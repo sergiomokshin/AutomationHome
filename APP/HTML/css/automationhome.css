@@ -1,0 +1,111 @@
+﻿html, body
+{
+    width:100%;
+    height:100%;
+    padding:0;margin:0;
+}
+
+html
+{
+    background: #445894; /* Old browsers */
+    background-image:linear-gradient(135deg, #445894 0%,#363766 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#445894', endColorstr='#363766',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+body
+{
+    font-family: 'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
+    background:url('../img/bg.png');
+}
+
+.field, .value
+{
+    font-size:13pt;
+}
+
+.field
+{
+    color:#FFF;
+}
+
+.value
+{
+    color:#FEE37A;
+    font-weight:bold;
+}
+
+.row1
+{
+    padding-top:10pt;
+    padding-bottom:10pt;
+    box-sizing: border-box;
+}
+
+.row2
+{
+    padding-top:10pt;
+    padding-bottom:10pt;
+    box-sizing: border-box;
+}
+
+.row3
+{
+    padding-top:10pt;
+    padding-bottom:10pt;
+    box-sizing: border-box;
+}
+
+.status
+{
+    text-align: right;
+    padding-top:10pt;
+    padding-bottom:10pt;
+}
+
+.btn.btn-on, .btn.btn-off
+{
+    color: #404F87;
+    font-size: 13pt;
+    width:100%;
+    margin:.2em 0;
+}
+
+.btn.btn-on span, .btn.btn-off span
+{
+    font-size:30pt;font-weight:bold;
+    clear:both;display:block;
+    text-shadow:0.03em 0.03em 0.03em rgba(255,255,255,1),0 -0.003em 0.03em rgba(0,0,0,1);
+}
+
+.btn.btn-on
+{
+    background: #3ebe9b; /* Old browsers */
+    background-image:linear-gradient(135deg, #8fd99b 0%,#3ebe9b 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fd99b', endColorstr='#3ebe9b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.btn.btn-on:hover
+{
+    background: #55D6B9; /* Old browsers */
+    background-image:linear-gradient(135deg, #ADE9B9 0%,#55D6B9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ADE9B9', endColorstr='#55D6B9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.btn.btn-off
+{
+    background: #f44d7e; /* Old browsers */
+    background-image:linear-gradient(135deg, #f48e80 0%,#f44d7e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f48e80', endColorstr='#f44d7e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.btn.btn-off:hover
+{
+    background: #F9689E; /* Old browsers */
+    background-image:linear-gradient(135deg, #F9ADA0 0%,#F9689E 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F9ADA0', endColorstr='#F9689E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.btn:focus
+{
+    outline: 1px solid transparent;
+}
