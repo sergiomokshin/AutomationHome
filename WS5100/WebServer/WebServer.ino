@@ -842,7 +842,7 @@ void ModoAuto() {
       digitalWrite(PIN_S8, LOW);
       EEPROM.write(MemSaida8, 0);
     }	
-    
+        
     //RGB
     if (ValueRGBHrI <= hour && ValueRGBHrF >= hour)
     {
