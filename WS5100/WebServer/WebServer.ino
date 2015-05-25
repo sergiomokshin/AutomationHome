@@ -28,9 +28,9 @@ keypad()                        Read a value from the keypad. Returns 0 if no ke
 #include "Wire.h"
 #include <LiquidCrystal_I2C.h>	// For the LCD
 
-//#include "DHT.h"
-//#define DHTPIN 8
-//#define DHTTYPE DHT11
+#include "DHT.h"
+#define DHTPIN 8
+#define DHTTYPE DHT11
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // set the LCD address to 0x27 for a 16 chars and 2 line display
 #define DS1307_I2C_ADDRESS 0x68
@@ -131,7 +131,7 @@ int countLcd = 0;
 
 String readString;
 byte second, minute, hour, dayOfWeek, dayOfMonth, month, year;
-//DHT dht(DHTPIN, DHTTYPE);
+DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
 
@@ -150,6 +150,9 @@ void setup() {
   pinMode(PIN_S7, OUTPUT);
   pinMode(PIN_S8, OUTPUT);  
 
+  pinMode(PIN_RED, OUTPUT);  
+  pinMode(PIN_BLUE, OUTPUT);
+  pinMode(PIN_GREEN, OUTPUT);  
   
   ValueSaveAuto = EEPROM.read(MemAuto);
 
@@ -196,14 +199,14 @@ void setup() {
   lcd.begin(20, 4);
   lcd.clear();
 
-//  dht.begin();
+  dht.begin();
 }
 
 void loop() {
 
   getDateDs1307(&second, &minute, &hour, &dayOfWeek, &dayOfMonth, &month, &year);
-  //humidity = dht.readHumidity();
-  //temp = dht.readTemperature();
+  humidity = dht.readHumidity();
+  temp = dht.readTemperature();
 
   ValueSaveSaida1 = digitalRead(PIN_S1);
   ValueSaveSaida2 = digitalRead(PIN_S2);
@@ -253,7 +256,7 @@ void PrintLcd() {
 
   countLcd++;
   
-  /*
+
   if (countLcd <= 50)
   {
 
@@ -266,7 +269,6 @@ void PrintLcd() {
   }
   else
   {
-    */
     lcd.setCursor(0, 1);
     lcd.print("Saidas:");
     lcd.print(ValueSaveSaida1);
@@ -278,22 +280,21 @@ void PrintLcd() {
     lcd.print(ValueSaveSaida7);    
     lcd.print(ValueSaveSaida6);        
 
-/*
-    if (LedR > 10 )
+
+    if (ValueRed > 10 )
       lcd.print("R");
     else
       lcd.print(" ");
-    if (LedG > 10 )
+    if (ValueGreen > 10 )
       lcd.print("G");
     else
       lcd.print(" ");
 
-    if (LedB > 10 )
+    if (ValueBlue > 10 )
       lcd.print("B     ");
     else
       lcd.print("      ");
   }
- */
  
   if(countLcd >=100)
     countLcd = 0;
@@ -665,6 +666,13 @@ void SendResponse(EthernetClient client) {
   client.println(minute, DEC);
   client.print(",\"Second\":");
   client.println(second, DEC);
+  
+
+  client.print(",\"temp\":");
+  client.println(temp);
+  client.print(",\"humidity\":");
+  client.println(humidity);
+  
 
   client.print(",\"S1\":");
   client.println(ValueSaveSaida1);
@@ -743,51 +751,98 @@ void ModoAuto() {
     //Saida 1
     if (ValueSaida1HrI <= hour && ValueSaida1HrF >= hour)
     {
-      digitalWrite(A0, HIGH);
+      digitalWrite(PIN_S1, HIGH);
       EEPROM.write(MemSaida1, 1);
     }
     else
     {
-      digitalWrite(A0, LOW);
+      digitalWrite(PIN_S1, LOW);
       EEPROM.write(MemSaida1, 0);
     }
 
     //Saida 2
     if (ValueSaida2HrI <= hour && ValueSaida2HrF >= hour)
     {
-      digitalWrite(A1, HIGH);
+      digitalWrite(PIN_S2, HIGH);
       EEPROM.write(MemSaida2, 1);
     }
     else
     {
-      digitalWrite(A1, LOW);
+      digitalWrite(PIN_S2, LOW);
       EEPROM.write(MemSaida2, 0);
     }
 
     //Saida 3
     if (ValueSaida3HrI <= hour && ValueSaida3HrF >= hour)
     {
-      digitalWrite(A2, HIGH);
+      digitalWrite(PIN_S3, HIGH);
       EEPROM.write(MemSaida3, 1);
     }
     else
     {
-      digitalWrite(A2, LOW);
+      digitalWrite(PIN_S3, LOW);
       EEPROM.write(MemSaida3, 0);
     }
 
     //Saida 4
     if (ValueSaida4HrI <= hour && ValueSaida4HrF >= hour)
     {
-      digitalWrite(A3, HIGH);
+      digitalWrite(PIN_S4, HIGH);
       EEPROM.write(MemSaida4, 1);
     }
     else
     {
-      digitalWrite(A3, LOW);
+      digitalWrite(PIN_S4, LOW);
       EEPROM.write(MemSaida4, 0);
     }
+ //Saida 5
+    if (ValueSaida5HrI <= hour && ValueSaida5HrF >= hour)
+    {
+      digitalWrite(PIN_S5, HIGH);
+      EEPROM.write(MemSaida5, 1);
+    }
+    else
+    {
+      digitalWrite(PIN_S5, LOW);
+      EEPROM.write(MemSaida5, 0);
+    }
+	
+ //Saida 6
+    if (ValueSaida6HrI <= hour && ValueSaida6HrF >= hour)
+    {
+      digitalWrite(PIN_S6, HIGH);
+      EEPROM.write(MemSaida6, 1);
+    }
+    else
+    {
+      digitalWrite(PIN_S6, LOW);
+      EEPROM.write(MemSaida6, 0);
+    }
 
+ //Saida 7
+    if (ValueSaida7HrI <= hour && ValueSaida7HrF >= hour)
+    {
+      digitalWrite(PIN_S7, HIGH);
+      EEPROM.write(MemSaida7, 1);
+    }
+    else
+    {
+      digitalWrite(PIN_S7, LOW);
+      EEPROM.write(MemSaida7, 0);
+    }
+
+ //Saida 8
+    if (ValueSaida8HrI <= hour && ValueSaida8HrF >= hour)
+    {
+      digitalWrite(PIN_S8, HIGH);
+      EEPROM.write(MemSaida8, 1);
+    }
+    else
+    {
+      digitalWrite(PIN_S8, LOW);
+      EEPROM.write(MemSaida8, 0);
+    }	
+    
     //RGB
     if (ValueRGBHrI <= hour && ValueRGBHrF >= hour)
     {

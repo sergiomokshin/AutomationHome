@@ -1,4 +1,4 @@
-var ipArduino = 'http://192.168.0.202';
+﻿var ipArduino = 'http://192.168.0.202';
 
 var dadosRecebidos;
 var tipoAgendamento = "";
@@ -80,6 +80,9 @@ function BindData(data) {
     }
 
     $("#DataHW").text(RetornaData() + " " + RetornaHora());
+	
+	$("#spTemperatura").text(data.temp + "º");
+	$("#spUmidade").text(data.humidity + "%");
         
    
 
