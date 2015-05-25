@@ -61,21 +61,35 @@
                     <th>Ação</th>
                     <th colspan="2">Agendamento</th>
                 </tr>
-                <tr>
+                 <tr>
                     <td>Saida 1</td>
-                    <td width="150px">
-                        <button type="button" id="S1" class="btn" onclick="EnviarComandoSaida('S1')">Ligar</button>
+                    <td>
+                        <button type="button" id="S1" class="btn btn-danger" onclick="EnviarComandoSaida('S1')">Ligar</button>
                         <img src="img/icoLoading.gif" id="icoExecS1">
                     </td>
-                    <td colspan="2"></td>
+                    <td width="50px">
+                        <button type="button" class="btn btn-info" aria-label="Left Align" id="btAgeS1" onclick="MostraPopUpPeriodo('S1')">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <span id="AgeS1"></span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Saida 2</td>
                     <td>
-                        <button type="button" id="S2" class="btn" onclick="EnviarComandoSaida('S2')">Ligar</button>
+                        <button type="button" id="S2" class="btn btn-danger" onclick="EnviarComandoSaida('S2')">Ligar</button>
                         <img src="img/icoLoading.gif" id="icoExecS2">
                     </td>
-                    <td colspan="2"></td>
+                    <td width="50px">
+                        <button type="button" class="btn btn-info" aria-label="Left Align" id="btAgeS2" onclick="MostraPopUpPeriodo('S2')">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <span id="AgeS2"></span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Saida 3</td>

@@ -215,8 +215,8 @@ void loop() {
   ValueSaveSaida8 = digitalRead(PIN_S8);    
 
   ValueRed = analogRead(PIN_RED);
-  ValueGreen = EEPROM.read(PIN_GREEN);
-  ValueBlue = EEPROM.read(PIN_BLUE);
+  ValueGreen = analogRead(PIN_GREEN);
+  ValueBlue = analogRead(PIN_BLUE);
  
 
   WebServer();
@@ -683,7 +683,14 @@ void SendResponse(EthernetClient client) {
   client.print(",\"S8\":");
   client.println(ValueSaveSaida8);
 
-
+  client.print(",\"AgeS1HrI\":");
+  client.println(ValueSaida1HrI);
+  client.print(",\"AgeS1HrF\":");
+  client.println(ValueSaida1HrF);
+  client.print(",\"AgeS2HrI\":");
+  client.println(ValueSaida2HrI);
+  client.print(",\"AgeS2HrF\":");
+  client.println(ValueSaida2HrF);
   client.print(",\"AgeS3HrI\":");
   client.println(ValueSaida3HrI);
   client.print(",\"AgeS3HrF\":");

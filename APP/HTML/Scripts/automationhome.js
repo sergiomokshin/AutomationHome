@@ -91,6 +91,7 @@ function BindData(data) {
         $("#S1").html('Off');
         $('#S1').addClass('btn btn-danger');
     }
+	$("#AgeS1").text(data.AgeS1HrI + ":00 ate " + data.AgeS1HrF + ":59");
 
     if (data.S2 == 1) {
         $("#S2").html('On');
@@ -100,6 +101,7 @@ function BindData(data) {
         $("#S2").html('Off');
         $('#S2').addClass('btn btn-danger');
     }
+	$("#AgeS2").text(data.AgeS2HrI + ":00 ate " + data.AgeS2HrF + ":59");
 
     if (data.S3 == 1) {
         $("#S3").html('On');
