@@ -643,7 +643,7 @@ void SendResponse(EthernetClient client) {
   
 
 
- client.println(F("HTTP/1.1 200 OK")); //send new page
+  client.println(F("HTTP/1.1 200 OK")); //send new page
   client.println(F("Content-Type: application/json"));
   client.println();
   client.print("dataCB");
