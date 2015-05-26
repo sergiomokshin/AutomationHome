@@ -110,14 +110,16 @@ int ValueGreen = 0; //Conteudo de memoria  Green
 int ValueBlue = 0; //Conteudo de memoria  Blue
 
 // ethernet interface ip address
-static byte myip[] = { 192, 168, 1, 200 };
+static byte myip[] = { 192, 168, 0, 202 };
 // gateway ip address
-static byte gwip[] = { 192, 168, 1, 1 };
+static byte gwip[] = { 192, 168, 0, 1 };
 
 // ethernet mac address - must be unique on your network
 static byte mymac[] = { 0x74,0x69,0x69,0x2D,0x30,0x31 };
 byte Ethernet::buffer[550]; // tcp/ip send and receive buffer
 BufferFiller bfill;
+
+
 
 byte second, minute, hour, dayOfWeek, dayOfMonth, month, year;
 
@@ -234,99 +236,99 @@ static word homePage() {
   bfill = ether.tcpOffset();
   
   bfill.emit_p(PSTR("HTTP/1.1 200 OK")); //send new page
-  bfill.emit_p(PSTR("Content-Type: application/json"));
+  bfill.emit_p(PSTR("Content-Type: application/json\r\n\r\n"));
   bfill.emit_p(PSTR("\n"));
   bfill.emit_p(PSTR("dataCB"));
   bfill.emit_p(PSTR("({"));
 
 
   bfill.emit_p(PSTR("\"Auto\":\""));
-//  bfill.emit_p(PSTR(ValueSaveAuto));
+  bfill.emit_p(PSTR("$D"), ValueSaveAuto);
   bfill.emit_p(PSTR("\""));
 
 
   bfill.emit_p(PSTR(",\"Day\":"));
-//  bfill.emit_p(PSTR(dayOfMonth));
+  bfill.emit_p(PSTR("$D"), dayOfMonth);
   bfill.emit_p(PSTR(",\"Mounth\":"));
-//  bfill.emit_p(PSTR(month));
+  bfill.emit_p(PSTR("$D"), month);
   bfill.emit_p(PSTR(",\"Year\":"));
-//  bfill.emit_p(PSTR(year));
+  bfill.emit_p(PSTR("$D"), year);
   bfill.emit_p(PSTR(",\"Hour\":"));
-//  bfill.emit_p(PSTR(hour));
+  bfill.emit_p(PSTR("$D"), hour);
   bfill.emit_p(PSTR(",\"Minute\":"));
-//  bfill.emit_p(PSTR(minute));
+  bfill.emit_p(PSTR("$D"), minute);
   bfill.emit_p(PSTR(",\"Second\":"));
-//  bfill.emit_p(PSTR(second));
+  bfill.emit_p(PSTR("$D"), second);
   
 
-  bfill.emit_p(PSTR(",\"temp\":"));
-//  bfill.emit_p(PSTR(temp));
-  bfill.emit_p(PSTR(",\"humidity\":"));
-//  bfill.emit_p(PSTR(humidity));
+  bfill.emit_p(PSTR(",\"temp\":0"));
+//  bfill.emit_p(PSTR("$D"), temp);
+  bfill.emit_p(PSTR(",\"humidity\":0"));
+//  bfill.emit_p(PSTR("$D"), humidity);
 
 
 
   bfill.emit_p(PSTR(",\"S1\":"));
-//  bfill.emit_p(PSTR(ValueSaveSaida1));
+  bfill.emit_p(PSTR("$D"), ValueSaveSaida1);
   bfill.emit_p(PSTR(",\"S2\":"));
-//  bfill.emit_p(PSTR(ValueSaveSaida2));
+  bfill.emit_p(PSTR("$D"), ValueSaveSaida2);
   bfill.emit_p(PSTR(",\"S3\":"));
-//  bfill.emit_p(PSTR(ValueSaveSaida3));
+  bfill.emit_p(PSTR("$D"), ValueSaveSaida3);
   bfill.emit_p(PSTR(",\"S4\":"));
-//  bfill.emit_p(PSTR(ValueSaveSaida4));
+  bfill.emit_p(PSTR("$D"), ValueSaveSaida4);
   bfill.emit_p(PSTR(",\"S5\":"));
-//  bfill.emit_p(PSTR(ValueSaveSaida5));
+  bfill.emit_p(PSTR("$D"), ValueSaveSaida5);
   bfill.emit_p(PSTR(",\"S6\":"));
-//  bfill.emit_p(PSTR(ValueSaveSaida6));
+  bfill.emit_p(PSTR("$D"), ValueSaveSaida6);
   bfill.emit_p(PSTR(",\"S7\":"));
-//  bfill.emit_p(PSTR(ValueSaveSaida7));
+  bfill.emit_p(PSTR("$D"), ValueSaveSaida7);
   bfill.emit_p(PSTR(",\"S8\":"));
-//  bfill.emit_p(PSTR(ValueSaveSaida8));
+  bfill.emit_p(PSTR("$D"), ValueSaveSaida8);
 
   bfill.emit_p(PSTR(",\"AgeS1HrI\":"));
-//  bfill.emit_p(PSTR(ValueSaida1HrI));
+  bfill.emit_p(PSTR("$D"), ValueSaida1HrI);
   bfill.emit_p(PSTR(",\"AgeS1HrF\":"));
-//  bfill.emit_p(PSTR(ValueSaida1HrF));
+  bfill.emit_p(PSTR("$D"), ValueSaida1HrF);
   bfill.emit_p(PSTR(",\"AgeS2HrI\":"));
-//  bfill.emit_p(PSTR(ValueSaida2HrI));
+  bfill.emit_p(PSTR("$D"), ValueSaida2HrI);
   bfill.emit_p(PSTR(",\"AgeS2HrF\":"));
-//  bfill.emit_p(PSTR(ValueSaida2HrF));
+  bfill.emit_p(PSTR("$D"), ValueSaida2HrF);
   bfill.emit_p(PSTR(",\"AgeS3HrI\":"));
-//  bfill.emit_p(PSTR(ValueSaida3HrI));
+  bfill.emit_p(PSTR("$D"), ValueSaida3HrI);
   bfill.emit_p(PSTR(",\"AgeS3HrF\":"));
-//  bfill.emit_p(PSTR(ValueSaida3HrF));
+  bfill.emit_p(PSTR("$D"), ValueSaida3HrF);
   bfill.emit_p(PSTR(",\"AgeS4HrI\":"));
-//  bfill.emit_p(PSTR(ValueSaida4HrI));
+  bfill.emit_p(PSTR("$D"), ValueSaida4HrI);
   bfill.emit_p(PSTR(",\"AgeS4HrF\":"));
-//  bfill.emit_p(PSTR(ValueSaida4HrF));
+  bfill.emit_p(PSTR("$D"), ValueSaida4HrF);
   bfill.emit_p(PSTR(",\"AgeS5HrI\":"));
-//  bfill.emit_p(PSTR(ValueSaida5HrI));
+  bfill.emit_p(PSTR("$D"), ValueSaida5HrI);
   bfill.emit_p(PSTR(",\"AgeS5HrF\":"));
-//  bfill.emit_p(PSTR(ValueSaida5HrF));
+  bfill.emit_p(PSTR("$D"), ValueSaida5HrF);
   bfill.emit_p(PSTR(",\"AgeS6HrI\":"));
-//  bfill.emit_p(PSTR(ValueSaida6HrI));
+  bfill.emit_p(PSTR("$D"), ValueSaida6HrI);
   bfill.emit_p(PSTR(",\"AgeS6HrF\":"));
-//  bfill.emit_p(PSTR(ValueSaida6HrF));
+  bfill.emit_p(PSTR("$D"), ValueSaida6HrF);
   bfill.emit_p(PSTR(",\"AgeS7HrI\":"));
-//  bfill.emit_p(PSTR(ValueSaida7HrI));
+  bfill.emit_p(PSTR("$D"), ValueSaida7HrI);
   bfill.emit_p(PSTR(",\"AgeS7HrF\":"));
-//  bfill.emit_p(PSTR(ValueSaida7HrF));
+  bfill.emit_p(PSTR("$D"), ValueSaida7HrF);
   bfill.emit_p(PSTR(",\"AgeS8HrI\":"));
-//  bfill.emit_p(PSTR(ValueSaida8HrI));
+  bfill.emit_p(PSTR("$D"), ValueSaida8HrI);
   bfill.emit_p(PSTR(",\"AgeS8HrF\":"));
-//  bfill.emit_p(PSTR(ValueSaida8HrF));
+  bfill.emit_p(PSTR("$D"), ValueSaida8HrF);
 
   bfill.emit_p(PSTR(",\"AgeRGBHrI\":"));
-//  bfill.emit_p(PSTR(ValueRGBHrI));
+  bfill.emit_p(PSTR("$D"), ValueRGBHrI);
   bfill.emit_p(PSTR(",\"AgeRGBHrF\":"));
-//  bfill.emit_p(PSTR(ValueRGBHrF));
+  bfill.emit_p(PSTR("$D"), ValueRGBHrF);
 
   bfill.emit_p(PSTR(",\"Red\":"));
-//  bfill.emit_p(PSTR(ValueRed);
+  bfill.emit_p(PSTR("$D"), ValueRed);
   bfill.emit_p(PSTR(",\"Green\":"));
-//  bfill.emit_p(PSTR(ValueGreen));
+  bfill.emit_p(PSTR("$D"), ValueGreen);
   bfill.emit_p(PSTR(",\"Blue\":"));
-//  bfill.emit_p(PSTR(ValueBlue));  
+  bfill.emit_p(PSTR("$D"), ValueBlue);  
 
 
   bfill.emit_p(PSTR("})"));
