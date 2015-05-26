@@ -637,9 +637,9 @@ void SendResponse(EthernetClient client) {
   ValueSaveSaida7 = digitalRead(PIN_S7);  
   ValueSaveSaida8 = digitalRead(PIN_S8);    
 
-  ValueRed = analogRead(PIN_RED);
-  ValueGreen = analogRead(PIN_GREEN);
-  ValueBlue = analogRead(PIN_BLUE);
+  int LedR = analogRead(6);
+  int LedG = analogRead(5);
+  int LedB = analogRead(3);
   
 
 
@@ -730,11 +730,11 @@ void SendResponse(EthernetClient client) {
   client.println(ValueRGBHrF);
 
   client.print(",\"Red\":");
-  client.println(ValueRed);
+  client.println(LedR);
   client.print(",\"Green\":");
-  client.println(ValueGreen);
+  client.println(LedG);
   client.print(",\"Blue\":");
-  client.println(ValueBlue);
+  client.println(LedB);
 
 
   client.println(F("})"));
