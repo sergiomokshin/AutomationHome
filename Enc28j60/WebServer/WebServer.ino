@@ -1,4 +1,4 @@
- 
+
 /*
 Sergio Mokshin
 Automação Livre
@@ -7,25 +7,21 @@ Fev/2015
 http://jeelabs.net/pub/docs/ethercard/index.html
 // http://jeelabs.net/pub/docs/ethercard/classBufferFiller.html
 //  "Status: <a href=\"?REL=$F\">$F</a><b>"), http_OK, temp, RELStatus?PSTR("off"):PSTR("on"), RELStatus?PSTR("ON"):PSTR("OFF"));
-      
+
 
 */
- 
+
 #include <EtherCard.h>
 #include <EEPROM.h>
 
 #include "Wire.h"
 
-
-
-#define PIN_RED 6  
+#define PIN_RED 6
 #define PIN_GREEN 5
 #define PIN_BLUE 3
 #define PIN_ALARM 8
 
-
 #define DS1307_I2C_ADDRESS 0x68
-
 
 #define PIN_S1 2
 #define PIN_S2 4
@@ -110,47 +106,38 @@ int ValueGreen = 0; //Conteudo de memoria  Green
 int ValueBlue = 0; //Conteudo de memoria  Blue
 
 // ethernet interface ip address
-static byte myip[] = { 192, 168, 0, 202 };
+static byte myip[] = { 192, 168, 1, 202 };
 // gateway ip address
-static byte gwip[] = { 192, 168, 0, 1 };
+static byte gwip[] = { 192, 168, 1, 1 };
 
 // ethernet mac address - must be unique on your network
-static byte mymac[] = { 0x74,0x69,0x69,0x2D,0x30,0x31 };
+static byte mymac[] = { 0x74, 0x69, 0x69, 0x2D, 0x30, 0x31 };
 byte Ethernet::buffer[550]; // tcp/ip send and receive buffer
 BufferFiller bfill;
 
 
-
 byte second, minute, hour, dayOfWeek, dayOfMonth, month, year;
 
-void setup(){  
-  
-   Wire.begin();
-   
-     
-  //Setup Inicial / descomentar build / comentar
-  //EEPROM.write(MemSaida1, 0);  
-  //EEPROM.write(MemSaida2, 0);
-  //EEPROM.write(MemSaida3, 0);          
-  //EEPROM.write(MemSaida4, 0);  
-  
-  
+void setup() {
+
+  Wire.begin();
+
   Serial.begin(9600);
-  Serial.println("Iniciando Setup");      
-  
- pinMode(PIN_S1, OUTPUT);
+  Serial.println("Iniciando Setup");
+
+  pinMode(PIN_S1, OUTPUT);
   pinMode(PIN_S2, OUTPUT);
   pinMode(PIN_S3, OUTPUT);
   pinMode(PIN_S4, OUTPUT);
   pinMode(PIN_S5, OUTPUT);
   pinMode(PIN_S6, OUTPUT);
   pinMode(PIN_S7, OUTPUT);
-  pinMode(PIN_S8, OUTPUT);  
+  pinMode(PIN_S8, OUTPUT);
 
-  pinMode(PIN_RED, OUTPUT);  
+  pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_BLUE, OUTPUT);
-  pinMode(PIN_GREEN, OUTPUT);  
-  
+  pinMode(PIN_GREEN, OUTPUT);
+
   ValueSaveAuto = EEPROM.read(MemAuto);
 
   ValueSaida1HrI = EEPROM.read(MemSaida1HrI);
@@ -186,55 +173,55 @@ void setup(){
   digitalWrite(PIN_S6, EEPROM.read(MemSaida6));
   digitalWrite(PIN_S7, EEPROM.read(MemSaida7));
   digitalWrite(PIN_S8, EEPROM.read(MemSaida8));
-  
-  
+
+
   analogWrite(PIN_RED, ValueRed);
   analogWrite(PIN_GREEN, ValueGreen);
   analogWrite(PIN_BLUE, ValueBlue);
-  
-  
-  if (ether.begin(sizeof Ethernet::buffer, mymac) == 0) 
+
+
+  if (ether.begin(sizeof Ethernet::buffer, mymac) == 0)
   {
     Serial.println( "Failed to access Ethernet controller");
   }
 
   ether.staticSetup(myip, gwip);
   ether.printIp("IP:  ", ether.myip);
-  ether.printIp("GW:  ", ether.gwip);  
-  ether.printIp("DNS: ", ether.dnsip);    
-   
-  Serial.println("Finalizando Setup");      
+  ether.printIp("GW:  ", ether.gwip);
+  ether.printIp("DNS: ", ether.dnsip);
+
+  Serial.println("Finalizando Setup");
 }
 
-void loop(){    
-  
+void loop() {
+
   getDateDs1307(&second, &minute, &hour, &dayOfWeek, &dayOfMonth, &month, &year);
-    
   WebServer();
+  ModoAuto();
 
 }
 
 
 static word homePage() {
-  
-  Serial.println("Gerando Home Page");  
- 
+
+  Serial.println("Gerando Home Page");
+
   ValueSaveSaida1 = digitalRead(PIN_S1);
   ValueSaveSaida2 = digitalRead(PIN_S2);
   ValueSaveSaida3 = digitalRead(PIN_S3);
   ValueSaveSaida4 = digitalRead(PIN_S4);
   ValueSaveSaida5 = digitalRead(PIN_S5);
   ValueSaveSaida6 = digitalRead(PIN_S6);
-  ValueSaveSaida7 = digitalRead(PIN_S7);  
-  ValueSaveSaida8 = digitalRead(PIN_S8);    
+  ValueSaveSaida7 = digitalRead(PIN_S7);
+  ValueSaveSaida8 = digitalRead(PIN_S8);
 
   ValueRed = analogRead(PIN_RED);
   ValueGreen = analogRead(PIN_GREEN);
   ValueBlue = analogRead(PIN_BLUE);
- 
-            
+
+
   bfill = ether.tcpOffset();
-  
+
   bfill.emit_p(PSTR("HTTP/1.1 200 OK")); //send new page
   bfill.emit_p(PSTR("Content-Type: application/json\r\n\r\n"));
   bfill.emit_p(PSTR("\n"));
@@ -259,12 +246,12 @@ static word homePage() {
   bfill.emit_p(PSTR("$D"), minute);
   bfill.emit_p(PSTR(",\"Second\":"));
   bfill.emit_p(PSTR("$D"), second);
-  
+
 
   bfill.emit_p(PSTR(",\"temp\":0"));
-//  bfill.emit_p(PSTR("$D"), temp);
+  //  bfill.emit_p(PSTR("$D"), temp);
   bfill.emit_p(PSTR(",\"humidity\":0"));
-//  bfill.emit_p(PSTR("$D"), humidity);
+  //  bfill.emit_p(PSTR("$D"), humidity);
 
 
 
@@ -328,17 +315,17 @@ static word homePage() {
   bfill.emit_p(PSTR(",\"Green\":"));
   bfill.emit_p(PSTR("$D"), ValueGreen);
   bfill.emit_p(PSTR(",\"Blue\":"));
-  bfill.emit_p(PSTR("$D"), ValueBlue);  
+  bfill.emit_p(PSTR("$D"), ValueBlue);
 
 
   bfill.emit_p(PSTR("})"));
 
-      
+
 
   return bfill.position();
 }
- 
- 
+
+
 
 
 
@@ -399,107 +386,288 @@ void setDateDs1307(byte second,        // 0-59
 
 void WebServer()
 {
-   word len = ether.packetReceive();
-   word pos = ether.packetLoop(len);
-  
- // char* dados =(char *)Ethernet::buffer + pos;  
- // if(pos >0)
- // {
- //    Serial.println(dados);  
- // }
-  
-    if(strstr((char *)Ethernet::buffer + pos, "GET /S1/ON") != 0) {
-      Serial.println("Received ON command");
-      digitalWrite(A0, HIGH);
+  word len = ether.packetReceive();
+  word pos = ether.packetLoop(len);
+
+  // char* dados =(char *)Ethernet::buffer + pos;
+  // if(pos >0)
+  // {
+  //    Serial.println(dados);
+  // }
+
+
+  if (strstr((char *)Ethernet::buffer + pos, "?AUTOL") != 0) {
+    ValueSaveAuto = 1;
+    EEPROM.write(MemAuto, 1);
+  }
+  if (strstr((char *)Ethernet::buffer + pos, "?AUTOD") != 0) {
+    ValueSaveAuto = 0;
+    EEPROM.write(MemAuto, 0);
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "?S1L") != 0) {
+    digitalWrite(PIN_S1, HIGH);
+    EEPROM.write(MemSaida1, 1);
+  }
+  if (strstr((char *)Ethernet::buffer + pos, "?S1D") != 0) {
+    digitalWrite(PIN_S1, LOW);
+    EEPROM.write(MemSaida1, 0);
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "?S2L") != 0) {
+    digitalWrite(PIN_S2, HIGH);
+    EEPROM.write(MemSaida2, 1);
+  }
+  if (strstr((char *)Ethernet::buffer + pos, "?S2D") != 0) {
+    digitalWrite(PIN_S2, LOW);
+    EEPROM.write(MemSaida2, 0);
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "?S3L") != 0) {
+    digitalWrite(PIN_S3, HIGH);
+    EEPROM.write(MemSaida3, 1);
+  }
+  if (strstr((char *)Ethernet::buffer + pos, "?S3D") != 0) {
+    digitalWrite(PIN_S3, LOW);
+    EEPROM.write(MemSaida3, 0);
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "?S4L") != 0) {
+    digitalWrite(PIN_S4, HIGH);
+    EEPROM.write(MemSaida4, 1);
+  }
+  if (strstr((char *)Ethernet::buffer + pos, "?S4D") != 0) {
+    digitalWrite(PIN_S4, LOW);
+    EEPROM.write(MemSaida4, 0);
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "?S5L") != 0) {
+    digitalWrite(PIN_S5, HIGH);
+    EEPROM.write(MemSaida5, 1);
+  }
+  if (strstr((char *)Ethernet::buffer + pos, "?S5D") != 0) {
+    digitalWrite(PIN_S5, LOW);
+    EEPROM.write(MemSaida5, 0);
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "?S6L") != 0) {
+    digitalWrite(PIN_S6, HIGH);
+    EEPROM.write(MemSaida6, 1);
+  }
+  if (strstr((char *)Ethernet::buffer + pos, "?S6D") != 0) {
+    digitalWrite(PIN_S6, LOW);
+    EEPROM.write(MemSaida6, 0);
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "?S7L") != 0) {
+    digitalWrite(PIN_S7, HIGH);
+    EEPROM.write(MemSaida7, 1);
+  }
+  if (strstr((char *)Ethernet::buffer + pos, "?S7D") != 0) {
+    digitalWrite(PIN_S7, LOW);
+    EEPROM.write(MemSaida7, 0);
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "?S8L") != 0) {
+    digitalWrite(PIN_S8, HIGH);
+    EEPROM.write(MemSaida8, 1);
+  }
+  if (strstr((char *)Ethernet::buffer + pos, "?S8D") != 0) {
+    digitalWrite(PIN_S8, LOW);
+    EEPROM.write(MemSaida8, 0);
+  }
+
+   char* data = (char *) Ethernet::buffer + pos;
+   String readString2 = "";
+
+   int sz = sizeof(data);
+   for(int i = 0;  i < sz ; i++)
+      readString2 += data[i];
+   
+   
+//   if (readString2.indexOf("?AgeS1HrI") > 0) {
+ if (strstr((char *)Ethernet::buffer + pos, "?AgeS1HrI") != 0) {     
+
+        Serial.println("Inicio Comando");
+        Serial.println(readString2);
+    
+      int cmd = readString2.substring(readString2.indexOf("y") + 1, readString2.lastIndexOf("y")).toInt();
+      EEPROM.write(MemSaida1HrI, cmd);
+      ValueSaida1HrI = cmd;
+
+
+       Serial.println("Comando");
+        Serial.println(cmd);
+ 
+
+      cmd = readString2.substring(readString2.indexOf("z") + 1, readString2.lastIndexOf("z")).toInt();
+      EEPROM.write(MemSaida1HrF, cmd);
+      ValueSaida1HrF = cmd;
+
+    }
+
+
+
+
+  if (strstr((char *)Ethernet::buffer + pos, "GET /R/ON") != 0) {
+    analogWrite(5, 255);
+    EEPROM.write(MemRed, 255);
+    ValueRed = 255;
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "GET /R/OFF") != 0) {
+    analogWrite(5, 0);
+    EEPROM.write(MemRed, 0);
+    ValueRed = 0;
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "GET /G/ON") != 0) {
+    analogWrite(6, 255);
+    EEPROM.write(MemGreen, 255);
+    ValueGreen = 255;
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "GET /G/OFF") != 0) {
+    analogWrite(6, 0);
+    EEPROM.write(MemGreen, 0);
+    ValueGreen = 0;
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "GET /B/ON") != 0) {
+    analogWrite(3, 255);
+    EEPROM.write(MemBlue, 255);
+    ValueBlue = 255;
+  }
+
+  if (strstr((char *)Ethernet::buffer + pos, "GET /B/OFF") != 0) {
+    analogWrite(3, 0);
+    EEPROM.write(MemBlue, 0);
+    ValueBlue = 0;
+  }
+
+
+  if (pos)
+  {
+    ether.httpServerReply(homePage());
+  }
+}
+
+
+
+void ModoAuto() {
+
+  //Verifica se modo Automático está ativado
+  if (ValueSaveAuto == 1)
+  {
+    //Saida 1
+    if (ValueSaida1HrI <= hour && ValueSaida1HrF >= hour)
+    {
+      digitalWrite(PIN_S1, HIGH);
       EEPROM.write(MemSaida1, 1);
     }
-    if(strstr((char *)Ethernet::buffer + pos, "GET /S1/OFF") != 0) {
-      Serial.println("Received OFF command");
-      digitalWrite(A0, LOW);
+    else
+    {
+      digitalWrite(PIN_S1, LOW);
       EEPROM.write(MemSaida1, 0);
     }
-    
-  if(strstr((char *)Ethernet::buffer + pos, "GET /S2/ON") != 0) {
-      Serial.println("Received ON command");
-       digitalWrite(A1, HIGH);
-       EEPROM.write(MemSaida2, 1);
+
+    //Saida 2
+    if (ValueSaida2HrI <= hour && ValueSaida2HrF >= hour)
+    {
+      digitalWrite(PIN_S2, HIGH);
+      EEPROM.write(MemSaida2, 1);
     }
-    if(strstr((char *)Ethernet::buffer + pos, "GET /S2/OFF") != 0) {
-      Serial.println("Received OFF command");
-       digitalWrite(A1, LOW);
-       EEPROM.write(MemSaida2, 0);   
+    else
+    {
+      digitalWrite(PIN_S2, LOW);
+      EEPROM.write(MemSaida2, 0);
     }
 
-  if(strstr((char *)Ethernet::buffer + pos, "GET /S3/ON") != 0) {
-      Serial.println("Received ON command");
-       digitalWrite(A2, HIGH);
-       EEPROM.write(MemSaida3, 1); 
+    //Saida 3
+    if (ValueSaida3HrI <= hour && ValueSaida3HrF >= hour)
+    {
+      digitalWrite(PIN_S3, HIGH);
+      EEPROM.write(MemSaida3, 1);
     }
-    if(strstr((char *)Ethernet::buffer + pos, "GET /S3/OFF") != 0) {
-      Serial.println("Received OFF command");
-       digitalWrite(A2, LOW);
-       EEPROM.write(MemSaida3, 0);
-       
+    else
+    {
+      digitalWrite(PIN_S3, LOW);
+      EEPROM.write(MemSaida3, 0);
     }
 
-  if(strstr((char *)Ethernet::buffer + pos, "GET /S4/ON") != 0) {
-      Serial.println("Received ON command");
-       digitalWrite(A3, HIGH);
-       EEPROM.write(MemSaida4, 1);       
+    //Saida 4
+    if (ValueSaida4HrI <= hour && ValueSaida4HrF >= hour)
+    {
+      digitalWrite(PIN_S4, HIGH);
+      EEPROM.write(MemSaida4, 1);
     }
-  if(strstr((char *)Ethernet::buffer + pos, "GET /S4/OFF") != 0) {
-      Serial.println("Received OFF command");
-      digitalWrite(A3, LOW);
+    else
+    {
+      digitalWrite(PIN_S4, LOW);
       EEPROM.write(MemSaida4, 0);
-   }     
-   
-  if(strstr((char *)Ethernet::buffer + pos, "GET /R/ON") != 0) {
-      Serial.println("Received OFF command");
-      analogWrite(5, 255);  
-      EEPROM.write(MemRed, 255);
-      ValueRed = 255;
-   }
-   
-   if(strstr((char *)Ethernet::buffer + pos, "GET /R/OFF") != 0) {
-      Serial.println("Received OFF command");
-      analogWrite(5, 0);  
-      EEPROM.write(MemRed, 0);
-      ValueRed = 0;
-   }
-   
-   if(strstr((char *)Ethernet::buffer + pos, "GET /G/ON") != 0) {
-      Serial.println("Received OFF command");
-      analogWrite(6, 255);  
-      EEPROM.write(MemGreen, 255);      
-      ValueGreen = 255;
-   }
-   
-   if(strstr((char *)Ethernet::buffer + pos, "GET /G/OFF") != 0) {
-      Serial.println("Received OFF command");
-      analogWrite(6, 0);  
-      EEPROM.write(MemGreen, 0);            
-      ValueGreen = 0;
-   }
-   
-   if(strstr((char *)Ethernet::buffer + pos, "GET /B/ON") != 0) {
-      Serial.println("Received OFF command");
-      analogWrite(3, 255);  
-      EEPROM.write(MemBlue, 255);       
-      ValueBlue = 255;     
-   }
-   
-   if(strstr((char *)Ethernet::buffer + pos, "GET /B/OFF") != 0) {
-      Serial.println("Received OFF command");
-      analogWrite(3, 0);  
-      EEPROM.write(MemBlue, 0);                        
-      ValueBlue = 0;      
-   }
-   
-   
-   if (pos) 
-   {
-    ether.httpServerReply(homePage());   
-   }   
+    }
+    //Saida 5
+    if (ValueSaida5HrI <= hour && ValueSaida5HrF >= hour)
+    {
+      digitalWrite(PIN_S5, HIGH);
+      EEPROM.write(MemSaida5, 1);
+    }
+    else
+    {
+      digitalWrite(PIN_S5, LOW);
+      EEPROM.write(MemSaida5, 0);
+    }
+
+    //Saida 6
+    if (ValueSaida6HrI <= hour && ValueSaida6HrF >= hour)
+    {
+      digitalWrite(PIN_S6, HIGH);
+      EEPROM.write(MemSaida6, 1);
+    }
+    else
+    {
+      digitalWrite(PIN_S6, LOW);
+      EEPROM.write(MemSaida6, 0);
+    }
+
+    //Saida 7
+    if (ValueSaida7HrI <= hour && ValueSaida7HrF >= hour)
+    {
+      digitalWrite(PIN_S7, HIGH);
+      EEPROM.write(MemSaida7, 1);
+    }
+    else
+    {
+      digitalWrite(PIN_S7, LOW);
+      EEPROM.write(MemSaida7, 0);
+    }
+
+    //Saida 8
+    if (ValueSaida8HrI <= hour && ValueSaida8HrF >= hour)
+    {
+      digitalWrite(PIN_S8, HIGH);
+      EEPROM.write(MemSaida8, 1);
+    }
+    else
+    {
+      digitalWrite(PIN_S8, LOW);
+      EEPROM.write(MemSaida8, 0);
+    }
+
+    //RGB
+    if (ValueRGBHrI <= hour && ValueRGBHrF >= hour)
+    {
+      analogWrite(PIN_RED, ValueRed);
+      analogWrite(PIN_GREEN, ValueGreen);
+      analogWrite(PIN_BLUE, ValueBlue);
+    }
+    else
+    {
+      analogWrite(PIN_RED, 0);
+      analogWrite(PIN_GREEN, 0);
+      analogWrite(PIN_BLUE, 0);
+    }
+  }
 }
 
 
