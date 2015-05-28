@@ -395,100 +395,215 @@ void WebServer()
   //    Serial.println(dados);
   // }
 
-
-  if (strstr((char *)Ethernet::buffer + pos, "?AUTOL") != 0) {
-    ValueSaveAuto = 1;
-    EEPROM.write(MemAuto, 1);
-  }
-  if (strstr((char *)Ethernet::buffer + pos, "?AUTOD") != 0) {
-    ValueSaveAuto = 0;
-    EEPROM.write(MemAuto, 0);
-  }
-
-  if (strstr((char *)Ethernet::buffer + pos, "?S1L") != 0) {
-    digitalWrite(PIN_S1, HIGH);
-    EEPROM.write(MemSaida1, 1);
-  }
-  if (strstr((char *)Ethernet::buffer + pos, "?S1D") != 0) {
-    digitalWrite(PIN_S1, LOW);
-    EEPROM.write(MemSaida1, 0);
-  }
-
-  if (strstr((char *)Ethernet::buffer + pos, "?S2L") != 0) {
-    digitalWrite(PIN_S2, HIGH);
-    EEPROM.write(MemSaida2, 1);
-  }
-  if (strstr((char *)Ethernet::buffer + pos, "?S2D") != 0) {
-    digitalWrite(PIN_S2, LOW);
-    EEPROM.write(MemSaida2, 0);
-  }
-
-  if (strstr((char *)Ethernet::buffer + pos, "?S3L") != 0) {
-    digitalWrite(PIN_S3, HIGH);
-    EEPROM.write(MemSaida3, 1);
-  }
-  if (strstr((char *)Ethernet::buffer + pos, "?S3D") != 0) {
-    digitalWrite(PIN_S3, LOW);
-    EEPROM.write(MemSaida3, 0);
-  }
-
-  if (strstr((char *)Ethernet::buffer + pos, "?S4L") != 0) {
-    digitalWrite(PIN_S4, HIGH);
-    EEPROM.write(MemSaida4, 1);
-  }
-  if (strstr((char *)Ethernet::buffer + pos, "?S4D") != 0) {
-    digitalWrite(PIN_S4, LOW);
-    EEPROM.write(MemSaida4, 0);
-  }
-
-  if (strstr((char *)Ethernet::buffer + pos, "?S5L") != 0) {
-    digitalWrite(PIN_S5, HIGH);
-    EEPROM.write(MemSaida5, 1);
-  }
-  if (strstr((char *)Ethernet::buffer + pos, "?S5D") != 0) {
-    digitalWrite(PIN_S5, LOW);
-    EEPROM.write(MemSaida5, 0);
-  }
-
-  if (strstr((char *)Ethernet::buffer + pos, "?S6L") != 0) {
-    digitalWrite(PIN_S6, HIGH);
-    EEPROM.write(MemSaida6, 1);
-  }
-  if (strstr((char *)Ethernet::buffer + pos, "?S6D") != 0) {
-    digitalWrite(PIN_S6, LOW);
-    EEPROM.write(MemSaida6, 0);
-  }
-
-  if (strstr((char *)Ethernet::buffer + pos, "?S7L") != 0) {
-    digitalWrite(PIN_S7, HIGH);
-    EEPROM.write(MemSaida7, 1);
-  }
-  if (strstr((char *)Ethernet::buffer + pos, "?S7D") != 0) {
-    digitalWrite(PIN_S7, LOW);
-    EEPROM.write(MemSaida7, 0);
-  }
-
-  if (strstr((char *)Ethernet::buffer + pos, "?S8L") != 0) {
-    digitalWrite(PIN_S8, HIGH);
-    EEPROM.write(MemSaida8, 1);
-  }
-  if (strstr((char *)Ethernet::buffer + pos, "?S8D") != 0) {
-    digitalWrite(PIN_S8, LOW);
-    EEPROM.write(MemSaida8, 0);
-  }
-
-
-
   char* data = (char *) Ethernet::buffer + pos;
 
   String param;
   param = "";
-  for (int i = 5; i <= 30 ; i++)
+  for (int i = 4; i <= 30 ; i++)
   {
     param += data[i];
   }
-  
-  if (param.indexOf("S1HrI") > 0) {
+
+  if (param.indexOf("?AUTOL") > 0) {
+    ValueSaveAuto = 1;
+    EEPROM.write(MemAuto, 1);
+  }
+
+  if (param.indexOf("?AUTOD") > 0) {
+    ValueSaveAuto = 0;
+    EEPROM.write(MemAuto, 0);
+  }
+
+  if (param.indexOf("?DataHora") > 0) {
+
+    String Data = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y"));
+    String Horario = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z"));
+
+    //  Serial.println(Data);
+    //  Serial.println(Horario);
+
+    //Data no formato dd/mm/yyyy
+    String Dia = Data.substring(0, Data.indexOf("/"));
+    String temp = Data.substring(Data.indexOf("/"));
+    String Mes = temp.substring(1, 3);
+    String Ano = temp.substring(temp.lastIndexOf("/") + 3);
+
+    String Hora = Horario.substring(0, Horario.indexOf(":"));
+    String temp2 = Horario.substring(Horario.indexOf(":"));
+    String Minuto = temp2.substring(1, 3);
+
+    //Serial.println(Hora);
+    //Serial.println(Minuto);
+
+    // Serial.println(Dia);
+    // Serial.println(Mes);
+    // Serial.println(Ano);
+
+
+    second = 0;
+    minute = Minuto.toInt();
+    hour = Hora.toInt();
+    dayOfWeek = 1;
+    dayOfMonth = Dia.toInt();
+    month = Mes.toInt();
+    year = Ano.toInt();
+
+    // Serial.println(dayOfMonth);
+    // Serial.println(month);
+    // Serial.println(year);
+
+    setDateDs1307(second, minute, hour, dayOfWeek, dayOfMonth, month, year);
+  }
+
+
+  if (param.indexOf("?S1L") > 0) {
+    digitalWrite(PIN_S1, HIGH);
+    EEPROM.write(MemSaida1, 1);
+  }
+  if (param.indexOf("?S1D") > 0) {
+    digitalWrite(PIN_S1, LOW);
+    EEPROM.write(MemSaida1, 0);
+  }
+
+  if (param.indexOf("?S2L") > 0) {
+    digitalWrite(PIN_S2, HIGH);
+    EEPROM.write(MemSaida2, 1);
+  }
+  if (param.indexOf("?S2D") > 0) {
+    digitalWrite(PIN_S2, LOW);
+    EEPROM.write(MemSaida2, 0);
+  }
+
+  if (param.indexOf("?S3L") > 0) {
+    digitalWrite(PIN_S3, HIGH);
+    EEPROM.write(MemSaida3, 1);
+  }
+  if (param.indexOf("?S3D") > 0) {
+    digitalWrite(PIN_S3, LOW);
+    EEPROM.write(MemSaida3, 0);
+  }
+
+  if (param.indexOf("?S4L") > 0) {
+    digitalWrite(PIN_S4, HIGH);
+    EEPROM.write(MemSaida4, 1);
+  }
+  if (param.indexOf("?S4D") > 0) {
+    digitalWrite(PIN_S4, LOW);
+    EEPROM.write(MemSaida4, 0);
+  }
+
+  if (param.indexOf("?S5L") > 0) {
+    digitalWrite(PIN_S5, HIGH);
+    EEPROM.write(MemSaida5, 1);
+  }
+  if (param.indexOf("?S5D") > 0) {
+    digitalWrite(PIN_S5, LOW);
+    EEPROM.write(MemSaida5, 0);
+  }
+
+
+  if (param.indexOf("?S6L") > 0) {
+    digitalWrite(PIN_S6, HIGH);
+    EEPROM.write(MemSaida6, 1);
+  }
+  if (param.indexOf("?S6D") > 0) {
+    digitalWrite(PIN_S6, LOW);
+    EEPROM.write(MemSaida6, 0);
+  }
+
+
+  if (param.indexOf("?S7L") > 0) {
+    digitalWrite(PIN_S7, HIGH);
+    EEPROM.write(MemSaida7, 1);
+  }
+  if (param.indexOf("?S7D") > 0) {
+    digitalWrite(PIN_S7, LOW);
+    EEPROM.write(MemSaida7, 0);
+  }
+
+
+  if (param.indexOf("?S8L") > 0) {
+    digitalWrite(PIN_S8, HIGH);
+    EEPROM.write(MemSaida8, 1);
+  }
+  if (param.indexOf("?S8D") > 0) {
+    digitalWrite(PIN_S8, LOW);
+    EEPROM.write(MemSaida8, 0);
+  }
+
+  if (param.indexOf("?RED") > 0) {
+    ValueRed = 255;
+    ValueGreen = 0;
+    ValueBlue = 0;
+    if (ValueSaveAuto == 0)
+    {
+      analogWrite(PIN_RED, ValueRed);
+      analogWrite(PIN_GREEN, ValueGreen);
+      analogWrite(PIN_BLUE, ValueBlue);
+    }
+    EEPROM.write(MemRed, ValueRed);
+    EEPROM.write(MemGreen, ValueGreen);
+    EEPROM.write(MemBlue, ValueBlue);
+  }
+
+  if (param.indexOf("?GRE") > 0) {
+    ValueRed = 0;
+    ValueGreen = 255;
+    ValueBlue = 0;
+    if (ValueSaveAuto == 0)
+    {
+      analogWrite(PIN_RED, ValueRed);
+      analogWrite(PIN_GREEN, ValueGreen);
+      analogWrite(PIN_BLUE, ValueBlue);
+    }
+    EEPROM.write(MemRed, ValueRed);
+    EEPROM.write(MemGreen, ValueGreen);
+    EEPROM.write(MemBlue, ValueBlue);
+  }
+
+  if (param.indexOf("?BLU") > 0) {
+    ValueRed = 0;
+    ValueGreen = 0;
+    ValueBlue = 255;
+    if (ValueSaveAuto == 0)
+    {
+      analogWrite(PIN_RED, ValueRed);
+      analogWrite(PIN_GREEN, ValueGreen);
+      analogWrite(PIN_BLUE, ValueBlue);
+    }
+    EEPROM.write(MemRed, ValueRed);
+    EEPROM.write(MemGreen, ValueGreen);
+    EEPROM.write(MemBlue, ValueBlue);
+  }
+
+  if (param.indexOf("?WHI") > 0) {
+    ValueRed = 255;
+    ValueGreen = 255;
+    ValueBlue = 255;
+    if (ValueSaveAuto == 0)
+    {
+      analogWrite(PIN_RED, ValueRed);
+      analogWrite(PIN_GREEN, ValueGreen);
+      analogWrite(PIN_BLUE, ValueBlue);
+    }
+    EEPROM.write(MemRed, ValueRed);
+    EEPROM.write(MemGreen, ValueGreen);
+    EEPROM.write(MemBlue, ValueBlue);
+  }
+
+  if (param.indexOf("?RGBOFF") > 0) {
+    ValueRed = 0;
+    ValueGreen = 0;
+    ValueBlue = 0;
+    analogWrite(PIN_RED, ValueRed);
+    analogWrite(PIN_GREEN, ValueGreen);
+    analogWrite(PIN_BLUE, ValueBlue);
+    EEPROM.write(MemRed, ValueRed);
+    EEPROM.write(MemGreen, ValueGreen);
+    EEPROM.write(MemBlue, ValueBlue);
+  }
+
+  if (param.indexOf("?AgeS1HrI") > 0) {
 
     int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
     EEPROM.write(MemSaida1HrI, cmd);
@@ -500,43 +615,88 @@ void WebServer()
 
   }
 
+  if (param.indexOf("?AgeS2HrI") > 0) {
 
-
-  if (strstr((char *)Ethernet::buffer + pos, "GET /R/ON") != 0) {
-    analogWrite(5, 255);
-    EEPROM.write(MemRed, 255);
-    ValueRed = 255;
+    int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
+    EEPROM.write(MemSaida2HrI, cmd);
+    ValueSaida2HrI = cmd;
+    cmd = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z")).toInt();
+    EEPROM.write(MemSaida2HrF, cmd);
+    ValueSaida2HrF = cmd;
   }
 
-  if (strstr((char *)Ethernet::buffer + pos, "GET /R/OFF") != 0) {
-    analogWrite(5, 0);
-    EEPROM.write(MemRed, 0);
-    ValueRed = 0;
+  if (param.indexOf("?AgeS3HrI") > 0) {
+
+    int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
+    EEPROM.write(MemSaida3HrI, cmd);
+    ValueSaida3HrI = cmd;
+
+    cmd = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z")).toInt();
+    EEPROM.write(MemSaida3HrF, cmd);
+    ValueSaida3HrF = cmd;
   }
 
-  if (strstr((char *)Ethernet::buffer + pos, "GET /G/ON") != 0) {
-    analogWrite(6, 255);
-    EEPROM.write(MemGreen, 255);
-    ValueGreen = 255;
+  if (param.indexOf("?AgeS4HrI") > 0) {
+    int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
+    EEPROM.write(MemSaida4HrI, cmd);
+    ValueSaida4HrI = cmd;
+
+    cmd = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z")).toInt();
+    EEPROM.write(MemSaida4HrF, cmd);
+    ValueSaida4HrF = cmd;
   }
 
-  if (strstr((char *)Ethernet::buffer + pos, "GET /G/OFF") != 0) {
-    analogWrite(6, 0);
-    EEPROM.write(MemGreen, 0);
-    ValueGreen = 0;
+  if (param.indexOf("?AgeS5HrI") > 0) {
+    int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
+    EEPROM.write(MemSaida5HrI, cmd);
+    ValueSaida5HrI = cmd;
+
+    cmd = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z")).toInt();
+    EEPROM.write(MemSaida5HrF, cmd);
+    ValueSaida5HrF = cmd;
   }
 
-  if (strstr((char *)Ethernet::buffer + pos, "GET /B/ON") != 0) {
-    analogWrite(3, 255);
-    EEPROM.write(MemBlue, 255);
-    ValueBlue = 255;
+  if (param.indexOf("?AgeS6HrI") > 0) {
+    int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
+    EEPROM.write(MemSaida6HrI, cmd);
+    ValueSaida6HrI = cmd;
+
+    cmd = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z")).toInt();
+    EEPROM.write(MemSaida6HrF, cmd);
+    ValueSaida6HrF = cmd;
   }
 
-  if (strstr((char *)Ethernet::buffer + pos, "GET /B/OFF") != 0) {
-    analogWrite(3, 0);
-    EEPROM.write(MemBlue, 0);
-    ValueBlue = 0;
+  if (param.indexOf("?AgeS7HrI") > 0) {
+    int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
+    EEPROM.write(MemSaida7HrI, cmd);
+    ValueSaida7HrI = cmd;
+
+    cmd = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z")).toInt();
+    EEPROM.write(MemSaida7HrF, cmd);
+    ValueSaida7HrF = cmd;
   }
+
+  if (param.indexOf("?AgeS8HrI") > 0) {
+    int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
+    EEPROM.write(MemSaida8HrI, cmd);
+    ValueSaida8HrI = cmd;
+
+    cmd = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z")).toInt();
+    EEPROM.write(MemSaida8HrF, cmd);
+    ValueSaida8HrF = cmd;
+  }
+
+
+  if (param.indexOf("?AgeRGBHrI") > 0) {
+    int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
+    EEPROM.write(MemRGBHrI, cmd);
+    ValueRGBHrI = cmd;
+
+    cmd = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z")).toInt();
+    EEPROM.write(MemRGBHrF, cmd);
+    ValueRGBHrF = cmd;
+  }
+
 
 
   if (pos)
