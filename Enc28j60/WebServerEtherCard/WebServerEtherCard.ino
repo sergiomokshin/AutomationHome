@@ -477,35 +477,28 @@ void WebServer()
     EEPROM.write(MemSaida8, 0);
   }
 
-   char* data = (char *) Ethernet::buffer + pos;
-   String readString2 = "";
-
-   int sz = sizeof(data);
-   for(int i = 0;  i < sz ; i++)
-      readString2 += data[i];
-   
-   
-//   if (readString2.indexOf("?AgeS1HrI") > 0) {
- if (strstr((char *)Ethernet::buffer + pos, "?AgeS1HrI") != 0) {     
-
-        Serial.println("Inicio Comando");
-        Serial.println(readString2);
-    
-      int cmd = readString2.substring(readString2.indexOf("y") + 1, readString2.lastIndexOf("y")).toInt();
-      EEPROM.write(MemSaida1HrI, cmd);
-      ValueSaida1HrI = cmd;
 
 
-       Serial.println("Comando");
-        Serial.println(cmd);
- 
+  char* data = (char *) Ethernet::buffer + pos;
 
-      cmd = readString2.substring(readString2.indexOf("z") + 1, readString2.lastIndexOf("z")).toInt();
-      EEPROM.write(MemSaida1HrF, cmd);
-      ValueSaida1HrF = cmd;
+  String param;
+  param = "";
+  for (int i = 5; i <= 30 ; i++)
+  {
+    param += data[i];
+  }
+  
+  if (param.indexOf("S1HrI") > 0) {
 
-    }
+    int cmd = param.substring(param.indexOf("y") + 1, param.lastIndexOf("y")).toInt();
+    EEPROM.write(MemSaida1HrI, cmd);
+    ValueSaida1HrI = cmd;
 
+    cmd = param.substring(param.indexOf("z") + 1, param.lastIndexOf("z")).toInt();
+    EEPROM.write(MemSaida1HrF, cmd);
+    ValueSaida1HrF = cmd;
+
+  }
 
 
 
