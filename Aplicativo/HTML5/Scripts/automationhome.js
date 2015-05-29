@@ -1,4 +1,4 @@
-﻿var ipArduino = 'http://192.168.1.202';
+﻿var ipArduino = 'http://192.168.0.202';
 
 var dadosRecebidos;
 var tipoAgendamento = "";
