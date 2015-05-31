@@ -149,10 +149,6 @@ void setup() {
   pinMode(PIN_S6, OUTPUT);
   pinMode(PIN_S7, OUTPUT);
   pinMode(PIN_S8, OUTPUT);  
-
-  pinMode(PIN_RED, OUTPUT);  
-  pinMode(PIN_BLUE, OUTPUT);
-  pinMode(PIN_GREEN, OUTPUT);  
   
   ValueSaveAuto = EEPROM.read(MemAuto);
 
@@ -208,19 +204,7 @@ void loop() {
   humidity = dht.readHumidity();
   temp = dht.readTemperature();
 
-  ValueSaveSaida1 = digitalRead(PIN_S1);
-  ValueSaveSaida2 = digitalRead(PIN_S2);
-  ValueSaveSaida3 = digitalRead(PIN_S3);
-  ValueSaveSaida4 = digitalRead(PIN_S4);
-  ValueSaveSaida5 = digitalRead(PIN_S5);
-  ValueSaveSaida6 = digitalRead(PIN_S6);
-  ValueSaveSaida7 = digitalRead(PIN_S7);  
-  ValueSaveSaida8 = digitalRead(PIN_S8);    
 
-  ValueRed = analogRead(PIN_RED);
-  ValueGreen = analogRead(PIN_GREEN);
-  ValueBlue = analogRead(PIN_BLUE);
- 
 
   WebServer();
   ModoAuto();
@@ -448,12 +432,12 @@ void WebServer() {
             ValueRed = 255;
             ValueGreen = 0;
             ValueBlue = 0;
-            if (ValueSaveAuto == 0)
-            {
+            //if (ValueSaveAuto == 0)
+           // {
               analogWrite(PIN_RED, ValueRed);
               analogWrite(PIN_GREEN, ValueGreen);
               analogWrite(PIN_BLUE, ValueBlue);
-            }
+           // }
             EEPROM.write(MemRed, ValueRed);
             EEPROM.write(MemGreen, ValueGreen);
             EEPROM.write(MemBlue, ValueBlue);
@@ -463,12 +447,12 @@ void WebServer() {
             ValueRed = 0;
             ValueGreen = 255;
             ValueBlue = 0;
-            if (ValueSaveAuto == 0)
-            {
+         //   if (ValueSaveAuto == 0)
+           // {
               analogWrite(PIN_RED, ValueRed);
               analogWrite(PIN_GREEN, ValueGreen);
               analogWrite(PIN_BLUE, ValueBlue);
-            }
+          //  }
             EEPROM.write(MemRed, ValueRed);
             EEPROM.write(MemGreen, ValueGreen);
             EEPROM.write(MemBlue, ValueBlue);
@@ -478,12 +462,12 @@ void WebServer() {
             ValueRed = 0;
             ValueGreen = 0;
             ValueBlue = 255;
-            if (ValueSaveAuto == 0)
-            {
+        //    if (ValueSaveAuto == 0)
+       //     {
               analogWrite(PIN_RED, ValueRed);
               analogWrite(PIN_GREEN, ValueGreen);
               analogWrite(PIN_BLUE, ValueBlue);
-            }
+        //    }
             EEPROM.write(MemRed, ValueRed);
             EEPROM.write(MemGreen, ValueGreen);
             EEPROM.write(MemBlue, ValueBlue);
@@ -493,12 +477,12 @@ void WebServer() {
             ValueRed = 255;
             ValueGreen = 255;
             ValueBlue = 255;
-            if (ValueSaveAuto == 0)
-            {
+           // if (ValueSaveAuto == 0)
+        //    {
               analogWrite(PIN_RED, ValueRed);
               analogWrite(PIN_GREEN, ValueGreen);
               analogWrite(PIN_BLUE, ValueBlue);
-            }
+        //    }
             EEPROM.write(MemRed, ValueRed);
             EEPROM.write(MemGreen, ValueGreen);
             EEPROM.write(MemBlue, ValueBlue);
@@ -637,12 +621,10 @@ void SendResponse(EthernetClient client) {
   ValueSaveSaida7 = digitalRead(PIN_S7);  
   ValueSaveSaida8 = digitalRead(PIN_S8);    
 
-  int LedR = analogRead(6);
-  int LedG = analogRead(5);
-  int LedB = analogRead(3);
+ // ValueRed = analogRead(PIN_RED);
+//  ValueGreen = analogRead(PIN_GREEN);
+ // ValueBlue = analogRead(PIN_BLUE);  
   
-
-
   client.println(F("HTTP/1.1 200 OK")); //send new page
   client.println(F("Content-Type: application/json"));
   client.println();
@@ -730,11 +712,12 @@ void SendResponse(EthernetClient client) {
   client.println(ValueRGBHrF);
 
   client.print(",\"Red\":");
-  client.println(LedR);
+  client.println(ValueRed);
   client.print(",\"Green\":");
-  client.println(LedG);
+  client.println(ValueGreen);
   client.print(",\"Blue\":");
-  client.println(LedB);
+  client.println(ValueBlue);
+
 
 
   client.println(F("})"));
