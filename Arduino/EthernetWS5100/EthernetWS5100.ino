@@ -718,7 +718,10 @@ void SendResponse(EthernetClient client) {
   client.print(",\"Blue\":");
   client.println(ValueBlue);
 
-
+  client.print(",\"A6\":");
+  client.println(analogRead(A6));
+  client.print(",\"A7\":");
+  client.println(analogRead(A7));
 
   client.println(F("})"));
   client.println();
