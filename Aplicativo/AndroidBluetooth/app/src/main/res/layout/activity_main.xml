@@ -1,0 +1,101 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:text="Saídas"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2" />
+
+        <Button
+            android:id="@+id/btSaida1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Saida 1" />
+        <Button
+            android:id="@+id/btSaida2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Saida 2" />
+        <Button
+            android:id="@+id/btSaida3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Saida 3" />
+        <Button
+            android:id="@+id/btSaida4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Saida 4" />
+		<Button
+            android:id="@+id/btSaida5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Saida 5" />
+		<Button
+            android:id="@+id/btSaida6"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Saida 6" />
+		<Button
+            android:id="@+id/btSaida7"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Saida 7" />
+		<Button
+            android:id="@+id/btSaida8"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Saida 8" />						
+        <TextView
+            android:text="Iluminação RGB"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3" />
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="9"
+            android:id="@+id/seekR" />
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="9"
+            android:id="@+id/seekG" />
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="9"
+            android:id="@+id/seekB" />
+
+        <TextView
+            android:text="Mensagens"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtMsg" />
+		<Button
+            android:id="@+id/btSetupBluetooth"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Setup Bluetooth" />			
+		<Button
+            android:id="@+id/btSetupSaidas"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Setup Saidas" />	
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
