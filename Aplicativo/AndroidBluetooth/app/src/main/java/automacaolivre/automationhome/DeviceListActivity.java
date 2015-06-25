@@ -119,7 +119,7 @@ public class DeviceListActivity extends Activity {
 
         // Indicate scanning in the title
         setProgressBarIndeterminateVisibility(true);
-        setTitle("Busncando dispositivos");
+        setTitle("Buscando dispositivos");
 
         // Turn on sub-title for new devices
         findViewById(R.id.title_new_devices).setVisibility(View.VISIBLE);

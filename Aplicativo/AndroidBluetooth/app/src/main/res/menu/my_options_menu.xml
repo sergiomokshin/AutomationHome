@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item android:id="@+id/DeviceListActivity"
+		  android:title="Bluetooth" 
+		  android:icon="@drawable/bluetooth" />
+		  
+	<item android:id="@+id/SetupDevice"
+		  android:title="Placa" 
+		  android:icon="@drawable/setup" />
+		  
+	<item android:id="@+id/SetupPlaca"
+		  android:title="Setup Placa" 
+		  android:icon="@drawable/setup" />
+</menu>

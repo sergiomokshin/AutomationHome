@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Activity;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.view.View.OnClickListener;
 
 
@@ -23,15 +26,15 @@ import android.content.SharedPreferences;
 
 public class SetupDevice extends Activity {
 
-	private String NameSaida1 = "Saída 1";
-    private String NameSaida2 = "Saída 2";
-    private String NameSaida3 = "Saída 3";
-    private String NameSaida4 = "Saída 4";
-	private String NameSaida5 = "Saída 5";
-	private String NameSaida6 = "Saída 6";
-	private String NameSaida7 = "Saída 7";
-	private String NameSaida8 = "Saída 8";
-	private String NameSaidaRGB = "Iluminaçãoo";
+	private String NameSaida1 = "";
+    private String NameSaida2 = "";
+    private String NameSaida3 = "";
+    private String NameSaida4 = "";
+	private String NameSaida5 = "";
+	private String NameSaida6 = "";
+	private String NameSaida7 = "";
+	private String NameSaida8 = "";
+	private String NameSaidaRGB = "";
 	private Button btAlterar;
 	
 	private EditText edtSaida1;
@@ -43,12 +46,20 @@ public class SetupDevice extends Activity {
 	private EditText edtSaida7;
 	private EditText edtSaida8;
 	private EditText edtSaidaRGB;
+	
+	SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferences;
     	  
     @Override
     public void onCreate(Bundle savedInstanceState) {
 	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setup_device);
+																
+	//	ArrayAdapter<Saida> ad = new CustomAdapter(this, R.layout.list_setup, personList);
+//		ListView lv = (ListView) findViewById(R.id.list);//
+		//lv.setAdapter(ad);
+																
 																
         btAlterar = (Button) findViewById(R.id.btAlterar);
         edtSaida1 = (EditText) findViewById(R.id.edtSaida1);
@@ -60,17 +71,19 @@ public class SetupDevice extends Activity {
 		edtSaida7 = (EditText) findViewById(R.id.edtSaida7);
 		edtSaida8 = (EditText) findViewById(R.id.edtSaida8);
 		edtSaidaRGB = (EditText) findViewById(R.id.edtSaidaRGB);
-		       
-		NameSaida1 = ApplicationPreferences.getInstance().getNameSaida1();
-		NameSaida2 = ApplicationPreferences.getInstance().getNameSaida2();
-		NameSaida3 = ApplicationPreferences.getInstance().getNameSaida3();
-		NameSaida4 = ApplicationPreferences.getInstance().getNameSaida4();
-		NameSaida5 = ApplicationPreferences.getInstance().getNameSaida5();
-		NameSaida6 = ApplicationPreferences.getInstance().getNameSaida6();
-		NameSaida7 = ApplicationPreferences.getInstance().getNameSaida7();
-		NameSaida8 = ApplicationPreferences.getInstance().getNameSaida8();
-		NameSaidaRGB = ApplicationPreferences.getInstance().getNameSaidaRGB();
-		
+
+
+        sharedPreferences = getSharedPreferences("APP_PREFS", getBaseContext().MODE_PRIVATE);
+        NameSaida1 = sharedPreferences.getString("NAME_SAIDA1","Saída 1");
+        NameSaida2 = sharedPreferences.getString("NAME_SAIDA2","Saída 2");
+        NameSaida3 = sharedPreferences.getString("NAME_SAIDA3","Saída 3");
+        NameSaida4 = sharedPreferences.getString("NAME_SAIDA4","Saída 4");
+        NameSaida5 = sharedPreferences.getString("NAME_SAIDA5","Saída 5");
+        NameSaida6 = sharedPreferences.getString("NAME_SAIDA6","Saída 6");
+        NameSaida7 = sharedPreferences.getString("NAME_SAIDA7","Saída 7");
+        NameSaida8 = sharedPreferences.getString("NAME_SAIDA8","Saída 8");
+        NameSaidaRGB = sharedPreferences.getString("NAME_SAIDARGB","ILUMINACAO");
+	
 		edtSaida1.setText(NameSaida1);
 		edtSaida2.setText(NameSaida2);
 		edtSaida3.setText(NameSaida3);
@@ -85,17 +98,21 @@ public class SetupDevice extends Activity {
             @Override
             public void onClick(View arg0) {
 
-					ApplicationPreferences.getInstance().setNameSaida1(edtSaida1.getText().toString());
-					ApplicationPreferences.getInstance().setNameSaida2(edtSaida2.getText().toString());
-					ApplicationPreferences.getInstance().setNameSaida2(edtSaida2.getText().toString());
-					ApplicationPreferences.getInstance().setNameSaida3(edtSaida3.getText().toString());
-					ApplicationPreferences.getInstance().setNameSaida4(edtSaida4.getText().toString());
-					ApplicationPreferences.getInstance().setNameSaida5(edtSaida5.getText().toString());
-					ApplicationPreferences.getInstance().setNameSaida6(edtSaida6.getText().toString());
-					ApplicationPreferences.getInstance().setNameSaida7(edtSaida7.getText().toString());
-					ApplicationPreferences.getInstance().setNameSaida8(edtSaida8.getText().toString());
-					ApplicationPreferences.getInstance().setNameSaidaRGB(edtSaidaRGB.getText().toString());
-                    																				
+					//sharedPreferences = getSharedPreferences("APP_PREFS",Context.MODE_PRIVATE);
+                sharedPreferences = getSharedPreferences("APP_PREFS", 0);
+					editor = sharedPreferences.edit();
+					
+					editor.putString("NAME_SAIDA1", edtSaida1.getText().toString());
+					editor.putString("NAME_SAIDA2", edtSaida2.getText().toString());
+					editor.putString("NAME_SAIDA3", edtSaida3.getText().toString());
+					editor.putString("NAME_SAIDA4", edtSaida4.getText().toString());
+					editor.putString("NAME_SAIDA5", edtSaida5.getText().toString());
+					editor.putString("NAME_SAIDA6", edtSaida6.getText().toString());
+					editor.putString("NAME_SAIDA7", edtSaida7.getText().toString());
+					editor.putString("NAME_SAIDA8", edtSaida8.getText().toString());
+					editor.putString("NAME_SAIDARGB", edtSaidaRGB.getText().toString());
+									
+					editor.commit();                    																		
 					setResult(Activity.RESULT_OK);
 					finish();
 
