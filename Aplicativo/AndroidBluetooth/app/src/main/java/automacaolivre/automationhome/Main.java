@@ -1,7 +1,3 @@
-//http://dev.androidbrasil.com/2012/03/listview-dificuldades-e-maravilhas/
-//  http://dev.androidbrasil.com/2012/03/listview-dificuldades-e-maravilhas/
-//http://code.tutsplus.com/tutorials/android-sdk-implement-an-options-menu--mobile-9453
-
 package automacaolivre.automationhome;
 
 import java.io.IOException;
@@ -30,27 +26,27 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Main extends Activity {
-    	
-	private String NameSaida1 = "";
+
+    private String NameSaida1 = "";
     private String NameSaida2 = "";
     private String NameSaida3 = "";
     private String NameSaida4 = "";
-	private String NameSaida5 = "";
-	private String NameSaida6 = "";
-	private String NameSaida7 = "";
-	private String NameSaida8 = "";
-	private String NameSaidaRGB = "";
-		
-	private Button btSaida1;
+    private String NameSaida5 = "";
+    private String NameSaida6 = "";
+    private String NameSaida7 = "";
+    private String NameSaida8 = "";
+    private String NameSaidaRGB = "";
+
+    private Button btSaida1;
     private Button btSaida2;
     private Button btSaida3;
     private Button btSaida4;
-	private Button btSaida5;
-	private Button btSaida6;
-	private Button btSaida7;
-	private Button btSaida8;
-	private Button btSetupBlueTooth;
-	private Button btSetupSaidas;
+    private Button btSaida5;
+    private Button btSaida6;
+    private Button btSaida7;
+    private Button btSaida8;
+    private Button btSetupBlueTooth;
+    private Button btSetupSaidas;
 
     private SeekBar seekBarR;
     private SeekBar seekBarG;
@@ -60,84 +56,84 @@ public class Main extends Activity {
     private int ValueSaida2;
     private int ValueSaida3;
     private int ValueSaida4;
-	private int ValueSaida5;
-	private int ValueSaida6;
-	private int ValueSaida7;
-	private int ValueSaida8;
+    private int ValueSaida5;
+    private int ValueSaida6;
+    private int ValueSaida7;
+    private int ValueSaida8;
     private int ValueSaidaR;
     private int ValueSaidaG;
     private int ValueSaidaB;
-	private int ValueSaveAuto;
-	
+    private int ValueSaveAuto;
+
     private String ValueSaida1HrI = "0";
-	private String ValueSaida1HrF = "0";
-	private String ValueSaida2HrI = "0";
-	private String ValueSaida2HrF = "0";
-	private String ValueSaida3HrI = "0";
-	private String ValueSaida3HrF = "0";
-	private String ValueSaida4HrI = "0";
-	private String ValueSaida4HrF = "0";
-	private String ValueSaida5HrI = "0";
-	private String ValueSaida5HrF = "0";
-	private String ValueSaida6HrI = "0";
-	private String ValueSaida6HrF = "0";
-	private String ValueSaida7HrI = "0";
-	private String ValueSaida7HrF = "0";
-	private String ValueSaida8HrI = "0";
-	private String ValueSaida8HrF = "0";
-	private String ValueRGBHrI = "0";
-	private String ValueRGBHrF = "0";
-	
-	
-	String address;
-    Handler handler = new Handler();		
-	private Boolean FirstTime;	
-	private boolean stopWorker = false;
+    private String ValueSaida1HrF = "0";
+    private String ValueSaida2HrI = "0";
+    private String ValueSaida2HrF = "0";
+    private String ValueSaida3HrI = "0";
+    private String ValueSaida3HrF = "0";
+    private String ValueSaida4HrI = "0";
+    private String ValueSaida4HrF = "0";
+    private String ValueSaida5HrI = "0";
+    private String ValueSaida5HrF = "0";
+    private String ValueSaida6HrI = "0";
+    private String ValueSaida6HrF = "0";
+    private String ValueSaida7HrI = "0";
+    private String ValueSaida7HrF = "0";
+    private String ValueSaida8HrI = "0";
+    private String ValueSaida8HrF = "0";
+    private String ValueRGBHrI = "0";
+    private String ValueRGBHrF = "0";
+
+
+    String address;
+    Handler handler = new Handler();
+    private Boolean FirstTime;
+    private boolean stopWorker = false;
     private int readBufferPosition = 0;
     private byte[] readBuffer = new byte[1024];
     private TextView txtMsg;
     byte delimiter = 10;
-		
-	private final int REQUEST_CONNECT_DEVICE = 1;
-	private final int REQUEST_SETUP_DEVICE = 2;
-	
-	private BluetoothAdapter meuAdaptadorBluetooth = null;
+
+    private final int REQUEST_CONNECT_DEVICE = 1;
+    private final int REQUEST_SETUP_DEVICE = 2;
+
+    private BluetoothAdapter meuAdaptadorBluetooth = null;
     private BluetoothSocket mmSocket = null;
     private BluetoothDevice mmDevice = null;
     private InputStream mmInStream = null;
     private OutputStream mmOutStream = null;
-	
-	SharedPreferences.Editor editor;
+
+    SharedPreferences.Editor editor;
     SharedPreferences sharedPreferences;
     private UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-	
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-								
+
         btSaida1 = (Button) findViewById(R.id.btSaida1);
         btSaida2 = (Button) findViewById(R.id.btSaida2);
         btSaida3 = (Button) findViewById(R.id.btSaida3);
         btSaida4 = (Button) findViewById(R.id.btSaida4);
-		btSaida5 = (Button) findViewById(R.id.btSaida5);
-		btSaida6 = (Button) findViewById(R.id.btSaida6);
-		btSaida7 = (Button) findViewById(R.id.btSaida7);
-		btSaida8 = (Button) findViewById(R.id.btSaida8);
+        btSaida5 = (Button) findViewById(R.id.btSaida5);
+        btSaida6 = (Button) findViewById(R.id.btSaida6);
+        btSaida7 = (Button) findViewById(R.id.btSaida7);
+        btSaida8 = (Button) findViewById(R.id.btSaida8);
         btSetupBlueTooth = (Button) findViewById(R.id.btSetupBluetooth);
-		btSetupSaidas = (Button) findViewById(R.id.btSetupSaidas);
-					
+        btSetupSaidas = (Button) findViewById(R.id.btSetupSaidas);
+
         seekBarR = (SeekBar) findViewById(R.id.seekR);
         seekBarG = (SeekBar) findViewById(R.id.seekG);
         seekBarB = (SeekBar) findViewById(R.id.seekB);
-				        		
-		AtualizaLabels();
-				
-        txtMsg = (TextView) findViewById(R.id.txtMsg);		
-		FirstTime = true;
-		
-		 btSaida1.setOnClickListener(new OnClickListener() {
+
+        AtualizaLabels();
+
+        txtMsg = (TextView) findViewById(R.id.txtMsg);
+        FirstTime = true;
+
+        btSaida1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -179,9 +175,9 @@ public class Main extends Activity {
                     e.printStackTrace();
                 }
             }
-        });			
-		
-		btSaida5.setOnClickListener(new OnClickListener() {
+        });
+
+        btSaida5.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -191,8 +187,8 @@ public class Main extends Activity {
                 }
             }
         });
-		
-		btSaida6.setOnClickListener(new OnClickListener() {
+
+        btSaida6.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -202,8 +198,8 @@ public class Main extends Activity {
                 }
             }
         });
-		
-		btSaida7.setOnClickListener(new OnClickListener() {
+
+        btSaida7.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -213,8 +209,8 @@ public class Main extends Activity {
                 }
             }
         });
-		
-		btSaida8.setOnClickListener(new OnClickListener() {
+
+        btSaida8.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -224,22 +220,22 @@ public class Main extends Activity {
                 }
             }
         });
-		
-		btSetupBlueTooth.setOnClickListener(new OnClickListener() {
+
+        btSetupBlueTooth.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                
-				meuAdaptadorBluetooth = BluetoothAdapter.getDefaultAdapter();	
-			//	Intent setupIntent = new Intent(this, DeviceListActivity.class);
-			//	startActivityForResult(setupIntent, REQUEST_CONNECT_DEVICE);
+
+                meuAdaptadorBluetooth = BluetoothAdapter.getDefaultAdapter();
+                //	Intent setupIntent = new Intent(this, DeviceListActivity.class);
+                //	startActivityForResult(setupIntent, REQUEST_CONNECT_DEVICE);
             }
         });
-		
-		btSetupSaidas.setOnClickListener(new OnClickListener() {
+
+        btSetupSaidas.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-			//	Intent serverIntent = new Intent(this, SetupDevice.class);
-			//	startActivityForResult(serverIntent, REQUEST_SETUP_DEVICE);
+                //	Intent serverIntent = new Intent(this, SetupDevice.class);
+                //	startActivityForResult(serverIntent, REQUEST_SETUP_DEVICE);
             }
         });
 
@@ -323,132 +319,127 @@ public class Main extends Activity {
 
             }
         });
-		
-		meuAdaptadorBluetooth = BluetoothAdapter.getDefaultAdapter();
-		address = sharedPreferences.getString("ADDRESS", "");
 
-		if(address == "")
-		{				
-			Intent setupIntent = new Intent(this, DeviceListActivity.class);
-			startActivityForResult(setupIntent, REQUEST_CONNECT_DEVICE);
-		}
-		else
-		{		
-			Connect();
-		}
+        meuAdaptadorBluetooth = BluetoothAdapter.getDefaultAdapter();
+        address = sharedPreferences.getString("ADDRESS", "");
+
+        if (address == "") {
+            Intent setupIntent = new Intent(this, DeviceListActivity.class);
+            startActivityForResult(setupIntent, REQUEST_CONNECT_DEVICE);
+        } else {
+            Connect();
+        }
     }
-	
-	 public boolean onCreateOptionsMenu(Menu menu) {
+
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.my_options_menu, menu);
         return true;
     }
- 	
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-			case R.id.DeviceListActivity:
-				startActivity(new Intent(this, DeviceListActivity.class));
+            case R.id.DeviceListActivity:
+                startActivity(new Intent(this, DeviceListActivity.class));
                 //startActivity(new Intent(this, DeviceListActivity.class),  REQUEST_CONNECT_DEVICE);
-				return true;
-        case R.id.SetupDevice:
-				//startActivity(new Intent(this, SetupDevice.class), REQUEST_SETUP_DEVICE);
+                return true;
+            case R.id.SetupDevice:
+                //startActivity(new Intent(this, SetupDevice.class), REQUEST_SETUP_DEVICE);
                 startActivity(new Intent(this, SetupDevice.class));
-				return true;
-		case R.id.SetupPlaca:
-				//startActivity(new Intent(this, SetupPlacaList.class), REQUEST_SETUP_DEVICE);
+                return true;
+            case R.id.SetupPlaca:
+                //startActivity(new Intent(this, SetupPlacaList.class), REQUEST_SETUP_DEVICE);
                 startActivity(new Intent(this, SetupPlacaList.class));
-				return true;				
-        default:
-			return super.onOptionsItemSelected(item);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
-		
-	private void AtualizaLabels(){
 
-        sharedPreferences = getSharedPreferences("APP_PREFS",Context.MODE_PRIVATE);
+    private void AtualizaLabels() {
+
+        sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        NameSaida1 = sharedPreferences.getString("NAME_SAIDA1","Saída 1");
-        NameSaida2 = sharedPreferences.getString("NAME_SAIDA2","Saída 2");
-        NameSaida3 = sharedPreferences.getString("NAME_SAIDA3","Saída 3");
-        NameSaida4 = sharedPreferences.getString("NAME_SAIDA4","Saída 4");
-        NameSaida5 = sharedPreferences.getString("NAME_SAIDA5","Saída 5");
-        NameSaida6 = sharedPreferences.getString("NAME_SAIDA6","Saída 6");
-        NameSaida7 = sharedPreferences.getString("NAME_SAIDA7","Saída 7");
-        NameSaida8 = sharedPreferences.getString("NAME_SAIDA8","Saída 8");
-        NameSaidaRGB = sharedPreferences.getString("NAME_SAIDARGB","ILUMINACAO");
+        NameSaida1 = sharedPreferences.getString("NAME_SAIDA1", "Saída 1");
+        NameSaida2 = sharedPreferences.getString("NAME_SAIDA2", "Saída 2");
+        NameSaida3 = sharedPreferences.getString("NAME_SAIDA3", "Saída 3");
+        NameSaida4 = sharedPreferences.getString("NAME_SAIDA4", "Saída 4");
+        NameSaida5 = sharedPreferences.getString("NAME_SAIDA5", "Saída 5");
+        NameSaida6 = sharedPreferences.getString("NAME_SAIDA6", "Saída 6");
+        NameSaida7 = sharedPreferences.getString("NAME_SAIDA7", "Saída 7");
+        NameSaida8 = sharedPreferences.getString("NAME_SAIDA8", "Saída 8");
+        NameSaidaRGB = sharedPreferences.getString("NAME_SAIDARGB", "ILUMINACAO");
 
-		btSaida1.setText(NameSaida1);
-		btSaida2.setText(NameSaida2);
-		btSaida3.setText(NameSaida3);
-		btSaida4.setText(NameSaida4);
-		btSaida5.setText(NameSaida5);
-		btSaida6.setText(NameSaida6);
-		btSaida7.setText(NameSaida7);
-		btSaida8.setText(NameSaida8);
-								
-	}
-	
+        btSaida1.setText(NameSaida1);
+        btSaida2.setText(NameSaida2);
+        btSaida3.setText(NameSaida3);
+        btSaida4.setText(NameSaida4);
+        btSaida5.setText(NameSaida5);
+        btSaida6.setText(NameSaida6);
+        btSaida7.setText(NameSaida7);
+        btSaida8.setText(NameSaida8);
+
+    }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-	
+
         switch (requestCode) {
-			case REQUEST_CONNECT_DEVICE:
-				if (resultCode == Activity.RESULT_OK) {										
-					address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);																				
-					sharedPreferences = getSharedPreferences("APP_PREFS",Context.MODE_PRIVATE);
-					editor = sharedPreferences.edit();
-					
-					editor.putString("ADDRESS", address);
-					editor.commit();
-										
-					Connect();
-				}
-				break;
-			case REQUEST_SETUP_DEVICE:			
-		//			AtualizaHorariosPlaca();
-					AtualizaLabels();					
-				break;
+            case REQUEST_CONNECT_DEVICE:
+                if (resultCode == Activity.RESULT_OK) {
+                    address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+                    sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+
+                    editor.putString("ADDRESS", address);
+                    editor.commit();
+
+                    Connect();
+                }
+                break;
+            case REQUEST_SETUP_DEVICE:
+                //			AtualizaHorariosPlaca();
+                AtualizaLabels();
+                break;
         }
     }
-	
-	private void Connect()
-	{
-		meuAdaptadorBluetooth.cancelDiscovery();		
-		mmDevice = meuAdaptadorBluetooth.getRemoteDevice(address);
-		
-		try {
-		
-			mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
-			mmSocket.connect();
-			mmInStream = mmSocket.getInputStream();
-			mmOutStream = mmSocket.getOutputStream();
-			
-			String enviada = "";
-			byte[] send = enviada.getBytes();
-			mmOutStream.write(send);
 
-			beginListenForCommands();
+    private void Connect() {
+        meuAdaptadorBluetooth.cancelDiscovery();
+        mmDevice = meuAdaptadorBluetooth.getRemoteDevice(address);
 
-		}
-		catch(IOException e){
-			Toast.makeText(this, "Ocorreu um erro durante a conexão com o Bluetooth!", Toast.LENGTH_LONG).show();
-		}
-	}
-	
-	private void EnviarRGB(String Porta, int Progress) throws IOException {
-	
+        try {
+
+            mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
+            mmSocket.connect();
+            mmInStream = mmSocket.getInputStream();
+            mmOutStream = mmSocket.getOutputStream();
+
+            String enviada = "";
+            byte[] send = enviada.getBytes();
+            mmOutStream.write(send);
+
+            beginListenForCommands();
+
+        } catch (IOException e) {
+            Toast.makeText(this, "Ocorreu um erro durante a conexão com o Bluetooth!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void EnviarRGB(String Porta, int Progress) throws IOException {
+
         String comando = "|A" + Porta + String.valueOf(Progress) + "|";
         writeData(comando);
-		
+
     }
 
     private void EnviarComandoDigital(String Saida) throws IOException {
-        
-		//|D21|
+
+        //|D21|
         String comando = "|D" + Saida;
-		
-		String StatusSaida = "";		
+
+        String StatusSaida = "";
 
         if (Saida == "1") {
             StatusSaida = (ValueSaida1 == 1) ? "0" : "1";
@@ -466,19 +457,19 @@ public class Main extends Activity {
             StatusSaida = (ValueSaida4 == 1) ? "0" : "1";
             comando += StatusSaida + "|";
         }
-		if (Saida == "5") {
+        if (Saida == "5") {
             StatusSaida = (ValueSaida5 == 1) ? "0" : "1";
             comando += StatusSaida + "|";
         }
-		if (Saida == "6") {
+        if (Saida == "6") {
             StatusSaida = (ValueSaida6 == 1) ? "0" : "1";
             comando += StatusSaida + "|";
         }
-		if (Saida == "7") {
+        if (Saida == "7") {
             StatusSaida = (ValueSaida7 == 1) ? "0" : "1";
             comando += StatusSaida + "|";
         }
-		if (Saida == "8") {
+        if (Saida == "8") {
             StatusSaida = (ValueSaida8 == 1) ? "0" : "1";
             comando += StatusSaida + "|";
         }
@@ -489,8 +480,8 @@ public class Main extends Activity {
 
         writeData(comando);
     }
-	
-	private void writeData(String data) throws IOException {
+
+    private void writeData(String data) throws IOException {
 
         try {
             write(data);
@@ -505,62 +496,50 @@ public class Main extends Activity {
         mmOutStream.write(msgBuffer, 0, msgBuffer.length);
 
     }
-	
-	public void beginListenForCommands()   {
-		
+
+    public void beginListenForCommands() {
+
         try {
-            mmInStream = mmSocket.getInputStream();			
+            mmInStream = mmSocket.getInputStream();
         } catch (IOException e) {
-					
-			Toast.makeText(this, "Dispositivo nao conectado, reconecte!", Toast.LENGTH_LONG).show();
+
+            Toast.makeText(this, "Dispositivo nao conectado, reconecte!", Toast.LENGTH_LONG).show();
         }
 
-        Thread workerThread = new Thread(new Runnable()
-        {
-            public void run()
-            {
-                while(!Thread.currentThread().isInterrupted() && !stopWorker)
-                {
-                    try
-                    {					
+        Thread workerThread = new Thread(new Runnable() {
+            public void run() {
+                while (!Thread.currentThread().isInterrupted() && !stopWorker) {
+                    try {
                         int bytesAvailable = mmInStream.available();
-                        if(bytesAvailable > 0)
-                        {
+                        if (bytesAvailable > 0) {
                             byte[] packetBytes = new byte[bytesAvailable];
                             mmInStream.read(packetBytes);
-                            for(int i=0;i<bytesAvailable;i++)
-                            {
+                            for (int i = 0; i < bytesAvailable; i++) {
                                 byte b = packetBytes[i];
-                                if(b == delimiter)
-                                {
+                                if (b == delimiter) {
                                     byte[] encodedBytes = new byte[readBufferPosition];
                                     System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
                                     final String data = new String(encodedBytes, "US-ASCII");
                                     readBufferPosition = 0;
-                                    handler.post(new Runnable()
-                                    {
+                                    handler.post(new Runnable() {
                                         public void run() {
 
                                             if (data.contains("COMANDOS")) {
-												AtualizaDadosPlaca(data);                                                   
+                                                AtualizaDadosPlaca(data);
                                             }
 
-                                           //txtMsg.setText(data);
-                                             txtMsg.setText("");
+                                            //txtMsg.setText(data);
+                                            txtMsg.setText("");
                                         }
                                     });
-                                }
-                                else
-                                {
+                                } else {
                                     readBuffer[readBufferPosition++] = b;
                                 }
                             }
                         }
-                    }
-                    catch (IOException ex)
-                    {
+                    } catch (IOException ex) {
                         stopWorker = true;
-						//Toast.makeText(this, "Ocorreu um erro durante o recebimendo dos dados do dispositivo!", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(this, "Ocorreu um erro durante o recebimendo dos dados do dispositivo!", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -568,127 +547,126 @@ public class Main extends Activity {
 
         workerThread.start();
     }
-	
-	private void AtualizaDadosPlaca(String data)
-	{
-		String[] DataCommand = data.split("#");
-													
-		ValueSaida1 = Integer.parseInt(DataCommand[1]);
-		ValueSaida2 = Integer.parseInt(DataCommand[2]);
-		ValueSaida3 = Integer.parseInt(DataCommand[3]);
-		ValueSaida4 = Integer.parseInt(DataCommand[4]);
-		ValueSaida5 = Integer.parseInt(DataCommand[5]);
-		ValueSaida6 = Integer.parseInt(DataCommand[6]);
-		ValueSaida7 = Integer.parseInt(DataCommand[7]);
-		ValueSaida8 = Integer.parseInt(DataCommand[8]);
-		ValueSaidaR = Integer.parseInt(DataCommand[9]);
-		ValueSaidaG = Integer.parseInt(DataCommand[10]);
-		ValueSaidaB = Integer.parseInt(DataCommand[11]);
-		ValueSaveAuto = Integer.parseInt(DataCommand[11]);
-		
-		ValueSaida1HrI = DataCommand[13];
-		ValueSaida1HrF = DataCommand[14];
-		ValueSaida2HrI = DataCommand[15];
-		ValueSaida2HrF = DataCommand[16];
-		ValueSaida3HrI = DataCommand[17];
-		ValueSaida3HrF = DataCommand[18];
-		ValueSaida4HrI = DataCommand[19];
-		ValueSaida4HrF = DataCommand[20];
-		ValueSaida5HrI = DataCommand[21];
-		ValueSaida5HrF = DataCommand[22];
-		ValueSaida6HrI = DataCommand[23];
-		ValueSaida6HrF = DataCommand[24];
-		ValueSaida7HrI = DataCommand[25];
-		ValueSaida7HrF = DataCommand[26];
-		ValueSaida8HrI = DataCommand[27];
-		ValueSaida8HrF = DataCommand[28];
-		ValueRGBHrI = DataCommand[29]; 
-		ValueRGBHrF = DataCommand[30]; 
 
-		if (ValueSaida1 == 1) {
-			btSaida1.setText(NameSaida1 + " - ON");
-		} else {
-			btSaida1.setText(NameSaida1 + " - OFF");
-		}
+    private void AtualizaDadosPlaca(String data) {
+        String[] DataCommand = data.split("#");
 
-		if (ValueSaida2 == 1) {
-			btSaida2.setText(NameSaida2 + " - ON");
-		} else {
-			btSaida2.setText(NameSaida2 + " - OFF");
-		}
+        ValueSaida1 = Integer.parseInt(DataCommand[1]);
+        ValueSaida2 = Integer.parseInt(DataCommand[2]);
+        ValueSaida3 = Integer.parseInt(DataCommand[3]);
+        ValueSaida4 = Integer.parseInt(DataCommand[4]);
+        ValueSaida5 = Integer.parseInt(DataCommand[5]);
+        ValueSaida6 = Integer.parseInt(DataCommand[6]);
+        ValueSaida7 = Integer.parseInt(DataCommand[7]);
+        ValueSaida8 = Integer.parseInt(DataCommand[8]);
+        ValueSaidaR = Integer.parseInt(DataCommand[9]);
+        ValueSaidaG = Integer.parseInt(DataCommand[10]);
+        ValueSaidaB = Integer.parseInt(DataCommand[11]);
+        ValueSaveAuto = Integer.parseInt(DataCommand[11]);
 
-		if (ValueSaida3 == 1) {
-			btSaida3.setText(NameSaida3 + " - ON");
-		} else {
-			btSaida3.setText(NameSaida3 + " - OFF");
-		}
+        ValueSaida1HrI = DataCommand[13];
+        ValueSaida1HrF = DataCommand[14];
+        ValueSaida2HrI = DataCommand[15];
+        ValueSaida2HrF = DataCommand[16];
+        ValueSaida3HrI = DataCommand[17];
+        ValueSaida3HrF = DataCommand[18];
+        ValueSaida4HrI = DataCommand[19];
+        ValueSaida4HrF = DataCommand[20];
+        ValueSaida5HrI = DataCommand[21];
+        ValueSaida5HrF = DataCommand[22];
+        ValueSaida6HrI = DataCommand[23];
+        ValueSaida6HrF = DataCommand[24];
+        ValueSaida7HrI = DataCommand[25];
+        ValueSaida7HrF = DataCommand[26];
+        ValueSaida8HrI = DataCommand[27];
+        ValueSaida8HrF = DataCommand[28];
+        ValueRGBHrI = DataCommand[29];
+        ValueRGBHrF = DataCommand[30];
 
-		if (ValueSaida4 == 1) {
-			btSaida4.setText(NameSaida4 + " - ON");
-		} else {
-			btSaida4.setText(NameSaida4 + " - OFF");
-		}
+        if (ValueSaida1 == 1) {
+            btSaida1.setText(NameSaida1 + " - ON");
+        } else {
+            btSaida1.setText(NameSaida1 + " - OFF");
+        }
 
-		if (ValueSaida5 == 1) {
-			btSaida5.setText(NameSaida5 + " - ON");
-		} else {
-			btSaida5.setText(NameSaida5 + " - OFF");
-		}
+        if (ValueSaida2 == 1) {
+            btSaida2.setText(NameSaida2 + " - ON");
+        } else {
+            btSaida2.setText(NameSaida2 + " - OFF");
+        }
 
-		if (ValueSaida6 == 1) {
-			btSaida6.setText(NameSaida6 + " - ON");
-		} else {
-			btSaida6.setText(NameSaida6 + " - OFF");
-		}
+        if (ValueSaida3 == 1) {
+            btSaida3.setText(NameSaida3 + " - ON");
+        } else {
+            btSaida3.setText(NameSaida3 + " - OFF");
+        }
 
-		if (ValueSaida7 == 1) {
-			btSaida7.setText(NameSaida7 + " - ON");
-		} else {
-			btSaida7.setText(NameSaida7 + " - OFF");
-		}
+        if (ValueSaida4 == 1) {
+            btSaida4.setText(NameSaida4 + " - ON");
+        } else {
+            btSaida4.setText(NameSaida4 + " - OFF");
+        }
 
-		if (ValueSaida8 == 1) {
-			btSaida8.setText(NameSaida8 + " - ON");
-		} else {
-			btSaida8.setText(NameSaida8 + " - OFF");
-		}
+        if (ValueSaida5 == 1) {
+            btSaida5.setText(NameSaida5 + " - ON");
+        } else {
+            btSaida5.setText(NameSaida5 + " - OFF");
+        }
 
-		if (!FirstTime) {
+        if (ValueSaida6 == 1) {
+            btSaida6.setText(NameSaida6 + " - ON");
+        } else {
+            btSaida6.setText(NameSaida6 + " - OFF");
+        }
 
-			seekBarR.setProgress(ValueSaidaR / 28);
-			seekBarR.refreshDrawableState();
+        if (ValueSaida7 == 1) {
+            btSaida7.setText(NameSaida7 + " - ON");
+        } else {
+            btSaida7.setText(NameSaida7 + " - OFF");
+        }
 
-			seekBarG.setProgress(ValueSaidaG / 28);
-			seekBarG.refreshDrawableState();
+        if (ValueSaida8 == 1) {
+            btSaida8.setText(NameSaida8 + " - ON");
+        } else {
+            btSaida8.setText(NameSaida8 + " - OFF");
+        }
 
-			seekBarB.setProgress(ValueSaidaB / 28);
-			seekBarB.refreshDrawableState();
-			FirstTime = true;
-								
-			sharedPreferences = getSharedPreferences("APP_PREFS",Context.MODE_PRIVATE);
-			editor = sharedPreferences.edit();
-			
-			editor.putString("ValueSaida1HrI", ValueSaida1HrI);
-			editor.putString("ValueSaida1HrF", ValueSaida1HrF);
-			editor.putString("ValueSaida2HrI", ValueSaida2HrI);
-			editor.putString("ValueSaida2HrF", ValueSaida2HrF);
-			editor.putString("ValueSaida3HrI", ValueSaida3HrI);
-			editor.putString("ValueSaida3HrF", ValueSaida3HrF);
-			editor.putString("ValueSaida4HrI", ValueSaida4HrI);
-			editor.putString("ValueSaida4HrF", ValueSaida4HrF);
-			editor.putString("ValueSaida5HrI", ValueSaida5HrI);
-			editor.putString("ValueSaida5HrF", ValueSaida5HrF);
-			editor.putString("ValueSaida6HrI", ValueSaida6HrI);
-			editor.putString("ValueSaida6HrF", ValueSaida6HrF);
-			editor.putString("ValueSaida7HrI", ValueSaida7HrI);
-			editor.putString("ValueSaida7HrF", ValueSaida7HrF);
-			editor.putString("ValueSaida8HrI", ValueSaida8HrI);
-			editor.putString("ValueSaida8HrF", ValueSaida8HrF);
-			editor.putString("ValueRGBHrI", ValueRGBHrI);
-			editor.putString("ValueRGBHrF", ValueRGBHrF);
-										
-			editor.commit();                    																		
-		}		
-				    		
-	}	
+        if (!FirstTime) {
+
+            seekBarR.setProgress(ValueSaidaR / 28);
+            seekBarR.refreshDrawableState();
+
+            seekBarG.setProgress(ValueSaidaG / 28);
+            seekBarG.refreshDrawableState();
+
+            seekBarB.setProgress(ValueSaidaB / 28);
+            seekBarB.refreshDrawableState();
+            FirstTime = true;
+
+            sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+
+            editor.putString("ValueSaida1HrI", ValueSaida1HrI);
+            editor.putString("ValueSaida1HrF", ValueSaida1HrF);
+            editor.putString("ValueSaida2HrI", ValueSaida2HrI);
+            editor.putString("ValueSaida2HrF", ValueSaida2HrF);
+            editor.putString("ValueSaida3HrI", ValueSaida3HrI);
+            editor.putString("ValueSaida3HrF", ValueSaida3HrF);
+            editor.putString("ValueSaida4HrI", ValueSaida4HrI);
+            editor.putString("ValueSaida4HrF", ValueSaida4HrF);
+            editor.putString("ValueSaida5HrI", ValueSaida5HrI);
+            editor.putString("ValueSaida5HrF", ValueSaida5HrF);
+            editor.putString("ValueSaida6HrI", ValueSaida6HrI);
+            editor.putString("ValueSaida6HrF", ValueSaida6HrF);
+            editor.putString("ValueSaida7HrI", ValueSaida7HrI);
+            editor.putString("ValueSaida7HrF", ValueSaida7HrF);
+            editor.putString("ValueSaida8HrI", ValueSaida8HrI);
+            editor.putString("ValueSaida8HrF", ValueSaida8HrF);
+            editor.putString("ValueRGBHrI", ValueRGBHrI);
+            editor.putString("ValueRGBHrF", ValueRGBHrF);
+
+            editor.commit();
+        }
+
+    }
 }

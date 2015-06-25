@@ -22,7 +22,6 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 
-
 public class DeviceListActivity extends Activity {
     // Debugging
     private static final String TAG = "DeviceListActivity";
@@ -168,7 +167,7 @@ public class DeviceListActivity extends Activity {
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                     mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
                 }
-            // When discovery is finished, change the Activity title
+                // When discovery is finished, change the Activity title
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 setProgressBarIndeterminateVisibility(false);
                 setTitle("Selecione o dispositivo");
