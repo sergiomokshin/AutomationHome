@@ -1,3 +1,5 @@
+//http://www.webplusandroid.com/creating-listview-with-edittext-and-textwatcher-in-android/
+
 package automacaolivre.automationhome;
 
 import java.io.IOException;
@@ -22,7 +24,6 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.os.Handler;
 import android.content.Context;
-
 import android.content.SharedPreferences;
 
 public class Main extends Activity {
@@ -358,18 +359,19 @@ public class Main extends Activity {
 
     private void AtualizaLabels() {
 
+		//final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        NameSaida1 = sharedPreferences.getString("NAME_SAIDA1", "Saída 1");
-        NameSaida2 = sharedPreferences.getString("NAME_SAIDA2", "Saída 2");
-        NameSaida3 = sharedPreferences.getString("NAME_SAIDA3", "Saída 3");
-        NameSaida4 = sharedPreferences.getString("NAME_SAIDA4", "Saída 4");
-        NameSaida5 = sharedPreferences.getString("NAME_SAIDA5", "Saída 5");
-        NameSaida6 = sharedPreferences.getString("NAME_SAIDA6", "Saída 6");
-        NameSaida7 = sharedPreferences.getString("NAME_SAIDA7", "Saída 7");
-        NameSaida8 = sharedPreferences.getString("NAME_SAIDA8", "Saída 8");
-        NameSaidaRGB = sharedPreferences.getString("NAME_SAIDARGB", "ILUMINACAO");
+        NameSaida1 = sharedPreferences.getString("SAIDA1", "Saída 1");
+        NameSaida2 = sharedPreferences.getString("SAIDA2", "Saída 2");
+        NameSaida3 = sharedPreferences.getString("SAIDA3", "Saída 3");
+        NameSaida4 = sharedPreferences.getString("SAIDA4", "Saída 4");
+        NameSaida5 = sharedPreferences.getString("SAIDA5", "Saída 5");
+        NameSaida6 = sharedPreferences.getString("SAIDA6", "Saída 6");
+        NameSaida7 = sharedPreferences.getString("SAIDA7", "Saída 7");
+        NameSaida8 = sharedPreferences.getString("SAIDA8", "Saída 8");
+        NameSaidaRGB = sharedPreferences.getString("SAIDARGB", "ILUMINACAO");
 
         btSaida1.setText(NameSaida1);
         btSaida2.setText(NameSaida2);
@@ -644,24 +646,25 @@ public class Main extends Activity {
             FirstTime = true;
 
             sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
-            editor = sharedPreferences.edit();
-
-            editor.putString("ValueSaida1HrI", ValueSaida1HrI);
-            editor.putString("ValueSaida1HrF", ValueSaida1HrF);
-            editor.putString("ValueSaida2HrI", ValueSaida2HrI);
-            editor.putString("ValueSaida2HrF", ValueSaida2HrF);
-            editor.putString("ValueSaida3HrI", ValueSaida3HrI);
-            editor.putString("ValueSaida3HrF", ValueSaida3HrF);
-            editor.putString("ValueSaida4HrI", ValueSaida4HrI);
-            editor.putString("ValueSaida4HrF", ValueSaida4HrF);
-            editor.putString("ValueSaida5HrI", ValueSaida5HrI);
-            editor.putString("ValueSaida5HrF", ValueSaida5HrF);
-            editor.putString("ValueSaida6HrI", ValueSaida6HrI);
-            editor.putString("ValueSaida6HrF", ValueSaida6HrF);
-            editor.putString("ValueSaida7HrI", ValueSaida7HrI);
-            editor.putString("ValueSaida7HrF", ValueSaida7HrF);
-            editor.putString("ValueSaida8HrI", ValueSaida8HrI);
-            editor.putString("ValueSaida8HrF", ValueSaida8HrF);
+            editor = sharedPreferences.edit();		
+            editor = sharedPreferences.edit();		
+			
+            editor.putString("SAIDA1HrI", ValueSaida1HrI);
+            editor.putString("SAIDA1HrF", ValueSaida1HrF);
+            editor.putString("SAIDA2HrI", ValueSaida2HrI);
+            editor.putString("SAIDA2HrF", ValueSaida2HrF);
+            editor.putString("SAIDA3HrI", ValueSaida3HrI);
+            editor.putString("SAIDA3HrF", ValueSaida3HrF);
+            editor.putString("SAIDA4HrI", ValueSaida4HrI);
+            editor.putString("SAIDA4HrF", ValueSaida4HrF);
+            editor.putString("SAIDA5HrI", ValueSaida5HrI);
+            editor.putString("SAIDA5HrF", ValueSaida5HrF);
+            editor.putString("SAIDA6HrI", ValueSaida6HrI);
+            editor.putString("SAIDA6HrF", ValueSaida6HrF);
+            editor.putString("SAIDA7HrI", ValueSaida7HrI);
+            editor.putString("SAIDA7HrF", ValueSaida7HrF);
+            editor.putString("SAIDA8HrI", ValueSaida8HrI);
+            editor.putString("SAIDA8HrF", ValueSaida8HrF);
             editor.putString("ValueRGBHrI", ValueRGBHrI);
             editor.putString("ValueRGBHrF", ValueRGBHrF);
 

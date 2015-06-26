@@ -56,15 +56,15 @@ public class SetupDevice extends Activity {
 
 
         sharedPreferences = getSharedPreferences("APP_PREFS", getBaseContext().MODE_PRIVATE);
-        NameSaida1 = sharedPreferences.getString("NAME_SAIDA1", "Saída 1");
-        NameSaida2 = sharedPreferences.getString("NAME_SAIDA2", "Saída 2");
-        NameSaida3 = sharedPreferences.getString("NAME_SAIDA3", "Saída 3");
-        NameSaida4 = sharedPreferences.getString("NAME_SAIDA4", "Saída 4");
-        NameSaida5 = sharedPreferences.getString("NAME_SAIDA5", "Saída 5");
-        NameSaida6 = sharedPreferences.getString("NAME_SAIDA6", "Saída 6");
-        NameSaida7 = sharedPreferences.getString("NAME_SAIDA7", "Saída 7");
-        NameSaida8 = sharedPreferences.getString("NAME_SAIDA8", "Saída 8");
-        NameSaidaRGB = sharedPreferences.getString("NAME_SAIDARGB", "ILUMINACAO");
+        NameSaida1 = sharedPreferences.getString("SAIDA1", "Saída 1");
+        NameSaida2 = sharedPreferences.getString("SAIDA2", "Saída 2");
+        NameSaida3 = sharedPreferences.getString("SAIDA3", "Saída 3");
+        NameSaida4 = sharedPreferences.getString("SAIDA4", "Saída 4");
+        NameSaida5 = sharedPreferences.getString("SAIDA5", "Saída 5");
+        NameSaida6 = sharedPreferences.getString("SAIDA6", "Saída 6");
+        NameSaida7 = sharedPreferences.getString("SAIDA7", "Saída 7");
+        NameSaida8 = sharedPreferences.getString("SAIDA8", "Saída 8");
+        NameSaidaRGB = sharedPreferences.getString("SAIDARGB", "ILUMINACAO");
 
         edtSaida1.setText(NameSaida1);
         edtSaida2.setText(NameSaida2);
@@ -83,15 +83,15 @@ public class SetupDevice extends Activity {
                 sharedPreferences = getSharedPreferences("APP_PREFS", 0);
                 editor = sharedPreferences.edit();
 
-                editor.putString("NAME_SAIDA1", edtSaida1.getText().toString());
-                editor.putString("NAME_SAIDA2", edtSaida2.getText().toString());
-                editor.putString("NAME_SAIDA3", edtSaida3.getText().toString());
-                editor.putString("NAME_SAIDA4", edtSaida4.getText().toString());
-                editor.putString("NAME_SAIDA5", edtSaida5.getText().toString());
-                editor.putString("NAME_SAIDA6", edtSaida6.getText().toString());
-                editor.putString("NAME_SAIDA7", edtSaida7.getText().toString());
-                editor.putString("NAME_SAIDA8", edtSaida8.getText().toString());
-                editor.putString("NAME_SAIDARGB", edtSaidaRGB.getText().toString());
+                editor.putString("SAIDA1", edtSaida1.getText().toString());
+                editor.putString("SAIDA2", edtSaida2.getText().toString());
+                editor.putString("SAIDA3", edtSaida3.getText().toString());
+                editor.putString("SAIDA4", edtSaida4.getText().toString());
+                editor.putString("SAIDA5", edtSaida5.getText().toString());
+                editor.putString("SAIDA6", edtSaida6.getText().toString());
+                editor.putString("SAIDA7", edtSaida7.getText().toString());
+                editor.putString("SAIDA8", edtSaida8.getText().toString());
+                editor.putString("SAIDARGB", edtSaidaRGB.getText().toString());
 
                 editor.commit();
                 setResult(Activity.RESULT_OK);
