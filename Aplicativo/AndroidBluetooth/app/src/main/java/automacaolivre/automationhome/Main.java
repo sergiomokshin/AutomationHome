@@ -348,10 +348,6 @@ public class Main extends Activity {
                 //startActivity(new Intent(this, SetupDevice.class), REQUEST_SETUP_DEVICE);
                 startActivity(new Intent(this, SetupDevice.class));
                 return true;
-            case R.id.SetupPlaca:
-                //startActivity(new Intent(this, SetupPlacaList.class), REQUEST_SETUP_DEVICE);
-                startActivity(new Intent(this, SetupPlacaList.class));
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
