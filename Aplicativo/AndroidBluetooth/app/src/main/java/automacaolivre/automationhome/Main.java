@@ -363,15 +363,15 @@ public class Main extends Activity {
         sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        NameSaida1 = sharedPreferences.getString("SAIDA1", "Saída 1");
-        NameSaida2 = sharedPreferences.getString("SAIDA2", "Saída 2");
-        NameSaida3 = sharedPreferences.getString("SAIDA3", "Saída 3");
-        NameSaida4 = sharedPreferences.getString("SAIDA4", "Saída 4");
-        NameSaida5 = sharedPreferences.getString("SAIDA5", "Saída 5");
-        NameSaida6 = sharedPreferences.getString("SAIDA6", "Saída 6");
-        NameSaida7 = sharedPreferences.getString("SAIDA7", "Saída 7");
-        NameSaida8 = sharedPreferences.getString("SAIDA8", "Saída 8");
-        NameSaidaRGB = sharedPreferences.getString("SAIDARGB", "ILUMINACAO");
+        NameSaida1 = sharedPreferences.getString("S1", "Saída 1");
+        NameSaida2 = sharedPreferences.getString("S2", "Saída 2");
+        NameSaida3 = sharedPreferences.getString("S3", "Saída 3");
+        NameSaida4 = sharedPreferences.getString("S4", "Saída 4");
+        NameSaida5 = sharedPreferences.getString("S5", "Saída 5");
+        NameSaida6 = sharedPreferences.getString("S6", "Saída 6");
+        NameSaida7 = sharedPreferences.getString("S7", "Saída 7");
+        NameSaida8 = sharedPreferences.getString("S8", "Saída 8");
+        NameSaidaRGB = sharedPreferences.getString("RGB", "ILUMINACAO");
 
         btSaida1.setText(NameSaida1);
         btSaida2.setText(NameSaida2);
@@ -402,9 +402,10 @@ public class Main extends Activity {
                 break;
             case REQUEST_SETUP_DEVICE:
                 //			AtualizaHorariosPlaca();
-                AtualizaLabels();
                 break;
         }
+
+        AtualizaLabels();
     }
 
     private void Connect() {

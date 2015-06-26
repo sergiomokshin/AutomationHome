@@ -25,7 +25,7 @@ public class SetupPlacaList extends Activity {
 
         LoadList();
         lv = (ListView) findViewById(R.id.list);
-        lv.setAdapter(new CustomAdapter(this, saidaList));
+        lv.setAdapter(new CustomAdapter(this, R.layout.list_setup_item, saidaList));
 
     }
 
@@ -33,15 +33,15 @@ public class SetupPlacaList extends Activity {
 
         sharedPreferences = getSharedPreferences("APP_PREFS", 0);
 
-        String NameSaida1 = sharedPreferences.getString("SAIDA1", "Saida 1");
-        String NameSaida2 = sharedPreferences.getString("SAIDA2", "Saida 2");
-        String NameSaida3 = sharedPreferences.getString("SAIDA3", "Saida 3");
-        String NameSaida4 = sharedPreferences.getString("SAIDA4", "Saida 4");
-        String NameSaida5 = sharedPreferences.getString("SAIDA5", "Saida 5");
-        String NameSaida6 = sharedPreferences.getString("SAIDA6", "Saida 6");
-        String NameSaida7 = sharedPreferences.getString("SAIDA7", "Saida 7");
-        String NameSaida8 = sharedPreferences.getString("SAIDA8", "Saida 8");
-        String NameSaidaRGB = sharedPreferences.getString("SAIDARGB", "ILUMINACAO");
+        String NameSaida1 = sharedPreferences.getString("S1", "Saida 1");
+        String NameSaida2 = sharedPreferences.getString("S2", "Saida 2");
+        String NameSaida3 = sharedPreferences.getString("S3", "Saida 3");
+        String NameSaida4 = sharedPreferences.getString("S4", "Saida 4");
+        String NameSaida5 = sharedPreferences.getString("S5", "Saida 5");
+        String NameSaida6 = sharedPreferences.getString("S6", "Saida 6");
+        String NameSaida7 = sharedPreferences.getString("S7", "Saida 7");
+        String NameSaida8 = sharedPreferences.getString("S8", "Saida 8");
+        String NameSaidaRGB = sharedPreferences.getString("SRGB", "ILUMINACAO");
         String SAIDA1HrI = sharedPreferences.getString("SAIDA1HrI", "0");
         String SAIDA1HrF = sharedPreferences.getString("SAIDA1HrF", "0");
         String SAIDA2HrI = sharedPreferences.getString("SAIDA2HrI", "0");

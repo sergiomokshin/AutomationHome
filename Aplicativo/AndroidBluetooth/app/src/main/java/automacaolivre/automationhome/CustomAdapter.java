@@ -1,32 +1,34 @@
 //http://www.webplusandroid.com/creating-listview-with-edittext-and-textwatcher-in-android/
 package automacaolivre.automationhome;
-import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.text.TextWatcher;
-import android.text.Editable;
+import android.widget.TextView;
 
+import java.util.ArrayList;
 
-public class CustomAdapter extends BaseAdapter {
+public class CustomAdapter extends ArrayAdapter<Saida> {
 
     private LayoutInflater mInflater;
     Context context;
     private ArrayList<Saida> itens;
     SharedPreferences.Editor editor;
     SharedPreferences sharedPreferences;
+    int layoutResourceId;
 
-
-    public CustomAdapter(Context context, ArrayList<Saida> itens) {
+    public CustomAdapter(Context context, int layoutResourceId, ArrayList<Saida> itens) {
+        super(context, layoutResourceId, itens);
         this.itens = itens;
+        this.layoutResourceId = layoutResourceId;
         this.context = context;
     }
 
@@ -45,70 +47,109 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Saida saida = getItem(position);
-        if (convertView == null) {
-            LayoutInflater lInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = lInflater.inflate(R.layout.list_setup_item, null);
+        final Saida saida = itens.get(position);
+        final int Index = position;
+        //if (convertView == null) {
+        //    LayoutInflater lInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        //    convertView = lInflater.inflate(R.layout.list_setup_item, null);
+        // }
+
+        View row = convertView;
+        Holder holder = null;
+
+        if (row == null) {
+            //LayoutInflater lInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            //row = lInflater.inflate(R.layout.list_setup_item, null);
+
+
+            //LayoutInflater inflater = ((Activity)context).getLayoutInflater ();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            row = inflater.inflate(layoutResourceId, parent, false);
+
+
+            holder = new Holder();
+
+            holder.Codigo = (TextView) row.findViewById(R.id.Codigo);
+            holder.Descricao = (EditText) row.findViewById(R.id.Descricao);
+            holder.dsHorarioInicio = (TextView) row.findViewById(R.id.dsHorarioInicio);
+            holder.HorarioInicio = (EditText) row.findViewById(R.id.HorarioInicio);
+            holder.dsHorarioFim = (TextView) row.findViewById(R.id.dsHorarioFim);
+            holder.HorarioFim = (EditText) row.findViewById(R.id.HorarioFim);
+
+
+            holder.Descricao.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    SharedPreferences.Editor editor;
+                    SharedPreferences sharedPreferences;
+
+                    SharedPreferences sharedPreferences2 = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+
+                    ArrayList<Saida> itens2 = itens;
+                    Log.v("MLDA", "afterTextChanged");
+                    Saida saida = getItem(Index);
+                    String codigo = saida.getCodigo();
+                    String nome = s.toString();
+                    saida.setNome(nome);
+                    editor2.putString(codigo, nome).commit();
+
+                    Log.v("MLDA", "new description = " + nome);
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    // TODO Auto-generated method stub
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    SharedPreferences.Editor editor;
+                    SharedPreferences sharedPreferences;
+
+                    SharedPreferences sharedPreferences2 = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+
+                    ArrayList<Saida> itens2 = itens;
+                    Log.v("MLDA", "afterTextChanged");
+                    Saida saida = getItem(Index);
+                    String codigo = saida.getCodigo();
+                    String nome = s.toString();
+                    saida.setNome(nome);
+                    editor2.putString(codigo, nome).commit();
+
+                    Log.v("MLDA", "new description = " + nome);
+                }
+            });
+            row.setTag(holder);
+
+        } else {
+            holder = (Holder) row.getTag();
         }
 
-       // ImageView image = (ImageView) convertView.findViewById(R.id.image);
-        TextView Codigo = (TextView) convertView.findViewById(R.id.Codigo);
-        EditText Descricao = (EditText) convertView.findViewById(R.id.Descricao);
-        TextView dsHorarioInicio = (TextView) convertView.findViewById(R.id.dsHorarioInicio);
-		EditText HorarioInicio = (EditText) convertView.findViewById(R.id.HorarioInicio);
-		TextView dsHorarioFim = (TextView) convertView.findViewById(R.id.dsHorarioFim);
-		EditText HorarioFim = (EditText) convertView.findViewById(R.id.HorarioFim);
-        
         String codigo = saida.getCodigo();
         String nome = saida.getNome();
         String horarioInicio = saida.getHorarioInicio();
         String horarioFim = saida.getHorarioFim();
 
-        Codigo.setText(codigo);
-        Descricao.setText(nome);
-		dsHorarioInicio.setText("Inic�o:");
-        HorarioInicio.setText(horarioInicio);
-		dsHorarioFim.setText("Fim:");
-        HorarioFim.setText(horarioFim);
-        final int Index = position;
-		
-		//final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);		
-        final SharedPreferences sharedPreferences2 = context.getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor2 = sharedPreferences2.edit();
-		Descricao.addTextChangedListener(new TextWatcher() {
- 
-                @Override
-                public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                    // TODO Auto-generated method stub
- 
-                }
- 
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                        int arg3) {
-                    // TODO Auto-generated method stub
- 
-                }
- 
-                @Override
-                public void afterTextChanged(Editable arg0) {
-                    
-					Saida saida = getItem(Index);
-					
-					saida.setNome(arg0.toString());
-                    editor2.putString(saida.getCodigo(), arg0.toString()).commit();
-                    					
-					// TODO Auto-generated method stub
-                    //arrTemp[holder.ref] = arg0.toString();
-					//prefs.edit().putString("autoSave", s.toString()).commit();
-																		
-                }
-            });
- 
- 
-		
+        holder.Codigo.setText(codigo);
+        holder.Descricao.setText(nome);
+        holder.dsHorarioInicio.setText("Inicio:");
+        holder.HorarioInicio.setText(horarioInicio);
+        holder.dsHorarioFim.setText("Fim:");
+        holder.HorarioFim.setText(horarioFim);
 
-        return convertView;
+        return row;
     }
 
+class Holder {
+    TextView Codigo;
+    EditText Descricao;
+    TextView dsHorarioInicio;
+    EditText HorarioInicio;
+    TextView dsHorarioFim;
+    EditText HorarioFim;
+    int position;
+}
 }
