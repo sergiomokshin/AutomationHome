@@ -1,133 +1,576 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FF333333"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:context=".SetupDeviceActivity">
+    tools:context=".SetupDevice">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
 
         <TextView
             android:id="@+id/txtS1"
-            android:layout_width="wrap_content"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"
-            android:text="15dp" />
+            android:layout_width="wrap_content"
+            android:text="Saída 1" />
 
         <EditText
             android:id="@+id/edtS1"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:ems="10" >
+            android:layout_marginLeft="5dp"
+            android:layout_weight="20"
+            android:layout_width="140dp"
+            android:textColor="@android:color/black">
 
         </EditText>
-
-        <TextView
-            android:id="@+id/txtS1HI"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="15dp" />
 
         <EditText
             android:id="@+id/edtS1HI"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="40dp"
             android:textColor="@android:color/black"
-            android:inputType="number"
-            android:ems="10" >
-
+            android:inputType="number">
         </EditText>
 
         <TextView
-            android:id="@+id/txtS1HF"
-            android:layout_width="match_parent"
+            android:id="@+id/txtS1HIMin"
             android:layout_height="wrap_content"
+            android:layout_width="22dp"
             android:textColor="@android:color/black"
-            android:text="15dp" />
+            android:text=":00" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:textColor="@android:color/black"
+            android:text="até" />
 
         <EditText
             android:id="@+id/edtS1HF"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="40dp"
             android:textColor="@android:color/black"
-            android:inputType="number"
-            android:ems="10" >
-
-        </EditText>
-
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/txtS1HFMin"
+            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:textColor="@android:color/black"
+            android:text=":59" />
 
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
 
         <TextView
             android:id="@+id/txtS2"
-            android:layout_width="wrap_content"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"
-            android:text="15dp" />
+            android:layout_width="wrap_content"
+            android:text="Saída 2" />
 
         <EditText
             android:id="@+id/edtS2"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="10"
+            android:layout_width="140dp"
             android:textColor="@android:color/black"
             android:ems="10" >
 
         </EditText>
 
-        <TextView
-            android:id="@+id/txtS2HI"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="15dp" />
 
         <EditText
             android:id="@+id/edtS2HI"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="30dp"
             android:textColor="@android:color/black"
-            android:inputType="number"
-            android:ems="10" >
-
+            android:inputType="number">
         </EditText>
-
         <TextView
-            android:id="@+id/txtS2HF"
-            android:layout_width="match_parent"
+            android:id="@+id/txtS2HIMin"
             android:layout_height="wrap_content"
+            android:layout_width="40dp"
             android:textColor="@android:color/black"
-            android:text="15dp" />
+            android:text=":00" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text="até" />
 
         <EditText
             android:id="@+id/edtS2HF"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="30dp"
             android:textColor="@android:color/black"
-            android:inputType="number"
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/txtS2HFMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":59" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/txtS3"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Saída 3" />
+
+        <EditText
+            android:id="@+id/edtS3"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="10"
+            android:layout_width="140dp"
+            android:textColor="@android:color/black"
+            android:ems="10" >
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edtS3HI"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:inputType="number">
+        </EditText>
+        <TextView
+            android:id="@+id/txtS3HIMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":00" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text="até" />
+
+        <EditText
+            android:id="@+id/edtS3HF"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/txtS3HFMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":59" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/txtS4"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Saída 4" />
+
+        <EditText
+            android:id="@+id/edtS4"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="10"
+            android:layout_width="140dp"
+            android:textColor="@android:color/black"
+            android:ems="10" >
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edtS4HI"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:inputType="number">
+        </EditText>
+        <TextView
+            android:id="@+id/txtS4HIMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":00" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text="até" />
+
+        <EditText
+            android:id="@+id/edtS4HF"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/txtS4HFMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":59" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/txtS5"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Saída 5" />
+
+        <EditText
+            android:id="@+id/edtS5"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="10"
+            android:layout_width="140dp"
+            android:textColor="@android:color/black"
             android:ems="10" >
 
         </EditText>
 
 
+        <EditText
+            android:id="@+id/edtS5HI"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:inputType="number">
+        </EditText>
+        <TextView
+            android:id="@+id/txtS5HIMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":00" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text="até" />
+
+        <EditText
+            android:id="@+id/edtS5HF"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/txtS5HFMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":59" />
+
     </LinearLayout>
 
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/txtS6"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Saída 6" />
+
+        <EditText
+            android:id="@+id/edtS6"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="10"
+            android:layout_width="140dp"
+            android:textColor="@android:color/black"
+            android:ems="10" >
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/edtS6HI"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:inputType="number">
+        </EditText>
+        <TextView
+            android:id="@+id/txtS6HIMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":00" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text="até" />
+
+        <EditText
+            android:id="@+id/edtS6HF"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/txtS6HFMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":59" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/txtS7"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Saída 7" />
+
+        <EditText
+            android:id="@+id/edtS7"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="10"
+            android:layout_width="140dp"
+            android:textColor="@android:color/black"
+            android:ems="10" >
+
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/edtS7HI"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:inputType="number">
+        </EditText>
+        <TextView
+            android:id="@+id/txtS7HIMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":00" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text="até" />
+
+        <EditText
+            android:id="@+id/edtS7HF"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/txtS7HFMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":59" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/txtS8"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Saída 8" />
+
+        <EditText
+            android:id="@+id/edtS8"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="10"
+            android:layout_width="140dp"
+            android:textColor="@android:color/black"
+            android:ems="10" >
+
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/edtS8HI"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:inputType="number">
+        </EditText>
+        <TextView
+            android:id="@+id/txtS8HIMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":00" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text="até" />
+
+        <EditText
+            android:id="@+id/edtS8HF"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/txtS8HFMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":59" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/txtSRGB"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Saída 8" />
+
+        <EditText
+            android:id="@+id/edtSRGB"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="10"
+            android:layout_width="140dp"
+            android:textColor="@android:color/black"
+            android:ems="10" >
+
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/edtSRGBHI"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:inputType="number">
+        </EditText>
+        <TextView
+            android:id="@+id/txtSRGBHIMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":00" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text="até" />
+
+        <EditText
+            android:id="@+id/edtSRGBHF"
+            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:textColor="@android:color/black"
+            android:ems="10"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/txtSRGBHFMin"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="@android:color/black"
+            android:text=":59" />
+
+    </LinearLayout>
     <Button
         android:id="@+id/btAlterar"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Alterar" />
+
 
 </LinearLayout>

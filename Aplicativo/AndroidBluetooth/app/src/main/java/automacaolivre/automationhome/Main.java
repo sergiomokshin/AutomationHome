@@ -28,60 +28,60 @@ import android.content.SharedPreferences;
 
 public class Main extends Activity {
 
-    private String NameSaida1 = "";
-    private String NameSaida2 = "";
-    private String NameSaida3 = "";
-    private String NameSaida4 = "";
-    private String NameSaida5 = "";
-    private String NameSaida6 = "";
-    private String NameSaida7 = "";
-    private String NameSaida8 = "";
-    private String NameSaidaRGB = "";
+    private String NameS1 = "";
+    private String NameS2 = "";
+    private String NameS3 = "";
+    private String NameS4 = "";
+    private String NameS5 = "";
+    private String NameS6 = "";
+    private String NameS7 = "";
+    private String NameS8 = "";
+    private String NameSRGB = "";
 
-    private Button btSaida1;
-    private Button btSaida2;
-    private Button btSaida3;
-    private Button btSaida4;
-    private Button btSaida5;
-    private Button btSaida6;
-    private Button btSaida7;
-    private Button btSaida8;
+    private Button btS1;
+    private Button btS2;
+    private Button btS3;
+    private Button btS4;
+    private Button btS5;
+    private Button btS6;
+    private Button btS7;
+    private Button btS8;
     private Button btSetupBlueTooth;
-    private Button btSetupSaidas;
+    private Button btSetupSs;
 
     private SeekBar seekBarR;
     private SeekBar seekBarG;
     private SeekBar seekBarB;
 
-    private int ValueSaida1;
-    private int ValueSaida2;
-    private int ValueSaida3;
-    private int ValueSaida4;
-    private int ValueSaida5;
-    private int ValueSaida6;
-    private int ValueSaida7;
-    private int ValueSaida8;
-    private int ValueSaidaR;
-    private int ValueSaidaG;
-    private int ValueSaidaB;
+    private int ValueS1;
+    private int ValueS2;
+    private int ValueS3;
+    private int ValueS4;
+    private int ValueS5;
+    private int ValueS6;
+    private int ValueS7;
+    private int ValueS8;
+    private int ValueSR;
+    private int ValueSG;
+    private int ValueSB;
     private int ValueSaveAuto;
 
-    private String ValueSaida1HrI = "0";
-    private String ValueSaida1HrF = "0";
-    private String ValueSaida2HrI = "0";
-    private String ValueSaida2HrF = "0";
-    private String ValueSaida3HrI = "0";
-    private String ValueSaida3HrF = "0";
-    private String ValueSaida4HrI = "0";
-    private String ValueSaida4HrF = "0";
-    private String ValueSaida5HrI = "0";
-    private String ValueSaida5HrF = "0";
-    private String ValueSaida6HrI = "0";
-    private String ValueSaida6HrF = "0";
-    private String ValueSaida7HrI = "0";
-    private String ValueSaida7HrF = "0";
-    private String ValueSaida8HrI = "0";
-    private String ValueSaida8HrF = "0";
+    private String ValueS1HrI = "0";
+    private String ValueS1HrF = "0";
+    private String ValueS2HrI = "0";
+    private String ValueS2HrF = "0";
+    private String ValueS3HrI = "0";
+    private String ValueS3HrF = "0";
+    private String ValueS4HrI = "0";
+    private String ValueS4HrF = "0";
+    private String ValueS5HrI = "0";
+    private String ValueS5HrF = "0";
+    private String ValueS6HrI = "0";
+    private String ValueS6HrF = "0";
+    private String ValueS7HrI = "0";
+    private String ValueS7HrF = "0";
+    private String ValueS8HrI = "0";
+    private String ValueS8HrF = "0";
     private String ValueRGBHrI = "0";
     private String ValueRGBHrF = "0";
 
@@ -114,16 +114,16 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btSaida1 = (Button) findViewById(R.id.btSaida1);
-        btSaida2 = (Button) findViewById(R.id.btSaida2);
-        btSaida3 = (Button) findViewById(R.id.btSaida3);
-        btSaida4 = (Button) findViewById(R.id.btSaida4);
-        btSaida5 = (Button) findViewById(R.id.btSaida5);
-        btSaida6 = (Button) findViewById(R.id.btSaida6);
-        btSaida7 = (Button) findViewById(R.id.btSaida7);
-        btSaida8 = (Button) findViewById(R.id.btSaida8);
+        btS1 = (Button) findViewById(R.id.btS1);
+        btS2 = (Button) findViewById(R.id.btS2);
+        btS3 = (Button) findViewById(R.id.btS3);
+        btS4 = (Button) findViewById(R.id.btS4);
+        btS5 = (Button) findViewById(R.id.btS5);
+        btS6 = (Button) findViewById(R.id.btS6);
+        btS7 = (Button) findViewById(R.id.btS7);
+        btS8 = (Button) findViewById(R.id.btS8);
         btSetupBlueTooth = (Button) findViewById(R.id.btSetupBluetooth);
-        btSetupSaidas = (Button) findViewById(R.id.btSetupSaidas);
+        btSetupSs = (Button) findViewById(R.id.btSetupSaidas);
 
         seekBarR = (SeekBar) findViewById(R.id.seekR);
         seekBarG = (SeekBar) findViewById(R.id.seekG);
@@ -134,7 +134,7 @@ public class Main extends Activity {
         txtMsg = (TextView) findViewById(R.id.txtMsg);
         FirstTime = true;
 
-        btSaida1.setOnClickListener(new OnClickListener() {
+        btS1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -145,7 +145,7 @@ public class Main extends Activity {
             }
         });
 
-        btSaida2.setOnClickListener(new OnClickListener() {
+        btS2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -156,7 +156,7 @@ public class Main extends Activity {
             }
         });
 
-        btSaida3.setOnClickListener(new OnClickListener() {
+        btS3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -167,7 +167,7 @@ public class Main extends Activity {
             }
         });
 
-        btSaida4.setOnClickListener(new OnClickListener() {
+        btS4.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -178,7 +178,7 @@ public class Main extends Activity {
             }
         });
 
-        btSaida5.setOnClickListener(new OnClickListener() {
+        btS5.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -189,7 +189,7 @@ public class Main extends Activity {
             }
         });
 
-        btSaida6.setOnClickListener(new OnClickListener() {
+        btS6.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -200,7 +200,7 @@ public class Main extends Activity {
             }
         });
 
-        btSaida7.setOnClickListener(new OnClickListener() {
+        btS7.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -211,7 +211,7 @@ public class Main extends Activity {
             }
         });
 
-        btSaida8.setOnClickListener(new OnClickListener() {
+        btS8.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -232,7 +232,7 @@ public class Main extends Activity {
             }
         });
 
-        btSetupSaidas.setOnClickListener(new OnClickListener() {
+        btSetupSs.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 //	Intent serverIntent = new Intent(this, SetupDevice.class);
@@ -330,6 +330,7 @@ public class Main extends Activity {
         } else {
             Connect();
         }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -355,34 +356,34 @@ public class Main extends Activity {
 
     private void AtualizaLabels() {
 
-		//final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        NameSaida1 = sharedPreferences.getString("S1", "Saída 1");
-        NameSaida2 = sharedPreferences.getString("S2", "Saída 2");
-        NameSaida3 = sharedPreferences.getString("S3", "Saída 3");
-        NameSaida4 = sharedPreferences.getString("S4", "Saída 4");
-        NameSaida5 = sharedPreferences.getString("S5", "Saída 5");
-        NameSaida6 = sharedPreferences.getString("S6", "Saída 6");
-        NameSaida7 = sharedPreferences.getString("S7", "Saída 7");
-        NameSaida8 = sharedPreferences.getString("S8", "Saída 8");
-        NameSaidaRGB = sharedPreferences.getString("RGB", "ILUMINACAO");
+        NameS1 = sharedPreferences.getString("S1", "Saída 1");
+        NameS2 = sharedPreferences.getString("S2", "Saída 2");
+        NameS3 = sharedPreferences.getString("S3", "Saída 3");
+        NameS4 = sharedPreferences.getString("S4", "Saída 4");
+        NameS5 = sharedPreferences.getString("S5", "Saída 5");
+        NameS6 = sharedPreferences.getString("S6", "Saída 6");
+        NameS7 = sharedPreferences.getString("S7", "Saída 7");
+        NameS8 = sharedPreferences.getString("S8", "Saída 8");
+        NameSRGB = sharedPreferences.getString("RGB", "ILUMINACAO");
 
-        btSaida1.setText(NameSaida1);
-        btSaida2.setText(NameSaida2);
-        btSaida3.setText(NameSaida3);
-        btSaida4.setText(NameSaida4);
-        btSaida5.setText(NameSaida5);
-        btSaida6.setText(NameSaida6);
-        btSaida7.setText(NameSaida7);
-        btSaida8.setText(NameSaida8);
+        btS1.setText(NameS1);
+        btS2.setText(NameS2);
+        btS3.setText(NameS3);
+        btS4.setText(NameS4);
+        btS5.setText(NameS5);
+        btS6.setText(NameS6);
+        btS7.setText(NameS7);
+        btS8.setText(NameS8);
 
     }
 
-
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_CONNECT_DEVICE:
                 if (resultCode == Activity.RESULT_OK) {
@@ -398,9 +399,9 @@ public class Main extends Activity {
                 break;
             case REQUEST_SETUP_DEVICE:
                 //			AtualizaHorariosPlaca();
+                AtualizaLabels();
                 break;
         }
-
         AtualizaLabels();
     }
 
@@ -433,44 +434,44 @@ public class Main extends Activity {
 
     }
 
-    private void EnviarComandoDigital(String Saida) throws IOException {
+    private void EnviarComandoDigital(String S) throws IOException {
 
         //|D21|
-        String comando = "|D" + Saida;
+        String comando = "|D" + S;
 
-        String StatusSaida = "";
+        String StatusS = "";
 
-        if (Saida == "1") {
-            StatusSaida = (ValueSaida1 == 1) ? "0" : "1";
-            comando += StatusSaida + "|";
+        if (S == "1") {
+            StatusS = (ValueS1 == 1) ? "0" : "1";
+            comando += StatusS + "|";
         }
-        if (Saida == "2") {
-            StatusSaida = (ValueSaida2 == 1) ? "0" : "1";
-            comando += StatusSaida + "|";
+        if (S == "2") {
+            StatusS = (ValueS2 == 1) ? "0" : "1";
+            comando += StatusS + "|";
         }
-        if (Saida == "3") {
-            StatusSaida = (ValueSaida3 == 1) ? "0" : "1";
-            comando += StatusSaida + "|";
+        if (S == "3") {
+            StatusS = (ValueS3 == 1) ? "0" : "1";
+            comando += StatusS + "|";
         }
-        if (Saida == "4") {
-            StatusSaida = (ValueSaida4 == 1) ? "0" : "1";
-            comando += StatusSaida + "|";
+        if (S == "4") {
+            StatusS = (ValueS4 == 1) ? "0" : "1";
+            comando += StatusS + "|";
         }
-        if (Saida == "5") {
-            StatusSaida = (ValueSaida5 == 1) ? "0" : "1";
-            comando += StatusSaida + "|";
+        if (S == "5") {
+            StatusS = (ValueS5 == 1) ? "0" : "1";
+            comando += StatusS + "|";
         }
-        if (Saida == "6") {
-            StatusSaida = (ValueSaida6 == 1) ? "0" : "1";
-            comando += StatusSaida + "|";
+        if (S == "6") {
+            StatusS = (ValueS6 == 1) ? "0" : "1";
+            comando += StatusS + "|";
         }
-        if (Saida == "7") {
-            StatusSaida = (ValueSaida7 == 1) ? "0" : "1";
-            comando += StatusSaida + "|";
+        if (S == "7") {
+            StatusS = (ValueS7 == 1) ? "0" : "1";
+            comando += StatusS + "|";
         }
-        if (Saida == "8") {
-            StatusSaida = (ValueSaida8 == 1) ? "0" : "1";
-            comando += StatusSaida + "|";
+        if (S == "8") {
+            StatusS = (ValueS8 == 1) ? "0" : "1";
+            comando += StatusS + "|";
         }
 
         //int duracao = Toast.LENGTH_SHORT;
@@ -550,120 +551,120 @@ public class Main extends Activity {
     private void AtualizaDadosPlaca(String data) {
         String[] DataCommand = data.split("#");
 
-        ValueSaida1 = Integer.parseInt(DataCommand[1]);
-        ValueSaida2 = Integer.parseInt(DataCommand[2]);
-        ValueSaida3 = Integer.parseInt(DataCommand[3]);
-        ValueSaida4 = Integer.parseInt(DataCommand[4]);
-        ValueSaida5 = Integer.parseInt(DataCommand[5]);
-        ValueSaida6 = Integer.parseInt(DataCommand[6]);
-        ValueSaida7 = Integer.parseInt(DataCommand[7]);
-        ValueSaida8 = Integer.parseInt(DataCommand[8]);
-        ValueSaidaR = Integer.parseInt(DataCommand[9]);
-        ValueSaidaG = Integer.parseInt(DataCommand[10]);
-        ValueSaidaB = Integer.parseInt(DataCommand[11]);
+        ValueS1 = Integer.parseInt(DataCommand[1]);
+        ValueS2 = Integer.parseInt(DataCommand[2]);
+        ValueS3 = Integer.parseInt(DataCommand[3]);
+        ValueS4 = Integer.parseInt(DataCommand[4]);
+        ValueS5 = Integer.parseInt(DataCommand[5]);
+        ValueS6 = Integer.parseInt(DataCommand[6]);
+        ValueS7 = Integer.parseInt(DataCommand[7]);
+        ValueS8 = Integer.parseInt(DataCommand[8]);
+        ValueSR = Integer.parseInt(DataCommand[9]);
+        ValueSG = Integer.parseInt(DataCommand[10]);
+        ValueSB = Integer.parseInt(DataCommand[11]);
         ValueSaveAuto = Integer.parseInt(DataCommand[11]);
 
-        ValueSaida1HrI = DataCommand[13];
-        ValueSaida1HrF = DataCommand[14];
-        ValueSaida2HrI = DataCommand[15];
-        ValueSaida2HrF = DataCommand[16];
-        ValueSaida3HrI = DataCommand[17];
-        ValueSaida3HrF = DataCommand[18];
-        ValueSaida4HrI = DataCommand[19];
-        ValueSaida4HrF = DataCommand[20];
-        ValueSaida5HrI = DataCommand[21];
-        ValueSaida5HrF = DataCommand[22];
-        ValueSaida6HrI = DataCommand[23];
-        ValueSaida6HrF = DataCommand[24];
-        ValueSaida7HrI = DataCommand[25];
-        ValueSaida7HrF = DataCommand[26];
-        ValueSaida8HrI = DataCommand[27];
-        ValueSaida8HrF = DataCommand[28];
+        ValueS1HrI = DataCommand[13];
+        ValueS1HrF = DataCommand[14];
+        ValueS2HrI = DataCommand[15];
+        ValueS2HrF = DataCommand[16];
+        ValueS3HrI = DataCommand[17];
+        ValueS3HrF = DataCommand[18];
+        ValueS4HrI = DataCommand[19];
+        ValueS4HrF = DataCommand[20];
+        ValueS5HrI = DataCommand[21];
+        ValueS5HrF = DataCommand[22];
+        ValueS6HrI = DataCommand[23];
+        ValueS6HrF = DataCommand[24];
+        ValueS7HrI = DataCommand[25];
+        ValueS7HrF = DataCommand[26];
+        ValueS8HrI = DataCommand[27];
+        ValueS8HrF = DataCommand[28];
         ValueRGBHrI = DataCommand[29];
         ValueRGBHrF = DataCommand[30];
 
-        if (ValueSaida1 == 1) {
-            btSaida1.setText(NameSaida1 + " - ON");
+        if (ValueS1 == 1) {
+            btS1.setText(NameS1 + " - ON");
         } else {
-            btSaida1.setText(NameSaida1 + " - OFF");
+            btS1.setText(NameS1 + " - OFF");
         }
 
-        if (ValueSaida2 == 1) {
-            btSaida2.setText(NameSaida2 + " - ON");
+        if (ValueS2 == 1) {
+            btS2.setText(NameS2 + " - ON");
         } else {
-            btSaida2.setText(NameSaida2 + " - OFF");
+            btS2.setText(NameS2 + " - OFF");
         }
 
-        if (ValueSaida3 == 1) {
-            btSaida3.setText(NameSaida3 + " - ON");
+        if (ValueS3 == 1) {
+            btS3.setText(NameS3 + " - ON");
         } else {
-            btSaida3.setText(NameSaida3 + " - OFF");
+            btS3.setText(NameS3 + " - OFF");
         }
 
-        if (ValueSaida4 == 1) {
-            btSaida4.setText(NameSaida4 + " - ON");
+        if (ValueS4 == 1) {
+            btS4.setText(NameS4 + " - ON");
         } else {
-            btSaida4.setText(NameSaida4 + " - OFF");
+            btS4.setText(NameS4 + " - OFF");
         }
 
-        if (ValueSaida5 == 1) {
-            btSaida5.setText(NameSaida5 + " - ON");
+        if (ValueS5 == 1) {
+            btS5.setText(NameS5 + " - ON");
         } else {
-            btSaida5.setText(NameSaida5 + " - OFF");
+            btS5.setText(NameS5 + " - OFF");
         }
 
-        if (ValueSaida6 == 1) {
-            btSaida6.setText(NameSaida6 + " - ON");
+        if (ValueS6 == 1) {
+            btS6.setText(NameS6 + " - ON");
         } else {
-            btSaida6.setText(NameSaida6 + " - OFF");
+            btS6.setText(NameS6 + " - OFF");
         }
 
-        if (ValueSaida7 == 1) {
-            btSaida7.setText(NameSaida7 + " - ON");
+        if (ValueS7 == 1) {
+            btS7.setText(NameS7 + " - ON");
         } else {
-            btSaida7.setText(NameSaida7 + " - OFF");
+            btS7.setText(NameS7 + " - OFF");
         }
 
-        if (ValueSaida8 == 1) {
-            btSaida8.setText(NameSaida8 + " - ON");
+        if (ValueS8 == 1) {
+            btS8.setText(NameS8 + " - ON");
         } else {
-            btSaida8.setText(NameSaida8 + " - OFF");
+            btS8.setText(NameS8 + " - OFF");
         }
 
         if (!FirstTime) {
 
-            seekBarR.setProgress(ValueSaidaR / 28);
+            seekBarR.setProgress(ValueSR / 28);
             seekBarR.refreshDrawableState();
 
-            seekBarG.setProgress(ValueSaidaG / 28);
+            seekBarG.setProgress(ValueSG / 28);
             seekBarG.refreshDrawableState();
 
-            seekBarB.setProgress(ValueSaidaB / 28);
+            seekBarB.setProgress(ValueSB / 28);
             seekBarB.refreshDrawableState();
             FirstTime = true;
 
             sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
-            editor = sharedPreferences.edit();		
-            editor = sharedPreferences.edit();		
-			
-            editor.putString("SAIDA1HrI", ValueSaida1HrI);
-            editor.putString("SAIDA1HrF", ValueSaida1HrF);
-            editor.putString("SAIDA2HrI", ValueSaida2HrI);
-            editor.putString("SAIDA2HrF", ValueSaida2HrF);
-            editor.putString("SAIDA3HrI", ValueSaida3HrI);
-            editor.putString("SAIDA3HrF", ValueSaida3HrF);
-            editor.putString("SAIDA4HrI", ValueSaida4HrI);
-            editor.putString("SAIDA4HrF", ValueSaida4HrF);
-            editor.putString("SAIDA5HrI", ValueSaida5HrI);
-            editor.putString("SAIDA5HrF", ValueSaida5HrF);
-            editor.putString("SAIDA6HrI", ValueSaida6HrI);
-            editor.putString("SAIDA6HrF", ValueSaida6HrF);
-            editor.putString("SAIDA7HrI", ValueSaida7HrI);
-            editor.putString("SAIDA7HrF", ValueSaida7HrF);
-            editor.putString("SAIDA8HrI", ValueSaida8HrI);
-            editor.putString("SAIDA8HrF", ValueSaida8HrF);
-            editor.putString("ValueRGBHrI", ValueRGBHrI);
-            editor.putString("ValueRGBHrF", ValueRGBHrF);
+            editor = sharedPreferences.edit();
+            editor = sharedPreferences.edit();
+
+            editor.putString("S1HrI", ValueS1HrI);
+            editor.putString("S1HrF", ValueS1HrF);
+            editor.putString("S2HrI", ValueS2HrI);
+            editor.putString("S2HrF", ValueS2HrF);
+            editor.putString("S3HrI", ValueS3HrI);
+            editor.putString("S3HrF", ValueS3HrF);
+            editor.putString("S4HrI", ValueS4HrI);
+            editor.putString("S4HrF", ValueS4HrF);
+            editor.putString("S5HrI", ValueS5HrI);
+            editor.putString("S5HrF", ValueS5HrF);
+            editor.putString("S6HrI", ValueS6HrI);
+            editor.putString("S6HrF", ValueS6HrF);
+            editor.putString("S7HrI", ValueS7HrI);
+            editor.putString("S7HrF", ValueS7HrF);
+            editor.putString("S8HrI", ValueS8HrI);
+            editor.putString("S8HrF", ValueS8HrF);
+            editor.putString("SRGBHrI", ValueRGBHrI);
+            editor.putString("SRGBHrF", ValueRGBHrF);
 
             editor.commit();
         }

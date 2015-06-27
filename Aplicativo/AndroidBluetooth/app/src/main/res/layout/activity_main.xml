@@ -16,45 +16,45 @@
             android:id="@+id/textView2" />
 
         <Button
-            android:id="@+id/btSaida1"
+            android:id="@+id/btS1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Saida 1" />
         <Button
-            android:id="@+id/btSaida2"
+            android:id="@+id/btS2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Saida 2" />
         <Button
-            android:id="@+id/btSaida3"
+            android:id="@+id/btS3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Saida 3" />
         <Button
-            android:id="@+id/btSaida4"
+            android:id="@+id/btS4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Saida 4" />
-		<Button
-            android:id="@+id/btSaida5"
+        <Button
+            android:id="@+id/btS5"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Saida 5" />
-		<Button
-            android:id="@+id/btSaida6"
+        <Button
+            android:id="@+id/btS6"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Saida 6" />
-		<Button
-            android:id="@+id/btSaida7"
+        <Button
+            android:id="@+id/btS7"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Saida 7" />
-		<Button
-            android:id="@+id/btSaida8"
+        <Button
+            android:id="@+id/btS8"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Saida 8" />						
+            android:text="Saida 8" />
         <TextView
             android:text="Iluminação RGB"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -83,16 +83,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtMsg" />
-		<Button
+        <Button
             android:id="@+id/btSetupBluetooth"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Setup Bluetooth" />			
-		<Button
+            android:text="Setup Bluetooth" />
+        <Button
             android:id="@+id/btSetupSaidas"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Setup Saidas" />	
+            android:text="Setup Saidas" />
 
 
     </LinearLayout>
