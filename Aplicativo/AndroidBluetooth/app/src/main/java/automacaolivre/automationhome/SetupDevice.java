@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 
 public class SetupDevice extends Activity  {
 
@@ -46,14 +47,14 @@ public class SetupDevice extends Activity  {
 
 
         edtS1 = (EditText) findViewById(R.id.edtS1);
-        edtS1HI = (EditText) findViewById(R.id.edtS1);
-        edtS1HF = (EditText) findViewById(R.id.edtS1);
+        edtS1HI = (EditText) findViewById(R.id.edtS1HI);
+        edtS1HF = (EditText) findViewById(R.id.edtS1HF);
         NameS1 = sharedPreferences.getString("S1", "S1");
         S1HrI = sharedPreferences.getString("S1HrI", "0");
         S1HrF = sharedPreferences.getString("S1HrF", "23");
         edtS1.setText(NameS1);
-        edtS1.setText(S1HrI);
-        edtS1.setText(S1HrF);
+        edtS1HI.setText(S1HrI, TextView.BufferType.EDITABLE);
+        edtS1HF.setText(S1HrF, TextView.BufferType.EDITABLE);
 
         NameS2 = sharedPreferences.getString("S2", "S2");
         NameS3 = sharedPreferences.getString("S3", "S3");
@@ -74,27 +75,18 @@ public class SetupDevice extends Activity  {
                 editor.putString("S1", edtS1.getText().toString());
                 editor.putString("S1HrI", edtS1HI.getText().toString());
                 editor.putString("S1HrF", edtS1HF.getText().toString());
-
-
                 editor.commit();
 
+                Bundle conData = new Bundle();
+                conData.putString("OK", "OK");
                 Intent intent = new Intent();
-                intent.putExtra("STATUS", "OK");
-               // getParent().startActivityForResult(intent, 1);
-                //setResult(Activity.RESULT_OK, intent);
-
-
-                final Intent searchIntent = new Intent(getApplicationContext(), SetupDevice.class);
-                // add query to the Intent Extras
-
-                startActivityForResult(searchIntent, 100, savedInstanceState);
-
-
-
-                //setResult(100);
+                intent.putExtras(conData);
+                setResult(2, intent);
                 finish();
+
             }
         });
     }
+
 
 }

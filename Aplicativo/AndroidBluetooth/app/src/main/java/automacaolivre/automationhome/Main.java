@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.os.Handler;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
+
 
 public class Main extends Activity {
 
@@ -53,35 +55,35 @@ public class Main extends Activity {
     private SeekBar seekBarG;
     private SeekBar seekBarB;
 
-    private int ValueS1;
-    private int ValueS2;
-    private int ValueS3;
-    private int ValueS4;
-    private int ValueS5;
-    private int ValueS6;
-    private int ValueS7;
-    private int ValueS8;
-    private int ValueSR;
-    private int ValueSG;
-    private int ValueSB;
-    private int ValueSaveAuto;
+    private int S1;
+    private int S2;
+    private int S3;
+    private int S4;
+    private int S5;
+    private int S6;
+    private int S7;
+    private int S8;
+    private int SR;
+    private int SG;
+    private int SB;
+    private int SaveAuto;
 
-    private String ValueS1HrI = "0";
-    private String ValueS1HrF = "0";
-    private String ValueS2HrI = "0";
-    private String ValueS2HrF = "0";
-    private String ValueS3HrI = "0";
-    private String ValueS3HrF = "0";
-    private String ValueS4HrI = "0";
-    private String ValueS4HrF = "0";
-    private String ValueS5HrI = "0";
-    private String ValueS5HrF = "0";
-    private String ValueS6HrI = "0";
-    private String ValueS6HrF = "0";
-    private String ValueS7HrI = "0";
-    private String ValueS7HrF = "0";
-    private String ValueS8HrI = "0";
-    private String ValueS8HrF = "0";
+    private String S1HrI = "0";
+    private String S1HrF = "0";
+    private String S2HrI = "0";
+    private String S2HrF = "0";
+    private String S3HrI = "0";
+    private String S3HrF = "0";
+    private String S4HrI = "0";
+    private String S4HrF = "0";
+    private String S5HrI = "0";
+    private String S5HrF = "0";
+    private String S6HrI = "0";
+    private String S6HrF = "0";
+    private String S7HrI = "0";
+    private String S7HrF = "0";
+    private String S8HrI = "0";
+    private String S8HrF = "0";
     private String ValueRGBHrI = "0";
     private String ValueRGBHrF = "0";
 
@@ -342,12 +344,14 @@ public class Main extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.DeviceListActivity:
-                startActivity(new Intent(this, DeviceListActivity.class));
-                //startActivity(new Intent(this, DeviceListActivity.class),  REQUEST_CONNECT_DEVICE);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DeviceListActivity");
+                startActivityForResult(intent,90);
                 return true;
             case R.id.SetupDevice:
-                //startActivity(new Intent(this, SetupDevice.class), REQUEST_SETUP_DEVICE);
-                startActivity(new Intent(this, SetupDevice.class));
+                Intent intentS = new Intent(Intent.ACTION_VIEW);
+                intentS.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.SetupDevice");
+                startActivityForResult(intentS,90);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -384,7 +388,7 @@ public class Main extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
+        switch (resultCode) {
             case REQUEST_CONNECT_DEVICE:
                 if (resultCode == Activity.RESULT_OK) {
                     address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
@@ -398,11 +402,28 @@ public class Main extends Activity {
                 }
                 break;
             case REQUEST_SETUP_DEVICE:
-                //			AtualizaHorariosPlaca();
+                AtualizaHorariosPlaca();
                 AtualizaLabels();
                 break;
         }
-        AtualizaLabels();
+    }
+    private void AtualizaHorariosPlaca() {
+
+        try {
+
+            sharedPreferences = getSharedPreferences("APP_PREFS", getBaseContext().MODE_PRIVATE);
+
+            S1HrI = sharedPreferences.getString("S1HrI", "");
+            S1HrF = sharedPreferences.getString("S1HrF", "");
+            writeData("|H1I" + String.format("%02d", Integer.parseInt(S1HrI)) + "|");
+            writeData("|H1F" + String.format("%02d", Integer.parseInt(S1HrF)) + "|");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private void Connect() {
@@ -442,35 +463,35 @@ public class Main extends Activity {
         String StatusS = "";
 
         if (S == "1") {
-            StatusS = (ValueS1 == 1) ? "0" : "1";
+            StatusS = (S1 == 1) ? "0" : "1";
             comando += StatusS + "|";
         }
         if (S == "2") {
-            StatusS = (ValueS2 == 1) ? "0" : "1";
+            StatusS = (S2 == 1) ? "0" : "1";
             comando += StatusS + "|";
         }
         if (S == "3") {
-            StatusS = (ValueS3 == 1) ? "0" : "1";
+            StatusS = (S3 == 1) ? "0" : "1";
             comando += StatusS + "|";
         }
         if (S == "4") {
-            StatusS = (ValueS4 == 1) ? "0" : "1";
+            StatusS = (S4 == 1) ? "0" : "1";
             comando += StatusS + "|";
         }
         if (S == "5") {
-            StatusS = (ValueS5 == 1) ? "0" : "1";
+            StatusS = (S5 == 1) ? "0" : "1";
             comando += StatusS + "|";
         }
         if (S == "6") {
-            StatusS = (ValueS6 == 1) ? "0" : "1";
+            StatusS = (S6 == 1) ? "0" : "1";
             comando += StatusS + "|";
         }
         if (S == "7") {
-            StatusS = (ValueS7 == 1) ? "0" : "1";
+            StatusS = (S7 == 1) ? "0" : "1";
             comando += StatusS + "|";
         }
         if (S == "8") {
-            StatusS = (ValueS8 == 1) ? "0" : "1";
+            StatusS = (S8 == 1) ? "0" : "1";
             comando += StatusS + "|";
         }
 
@@ -551,118 +572,118 @@ public class Main extends Activity {
     private void AtualizaDadosPlaca(String data) {
         String[] DataCommand = data.split("#");
 
-        ValueS1 = Integer.parseInt(DataCommand[1]);
-        ValueS2 = Integer.parseInt(DataCommand[2]);
-        ValueS3 = Integer.parseInt(DataCommand[3]);
-        ValueS4 = Integer.parseInt(DataCommand[4]);
-        ValueS5 = Integer.parseInt(DataCommand[5]);
-        ValueS6 = Integer.parseInt(DataCommand[6]);
-        ValueS7 = Integer.parseInt(DataCommand[7]);
-        ValueS8 = Integer.parseInt(DataCommand[8]);
-        ValueSR = Integer.parseInt(DataCommand[9]);
-        ValueSG = Integer.parseInt(DataCommand[10]);
-        ValueSB = Integer.parseInt(DataCommand[11]);
-        ValueSaveAuto = Integer.parseInt(DataCommand[11]);
+        S1 = Integer.parseInt(DataCommand[1]);
+        S2 = Integer.parseInt(DataCommand[2]);
+        S3 = Integer.parseInt(DataCommand[3]);
+        S4 = Integer.parseInt(DataCommand[4]);
+        S5 = Integer.parseInt(DataCommand[5]);
+        S6 = Integer.parseInt(DataCommand[6]);
+        S7 = Integer.parseInt(DataCommand[7]);
+        S8 = Integer.parseInt(DataCommand[8]);
+        SR = Integer.parseInt(DataCommand[9]);
+        SG = Integer.parseInt(DataCommand[10]);
+        SB = Integer.parseInt(DataCommand[11]);
+        SaveAuto = Integer.parseInt(DataCommand[11]);
 
-        ValueS1HrI = DataCommand[13];
-        ValueS1HrF = DataCommand[14];
-        ValueS2HrI = DataCommand[15];
-        ValueS2HrF = DataCommand[16];
-        ValueS3HrI = DataCommand[17];
-        ValueS3HrF = DataCommand[18];
-        ValueS4HrI = DataCommand[19];
-        ValueS4HrF = DataCommand[20];
-        ValueS5HrI = DataCommand[21];
-        ValueS5HrF = DataCommand[22];
-        ValueS6HrI = DataCommand[23];
-        ValueS6HrF = DataCommand[24];
-        ValueS7HrI = DataCommand[25];
-        ValueS7HrF = DataCommand[26];
-        ValueS8HrI = DataCommand[27];
-        ValueS8HrF = DataCommand[28];
+        S1HrI = DataCommand[13];
+        S1HrF = DataCommand[14];
+        S2HrI = DataCommand[15];
+        S2HrF = DataCommand[16];
+        S3HrI = DataCommand[17];
+        S3HrF = DataCommand[18];
+        S4HrI = DataCommand[19];
+        S4HrF = DataCommand[20];
+        S5HrI = DataCommand[21];
+        S5HrF = DataCommand[22];
+        S6HrI = DataCommand[23];
+        S6HrF = DataCommand[24];
+        S7HrI = DataCommand[25];
+        S7HrF = DataCommand[26];
+        S8HrI = DataCommand[27];
+        S8HrF = DataCommand[28];
         ValueRGBHrI = DataCommand[29];
         ValueRGBHrF = DataCommand[30];
 
-        if (ValueS1 == 1) {
+        if (S1 == 1) {
             btS1.setText(NameS1 + " - ON");
         } else {
             btS1.setText(NameS1 + " - OFF");
         }
 
-        if (ValueS2 == 1) {
+        if (S2 == 1) {
             btS2.setText(NameS2 + " - ON");
         } else {
             btS2.setText(NameS2 + " - OFF");
         }
 
-        if (ValueS3 == 1) {
+        if (S3 == 1) {
             btS3.setText(NameS3 + " - ON");
         } else {
             btS3.setText(NameS3 + " - OFF");
         }
 
-        if (ValueS4 == 1) {
+        if (S4 == 1) {
             btS4.setText(NameS4 + " - ON");
         } else {
             btS4.setText(NameS4 + " - OFF");
         }
 
-        if (ValueS5 == 1) {
+        if (S5 == 1) {
             btS5.setText(NameS5 + " - ON");
         } else {
             btS5.setText(NameS5 + " - OFF");
         }
 
-        if (ValueS6 == 1) {
+        if (S6 == 1) {
             btS6.setText(NameS6 + " - ON");
         } else {
             btS6.setText(NameS6 + " - OFF");
         }
 
-        if (ValueS7 == 1) {
+        if (S7 == 1) {
             btS7.setText(NameS7 + " - ON");
         } else {
             btS7.setText(NameS7 + " - OFF");
         }
 
-        if (ValueS8 == 1) {
+        if (S8 == 1) {
             btS8.setText(NameS8 + " - ON");
         } else {
             btS8.setText(NameS8 + " - OFF");
         }
 
-        if (!FirstTime) {
+        if (FirstTime) {
 
-            seekBarR.setProgress(ValueSR / 28);
+            seekBarR.setProgress(SR / 28);
             seekBarR.refreshDrawableState();
 
-            seekBarG.setProgress(ValueSG / 28);
+            seekBarG.setProgress(SG / 28);
             seekBarG.refreshDrawableState();
 
-            seekBarB.setProgress(ValueSB / 28);
+            seekBarB.setProgress(SB / 28);
             seekBarB.refreshDrawableState();
-            FirstTime = true;
+            FirstTime = false;
 
             sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();
             editor = sharedPreferences.edit();
 
-            editor.putString("S1HrI", ValueS1HrI);
-            editor.putString("S1HrF", ValueS1HrF);
-            editor.putString("S2HrI", ValueS2HrI);
-            editor.putString("S2HrF", ValueS2HrF);
-            editor.putString("S3HrI", ValueS3HrI);
-            editor.putString("S3HrF", ValueS3HrF);
-            editor.putString("S4HrI", ValueS4HrI);
-            editor.putString("S4HrF", ValueS4HrF);
-            editor.putString("S5HrI", ValueS5HrI);
-            editor.putString("S5HrF", ValueS5HrF);
-            editor.putString("S6HrI", ValueS6HrI);
-            editor.putString("S6HrF", ValueS6HrF);
-            editor.putString("S7HrI", ValueS7HrI);
-            editor.putString("S7HrF", ValueS7HrF);
-            editor.putString("S8HrI", ValueS8HrI);
-            editor.putString("S8HrF", ValueS8HrF);
+            editor.putString("S1HrI", S1HrI);
+            editor.putString("S1HrF", S1HrF);
+            editor.putString("S2HrI", S2HrI);
+            editor.putString("S2HrF", S2HrF);
+            editor.putString("S3HrI", S3HrI);
+            editor.putString("S3HrF", S3HrF);
+            editor.putString("S4HrI", S4HrI);
+            editor.putString("S4HrF", S4HrF);
+            editor.putString("S5HrI", S5HrI);
+            editor.putString("S5HrF", S5HrF);
+            editor.putString("S6HrI", S6HrI);
+            editor.putString("S6HrF", S6HrF);
+            editor.putString("S7HrI", S7HrI);
+            editor.putString("S7HrF", S7HrF);
+            editor.putString("S8HrI", S8HrI);
+            editor.putString("S8HrF", S8HrF);
             editor.putString("SRGBHrI", ValueRGBHrI);
             editor.putString("SRGBHrF", ValueRGBHrF);
 

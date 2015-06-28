@@ -147,7 +147,7 @@ public class DeviceListActivity extends Activity {
             intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
 
             // Set result and finish this Activity
-            setResult(Activity.RESULT_OK, intent);
+            setResult(1, intent);
             finish();
         }
     };
