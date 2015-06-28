@@ -7,11 +7,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import android.location.Address;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.os.Bundle;
 import android.app.Activity;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -30,6 +34,7 @@ import android.text.TextUtils;
 
 public class Main extends Activity {
 
+    private String ModoAgendado = "";
     private String NameS1 = "";
     private String NameS2 = "";
     private String NameS3 = "";
@@ -40,7 +45,12 @@ public class Main extends Activity {
     private String NameS8 = "";
     private String NameSRGB = "";
 
-    private Button btS1;
+
+    private CheckBox chkModoAgendado;
+    private ImageButton imgS1;
+    private TextView txtS1;
+
+
     private Button btS2;
     private Button btS3;
     private Button btS4;
@@ -66,7 +76,7 @@ public class Main extends Activity {
     private int SR;
     private int SG;
     private int SB;
-    private int SaveAuto;
+
 
     private String S1HrI = "0";
     private String S1HrF = "0";
@@ -116,7 +126,11 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btS1 = (Button) findViewById(R.id.btS1);
+        chkModoAgendado = (CheckBox)findViewById(R.id.chkModoAgendado);
+
+        imgS1 = (ImageButton) findViewById(R.id.imgS1);
+        txtS1 = (TextView) findViewById(R.id.txtS1);
+
         btS2 = (Button) findViewById(R.id.btS2);
         btS3 = (Button) findViewById(R.id.btS3);
         btS4 = (Button) findViewById(R.id.btS4);
@@ -136,7 +150,27 @@ public class Main extends Activity {
         txtMsg = (TextView) findViewById(R.id.txtMsg);
         FirstTime = true;
 
-        btS1.setOnClickListener(new OnClickListener() {
+
+        chkModoAgendado.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                try {
+
+                    if (chkModoAgendado.isChecked()) {
+                        writeData("|M1|");
+
+                    } else {
+                        writeData("|M0|");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        imgS1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -326,9 +360,13 @@ public class Main extends Activity {
         meuAdaptadorBluetooth = BluetoothAdapter.getDefaultAdapter();
         address = sharedPreferences.getString("ADDRESS", "");
 
+        address = "20:15:04:10:34:03";
+
         if (address == "") {
-            Intent setupIntent = new Intent(this, DeviceListActivity.class);
-            startActivityForResult(setupIntent, REQUEST_CONNECT_DEVICE);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DeviceListActivity");
+            startActivityForResult(intent,90);
+
         } else {
             Connect();
         }
@@ -374,7 +412,7 @@ public class Main extends Activity {
         NameS8 = sharedPreferences.getString("S8", "Saída 8");
         NameSRGB = sharedPreferences.getString("RGB", "ILUMINACAO");
 
-        btS1.setText(NameS1);
+        txtS1.setText(NameS1);
         btS2.setText(NameS2);
         btS3.setText(NameS3);
         btS4.setText(NameS4);
@@ -583,7 +621,7 @@ public class Main extends Activity {
         SR = Integer.parseInt(DataCommand[9]);
         SG = Integer.parseInt(DataCommand[10]);
         SB = Integer.parseInt(DataCommand[11]);
-        SaveAuto = Integer.parseInt(DataCommand[11]);
+        ModoAgendado = DataCommand[12].toString();
 
         S1HrI = DataCommand[13];
         S1HrF = DataCommand[14];
@@ -604,10 +642,16 @@ public class Main extends Activity {
         ValueRGBHrI = DataCommand[29];
         ValueRGBHrF = DataCommand[30];
 
+        if(ModoAgendado.contains("1"))
+            chkModoAgendado.setChecked(true);
+        else
+            chkModoAgendado.setChecked(false);
+
+        txtS1.setText(NameS1);
         if (S1 == 1) {
-            btS1.setText(NameS1 + " - ON");
+            imgS1.setImageResource(R.drawable.on);
         } else {
-            btS1.setText(NameS1 + " - OFF");
+            imgS1.setImageResource(R.drawable.off);
         }
 
         if (S2 == 1) {

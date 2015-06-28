@@ -32,6 +32,11 @@ keypad()                        Read a value from the keypad. Returns 0 if no ke
   |HI100|  Horario Inicio 1 00
   |HFI100| Horario Fim 1 22
 
+
+  |M1| Modo Agendado
+
+  |M0| Modo Manual
+
   Versão 1.1 -> Incluido persitencia de comandos na EEPROM e WACHTDOG
 
   */
@@ -222,12 +227,9 @@ void setup()
   month = 6;
   year = 15;
 
-   //DEBUG
+  //DEBUG
   //Comentar novamente apos ajuste da data
-   setDateDs1307(second, minute, hour, dayOfWeek, dayOfMonth, month, year);
-
-   //DEBUG   
-   ValueSaveAuto = 1;
+  setDateDs1307(second, minute, hour, dayOfWeek, dayOfMonth, month, year);
 
 
 }
@@ -364,7 +366,6 @@ void disparacomando()
     lcd.setCursor(0, 4);
     lcd.print(hora);
 
-
     if (port == 1)
     {
       if (type == "I")
@@ -379,6 +380,12 @@ void disparacomando()
       }
     }
   }
+  else if (comando[0] == 'M')
+  {
+    int modo = (comando[1] - '0');
+    ValueSaveAuto = modo;
+    EEPROM.write(MemAuto, ValueSaveAuto);    
+   }
   else
   {
     Serial.println("Invalid Command");

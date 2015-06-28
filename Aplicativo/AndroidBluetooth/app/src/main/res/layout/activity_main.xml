@@ -1,8 +1,67 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:background="#FF333333"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     tools:context=".Main">
+
+
+    <LinearLayout
+        android:background="#FF333333"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+    <CheckBox
+            android:id="@+id/chkModoAgendado"
+            android:background="#FFFFFF"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modo Agendado" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:background="#FF333333"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <ImageButton
+            android:id="@+id/imgS1"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:src="@drawable/on" />
+
+        <TextView
+            android:id="@+id/txtS1"
+            android:textColor="@android:color/white"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:text="Saída 1" />
+
+
+        <TextView
+            android:id="@+id/txtS1H"
+            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:textColor="@android:color/white"
+            android:text="00:00 até 23:59" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
@@ -15,11 +74,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView2" />
 
-        <Button
-            android:id="@+id/btS1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Saida 1" />
         <Button
             android:id="@+id/btS2"
             android:layout_width="fill_parent"
@@ -94,6 +148,33 @@
             android:layout_height="wrap_content"
             android:text="Setup Saidas" />
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#FF333333"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:id="@+id/txtHora"
+            android:textColor="@android:color/white"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:text="Horário Placa:" />
+
+        <TextView
+            android:id="@+id/txtHorario"
+            android:textColor="@android:color/white"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:text="28/06/2015 18:59" />
 
     </LinearLayout>
 
