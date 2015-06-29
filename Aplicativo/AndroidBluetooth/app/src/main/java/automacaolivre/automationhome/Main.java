@@ -36,67 +36,89 @@ import android.text.TextUtils;
 public class Main extends Activity {
 
     private String ModoAgendado = "";
-    private String NameS1 = "";
-    private String NameS2 = "";
-    private String NameS3 = "";
-    private String NameS4 = "";
-    private String NameS5 = "";
-    private String NameS6 = "";
-    private String NameS7 = "";
-    private String NameS8 = "";
-    private String NameSRGB = "";
-
-
+	private String Data = "";
+	private String Hora = "";
     private Switch swModoAgendado;
+	
+	private TextView txtHorario;
+	
+	private int S1;
+	private String S1HrI = "0";
+    private String S1HrF = "0";
+    private String NameS1 = "";	
     private ImageButton imgS1;
     private TextView txtS1;
     private TextView txtS1H;
 
-
-    private Button btS2;
-    private Button btS3;
-    private Button btS4;
-    private Button btS5;
-    private Button btS6;
-    private Button btS7;
-    private Button btS8;
-
+	private int S2;
+	private String S2HrI = "0";
+    private String S2HrF = "0";
+    private String NameS2 = "";	
+    private ImageButton imgS2;
+    private TextView txtS2;
+    private TextView txtS2H;
+	
+	private int S3;
+	private String S3HrI = "0";
+    private String S3HrF = "0";
+    private String NameS3 = "";	
+    private ImageButton imgS3;
+    private TextView txtS3;
+    private TextView txtS3H;
+	
+	private int S4;
+	private String S4HrI = "0";
+    private String S4HrF = "0";
+    private String NameS4 = "";	
+    private ImageButton imgS4;
+    private TextView txtS4;
+    private TextView txtS4H;
+	
+	private int S5;
+	private String S5HrI = "0";
+    private String S5HrF = "0";
+    private String NameS5 = "";	
+    private ImageButton imgS5;
+    private TextView txtS5;
+    private TextView txtS5H;
+	
+	private int S6;
+	private String S6HrI = "0";
+    private String S6HrF = "0";
+    private String NameS6 = "";	
+    private ImageButton imgS6;
+    private TextView txtS6;
+    private TextView txtS6H;
+	
+	private int S7;
+	private String S7HrI = "0";
+    private String S7HrF = "0";
+    private String NameS7 = "";	
+    private ImageButton imgS7;
+    private TextView txtS7;
+    private TextView txtS7H;
+	
+	private int S8;
+	private String S8HrI = "0";
+    private String S8HrF = "0";
+    private String NameS8 = "";	
+    private ImageButton imgS8;
+    private TextView txtS8;
+    private TextView txtS8H;
+	
+	private int SRGB;
+	private String SRGBHrI = "0";
+    private String SRGBHrF = "0";
+    private String NameSRGB = "";	
+    private TextView txtSRGB;
+    private TextView txtSRGBH;
+		
     private SeekBar seekBarR;
     private SeekBar seekBarG;
     private SeekBar seekBarB;
-
-    private int S1;
-    private int S2;
-    private int S3;
-    private int S4;
-    private int S5;
-    private int S6;
-    private int S7;
-    private int S8;
     private int SR;
     private int SG;
     private int SB;
-
-
-    private String S1HrI = "0";
-    private String S1HrF = "0";
-    private String S2HrI = "0";
-    private String S2HrF = "0";
-    private String S3HrI = "0";
-    private String S3HrF = "0";
-    private String S4HrI = "0";
-    private String S4HrF = "0";
-    private String S5HrI = "0";
-    private String S5HrF = "0";
-    private String S6HrI = "0";
-    private String S6HrF = "0";
-    private String S7HrI = "0";
-    private String S7HrF = "0";
-    private String S8HrI = "0";
-    private String S8HrF = "0";
-    private String ValueRGBHrI = "0";
-    private String ValueRGBHrF = "0";
-
 
     String address;
     Handler handler = new Handler();
@@ -109,6 +131,7 @@ public class Main extends Activity {
 
     private final int REQUEST_CONNECT_DEVICE = 1;
     private final int REQUEST_SETUP_DEVICE = 2;
+	private final int REQUEST_SETUP_DATETIME = 3;
 
     private BluetoothAdapter meuAdaptadorBluetooth = null;
     private BluetoothSocket mmSocket = null;
@@ -127,19 +150,42 @@ public class Main extends Activity {
         setContentView(R.layout.activity_main);
 
         swModoAgendado = (Switch)findViewById(R.id.swModoAgendado);
-
+		txtHorario = (TextView)findViewById(R.id.txtHorario);
+		
         imgS1 = (ImageButton) findViewById(R.id.imgS1);
         txtS1 = (TextView) findViewById(R.id.txtS1);
         txtS1H = (TextView) findViewById(R.id.txtS1H);
-
-
-        btS2 = (Button) findViewById(R.id.btS2);
-        btS3 = (Button) findViewById(R.id.btS3);
-        btS4 = (Button) findViewById(R.id.btS4);
-        btS5 = (Button) findViewById(R.id.btS5);
-        btS6 = (Button) findViewById(R.id.btS6);
-        btS7 = (Button) findViewById(R.id.btS7);
-        btS8 = (Button) findViewById(R.id.btS8);
+		
+		imgS2 = (ImageButton) findViewById(R.id.imgS2);
+        txtS2 = (TextView) findViewById(R.id.txtS2);
+        txtS2H = (TextView) findViewById(R.id.txtS2H);
+		
+		imgS3 = (ImageButton) findViewById(R.id.imgS3);
+        txtS3 = (TextView) findViewById(R.id.txtS3);
+        txtS3H = (TextView) findViewById(R.id.txtS3H);
+		
+		imgS4 = (ImageButton) findViewById(R.id.imgS4);
+        txtS4 = (TextView) findViewById(R.id.txtS4);
+        txtS4H = (TextView) findViewById(R.id.txtS4H);
+		
+		imgS5 = (ImageButton) findViewById(R.id.imgS5);
+        txtS5 = (TextView) findViewById(R.id.txtS5);
+        txtS5H = (TextView) findViewById(R.id.txtS5H);
+		
+		imgS6 = (ImageButton) findViewById(R.id.imgS6);
+        txtS6 = (TextView) findViewById(R.id.txtS6);
+        txtS6H = (TextView) findViewById(R.id.txtS6H);
+		
+		imgS7 = (ImageButton) findViewById(R.id.imgS7);
+        txtS7 = (TextView) findViewById(R.id.txtS7);
+        txtS7H = (TextView) findViewById(R.id.txtS7H);
+		
+		imgS8 = (ImageButton) findViewById(R.id.imgS8);
+        txtS8 = (TextView) findViewById(R.id.txtS8);
+        txtS8H = (TextView) findViewById(R.id.txtS8H);
+		
+        txtSRGB = (TextView) findViewById(R.id.txtSRGB);
+        txtSRGBH = (TextView) findViewById(R.id.txtSRGBH);
 
         seekBarR = (SeekBar) findViewById(R.id.seekR);
         seekBarG = (SeekBar) findViewById(R.id.seekG);
@@ -180,8 +226,8 @@ public class Main extends Activity {
                 }
             }
         });
-
-        btS2.setOnClickListener(new OnClickListener() {
+		
+		 imgS2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -191,8 +237,8 @@ public class Main extends Activity {
                 }
             }
         });
-
-        btS3.setOnClickListener(new OnClickListener() {
+		
+		 imgS3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -202,8 +248,8 @@ public class Main extends Activity {
                 }
             }
         });
-
-        btS4.setOnClickListener(new OnClickListener() {
+		
+		 imgS4.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -213,8 +259,8 @@ public class Main extends Activity {
                 }
             }
         });
-
-        btS5.setOnClickListener(new OnClickListener() {
+		
+		 imgS5.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -224,8 +270,8 @@ public class Main extends Activity {
                 }
             }
         });
-
-        btS6.setOnClickListener(new OnClickListener() {
+		
+		 imgS6.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -235,8 +281,8 @@ public class Main extends Activity {
                 }
             }
         });
-
-        btS7.setOnClickListener(new OnClickListener() {
+		
+		 imgS7.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -246,8 +292,8 @@ public class Main extends Activity {
                 }
             }
         });
-
-        btS8.setOnClickListener(new OnClickListener() {
+		
+		 imgS8.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
@@ -257,6 +303,8 @@ public class Main extends Activity {
                 }
             }
         });
+
+      
 
         seekBarR.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -341,10 +389,7 @@ public class Main extends Activity {
 
         meuAdaptadorBluetooth = BluetoothAdapter.getDefaultAdapter();
         address = sharedPreferences.getString("ADDRESS", "");
-
-        //for 0debug
-        //address = "20:15:04:10:34:03";
-
+        
         if (address == "") {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DeviceListActivity");
@@ -365,6 +410,13 @@ public class Main extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.DefineHoraData:
+			
+				sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+				editor = sharedPreferences.edit();
+				editor.putString("Data", Data);
+				editor.putString("Hora", Hora);
+				editor.commit();
+							
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DefineHoraData");
                 startActivityForResult(intent,90);
@@ -398,17 +450,17 @@ public class Main extends Activity {
         NameS6 = sharedPreferences.getString("S6", "Saída 6");
         NameS7 = sharedPreferences.getString("S7", "Saída 7");
         NameS8 = sharedPreferences.getString("S8", "Saída 8");
-        NameSRGB = sharedPreferences.getString("RGB", "ILUMINACAO");
+        NameSRGB = sharedPreferences.getString("SRGB", "ILUMINACAO");
 
         txtS1.setText(NameS1);
-        btS2.setText(NameS2);
-        btS3.setText(NameS3);
-        btS4.setText(NameS4);
-        btS5.setText(NameS5);
-        btS6.setText(NameS6);
-        btS7.setText(NameS7);
-        btS8.setText(NameS8);
-
+		txtS2.setText(NameS2);
+		txtS3.setText(NameS3);
+		txtS4.setText(NameS4);
+		txtS5.setText(NameS5);
+		txtS6.setText(NameS6);
+		txtS7.setText(NameS7);
+		txtS8.setText(NameS8);
+		txtSRGB.setText(NameSRGB);		       
     }
 
     @Override
@@ -419,19 +471,32 @@ public class Main extends Activity {
                     address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
                     sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
                     editor = sharedPreferences.edit();
-
                     editor.putString("ADDRESS", address);
                     editor.commit();
 
                     Connect();
                 break;
             case REQUEST_SETUP_DEVICE:
-                AtualizaHorariosPlaca();
+                AtualizaAgendamentosPlaca();
                 AtualizaLabels();
                 break;
+			case REQUEST_SETUP_DATETIME:
+                AtualizaHorarioPlaca();                
+                break;								
         }
     }
-    private void AtualizaHorariosPlaca() {
+	private void AtualizaHorarioPlaca() {
+	
+		String data = sharedPreferences.getString("Data", "");
+		String hora = sharedPreferences.getString("Hora", "");
+        try {
+            writeData("|Ty" + data + "yz"  + hora + "z|");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void AtualizaAgendamentosPlaca() {
 
         try {
 
@@ -441,9 +506,50 @@ public class Main extends Activity {
             S1HrF = sharedPreferences.getString("S1HrF", "");
             writeData("|H1I" + String.format("%02d", Integer.parseInt(S1HrI)) + "|");
             writeData("|H1F" + String.format("%02d", Integer.parseInt(S1HrF)) + "|");
+			
+			S2HrI = sharedPreferences.getString("S2HrI", "");
+            S2HrF = sharedPreferences.getString("S2HrF", "");
+            writeData("|H2I" + String.format("%02d", Integer.parseInt(S2HrI)) + "|");
+            writeData("|H2F" + String.format("%02d", Integer.parseInt(S2HrF)) + "|");
+			
+			S3HrI = sharedPreferences.getString("S3HrI", "");
+            S3HrF = sharedPreferences.getString("S3HrF", "");
+            writeData("|H3I" + String.format("%02d", Integer.parseInt(S3HrI)) + "|");
+            writeData("|H3F" + String.format("%02d", Integer.parseInt(S3HrF)) + "|");
+			
+			S4HrI = sharedPreferences.getString("S4HrI", "");
+            S4HrF = sharedPreferences.getString("S4HrF", "");
+            writeData("|H4I" + String.format("%02d", Integer.parseInt(S4HrI)) + "|");
+            writeData("|H4F" + String.format("%02d", Integer.parseInt(S4HrF)) + "|");
+			
+			S5HrI = sharedPreferences.getString("S5HrI", "");
+            S5HrF = sharedPreferences.getString("S5HrF", "");
+            writeData("|H5I" + String.format("%02d", Integer.parseInt(S5HrI)) + "|");
+            writeData("|H5F" + String.format("%02d", Integer.parseInt(S5HrF)) + "|");
+			
+			S6HrI = sharedPreferences.getString("S6HrI", "");
+            S6HrF = sharedPreferences.getString("S6HrF", "");
+            writeData("|H6I" + String.format("%02d", Integer.parseInt(S6HrI)) + "|");
+            writeData("|H6F" + String.format("%02d", Integer.parseInt(S6HrF)) + "|");
+			
+			S7HrI = sharedPreferences.getString("S7HrI", "");
+            S7HrF = sharedPreferences.getString("S7HrF", "");
+            writeData("|H7I" + String.format("%02d", Integer.parseInt(S7HrI)) + "|");
+            writeData("|H7F" + String.format("%02d", Integer.parseInt(S7HrF)) + "|");
+			
+			S8HrI = sharedPreferences.getString("S8HrI", "");
+            S8HrF = sharedPreferences.getString("S8HrF", "");
+            writeData("|H8I" + String.format("%02d", Integer.parseInt(S8HrI)) + "|");
+            writeData("|H8F" + String.format("%02d", Integer.parseInt(S8HrF)) + "|");
+			
+			SRGBHrI = sharedPreferences.getString("SRGBHrI", "");
+            SRGBHrF = sharedPreferences.getString("SRGBHrF", "");
+            writeData("|H9I" + String.format("%02d", Integer.parseInt(SRGBHrI)) + "|");
+            writeData("|H9F" + String.format("%02d", Integer.parseInt(SRGBHrF)) + "|");
 
 
         } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "Erro durante a atualização dos parametros na placa, tente novamente!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -625,8 +731,13 @@ public class Main extends Activity {
         S7HrF = DataCommand[26];
         S8HrI = DataCommand[27];
         S8HrF = DataCommand[28];
-        ValueRGBHrI = DataCommand[29];
-        ValueRGBHrF = DataCommand[30];
+        SRGBHrI = DataCommand[29];
+        SRGBHrF = DataCommand[30];
+						
+		Data = DataCommand[31];
+		Hora = DataCommand[32];
+		
+		txtHorario.setText("Horário placa: " + Data + " " + Hora);							
 
         if(ModoAgendado.contains("1"))
             swModoAgendado.setChecked(true);
@@ -640,49 +751,67 @@ public class Main extends Activity {
         }
         txtS1.setText(NameS1);
         txtS1H.setText(S1HrI + ":59 até " + S1HrF + ":59");
-
-        if (S2 == 1) {
-            btS2.setText(NameS2 + " - ON");
+		
+		if (S2 == 1) {
+            imgS2.setImageResource(R.drawable.on);
         } else {
-            btS2.setText(NameS2 + " - OFF");
+            imgS2.setImageResource(R.drawable.off);
         }
-
-        if (S3 == 1) {
-            btS3.setText(NameS3 + " - ON");
+        txtS2.setText(NameS2);
+        txtS2H.setText(S2HrI + ":59 até " + S2HrF + ":59");
+		
+		if (S3 == 1) {
+            imgS3.setImageResource(R.drawable.on);
         } else {
-            btS3.setText(NameS3 + " - OFF");
+            imgS3.setImageResource(R.drawable.off);
         }
-
-        if (S4 == 1) {
-            btS4.setText(NameS4 + " - ON");
+        txtS3.setText(NameS3);
+        txtS3H.setText(S3HrI + ":59 até " + S3HrF + ":59");
+		
+		if (S4 == 1) {
+            imgS4.setImageResource(R.drawable.on);
         } else {
-            btS4.setText(NameS4 + " - OFF");
+            imgS4.setImageResource(R.drawable.off);
         }
-
-        if (S5 == 1) {
-            btS5.setText(NameS5 + " - ON");
+        txtS4.setText(NameS4);
+        txtS4H.setText(S4HrI + ":59 até " + S4HrF + ":59");
+		
+		if (S5 == 1) {
+            imgS5.setImageResource(R.drawable.on);
         } else {
-            btS5.setText(NameS5 + " - OFF");
+            imgS5.setImageResource(R.drawable.off);
         }
-
-        if (S6 == 1) {
-            btS6.setText(NameS6 + " - ON");
+        txtS5.setText(NameS5);
+        txtS5H.setText(S5HrI + ":59 até " + S5HrF + ":59");
+		
+		if (S6 == 1) {
+            imgS6.setImageResource(R.drawable.on);
         } else {
-            btS6.setText(NameS6 + " - OFF");
+            imgS6.setImageResource(R.drawable.off);
         }
-
-        if (S7 == 1) {
-            btS7.setText(NameS7 + " - ON");
+        txtS6.setText(NameS6);
+        txtS6H.setText(S6HrI + ":59 até " + S6HrF + ":59");
+		
+		if (S7 == 1) {
+            imgS7.setImageResource(R.drawable.on);
         } else {
-            btS7.setText(NameS7 + " - OFF");
+            imgS7.setImageResource(R.drawable.off);
         }
-
-        if (S8 == 1) {
-            btS8.setText(NameS8 + " - ON");
+        txtS7.setText(NameS7);
+        txtS7H.setText(S7HrI + ":59 até " + S7HrF + ":59");
+		
+		if (S8 == 1) {
+            imgS8.setImageResource(R.drawable.on);
         } else {
-            btS8.setText(NameS8 + " - OFF");
+            imgS8.setImageResource(R.drawable.off);
         }
-
+        txtS8.setText(NameS8);
+        txtS8H.setText(S8HrI + ":59 até " + S8HrF + ":59");
+				
+		txtSRGB.setText(NameSRGB);
+        txtSRGBH.setText(SRGBHrI + ":59 até " + SRGBHrF + ":59");
+		
+		
         if (FirstTime) {
 
             seekBarR.setProgress(SR / 28);
@@ -715,8 +844,8 @@ public class Main extends Activity {
             editor.putString("S7HrF", S7HrF);
             editor.putString("S8HrI", S8HrI);
             editor.putString("S8HrF", S8HrF);
-            editor.putString("SRGBHrI", ValueRGBHrI);
-            editor.putString("SRGBHrF", ValueRGBHrF);
+            editor.putString("SRGBHrI", SRGBHrI);
+            editor.putString("SRGBHrF", SRGBHrF);
 
             editor.commit();
         }

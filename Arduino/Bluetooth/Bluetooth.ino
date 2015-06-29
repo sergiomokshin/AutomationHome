@@ -229,7 +229,7 @@ void setup()
 
   //DEBUG
   //Comentar novamente apos ajuste da data
-  setDateDs1307(second, minute, hour, dayOfWeek, dayOfMonth, month, year);
+  //setDateDs1307(second, minute, hour, dayOfWeek, dayOfMonth, month, year);
 
 
 }
@@ -274,6 +274,7 @@ void disparacomando()
 
   Serial.println(comando);
 
+  //Envio de comando para acionamento de saídas de relés
   if (comando[0] == 'D')
   {
     int port = (comando[1] - '0');
@@ -328,6 +329,7 @@ void disparacomando()
       digitalWrite(PIN_S8, ValueSaveSaida8);
     }
   }
+  //Envio de comando para acionamento de saídas de potencia
   else if (comando[0] == 'A')
   {
     int port = (comando[1] - '0');
@@ -353,6 +355,7 @@ void disparacomando()
       analogWrite(port, value);
     }
   }
+  //Envio de comando para agendamento de saídas
   else if (comando[0] == 'H')
   {
 
@@ -379,13 +382,161 @@ void disparacomando()
         EEPROM.write(MemSaida1HrF, ValueSaida1HrF);
       }
     }
+
+    if (port == 2)
+    {
+      if (type == "I")
+      {
+        ValueSaida2HrI = hora.toInt();
+        EEPROM.write(MemSaida2HrI, ValueSaida2HrI);
+      }
+      else
+      {
+        ValueSaida2HrF = hora.toInt();
+        EEPROM.write(MemSaida2HrF, ValueSaida2HrF);
+      }
+    }
+
+    if (port == 3)
+    {
+      if (type == "I")
+      {
+        ValueSaida3HrI = hora.toInt();
+        EEPROM.write(MemSaida3HrI, ValueSaida3HrI);
+      }
+      else
+      {
+        ValueSaida3HrF = hora.toInt();
+        EEPROM.write(MemSaida3HrF, ValueSaida3HrF);
+      }
+    }
+
+    if (port == 4)
+    {
+      if (type == "I")
+      {
+        ValueSaida4HrI = hora.toInt();
+        EEPROM.write(MemSaida4HrI, ValueSaida4HrI);
+      }
+      else
+      {
+        ValueSaida4HrF = hora.toInt();
+        EEPROM.write(MemSaida4HrF, ValueSaida4HrF);
+      }
+    }
+
+    if (port == 5)
+    {
+      if (type == "I")
+      {
+        ValueSaida5HrI = hora.toInt();
+        EEPROM.write(MemSaida5HrI, ValueSaida5HrI);
+      }
+      else
+      {
+        ValueSaida5HrF = hora.toInt();
+        EEPROM.write(MemSaida5HrF, ValueSaida5HrF);
+      }
+    }
+
+    if (port == 6)
+    {
+      if (type == "I")
+      {
+        ValueSaida6HrI = hora.toInt();
+        EEPROM.write(MemSaida6HrI, ValueSaida6HrI);
+      }
+      else
+      {
+        ValueSaida6HrF = hora.toInt();
+        EEPROM.write(MemSaida6HrF, ValueSaida6HrF);
+      }
+    }
+
+    if (port == 7)
+    {
+      if (type == "I")
+      {
+        ValueSaida7HrI = hora.toInt();
+        EEPROM.write(MemSaida7HrI, ValueSaida7HrI);
+      }
+      else
+      {
+        ValueSaida7HrF = hora.toInt();
+        EEPROM.write(MemSaida7HrF, ValueSaida7HrF);
+      }
+    }
+
+    if (port == 8)
+    {
+      if (type == "I")
+      {
+        ValueSaida8HrI = hora.toInt();
+        EEPROM.write(MemSaida8HrI, ValueSaida8HrI);
+      }
+      else
+      {
+        ValueSaida8HrF = hora.toInt();
+        EEPROM.write(MemSaida8HrF, ValueSaida8HrF);
+      }
+    }
+
+    if (port == 9)
+    {
+      if (type == "I")
+      {
+        ValueRGBHrI = hora.toInt();
+        EEPROM.write(MemRGBHrI, ValueRGBHrI);
+      }
+      else
+      {
+        ValueRGBHrF = hora.toInt();
+        EEPROM.write(MemRGBHrF, ValueRGBHrF);
+      }
+    }
+
   }
+  //Envio de comando para alteração de modo Agendado e Manual
   else if (comando[0] == 'M')
   {
     int modo = (comando[1] - '0');
     ValueSaveAuto = modo;
-    EEPROM.write(MemAuto, ValueSaveAuto);    
-   }
+    EEPROM.write(MemAuto, ValueSaveAuto);
+  }
+  //Envio de comando para alteração de horário da placa
+  else if (comando[0] == 'T') {
+
+    String Data = comando.substring(comando.indexOf("y") + 1, comando.lastIndexOf("y"));
+    String Horario = comando.substring(comando.indexOf("z") + 1, comando.lastIndexOf("z"));
+
+    //Serial.println(Data);
+    //Serial.println(Horario);
+
+    String Dia = Data.substring(0, Data.indexOf("/"));
+    String temp = Data.substring(Data.indexOf("/"));
+    String Mes = temp.substring(1, 3);
+    String Ano = temp.substring(temp.lastIndexOf("/") + 3); //YY
+
+    //Serial.println(Dia);
+    //Serial.println(Mes);
+    //Serial.println(Ano);
+
+    String Hora = Horario.substring(0, Horario.indexOf(":"));
+    String temp2 = Horario.substring(Horario.indexOf(":"));
+    String Minuto = temp2.substring(1, 3);
+
+    //Serial.println(Hora);
+    //Serial.println(Minuto);
+
+    second = 0;
+    minute = Minuto.toInt();
+    hour = Hora.toInt();
+    dayOfWeek = 1;
+    dayOfMonth = Dia.toInt();
+    month = Mes.toInt();
+    year = Ano.toInt();
+    setDateDs1307(second, minute, hour, dayOfWeek, dayOfMonth, month, year);
+  }
   else
   {
     Serial.println("Invalid Command");
@@ -455,7 +606,10 @@ void RetornaComandos()
   retorno.concat(ValueRGBHrI);
   retorno.concat("#");
   retorno.concat(ValueRGBHrF);
-
+  retorno.concat("#");
+  retorno.concat(String(dayOfMonth) + "/" + String(month) + "/" + String(year));
+  retorno.concat("#");
+  retorno.concat(String(hour) + ":" + String(minute) + ":" + String(second));
 
   Serial.println(retorno);
 }
