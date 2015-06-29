@@ -9,17 +9,16 @@
     tools:context=".SetupDevice">
 
     <LinearLayout
-        android:background="#FFFFFF"
+        android:textColor="#FFCC00"
         android:gravity="center_vertical"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:padding="5dp"
         >
-
         <TextView
             android:id="@+id/txtS1"
-            android:textColor="@android:color/black"
+            android:textColor="#FFCC00"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Saída 1" />
@@ -30,7 +29,7 @@
             android:layout_marginLeft="5dp"
             android:layout_weight="20"
             android:layout_width="140dp"
-            android:textColor="@android:color/black">
+            android:textColor="#FFCC00">
 
         </EditText>
 
@@ -38,7 +37,7 @@
             android:id="@+id/edtS1HI"
             android:layout_height="wrap_content"
             android:layout_width="40dp"
-            android:textColor="@android:color/black"
+            android:textColor="#FFCC00"
             android:inputType="number">
         </EditText>
 
@@ -46,32 +45,32 @@
             android:id="@+id/txtS1HIMin"
             android:layout_height="wrap_content"
             android:layout_width="22dp"
-            android:textColor="@android:color/black"
+            android:textColor="#FFCC00"
             android:text=":00" />
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="20dp"
-            android:textColor="@android:color/black"
+            android:textColor="#FFCC00"
             android:text="até" />
 
         <EditText
             android:id="@+id/edtS1HF"
             android:layout_height="wrap_content"
             android:layout_width="40dp"
-            android:textColor="@android:color/black"
+            android:textColor="#FFCC00"
             android:ems="10"
             android:inputType="number" />
         <TextView
             android:id="@+id/txtS1HFMin"
             android:layout_height="wrap_content"
             android:layout_width="20dp"
-            android:textColor="@android:color/black"
+            android:textColor="#FFCC00"
             android:text=":59" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:background="#FFFFFF"
+        android:textColor="#FFCC00"
         android:gravity="center_vertical"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -570,6 +569,7 @@
         android:id="@+id/btAlterar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textColor="#FFCC00"
         android:text="Alterar" />
 
 

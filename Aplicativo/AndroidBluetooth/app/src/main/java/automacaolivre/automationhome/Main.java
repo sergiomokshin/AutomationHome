@@ -1,4 +1,4 @@
-//http://www.webplusandroid.com/creating-listview-with-edittext-and-textwatcher-in-android/
+//Android 4.0
 
 package automacaolivre.automationhome;
 
@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -46,9 +47,10 @@ public class Main extends Activity {
     private String NameSRGB = "";
 
 
-    private CheckBox chkModoAgendado;
+    private Switch swModoAgendado;
     private ImageButton imgS1;
     private TextView txtS1;
+    private TextView txtS1H;
 
 
     private Button btS2;
@@ -58,8 +60,6 @@ public class Main extends Activity {
     private Button btS6;
     private Button btS7;
     private Button btS8;
-    private Button btSetupBlueTooth;
-    private Button btSetupSs;
 
     private SeekBar seekBarR;
     private SeekBar seekBarG;
@@ -126,10 +126,12 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        chkModoAgendado = (CheckBox)findViewById(R.id.chkModoAgendado);
+        swModoAgendado = (Switch)findViewById(R.id.swModoAgendado);
 
         imgS1 = (ImageButton) findViewById(R.id.imgS1);
         txtS1 = (TextView) findViewById(R.id.txtS1);
+        txtS1H = (TextView) findViewById(R.id.txtS1H);
+
 
         btS2 = (Button) findViewById(R.id.btS2);
         btS3 = (Button) findViewById(R.id.btS3);
@@ -138,8 +140,6 @@ public class Main extends Activity {
         btS6 = (Button) findViewById(R.id.btS6);
         btS7 = (Button) findViewById(R.id.btS7);
         btS8 = (Button) findViewById(R.id.btS8);
-        btSetupBlueTooth = (Button) findViewById(R.id.btSetupBluetooth);
-        btSetupSs = (Button) findViewById(R.id.btSetupSaidas);
 
         seekBarR = (SeekBar) findViewById(R.id.seekR);
         seekBarG = (SeekBar) findViewById(R.id.seekG);
@@ -151,13 +151,13 @@ public class Main extends Activity {
         FirstTime = true;
 
 
-        chkModoAgendado.setOnClickListener(new OnClickListener() {
+        swModoAgendado.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 try {
 
-                    if (chkModoAgendado.isChecked()) {
+                    if (swModoAgendado.isChecked()) {
                         writeData("|M1|");
 
                     } else {
@@ -258,24 +258,6 @@ public class Main extends Activity {
             }
         });
 
-        btSetupBlueTooth.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-
-                meuAdaptadorBluetooth = BluetoothAdapter.getDefaultAdapter();
-                //	Intent setupIntent = new Intent(this, DeviceListActivity.class);
-                //	startActivityForResult(setupIntent, REQUEST_CONNECT_DEVICE);
-            }
-        });
-
-        btSetupSs.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                //	Intent serverIntent = new Intent(this, SetupDevice.class);
-                //	startActivityForResult(serverIntent, REQUEST_SETUP_DEVICE);
-            }
-        });
-
         seekBarR.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -360,7 +342,8 @@ public class Main extends Activity {
         meuAdaptadorBluetooth = BluetoothAdapter.getDefaultAdapter();
         address = sharedPreferences.getString("ADDRESS", "");
 
-        address = "20:15:04:10:34:03";
+        //for 0debug
+        //address = "20:15:04:10:34:03";
 
         if (address == "") {
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -381,10 +364,15 @@ public class Main extends Activity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.DeviceListActivity:
+            case R.id.DefineHoraData:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DeviceListActivity");
+                intent.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DefineHoraData");
                 startActivityForResult(intent,90);
+                return true;
+            case R.id.DeviceListActivity:
+                Intent intentD = new Intent(Intent.ACTION_VIEW);
+                intentD.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DeviceListActivity");
+                startActivityForResult(intentD,90);
                 return true;
             case R.id.SetupDevice:
                 Intent intentS = new Intent(Intent.ACTION_VIEW);
@@ -428,7 +416,6 @@ public class Main extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case REQUEST_CONNECT_DEVICE:
-                if (resultCode == Activity.RESULT_OK) {
                     address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
                     sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
                     editor = sharedPreferences.edit();
@@ -437,7 +424,6 @@ public class Main extends Activity {
                     editor.commit();
 
                     Connect();
-                }
                 break;
             case REQUEST_SETUP_DEVICE:
                 AtualizaHorariosPlaca();
@@ -643,16 +629,17 @@ public class Main extends Activity {
         ValueRGBHrF = DataCommand[30];
 
         if(ModoAgendado.contains("1"))
-            chkModoAgendado.setChecked(true);
+            swModoAgendado.setChecked(true);
         else
-            chkModoAgendado.setChecked(false);
+            swModoAgendado.setChecked(false);
 
-        txtS1.setText(NameS1);
         if (S1 == 1) {
             imgS1.setImageResource(R.drawable.on);
         } else {
             imgS1.setImageResource(R.drawable.off);
         }
+        txtS1.setText(NameS1);
+        txtS1H.setText(S1HrI + ":59 até " + S1HrF + ":59");
 
         if (S2 == 1) {
             btS2.setText(NameS2 + " - ON");

@@ -1,3 +1,7 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +11,6 @@
     android:orientation="vertical"
     tools:context=".Main">
 
-
     <LinearLayout
         android:background="#FF333333"
         android:gravity="center_vertical"
@@ -17,51 +20,51 @@
         android:padding="5dp"
         >
 
-    <CheckBox
-            android:id="@+id/chkModoAgendado"
-            android:background="#FFFFFF"
-            android:textColor="@android:color/white"
+        <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Modo Agendado" />
+            android:textColor="#FFCC00"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:text="Modo Agendado: "
+            android:id="@+id/swModoAgendado" />
 
 
     </LinearLayout>
 
 
-    <LinearLayout
-        android:background="#FF333333"
-        android:gravity="center_vertical"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:padding="5dp"
         >
-
         <ImageButton
             android:id="@+id/imgS1"
-            android:layout_width="50px"
-            android:layout_height="50px"
+            android:layout_width="150px"
+            android:layout_height="150px"
             android:src="@drawable/on" />
 
         <TextView
             android:id="@+id/txtS1"
-            android:textColor="@android:color/white"
-            android:layout_width="240dp"
+            android:textColor="#FFCC00"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5px"
+            android:layout_toRightOf="@+id/imgS1"
+            android:layout_marginLeft="5dp"
+            android:textStyle="bold"
+            android:textSize="23dp"
             android:text="Saída 1" />
 
 
         <TextView
             android:id="@+id/txtS1H"
+            android:textColor="#FFCC00"
             android:layout_height="wrap_content"
-            android:layout_width="150dp"
-            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_alignBottom="@+id/imgS1"
+            android:layout_alignLeft="@+id/txtS1"
             android:text="00:00 até 23:59" />
 
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="vertical"
@@ -137,17 +140,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtMsg" />
-        <Button
-            android:id="@+id/btSetupBluetooth"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Setup Bluetooth" />
-        <Button
-            android:id="@+id/btSetupSaidas"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Setup Saidas" />
-
 
     </LinearLayout>
 
@@ -161,22 +153,14 @@
         >
 
         <TextView
-            android:id="@+id/txtHora"
-            android:textColor="@android:color/white"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5px"
-            android:text="Horário Placa:" />
-
-        <TextView
             android:id="@+id/txtHorario"
             android:textColor="@android:color/white"
-            android:layout_width="140dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5px"
-            android:text="28/06/2015 18:59" />
+            android:text="Horário Placa: 28/06/2015 18:59" />
 
     </LinearLayout>
 
-
 </LinearLayout>
+   </ScrollView>
