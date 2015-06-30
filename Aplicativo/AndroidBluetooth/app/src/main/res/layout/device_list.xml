@@ -11,7 +11,7 @@
         android:text="Selecione o dispositivos pareados"
         android:visibility="gone"
         android:background="#666"
-        android:textColor="#FFCC00"
+        android:textColor="#FFFFFF"
     />
     <ListView android:id="@+id/paired_devices"
         android:layout_width="wrap_content"
@@ -25,19 +25,19 @@
         android:text="Outros dispositivos encontrados"
         android:visibility="gone"
         android:background="#666"
-        android:textColor="#FFCC00"
+        android:textColor="#FFFFFF"
      />
     <ListView android:id="@+id/new_devices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:stackFromBottom="true"
-        android:textColor="#FFCC00"
+        android:textColor="#FFFFFF"
         android:layout_weight="2"
     />
     <Button android:id="@+id/button_scan"
         android:text="Procurar dispositivos"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFCC00"/>
+        android:textColor="#FFFFFF"/>
     />
 </LinearLayout>

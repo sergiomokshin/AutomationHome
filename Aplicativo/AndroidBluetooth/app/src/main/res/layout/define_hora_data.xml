@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
-        android:textColor="#FFCC00"
+        android:textColor="#FFFFFF"
         android:paddingTop="5dp"
         android:paddingBottom="25dp"></TextView>
     <LinearLayout android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="25dp"
-            android:textColor="#FFCC00"
+            android:textColor="#FFFFFF"
             android:text="01/01/2015"
             android:id="@+id/txtDate">
         </TextView>
@@ -36,7 +36,7 @@
                 android:layout_weight="0"
                 android:id="@+id/btnCalendar"
                 android:text="Data"
-                android:textColor="#FFCC00"
+                android:textColor="#FFFFFF"
                 android:layout_width="150dp">
             </Button>
 
@@ -51,7 +51,7 @@
             android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="25dp"
-            android:textColor="#FFCC00"
+            android:textColor="#FFFFFF"
             android:text="21:00"
             android:layout_weight="1"
             android:id="@+id/txtTime">
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:id="@+id/btnTimePicker"
-            android:textColor="#FFCC00"
+            android:textColor="#FFFFFF"
             android:text="Hora"
             android:layout_width="150dp"></Button>
     </LinearLayout>
@@ -69,6 +69,6 @@
         android:id="@+id/btAlterar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFCC00"
+        android:textColor="#FFFFFF"
         android:text="Alterar" />
 </LinearLayout>
