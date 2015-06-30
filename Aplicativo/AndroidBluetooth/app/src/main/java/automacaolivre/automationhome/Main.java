@@ -149,6 +149,8 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toast.makeText(this, "Conectando com o dispositivo.", Toast.LENGTH_LONG).show();
+
         swModoAgendado = (Switch)findViewById(R.id.swModoAgendado);
 		txtHorario = (TextView)findViewById(R.id.txtHorario);
 		
@@ -477,11 +479,16 @@ public class Main extends Activity {
                     Connect();
                 break;
             case REQUEST_SETUP_DEVICE:
-                AtualizaAgendamentosPlaca();
+                try {
+                    AtualizaAgendamentosPlaca();
+                } catch (InterruptedException e) {
+                    Toast.makeText(getApplicationContext(), "Erro durante a atualização dos parametros na placa, tente novamente!", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
                 AtualizaLabels();
                 break;
 			case REQUEST_SETUP_DATETIME:
-                AtualizaHorarioPlaca();                
+                AtualizaHorarioPlaca();
                 break;								
         }
     }
@@ -490,13 +497,16 @@ public class Main extends Activity {
 		String data = sharedPreferences.getString("Data", "");
 		String hora = sharedPreferences.getString("Hora", "");
         try {
-            writeData("|Ty" + data + "yz"  + hora + "z|");
+            if(writeData("|Ty" + data + "yz"  + hora + "z|")) {
+                Toast.makeText(getApplicationContext(), "Data alterada com sucesso!", Toast.LENGTH_SHORT).show();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
-    private void AtualizaAgendamentosPlaca() {
+
+    private void AtualizaAgendamentosPlaca() throws InterruptedException {
 
         try {
 
@@ -504,48 +514,73 @@ public class Main extends Activity {
 
             S1HrI = sharedPreferences.getString("S1HrI", "");
             S1HrF = sharedPreferences.getString("S1HrF", "");
-            writeData("|H1I" + String.format("%02d", Integer.parseInt(S1HrI)) + "|");
-            writeData("|H1F" + String.format("%02d", Integer.parseInt(S1HrF)) + "|");
-			
-			S2HrI = sharedPreferences.getString("S2HrI", "");
-            S2HrF = sharedPreferences.getString("S2HrF", "");
-            writeData("|H2I" + String.format("%02d", Integer.parseInt(S2HrI)) + "|");
-            writeData("|H2F" + String.format("%02d", Integer.parseInt(S2HrF)) + "|");
-			
-			S3HrI = sharedPreferences.getString("S3HrI", "");
-            S3HrF = sharedPreferences.getString("S3HrF", "");
-            writeData("|H3I" + String.format("%02d", Integer.parseInt(S3HrI)) + "|");
-            writeData("|H3F" + String.format("%02d", Integer.parseInt(S3HrF)) + "|");
-			
-			S4HrI = sharedPreferences.getString("S4HrI", "");
-            S4HrF = sharedPreferences.getString("S4HrF", "");
-            writeData("|H4I" + String.format("%02d", Integer.parseInt(S4HrI)) + "|");
-            writeData("|H4F" + String.format("%02d", Integer.parseInt(S4HrF)) + "|");
-			
-			S5HrI = sharedPreferences.getString("S5HrI", "");
-            S5HrF = sharedPreferences.getString("S5HrF", "");
-            writeData("|H5I" + String.format("%02d", Integer.parseInt(S5HrI)) + "|");
-            writeData("|H5F" + String.format("%02d", Integer.parseInt(S5HrF)) + "|");
-			
-			S6HrI = sharedPreferences.getString("S6HrI", "");
-            S6HrF = sharedPreferences.getString("S6HrF", "");
-            writeData("|H6I" + String.format("%02d", Integer.parseInt(S6HrI)) + "|");
-            writeData("|H6F" + String.format("%02d", Integer.parseInt(S6HrF)) + "|");
-			
-			S7HrI = sharedPreferences.getString("S7HrI", "");
-            S7HrF = sharedPreferences.getString("S7HrF", "");
-            writeData("|H7I" + String.format("%02d", Integer.parseInt(S7HrI)) + "|");
-            writeData("|H7F" + String.format("%02d", Integer.parseInt(S7HrF)) + "|");
-			
-			S8HrI = sharedPreferences.getString("S8HrI", "");
-            S8HrF = sharedPreferences.getString("S8HrF", "");
-            writeData("|H8I" + String.format("%02d", Integer.parseInt(S8HrI)) + "|");
-            writeData("|H8F" + String.format("%02d", Integer.parseInt(S8HrF)) + "|");
-			
-			SRGBHrI = sharedPreferences.getString("SRGBHrI", "");
-            SRGBHrF = sharedPreferences.getString("SRGBHrF", "");
-            writeData("|H9I" + String.format("%02d", Integer.parseInt(SRGBHrI)) + "|");
-            writeData("|H9F" + String.format("%02d", Integer.parseInt(SRGBHrF)) + "|");
+
+            if(writeData("|H1I" + String.format("%02d", Integer.parseInt(S1HrI)) + "|")) {
+                Thread.sleep(100);
+                writeData("|H1F" + String.format("%02d", Integer.parseInt(S1HrF)) + "|");
+                Thread.sleep(100);
+
+                S2HrI = sharedPreferences.getString("S2HrI", "");
+                S2HrF = sharedPreferences.getString("S2HrF", "");
+                writeData("|H2I" + String.format("%02d", Integer.parseInt(S2HrI)) + "|");
+                Thread.sleep(100);
+                writeData("|H2F" + String.format("%02d", Integer.parseInt(S2HrF)) + "|");
+                Thread.sleep(100);
+
+                S3HrI = sharedPreferences.getString("S3HrI", "");
+                S3HrF = sharedPreferences.getString("S3HrF", "");
+                writeData("|H3I" + String.format("%02d", Integer.parseInt(S3HrI)) + "|");
+                Thread.sleep(100);
+                writeData("|H3F" + String.format("%02d", Integer.parseInt(S3HrF)) + "|");
+                Thread.sleep(100);
+
+                S4HrI = sharedPreferences.getString("S4HrI", "");
+                S4HrF = sharedPreferences.getString("S4HrF", "");
+                writeData("|H4I" + String.format("%02d", Integer.parseInt(S4HrI)) + "|");
+                Thread.sleep(100);
+                writeData("|H4F" + String.format("%02d", Integer.parseInt(S4HrF)) + "|");
+                Thread.sleep(100);
+
+                S5HrI = sharedPreferences.getString("S5HrI", "");
+                S5HrF = sharedPreferences.getString("S5HrF", "");
+                writeData("|H5I" + String.format("%02d", Integer.parseInt(S5HrI)) + "|");
+                Thread.sleep(100);
+                writeData("|H5F" + String.format("%02d", Integer.parseInt(S5HrF)) + "|");
+                Thread.sleep(100);
+
+                S6HrI = sharedPreferences.getString("S6HrI", "");
+                S6HrF = sharedPreferences.getString("S6HrF", "");
+                writeData("|H6I" + String.format("%02d", Integer.parseInt(S6HrI)) + "|");
+                Thread.sleep(100);
+                writeData("|H6F" + String.format("%02d", Integer.parseInt(S6HrF)) + "|");
+                Thread.sleep(100);
+
+                S7HrI = sharedPreferences.getString("S7HrI", "");
+                S7HrF = sharedPreferences.getString("S7HrF", "");
+                writeData("|H7I" + String.format("%02d", Integer.parseInt(S7HrI)) + "|");
+                Thread.sleep(100);
+                writeData("|H7F" + String.format("%02d", Integer.parseInt(S7HrF)) + "|");
+                Thread.sleep(100);
+
+                S8HrI = sharedPreferences.getString("S8HrI", "");
+                S8HrF = sharedPreferences.getString("S8HrF", "");
+                writeData("|H8I" + String.format("%02d", Integer.parseInt(S8HrI)) + "|");
+                Thread.sleep(100);
+                writeData("|H8F" + String.format("%02d", Integer.parseInt(S8HrF)) + "|");
+                Thread.sleep(100);
+
+                SRGBHrI = sharedPreferences.getString("SRGBHrI", "");
+                SRGBHrF = sharedPreferences.getString("SRGBHrF", "");
+                writeData("|H9I" + String.format("%02d", Integer.parseInt(SRGBHrI)) + "|");
+                Thread.sleep(100);
+
+                if(writeData("|H9F" + String.format("%02d", Integer.parseInt(SRGBHrF)) + "|")) {
+                    Toast.makeText(getApplicationContext(), "Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Erro durante a atualização dos parametros na placa, tente novamente!", Toast.LENGTH_SHORT).show();
+                }
+            }
 
 
         } catch (IOException e) {
@@ -563,6 +598,7 @@ public class Main extends Activity {
         try {
 
             mmSocket = mmDevice.createRfcommSocketToServiceRecord(MY_UUID);
+            if(!mmSocket.isConnected())
             mmSocket.connect();
             mmInStream = mmSocket.getInputStream();
             mmOutStream = mmSocket.getOutputStream();
@@ -574,7 +610,7 @@ public class Main extends Activity {
             beginListenForCommands();
 
         } catch (IOException e) {
-            Toast.makeText(this, "Ocorreu um erro durante a conexão com o Bluetooth!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Ocorreu um erro durante a conexão com o Bluetooth, verifique se a placa de automação está ligada!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -587,6 +623,11 @@ public class Main extends Activity {
 
     private void EnviarComandoDigital(String S) throws IOException {
 
+
+        if(ModoAgendado.contains("1")) {
+            Toast.makeText(getApplicationContext(), "Modo agendado não permite acionamento de comandos, altere para o modo Manual!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //|D21|
         String comando = "|D" + S;
 
@@ -632,19 +673,29 @@ public class Main extends Activity {
         writeData(comando);
     }
 
-    private void writeData(String data) throws IOException {
+    private boolean writeData(String data) throws IOException {
 
         try {
-            write(data);
+            return write(data);
         } catch (IOException ex) {
-            write(data);
+            return write(data);
         }
     }
 
-    private void write(String data) throws IOException {
+    private boolean write(String data) throws IOException {
 
         byte[] msgBuffer = data.getBytes();
-        mmOutStream.write(msgBuffer, 0, msgBuffer.length);
+
+        if(mmSocket.isConnected()) {
+
+            mmOutStream.write(msgBuffer, 0, msgBuffer.length);
+            return true;
+        }
+        else {
+            Toast.makeText(this, "Dispositivo não conectado, reconecte e tente novamente!", Toast.LENGTH_LONG).show();
+            return false;
+
+        }
 
     }
 
@@ -654,7 +705,7 @@ public class Main extends Activity {
             mmInStream = mmSocket.getInputStream();
         } catch (IOException e) {
 
-            Toast.makeText(this, "Dispositivo nao conectado, reconecte!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Dispositivo não conectado, reconecte e tente novamente!", Toast.LENGTH_LONG).show();
         }
 
         Thread workerThread = new Thread(new Runnable() {

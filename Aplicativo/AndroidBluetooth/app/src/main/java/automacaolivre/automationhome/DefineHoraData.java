@@ -11,15 +11,18 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.content.SharedPreferences;
+import android.widget.Toast;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DefineHoraData extends Activity implements OnClickListener {
 
     Button btnCalendar, btnTimePicker, btAlterar;
-    EditText txtDate, txtTime;
+    TextView txtDate, txtTime;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
 	private String Data, Hora;
@@ -28,7 +31,7 @@ public class DefineHoraData extends Activity implements OnClickListener {
 	
 	private Pattern patternD;
 	private Matcher matcherD;
-	private static final String DATE_PATTERN =  " ((19|20)\\d\\d)  [/.-] (0?[1-9]|[12][0-9]|3[01]) [/.-] (0?[1-9]|1[012]) ";
+	private static final String DATE_PATTERN =  " ((19|20)\\d\\d)[/.-](0?[1-9]|[12][0-9]|3[01])[/.-](0?[1-9]|1[012]) ";
 	//public DateValidator(){ patternD = Pattern.compile(DATE_PATTERN);
 	
 	
@@ -47,8 +50,8 @@ public class DefineHoraData extends Activity implements OnClickListener {
         btnTimePicker = (Button) findViewById(R.id.btnTimePicker);
 		btAlterar = (Button) findViewById(R.id.btAlterar);
 
-        txtDate = (EditText) findViewById(R.id.txtDate);
-        txtTime = (EditText) findViewById(R.id.txtTime);
+        txtDate = (TextView) findViewById(R.id.txtDate);
+        txtTime = (TextView) findViewById(R.id.txtTime);
 		
 		sharedPreferences = getSharedPreferences("APP_PREFS", getBaseContext().MODE_PRIVATE);
 		Data = sharedPreferences.getString("Data", "");
@@ -74,19 +77,20 @@ public class DefineHoraData extends Activity implements OnClickListener {
 				
 
 				//http://stackoverflow.com/questions/17416595/date-validation-in-android
-				/*
-				if(!validateDate(Data))
+
+				if(txtDate.getText() == "")
 				{
-					Toast.makeText(getApplicationContext(), "Data invalida, utilizar o formado DD/MM/YYYY!", Toast.LENGTH_SHORt).show();
+					Toast.makeText(getApplicationContext(), "Selecione a data!", Toast.LENGTH_SHORT).show();
 					return;				
 				}
-								
-				if(!validateTime(Hora))
+
+
+				if(txtTime.getText() == "")
 				{
-					Toast.makeText(getApplicationContext(), "Hora invalida, utilizar o formado HH:MM!", Toast.LENGTH_SHORt).show();
+					Toast.makeText(getApplicationContext(), "Selecione a hora!", Toast.LENGTH_SHORT).show();
 					return;				
 				}
-				*/
+
                 editor.putString("Data", Data);
                 editor.putString("Hora", Hora);
 															
@@ -108,9 +112,10 @@ public class DefineHoraData extends Activity implements OnClickListener {
 		  return matcher.matches();
  
 	  }	
-	  
+*/
 	public boolean validateDate(final String date){
 
+      patternD = Pattern.compile(DATE_PATTERN);
 	  matcherD = patternD.matcher(date);
 
 	  if(matcherD.matches()){
@@ -161,7 +166,7 @@ public class DefineHoraData extends Activity implements OnClickListener {
 		  return false;
 	  }              
 	}
-		  */
+
     @Override
     public void onClick(View v) {
 
@@ -181,8 +186,8 @@ public class DefineHoraData extends Activity implements OnClickListener {
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
                             // Display Selected date in textbox
-                            txtDate.setText(dayOfMonth + "-"
-                                    + (monthOfYear + 1) + "-" + year);
+                            txtDate.setText(dayOfMonth + "/"
+                                    + (monthOfYear + 1) + "/" + year);
 
                         }
                     }, mYear, mMonth, mDay);

@@ -5,53 +5,65 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
 
-    <TextView android:textColor="#fff" android:textSize="20dp"
-        android:layout_height="wrap_content" android:id="@+id/textView2"
-        android:text="Definir Horário Placa" android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal" android:paddingTop="5dp"
+    <TextView
+        android:textSize="20dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:text="Data/Hora"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#FFCC00"
+        android:paddingTop="5dp"
         android:paddingBottom="25dp"></TextView>
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1">
 
-        <Button android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:id="@+id/btnCalendar"
-            android:text="Calendário"
-            android:textColor="#FFCC00"
-            android:layout_width="150dp">
-         </Button>
-
-        <EditText android:layout_width="wrap_content"
+        <TextView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:width="100px"
-            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="25dp"
+            android:textColor="#FFCC00"
+            android:text="01/01/2015"
             android:id="@+id/txtDate">
-            <requestFocus></requestFocus>
+        </TextView>
 
-        </EditText>
+         <Button android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:id="@+id/btnCalendar"
+                android:text="Data"
+                android:textColor="#FFCC00"
+                android:layout_width="150dp">
+            </Button>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="25dp"
+            android:textColor="#FFCC00"
+            android:text="21:00"
+            android:layout_weight="1"
+            android:id="@+id/txtTime">
+            <requestFocus></requestFocus>
+        </TextView>
         <Button
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:id="@+id/btnTimePicker"
             android:textColor="#FFCC00"
-            android:text="Time Picker"
+            android:text="Hora"
             android:layout_width="150dp"></Button>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:layout_weight="1"
-            android:id="@+id/txtTime">
-            <requestFocus></requestFocus>
-        </EditText>
-
     </LinearLayout>
     <Button
         android:id="@+id/btAlterar"
