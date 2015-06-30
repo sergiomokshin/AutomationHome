@@ -610,7 +610,7 @@ public class Main extends Activity {
             beginListenForCommands();
 
         } catch (IOException e) {
-            Toast.makeText(this, "Ocorreu um erro durante a conexão com o Bluetooth, verifique se a placa de automação está ligada!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Ocorreu um erro durante a conexão com o Bluetooth, verifique se a placa de automação está ligada e dentro do raio de alcance!", Toast.LENGTH_LONG).show();
         }
     }
 
