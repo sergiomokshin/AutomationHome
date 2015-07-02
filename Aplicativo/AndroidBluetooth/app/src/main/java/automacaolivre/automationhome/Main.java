@@ -398,7 +398,7 @@ public class Main extends Activity {
             startActivityForResult(intent,90);
 
         } else {
-            Connect(true);
+            Connect(false);
         }
 
     }
@@ -483,7 +483,7 @@ public class Main extends Activity {
 
                     Boolean alterouDispositivo = (addressAtual.toString() != address.toString());
 
-                    Connect(alterouDispositivo);
+                    Connect(false);
                 break;
             case REQUEST_SETUP_DEVICE:
                 try {
@@ -598,13 +598,14 @@ public class Main extends Activity {
 
     }
 
-    private void Connect(Boolean alterouDispositivo) {
+    private void Connect(Boolean forceConect) {
 
         //if(!alterouDispositivo && mmSocket != null && mmSocket.isConnected())
-        if(mmSocket != null && mmSocket.isConnected())
+        if(!forceConect && mmSocket != null && mmSocket.isConnected())
         {
             return;
         }
+
 
         meuAdaptadorBluetooth.cancelDiscovery();
         mmDevice = meuAdaptadorBluetooth.getRemoteDevice(address);
@@ -692,6 +693,8 @@ public class Main extends Activity {
         try {
             return write(data);
         } catch (IOException ex) {
+            meuAdaptadorBluetooth = BluetoothAdapter.getDefaultAdapter();
+            Connect(true);
             return write(data);
         }
     }
@@ -765,155 +768,161 @@ public class Main extends Activity {
     }
 
     private void AtualizaDadosPlaca(String data) {
-        String[] DataCommand = data.split("#");
 
-        S1 = Integer.parseInt(DataCommand[1]);
-        S2 = Integer.parseInt(DataCommand[2]);
-        S3 = Integer.parseInt(DataCommand[3]);
-        S4 = Integer.parseInt(DataCommand[4]);
-        S5 = Integer.parseInt(DataCommand[5]);
-        S6 = Integer.parseInt(DataCommand[6]);
-        S7 = Integer.parseInt(DataCommand[7]);
-        S8 = Integer.parseInt(DataCommand[8]);
-        SR = Integer.parseInt(DataCommand[9]);
-        SG = Integer.parseInt(DataCommand[10]);
-        SB = Integer.parseInt(DataCommand[11]);
-        ModoAgendado = DataCommand[12].toString();
+        try {
+            String[] DataCommand = data.split("#");
 
-        S1HrI = DataCommand[13];
-        S1HrF = DataCommand[14];
-        S2HrI = DataCommand[15];
-        S2HrF = DataCommand[16];
-        S3HrI = DataCommand[17];
-        S3HrF = DataCommand[18];
-        S4HrI = DataCommand[19];
-        S4HrF = DataCommand[20];
-        S5HrI = DataCommand[21];
-        S5HrF = DataCommand[22];
-        S6HrI = DataCommand[23];
-        S6HrF = DataCommand[24];
-        S7HrI = DataCommand[25];
-        S7HrF = DataCommand[26];
-        S8HrI = DataCommand[27];
-        S8HrF = DataCommand[28];
-        SRGBHrI = DataCommand[29];
-        SRGBHrF = DataCommand[30];
-						
-		Data = DataCommand[31];
-		Hora = DataCommand[32];
-		
-		txtHorario.setText("Horário placa: " + Data + "  " + Hora);
+            S1 = Integer.parseInt(DataCommand[1]);
+            S2 = Integer.parseInt(DataCommand[2]);
+            S3 = Integer.parseInt(DataCommand[3]);
+            S4 = Integer.parseInt(DataCommand[4]);
+            S5 = Integer.parseInt(DataCommand[5]);
+            S6 = Integer.parseInt(DataCommand[6]);
+            S7 = Integer.parseInt(DataCommand[7]);
+            S8 = Integer.parseInt(DataCommand[8]);
+            SR = Integer.parseInt(DataCommand[9]);
+            SG = Integer.parseInt(DataCommand[10]);
+            SB = Integer.parseInt(DataCommand[11]);
+            ModoAgendado = DataCommand[12].toString();
 
-        if(ModoAgendado.contains("1"))
-            swModoAgendado.setChecked(true);
-        else
-            swModoAgendado.setChecked(false);
+            S1HrI = DataCommand[13];
+            S1HrF = DataCommand[14];
+            S2HrI = DataCommand[15];
+            S2HrF = DataCommand[16];
+            S3HrI = DataCommand[17];
+            S3HrF = DataCommand[18];
+            S4HrI = DataCommand[19];
+            S4HrF = DataCommand[20];
+            S5HrI = DataCommand[21];
+            S5HrF = DataCommand[22];
+            S6HrI = DataCommand[23];
+            S6HrF = DataCommand[24];
+            S7HrI = DataCommand[25];
+            S7HrF = DataCommand[26];
+            S8HrI = DataCommand[27];
+            S8HrF = DataCommand[28];
+            SRGBHrI = DataCommand[29];
+            SRGBHrF = DataCommand[30];
 
-        if (S1 == 1) {
-            imgS1.setImageResource(R.drawable.on);
-        } else {
-            imgS1.setImageResource(R.drawable.off);
+            Data = DataCommand[31];
+            Hora = DataCommand[32];
+
+            txtHorario.setText("Horário placa: " + Data + "  " + Hora);
+
+            if (ModoAgendado.contains("1"))
+                swModoAgendado.setChecked(true);
+            else
+                swModoAgendado.setChecked(false);
+
+            if (S1 == 1) {
+                imgS1.setImageResource(R.drawable.on);
+            } else {
+                imgS1.setImageResource(R.drawable.off);
+            }
+            txtS1.setText(NameS1);
+            txtS1H.setText(S1HrI + ":59 até " + S1HrF + ":59");
+
+            if (S2 == 1) {
+                imgS2.setImageResource(R.drawable.on);
+            } else {
+                imgS2.setImageResource(R.drawable.off);
+            }
+            txtS2.setText(NameS2);
+            txtS2H.setText(S2HrI + ":59 até " + S2HrF + ":59");
+
+            if (S3 == 1) {
+                imgS3.setImageResource(R.drawable.on);
+            } else {
+                imgS3.setImageResource(R.drawable.off);
+            }
+            txtS3.setText(NameS3);
+            txtS3H.setText(S3HrI + ":59 até " + S3HrF + ":59");
+
+            if (S4 == 1) {
+                imgS4.setImageResource(R.drawable.on);
+            } else {
+                imgS4.setImageResource(R.drawable.off);
+            }
+            txtS4.setText(NameS4);
+            txtS4H.setText(S4HrI + ":59 até " + S4HrF + ":59");
+
+            if (S5 == 1) {
+                imgS5.setImageResource(R.drawable.on);
+            } else {
+                imgS5.setImageResource(R.drawable.off);
+            }
+            txtS5.setText(NameS5);
+            txtS5H.setText(S5HrI + ":59 até " + S5HrF + ":59");
+
+            if (S6 == 1) {
+                imgS6.setImageResource(R.drawable.on);
+            } else {
+                imgS6.setImageResource(R.drawable.off);
+            }
+            txtS6.setText(NameS6);
+            txtS6H.setText(S6HrI + ":59 até " + S6HrF + ":59");
+
+            if (S7 == 1) {
+                imgS7.setImageResource(R.drawable.on);
+            } else {
+                imgS7.setImageResource(R.drawable.off);
+            }
+            txtS7.setText(NameS7);
+            txtS7H.setText(S7HrI + ":59 até " + S7HrF + ":59");
+
+            if (S8 == 1) {
+                imgS8.setImageResource(R.drawable.on);
+            } else {
+                imgS8.setImageResource(R.drawable.off);
+            }
+            txtS8.setText(NameS8);
+            txtS8H.setText(S8HrI + ":59 até " + S8HrF + ":59");
+
+            txtSRGB.setText(NameSRGB);
+            txtSRGBH.setText(SRGBHrI + ":59 até " + SRGBHrF + ":59");
+
+
+            if (FirstTime) {
+
+                seekBarR.setProgress(SR / 28);
+                seekBarR.refreshDrawableState();
+
+                seekBarG.setProgress(SG / 28);
+                seekBarG.refreshDrawableState();
+
+                seekBarB.setProgress(SB / 28);
+                seekBarB.refreshDrawableState();
+                FirstTime = false;
+
+                sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor = sharedPreferences.edit();
+
+                editor.putString("S1HrI", S1HrI);
+                editor.putString("S1HrF", S1HrF);
+                editor.putString("S2HrI", S2HrI);
+                editor.putString("S2HrF", S2HrF);
+                editor.putString("S3HrI", S3HrI);
+                editor.putString("S3HrF", S3HrF);
+                editor.putString("S4HrI", S4HrI);
+                editor.putString("S4HrF", S4HrF);
+                editor.putString("S5HrI", S5HrI);
+                editor.putString("S5HrF", S5HrF);
+                editor.putString("S6HrI", S6HrI);
+                editor.putString("S6HrF", S6HrF);
+                editor.putString("S7HrI", S7HrI);
+                editor.putString("S7HrF", S7HrF);
+                editor.putString("S8HrI", S8HrI);
+                editor.putString("S8HrF", S8HrF);
+                editor.putString("SRGBHrI", SRGBHrI);
+                editor.putString("SRGBHrF", SRGBHrF);
+
+                editor.commit();
+            }
+
         }
-        txtS1.setText(NameS1);
-        txtS1H.setText(S1HrI + ":59 até " + S1HrF + ":59");
-		
-		if (S2 == 1) {
-            imgS2.setImageResource(R.drawable.on);
-        } else {
-            imgS2.setImageResource(R.drawable.off);
+        catch (Exception ex) {
+           // Toast.makeText(this, "Erro na reconexão de parametros!", Toast.LENGTH_LONG).show();
         }
-        txtS2.setText(NameS2);
-        txtS2H.setText(S2HrI + ":59 até " + S2HrF + ":59");
-		
-		if (S3 == 1) {
-            imgS3.setImageResource(R.drawable.on);
-        } else {
-            imgS3.setImageResource(R.drawable.off);
-        }
-        txtS3.setText(NameS3);
-        txtS3H.setText(S3HrI + ":59 até " + S3HrF + ":59");
-		
-		if (S4 == 1) {
-            imgS4.setImageResource(R.drawable.on);
-        } else {
-            imgS4.setImageResource(R.drawable.off);
-        }
-        txtS4.setText(NameS4);
-        txtS4H.setText(S4HrI + ":59 até " + S4HrF + ":59");
-		
-		if (S5 == 1) {
-            imgS5.setImageResource(R.drawable.on);
-        } else {
-            imgS5.setImageResource(R.drawable.off);
-        }
-        txtS5.setText(NameS5);
-        txtS5H.setText(S5HrI + ":59 até " + S5HrF + ":59");
-		
-		if (S6 == 1) {
-            imgS6.setImageResource(R.drawable.on);
-        } else {
-            imgS6.setImageResource(R.drawable.off);
-        }
-        txtS6.setText(NameS6);
-        txtS6H.setText(S6HrI + ":59 até " + S6HrF + ":59");
-		
-		if (S7 == 1) {
-            imgS7.setImageResource(R.drawable.on);
-        } else {
-            imgS7.setImageResource(R.drawable.off);
-        }
-        txtS7.setText(NameS7);
-        txtS7H.setText(S7HrI + ":59 até " + S7HrF + ":59");
-		
-		if (S8 == 1) {
-            imgS8.setImageResource(R.drawable.on);
-        } else {
-            imgS8.setImageResource(R.drawable.off);
-        }
-        txtS8.setText(NameS8);
-        txtS8H.setText(S8HrI + ":59 até " + S8HrF + ":59");
-				
-		txtSRGB.setText(NameSRGB);
-        txtSRGBH.setText(SRGBHrI + ":59 até " + SRGBHrF + ":59");
-		
-		
-        if (FirstTime) {
-
-            seekBarR.setProgress(SR / 28);
-            seekBarR.refreshDrawableState();
-
-            seekBarG.setProgress(SG / 28);
-            seekBarG.refreshDrawableState();
-
-            seekBarB.setProgress(SB / 28);
-            seekBarB.refreshDrawableState();
-            FirstTime = false;
-
-            sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
-            editor = sharedPreferences.edit();
-            editor = sharedPreferences.edit();
-
-            editor.putString("S1HrI", S1HrI);
-            editor.putString("S1HrF", S1HrF);
-            editor.putString("S2HrI", S2HrI);
-            editor.putString("S2HrF", S2HrF);
-            editor.putString("S3HrI", S3HrI);
-            editor.putString("S3HrF", S3HrF);
-            editor.putString("S4HrI", S4HrI);
-            editor.putString("S4HrF", S4HrF);
-            editor.putString("S5HrI", S5HrI);
-            editor.putString("S5HrF", S5HrF);
-            editor.putString("S6HrI", S6HrI);
-            editor.putString("S6HrF", S6HrF);
-            editor.putString("S7HrI", S7HrI);
-            editor.putString("S7HrF", S7HrF);
-            editor.putString("S8HrI", S8HrI);
-            editor.putString("S8HrF", S8HrF);
-            editor.putString("SRGBHrI", SRGBHrI);
-            editor.putString("SRGBHrF", SRGBHrF);
-
-            editor.commit();
-        }
-
     }
 }
