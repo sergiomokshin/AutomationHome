@@ -8,7 +8,7 @@
     <TextView android:id="@+id/title_paired_devices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selecione o dispositivos pareados"
+        android:text="Selecione o dispositivo pareado"
         android:visibility="gone"
         android:background="#666"
         android:textColor="#FFFFFF"

@@ -398,7 +398,7 @@ public class Main extends Activity {
             startActivityForResult(intent,90);
 
         } else {
-            Connect();
+            Connect(true);
         }
 
     }
@@ -470,13 +470,20 @@ public class Main extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case REQUEST_CONNECT_DEVICE:
+
+
+                    String addressAtual = sharedPreferences.getString("ADDRESS", "");
+
+
                     address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
                     sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
                     editor = sharedPreferences.edit();
                     editor.putString("ADDRESS", address);
                     editor.commit();
 
-                    Connect();
+                    Boolean alterouDispositivo = (addressAtual.toString() != address.toString());
+
+                    Connect(alterouDispositivo);
                 break;
             case REQUEST_SETUP_DEVICE:
                 try {
@@ -591,7 +598,14 @@ public class Main extends Activity {
 
     }
 
-    private void Connect() {
+    private void Connect(Boolean alterouDispositivo) {
+
+        //if(!alterouDispositivo && mmSocket != null && mmSocket.isConnected())
+        if(mmSocket != null && mmSocket.isConnected())
+        {
+            return;
+        }
+
         meuAdaptadorBluetooth.cancelDiscovery();
         mmDevice = meuAdaptadorBluetooth.getRemoteDevice(address);
 
@@ -788,7 +802,7 @@ public class Main extends Activity {
 		Data = DataCommand[31];
 		Hora = DataCommand[32];
 		
-		txtHorario.setText("Horário placa: " + Data + " " + Hora);							
+		txtHorario.setText("Horário placa: " + Data + "  " + Hora);
 
         if(ModoAgendado.contains("1"))
             swModoAgendado.setChecked(true);
