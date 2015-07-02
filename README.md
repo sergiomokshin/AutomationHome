@@ -2,7 +2,7 @@ Automation Shield 2.0
 
 O Automation Shield é compatível com o Arduino Nano, permitindo o desenvolvimento de projetos de automação com o ambiente e bibliotecas do Arduino.
 
-![Automation Shield](http://2.bp.blogspot.com/-3SkegE5IOJI/VMkj9KsNF3I/AAAAAAAAHg4/j7NDYE7RcLY/s1600/IMG_20120922_233114_621.jpg)\
+![Automation Shield](http://4.bp.blogspot.com/-bpQSxqHV7HQ/VZXDbfkLriI/AAAAAAAAI7o/HSLuzIuipSA/s640/AutomationHomePCB.png)
 
 Especificações Técnicas:
 -Microcontrolador Arduino Nano.
