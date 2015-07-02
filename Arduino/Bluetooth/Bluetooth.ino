@@ -8,10 +8,10 @@ Automação Live - Abril/2015
   RX  TX
   Protocolo
   Exemplos protocolo
-  
-  |D21|  Liga Saida 1 
+
+  |D21|  Liga Saida 1
   |D20|  Desliga Saida 1
-  |A64| Potencia nível 4 pino PIN_GREEN 
+  |A64| Potencia nível 4 pino PIN_GREEN
 
   |H1I03|  Horario Inicio 1 03
   |H1F22|  Horario Fim 1 	22
@@ -19,14 +19,14 @@ Automação Live - Abril/2015
 
   |M1| Modo Agendado
   |M0| Modo Manual
-  
-  
+
+
   |Ty12/06/2015yz22:35z|    Horario
 
 
 */
 
-
+#include <EEPROM.h>
 #include <SPI.h>
 #include <Ethernet.h>
 #include <EEPROM.h>
@@ -127,10 +127,10 @@ byte second, minute, hour, dayOfWeek, dayOfMonth, month, year;
 
 void setup()
 {
-  //Manter em EPPROM acionamentos manuais do usuário  		
+  //Manter em EPPROM acionamentos manuais do usuário
   //EEPROMComandos = true;
   EEPROMComandos = false;
-  
+
   Wire.begin();
   int countLcd = 0;
 
@@ -168,34 +168,34 @@ void setup()
   ValueSaida8HrF = EEPROM.read(MemSaida8HrF);
   ValueRGBHrI = EEPROM.read(MemRGBHrI);
   ValueRGBHrF = EEPROM.read(MemRGBHrF);
-  
-  if(EEPROMComandos)
-  {
-	  //Inicializando placa com valores armazenados na FLASH Memory
-	  ValueSaveSaida1 = EEPROM.read(MemSaida1);
-	  ValueSaveSaida2 = EEPROM.read(MemSaida2);
-	  ValueSaveSaida3 = EEPROM.read(MemSaida3);
-	  ValueSaveSaida4 = EEPROM.read(MemSaida4);
-	  ValueSaveSaida5 = EEPROM.read(MemSaida5);
-	  ValueSaveSaida6 = EEPROM.read(MemSaida6);
-	  ValueSaveSaida7 = EEPROM.read(MemSaida7);
-	  ValueSaveSaida8 = EEPROM.read(MemSaida8);
-	  ValueSaveRed = EEPROM.read(MemRed);
-	  ValueSaveGreen = EEPROM.read(MemGreen);
-      ValueSaveBlue = EEPROM.read(MemBlue);
 
-	  digitalWrite(PIN_S1, ValueSaveSaida1);
-	  digitalWrite(PIN_S2, ValueSaveSaida2);
-	  digitalWrite(PIN_S3, ValueSaveSaida3);
-	  digitalWrite(PIN_S4, ValueSaveSaida4);
-	  digitalWrite(PIN_S5, ValueSaveSaida5);
-	  digitalWrite(PIN_S6, ValueSaveSaida6);
-	  digitalWrite(PIN_S7, ValueSaveSaida7);
-	  digitalWrite(PIN_S8, ValueSaveSaida8);
-	  
-	  analogWrite(PIN_RED, ValueSaveRed);
-	  analogWrite(PIN_GREEN, ValueSaveGreen);
-	  analogWrite(PIN_BLUE, ValueSaveBlue);
+  if (EEPROMComandos == true)
+  {
+    //Inicializando placa com valores armazenados na FLASH Memory
+    ValueSaveSaida1 = EEPROM.read(MemSaida1);
+    ValueSaveSaida2 = EEPROM.read(MemSaida2);
+    ValueSaveSaida3 = EEPROM.read(MemSaida3);
+    ValueSaveSaida4 = EEPROM.read(MemSaida4);
+    ValueSaveSaida5 = EEPROM.read(MemSaida5);
+    ValueSaveSaida6 = EEPROM.read(MemSaida6);
+    ValueSaveSaida7 = EEPROM.read(MemSaida7);
+    ValueSaveSaida8 = EEPROM.read(MemSaida8);
+    ValueSaveRed = EEPROM.read(MemRed);
+    ValueSaveGreen = EEPROM.read(MemGreen);
+    ValueSaveBlue = EEPROM.read(MemBlue);
+
+    digitalWrite(PIN_S1, ValueSaveSaida1);
+    digitalWrite(PIN_S2, ValueSaveSaida2);
+    digitalWrite(PIN_S3, ValueSaveSaida3);
+    digitalWrite(PIN_S4, ValueSaveSaida4);
+    digitalWrite(PIN_S5, ValueSaveSaida5);
+    digitalWrite(PIN_S6, ValueSaveSaida6);
+    digitalWrite(PIN_S7, ValueSaveSaida7);
+    digitalWrite(PIN_S8, ValueSaveSaida8);
+
+    analogWrite(PIN_RED, ValueSaveRed);
+    analogWrite(PIN_GREEN, ValueSaveGreen);
+    analogWrite(PIN_BLUE, ValueSaveBlue);
   }
 
   lcd.init();
@@ -263,76 +263,76 @@ void disparacomando()
 
     if (port == 1)
     {
-      ValueSaveSaida1 = value;      
-      digitalWrite(PIN_S1, ValueSaveSaida1);	  
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemSaida1, ValueSaveSaida1);
-	  }
+      ValueSaveSaida1 = value;
+      digitalWrite(PIN_S1, ValueSaveSaida1);
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemSaida1, ValueSaveSaida1);
+      }
     }
     else if (port == 2)
     {
-      ValueSaveSaida2 = value;      
+      ValueSaveSaida2 = value;
       digitalWrite(PIN_S2, ValueSaveSaida2);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemSaida2, ValueSaveSaida2);
-	  }
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemSaida2, ValueSaveSaida2);
+      }
     }
-	else if (port == 3)
+    else if (port == 3)
     {
-      ValueSaveSaida3 = value;      
+      ValueSaveSaida3 = value;
       digitalWrite(PIN_S3, ValueSaveSaida3);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemSaida3, ValueSaveSaida3);
-	  }
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemSaida3, ValueSaveSaida3);
+      }
     }
-	else if (port == 4)
+    else if (port == 4)
     {
-      ValueSaveSaida4 = value;      
+      ValueSaveSaida4 = value;
       digitalWrite(PIN_S4, ValueSaveSaida4);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemSaida4, ValueSaveSaida4);
-	  }
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemSaida4, ValueSaveSaida4);
+      }
     }
-	else if (port == 5)
+    else if (port == 5)
     {
-      ValueSaveSaida5 = value;      
+      ValueSaveSaida5 = value;
       digitalWrite(PIN_S5, ValueSaveSaida5);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemSaida5, ValueSaveSaida5);
-	  }
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemSaida5, ValueSaveSaida5);
+      }
     }
-	else if (port == 6)
+    else if (port == 6)
     {
-      ValueSaveSaida6 = value;      
+      ValueSaveSaida6 = value;
       digitalWrite(PIN_S6, ValueSaveSaida6);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemSaida6, ValueSaveSaida6);
-	  }
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemSaida6, ValueSaveSaida6);
+      }
     }
-	else if (port == 7)
+    else if (port == 7)
     {
-      ValueSaveSaida7 = value;      
+      ValueSaveSaida7 = value;
       digitalWrite(PIN_S7, ValueSaveSaida7);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemSaida7, ValueSaveSaida7);
-	  }
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemSaida7, ValueSaveSaida7);
+      }
     }
-	else if (port == 8)
+    else if (port == 8)
     {
-      ValueSaveSaida8 = value;      
+      ValueSaveSaida8 = value;
       digitalWrite(PIN_S8, ValueSaveSaida8);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemSaida8, ValueSaveSaida8);
-	  }
-    }    	
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemSaida8, ValueSaveSaida8);
+      }
+    }
   }
   //Envio de comando para acionamento de saídas de potencia
   else if (comando[0] == 'A')
@@ -343,30 +343,30 @@ void disparacomando()
 
     if ( port == 6 )
     {
-      ValueSaveRed = value;      
+      ValueSaveRed = value;
       analogWrite(port, value);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemRed, ValueSaveRed);
-	  }
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemRed, ValueSaveRed);
+      }
     }
     else if ( port == 5 )
     {
-      ValueSaveGreen = value;      
+      ValueSaveGreen = value;
       analogWrite(port, value);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemGreen, ValueSaveGreen);
-	  }
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemGreen, ValueSaveGreen);
+      }
     }
     else if ( port == 3 )
     {
-      ValueSaveBlue = value;      
+      ValueSaveBlue = value;
       analogWrite(port, value);
-	  if(EEPROMComandos)
-	  {
-		EEPROM.write(MemBlue, ValueSaveBlue);
-	  }
+      if (EEPROMComandos)
+      {
+        EEPROM.write(MemBlue, ValueSaveBlue);
+      }
     }
   }
   //Envio de comando para agendamento de saídas
