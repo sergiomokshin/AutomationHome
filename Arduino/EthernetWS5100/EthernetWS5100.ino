@@ -2,24 +2,6 @@
 Sergio Mokshin
 Automação Live - Abril/2015
 
-init()                              Init the LCD and library functions, Clears the display, turns off the cursors
-commandWrite(command)      Write a command not supported yet in the library to the display
-position(Row, Column)      Move the cursor to position valid range is Row[0-3], Column[0,19]
-print(char)                        Send the single character char to the display at the cursor position.
-println(string)                  Send the String to the display at the cursor position.
-clear()                        Clear the display and place the cursor at 0,0
-home()                        Home the cursor to 0,0 but do not clear the display
-on()                              Turn the LCD display on
-off()                              Turn the LCD display off
-cursor_on()                  Turn the blinking line cursor on
-cursor_off()                  Turn the blinking line cursor off
-blink_on()                        Turn the blinking block cursor on
-blink_off()                        Turn the blinking block cursor on
-left()                              Move the cursor to the left
-right()                        Move the cursor to the right
-keypad()                        Read a value from the keypad. Returns 0 if no key press is in the buffer
-
-
 */
 
 #include <SPI.h>
@@ -123,6 +105,9 @@ int ValueRed = 0; //Conteudo de memoria  Red
 int ValueGreen = 0; //Conteudo de memoria  Green
 int ValueBlue = 0; //Conteudo de memoria  Blue
 
+
+boolean EEPROMComandos = false;
+
 float humidity;
 float temp;
 
@@ -135,6 +120,11 @@ DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
 
+  //Manter em EPPROM acionamentos manuais do usuário  		
+  //EEPROMComandos = true;
+  EEPROMComandos = false;
+  
+  
   Wire.begin();
 
   Ethernet.begin(mac, ip, gateway, subnet);
@@ -171,25 +161,29 @@ void setup() {
   ValueRGBHrI = EEPROM.read(MemRGBHrI);
   ValueRGBHrF = EEPROM.read(MemRGBHrF);
   ValueRGBType = EEPROM.read(MemRGBType);
-  ValueRed = EEPROM.read(MemRed);
-  ValueGreen = EEPROM.read(MemGreen);
-  ValueBlue = EEPROM.read(MemBlue);
-
-
-  //Inicializando placa com valores armazenados na FLASH Memory
-  digitalWrite(PIN_S1, EEPROM.read(MemSaida1));
-  digitalWrite(PIN_S2, EEPROM.read(MemSaida2));
-  digitalWrite(PIN_S3, EEPROM.read(MemSaida3));
-  digitalWrite(PIN_S4, EEPROM.read(MemSaida4));
-  digitalWrite(PIN_S5, EEPROM.read(MemSaida5));
-  digitalWrite(PIN_S6, EEPROM.read(MemSaida6));
-  digitalWrite(PIN_S7, EEPROM.read(MemSaida7));
-  digitalWrite(PIN_S8, EEPROM.read(MemSaida8));
   
   
-  analogWrite(PIN_RED, ValueRed);
-  analogWrite(PIN_GREEN, ValueGreen);
-  analogWrite(PIN_BLUE, ValueBlue);
+  if(EEPROMComandos)
+  {
+	  //Inicializando placa com valores armazenados na FLASH Memory
+	  digitalWrite(PIN_S1, EEPROM.read(MemSaida1));
+	  digitalWrite(PIN_S2, EEPROM.read(MemSaida2));
+	  digitalWrite(PIN_S3, EEPROM.read(MemSaida3));
+	  digitalWrite(PIN_S4, EEPROM.read(MemSaida4));
+	  digitalWrite(PIN_S5, EEPROM.read(MemSaida5));
+	  digitalWrite(PIN_S6, EEPROM.read(MemSaida6));
+	  digitalWrite(PIN_S7, EEPROM.read(MemSaida7));
+	  digitalWrite(PIN_S8, EEPROM.read(MemSaida8));
+	  
+	  ValueRed = EEPROM.read(MemRed);
+	  ValueGreen = EEPROM.read(MemGreen);
+      ValueBlue = EEPROM.read(MemBlue);
+	  
+	  analogWrite(PIN_RED, ValueRed);
+	  analogWrite(PIN_GREEN, ValueGreen);
+	  analogWrite(PIN_BLUE, ValueBlue);
+	  
+	}
 
   lcd.init();
   lcd.begin(20, 4);
@@ -352,140 +346,167 @@ void WebServer() {
             setDateDs1307(second, minute, hour, dayOfWeek, dayOfMonth, month, year);
           }
 
-
           if (readString.indexOf("?S1L") > 0) {
             digitalWrite(PIN_S1, HIGH);
-            EEPROM.write(MemSaida1, 1);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida1, 1);
+			}	
           }
           if (readString.indexOf("?S1D") > 0) {
             digitalWrite(PIN_S1, LOW);
-            EEPROM.write(MemSaida1, 0);
+            if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida1, 0);
+			}	
           }
 
-          if (readString.indexOf("?S2L") > 0) {
+		  if (readString.indexOf("?S2L") > 0) {
             digitalWrite(PIN_S2, HIGH);
-            EEPROM.write(MemSaida2, 1);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida2, 2);
+			}	
           }
           if (readString.indexOf("?S2D") > 0) {
             digitalWrite(PIN_S2, LOW);
-            EEPROM.write(MemSaida2, 0);
+            if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida2, 0);
+			}	
           }
-
-          if (readString.indexOf("?S3L") > 0) {
+		  if (readString.indexOf("?S3L") > 0) {
             digitalWrite(PIN_S3, HIGH);
-            EEPROM.write(MemSaida3, 1);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida3, 3);
+			}	
           }
           if (readString.indexOf("?S3D") > 0) {
             digitalWrite(PIN_S3, LOW);
-            EEPROM.write(MemSaida3, 0);
+            if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida3, 0);
+			}	
           }
-
-          if (readString.indexOf("?S4L") > 0) {
+		  if (readString.indexOf("?S4L") > 0) {
             digitalWrite(PIN_S4, HIGH);
-            EEPROM.write(MemSaida4, 1);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida4, 4);
+			}	
           }
           if (readString.indexOf("?S4D") > 0) {
             digitalWrite(PIN_S4, LOW);
-            EEPROM.write(MemSaida4, 0);
+            if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida4, 0);
+			}	
           }
-          
-          if (readString.indexOf("?S5L") > 0) {
+		  if (readString.indexOf("?S5L") > 0) {
             digitalWrite(PIN_S5, HIGH);
-            EEPROM.write(MemSaida5, 1);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida5, 5);
+			}	
           }
           if (readString.indexOf("?S5D") > 0) {
             digitalWrite(PIN_S5, LOW);
-            EEPROM.write(MemSaida5, 0);
+            if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida5, 0);
+			}	
           }
-          
-          
-          if (readString.indexOf("?S6L") > 0) {
+		  if (readString.indexOf("?S6L") > 0) {
             digitalWrite(PIN_S6, HIGH);
-            EEPROM.write(MemSaida6, 1);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida6, 6);
+			}	
           }
           if (readString.indexOf("?S6D") > 0) {
             digitalWrite(PIN_S6, LOW);
-            EEPROM.write(MemSaida6, 0);
+            if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida6, 0);
+			}	
           }
-          
-          
-          if (readString.indexOf("?S7L") > 0) {
+		  if (readString.indexOf("?S7L") > 0) {
             digitalWrite(PIN_S7, HIGH);
-            EEPROM.write(MemSaida7, 1);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida7, 7);
+			}	
           }
           if (readString.indexOf("?S7D") > 0) {
             digitalWrite(PIN_S7, LOW);
-            EEPROM.write(MemSaida7, 0);
+            if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida7, 0);
+			}	
           }
-          
-          
-          if (readString.indexOf("?S8L") > 0) {
+		  if (readString.indexOf("?S8L") > 0) {
             digitalWrite(PIN_S8, HIGH);
-            EEPROM.write(MemSaida8, 1);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida8, 8);
+			}	
           }
           if (readString.indexOf("?S8D") > 0) {
             digitalWrite(PIN_S8, LOW);
-            EEPROM.write(MemSaida8, 0);
+            if(EEPROMComandos)
+			{
+				EEPROM.write(MemSaida8, 0);
+			}	
           }
+          
 
           if (readString.indexOf("?RED") > 0) {
             ValueRed = 255;
             ValueGreen = 0;
             ValueBlue = 0;
-            //if (ValueSaveAuto == 0)
-           // {
-              analogWrite(PIN_RED, ValueRed);
-              analogWrite(PIN_GREEN, ValueGreen);
-              analogWrite(PIN_BLUE, ValueBlue);
-           // }
-            EEPROM.write(MemRed, ValueRed);
-            EEPROM.write(MemGreen, ValueGreen);
-            EEPROM.write(MemBlue, ValueBlue);
+              if(EEPROMComandos)
+			{
+				EEPROM.write(MemRed, ValueRed);
+				EEPROM.write(MemGreen, ValueGreen);
+				EEPROM.write(MemBlue, ValueBlue);
+			}
           }
 
           if (readString.indexOf("?GRE") > 0) {
             ValueRed = 0;
             ValueGreen = 255;
             ValueBlue = 0;
-         //   if (ValueSaveAuto == 0)
-           // {
-              analogWrite(PIN_RED, ValueRed);
-              analogWrite(PIN_GREEN, ValueGreen);
-              analogWrite(PIN_BLUE, ValueBlue);
-          //  }
-            EEPROM.write(MemRed, ValueRed);
-            EEPROM.write(MemGreen, ValueGreen);
-            EEPROM.write(MemBlue, ValueBlue);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemRed, ValueRed);
+				EEPROM.write(MemGreen, ValueGreen);
+				EEPROM.write(MemBlue, ValueBlue);
+			}
           }
 
           if (readString.indexOf("?BLU") > 0) {
             ValueRed = 0;
             ValueGreen = 0;
             ValueBlue = 255;
-        //    if (ValueSaveAuto == 0)
-       //     {
-              analogWrite(PIN_RED, ValueRed);
-              analogWrite(PIN_GREEN, ValueGreen);
-              analogWrite(PIN_BLUE, ValueBlue);
-        //    }
-            EEPROM.write(MemRed, ValueRed);
-            EEPROM.write(MemGreen, ValueGreen);
-            EEPROM.write(MemBlue, ValueBlue);
+			if(EEPROMComandos)
+			{			
+				EEPROM.write(MemRed, ValueRed);
+				EEPROM.write(MemGreen, ValueGreen);
+				EEPROM.write(MemBlue, ValueBlue);
+			}	
           }
 
           if (readString.indexOf("?WHI") > 0) {
             ValueRed = 255;
             ValueGreen = 255;
             ValueBlue = 255;
-           // if (ValueSaveAuto == 0)
-        //    {
-              analogWrite(PIN_RED, ValueRed);
-              analogWrite(PIN_GREEN, ValueGreen);
-              analogWrite(PIN_BLUE, ValueBlue);
-        //    }
-            EEPROM.write(MemRed, ValueRed);
-            EEPROM.write(MemGreen, ValueGreen);
-            EEPROM.write(MemBlue, ValueBlue);
+            if(EEPROMComandos)
+			{
+				EEPROM.write(MemRed, ValueRed);
+				EEPROM.write(MemGreen, ValueGreen);
+				EEPROM.write(MemBlue, ValueBlue);
+			}	
           }
 
           if (readString.indexOf("?RGBOFF") > 0) {
@@ -495,9 +516,12 @@ void WebServer() {
             analogWrite(PIN_RED, ValueRed);
             analogWrite(PIN_GREEN, ValueGreen);
             analogWrite(PIN_BLUE, ValueBlue);
-            EEPROM.write(MemRed, ValueRed);
-            EEPROM.write(MemGreen, ValueGreen);
-            EEPROM.write(MemBlue, ValueBlue);
+			if(EEPROMComandos)
+			{
+				EEPROM.write(MemRed, ValueRed);
+				EEPROM.write(MemGreen, ValueGreen);
+				EEPROM.write(MemBlue, ValueBlue);
+			}	
           }
 
           if (readString.indexOf("?AgeS1HrI") > 0) {
@@ -621,9 +645,9 @@ void SendResponse(EthernetClient client) {
   ValueSaveSaida7 = digitalRead(PIN_S7);  
   ValueSaveSaida8 = digitalRead(PIN_S8);    
 
- // ValueRed = analogRead(PIN_RED);
-//  ValueGreen = analogRead(PIN_GREEN);
- // ValueBlue = analogRead(PIN_BLUE);  
+  ValueRed = analogRead(PIN_RED);
+  ValueGreen = analogRead(PIN_GREEN);
+  ValueBlue = analogRead(PIN_BLUE);  
   
   client.println(F("HTTP/1.1 200 OK")); //send new page
   client.println(F("Content-Type: application/json"));
@@ -738,95 +762,79 @@ void ModoAuto() {
     if (ValueSaida1HrI <= hour && ValueSaida1HrF >= hour)
     {
       digitalWrite(PIN_S1, HIGH);
-      EEPROM.write(MemSaida1, 1);
     }
     else
     {
       digitalWrite(PIN_S1, LOW);
-      EEPROM.write(MemSaida1, 0);
     }
 
     //Saida 2
     if (ValueSaida2HrI <= hour && ValueSaida2HrF >= hour)
     {
       digitalWrite(PIN_S2, HIGH);
-      EEPROM.write(MemSaida2, 1);
     }
     else
     {
       digitalWrite(PIN_S2, LOW);
-      EEPROM.write(MemSaida2, 0);
     }
 
     //Saida 3
     if (ValueSaida3HrI <= hour && ValueSaida3HrF >= hour)
     {
       digitalWrite(PIN_S3, HIGH);
-      EEPROM.write(MemSaida3, 1);
     }
     else
     {
       digitalWrite(PIN_S3, LOW);
-      EEPROM.write(MemSaida3, 0);
     }
 
     //Saida 4
     if (ValueSaida4HrI <= hour && ValueSaida4HrF >= hour)
     {
       digitalWrite(PIN_S4, HIGH);
-      EEPROM.write(MemSaida4, 1);
     }
     else
     {
       digitalWrite(PIN_S4, LOW);
-      EEPROM.write(MemSaida4, 0);
     }
  //Saida 5
     if (ValueSaida5HrI <= hour && ValueSaida5HrF >= hour)
     {
       digitalWrite(PIN_S5, HIGH);
-      EEPROM.write(MemSaida5, 1);
     }
     else
     {
       digitalWrite(PIN_S5, LOW);
-      EEPROM.write(MemSaida5, 0);
     }
 	
  //Saida 6
     if (ValueSaida6HrI <= hour && ValueSaida6HrF >= hour)
     {
       digitalWrite(PIN_S6, HIGH);
-      EEPROM.write(MemSaida6, 1);
     }
     else
     {
       digitalWrite(PIN_S6, LOW);
-      EEPROM.write(MemSaida6, 0);
     }
 
  //Saida 7
     if (ValueSaida7HrI <= hour && ValueSaida7HrF >= hour)
     {
       digitalWrite(PIN_S7, HIGH);
-      EEPROM.write(MemSaida7, 1);
     }
     else
     {
       digitalWrite(PIN_S7, LOW);
-      EEPROM.write(MemSaida7, 0);
     }
 
  //Saida 8
     if (ValueSaida8HrI <= hour && ValueSaida8HrF >= hour)
     {
       digitalWrite(PIN_S8, HIGH);
-      EEPROM.write(MemSaida8, 1);
     }
     else
     {
       digitalWrite(PIN_S8, LOW);
-      EEPROM.write(MemSaida8, 0);
     }	
         
     //RGB
