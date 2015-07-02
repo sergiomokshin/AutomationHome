@@ -515,11 +515,11 @@ void disparacomando()
     String Dia = Data.substring(0, Data.indexOf("/"));
     String temp = Data.substring(Data.indexOf("/"));
     String Mes = temp.substring(1, 3);
-    String Ano = temp.substring(temp.lastIndexOf("/") + 3); //YY
+    String Ano = temp.substring(temp.lastIndexOf("/") + 1); //YY
 
-    //Serial.println(Dia);
-    //Serial.println(Mes);
-    //Serial.println(Ano);
+    Serial.println(Dia);
+    Serial.println(Mes);
+    Serial.println(Ano);
 
     String Hora = Horario.substring(0, Horario.indexOf(":"));
     String temp2 = Horario.substring(Horario.indexOf(":"));
@@ -887,6 +887,7 @@ void setDateDs1307(byte second,        // 0-59
   Wire.write(decToBcd(year));
   Wire.endTransmission();
 }
+
 
 
 

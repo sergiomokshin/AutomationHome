@@ -72,8 +72,7 @@ public class DefineHoraData extends Activity implements OnClickListener {
                 sharedPreferences = getSharedPreferences("APP_PREFS", 0);
                 editor = sharedPreferences.edit();
 				
-				Data = mDay + "/" + mMonth + "/" + mYear;
-				Hora = mHour + ":" + mMinute;								
+
 				
 
 				//http://stackoverflow.com/questions/17416595/date-validation-in-android
@@ -90,6 +89,9 @@ public class DefineHoraData extends Activity implements OnClickListener {
 					Toast.makeText(getApplicationContext(), "Selecione a hora!", Toast.LENGTH_SHORT).show();
 					return;				
 				}
+
+                Data = txtDate.getText().toString();
+                Hora = txtTime.getText().toString();
 
                 editor.putString("Data", Data);
                 editor.putString("Hora", Hora);
@@ -187,7 +189,7 @@ public class DefineHoraData extends Activity implements OnClickListener {
                                               int monthOfYear, int dayOfMonth) {
                             // Display Selected date in textbox
                             txtDate.setText(dayOfMonth + "/"
-                                    + (monthOfYear + 1) + "/" + year);
+                                    + (monthOfYear + 1) + "/" + (year-2000));
 
                         }
                     }, mYear, mMonth, mDay);

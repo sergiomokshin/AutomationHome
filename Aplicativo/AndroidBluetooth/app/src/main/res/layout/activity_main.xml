@@ -49,7 +49,7 @@
                 android:layout_toRightOf="@+id/imgS1"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Saída 1" />
             <TextView
                 android:id="@+id/txtS1H"
@@ -77,7 +77,7 @@
                 android:layout_toRightOf="@+id/imgS2"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Saída 2" />
             <TextView
                 android:id="@+id/txtS2H"
@@ -105,7 +105,7 @@
                 android:layout_toRightOf="@+id/imgS3"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Saída 3" />
             <TextView
                 android:id="@+id/txtS3H"
@@ -133,13 +133,13 @@
                 android:layout_toRightOf="@+id/imgS4"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Saída 4" />
             <TextView
                 android:id="@+id/txtS4H"
                 android:textColor="#FFFFFF"
-                android:layout_width="225px"
-                android:layout_height="112px"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 android:layout_alignBottom="@+id/imgS4"
                 android:layout_alignLeft="@+id/txtS4"
                 android:text="" />
@@ -161,7 +161,7 @@
                 android:layout_toRightOf="@+id/imgS5"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Saída 5" />
             <TextView
                 android:id="@+id/txtS5H"
@@ -189,7 +189,7 @@
                 android:layout_toRightOf="@+id/imgS6"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Saída 6" />
             <TextView
                 android:id="@+id/txtS6H"
@@ -217,7 +217,7 @@
                 android:layout_toRightOf="@+id/imgS7"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Saída 7" />
             <TextView
                 android:id="@+id/txtS7H"
@@ -245,7 +245,7 @@
                 android:layout_toRightOf="@+id/imgS8"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Saída 8" />
             <TextView
                 android:id="@+id/txtS8H"
@@ -268,7 +268,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:text="Iluminacao" />
             <SeekBar
                 android:layout_width="match_parent"
