@@ -2,47 +2,31 @@
 Sergio Mokshin
 Automação Live - Abril/2015
 
-init()                              Init the LCD and library functions, Clears the display, turns off the cursors
-commandWrite(command)      Write a command not supported yet in the library to the display
-position(Row, Column)      Move the cursor to position valid range is Row[0-3], Column[0,19]
-print(char)                        Send the single character char to the display at the cursor position.
-println(string)                  Send the String to the display at the cursor position.
-clear()                        Clear the display and place the cursor at 0,0
-home()                        Home the cursor to 0,0 but do not clear the display
-on()                              Turn the LCD display on
-off()                              Turn the LCD display off
-cursor_on()                  Turn the blinking line cursor on
-cursor_off()                  Turn the blinking line cursor off
-blink_on()                        Turn the blinking block cursor on
-blink_off()                        Turn the blinking block cursor on
-left()                              Move the cursor to the left
-right()                        Move the cursor to the right
-keypad()                        Read a value from the keypad. Returns 0 if no key press is in the buffer
-
   VCC 3V
   GND  GND
   TX  RX
   RX  TX
   Protocolo
-  |D21|
-  |D20|
+  Exemplos protocolo
+  
+  |D21|  Liga Saida 1 
+  |D20|  Desliga Saida 1
+  |A64| Potencia nível 4 pino PIN_GREEN 
 
-  |A64|
-
-  |HI100|  Horario Inicio 1 00
-  |HFI100| Horario Fim 1 22
+  |H1I03|  Horario Inicio 1 03
+  |H1F22|  Horario Fim 1 	22
 
 
   |M1| Modo Agendado
-
   |M0| Modo Manual
+  
+  
+  |Ty12/06/2015yz22:35z|    Horario
 
-  Versão 1.1 -> Incluido persitencia de comandos na EEPROM e WACHTDOG
 
-  */
+*/
 
 
-#include <EEPROM.h>
 #include <SPI.h>
 #include <Ethernet.h>
 #include <EEPROM.h>
@@ -130,20 +114,23 @@ int ValueSaida8HrI = 0; //Conteudo da memoria inicio horario Saida 8
 int ValueSaida8HrF = 0; //Conteudo da memoria fim horario Saida 8
 int ValueRGBHrI = 0; //Conteudo de memoria inicio horario RGB
 int ValueRGBHrF = 0; //Conteudo de memoria fim horario RGB
-int ValueRGBType = 0; //Conteudo de memoria com cor RGB para agendamento
 int ValueSaveRed = 0; //Conteudo de memoria  Red
 int ValueSaveGreen = 0; //Conteudo de memoria  Green
 int ValueSaveBlue = 0; //Conteudo de memoria  Blue
 
 int inicioucomando;
 String comando = "";
+boolean EEPROMComandos = false;
 
 byte second, minute, hour, dayOfWeek, dayOfMonth, month, year;
 
 
 void setup()
 {
-
+  //Manter em EPPROM acionamentos manuais do usuário  		
+  //EEPROMComandos = true;
+  EEPROMComandos = false;
+  
   Wire.begin();
   int countLcd = 0;
 
@@ -181,44 +168,40 @@ void setup()
   ValueSaida8HrF = EEPROM.read(MemSaida8HrF);
   ValueRGBHrI = EEPROM.read(MemRGBHrI);
   ValueRGBHrF = EEPROM.read(MemRGBHrF);
-  ValueRGBType = EEPROM.read(MemRGBType);
-  ValueSaveRed = EEPROM.read(MemRed);
-  ValueSaveGreen = EEPROM.read(MemGreen);
-  ValueSaveBlue = EEPROM.read(MemBlue);
+  
+  if(EEPROMComandos)
+  {
+	  //Inicializando placa com valores armazenados na FLASH Memory
+	  ValueSaveSaida1 = EEPROM.read(MemSaida1);
+	  ValueSaveSaida2 = EEPROM.read(MemSaida2);
+	  ValueSaveSaida3 = EEPROM.read(MemSaida3);
+	  ValueSaveSaida4 = EEPROM.read(MemSaida4);
+	  ValueSaveSaida5 = EEPROM.read(MemSaida5);
+	  ValueSaveSaida6 = EEPROM.read(MemSaida6);
+	  ValueSaveSaida7 = EEPROM.read(MemSaida7);
+	  ValueSaveSaida8 = EEPROM.read(MemSaida8);
+	  ValueSaveRed = EEPROM.read(MemRed);
+	  ValueSaveGreen = EEPROM.read(MemGreen);
+      ValueSaveBlue = EEPROM.read(MemBlue);
 
-
-  //Inicializando placa com valores armazenados na FLASH Memory
-  ValueSaveSaida1 = EEPROM.read(MemSaida1);
-  ValueSaveSaida2 = EEPROM.read(MemSaida2);
-  ValueSaveSaida3 = EEPROM.read(MemSaida3);
-  ValueSaveSaida4 = EEPROM.read(MemSaida4);
-  ValueSaveSaida5 = EEPROM.read(MemSaida5);
-  ValueSaveSaida6 = EEPROM.read(MemSaida6);
-  ValueSaveSaida7 = EEPROM.read(MemSaida7);
-  ValueSaveSaida8 = EEPROM.read(MemSaida8);
-
-  digitalWrite(PIN_S1, ValueSaveSaida1);
-  digitalWrite(PIN_S2, ValueSaveSaida2);
-  digitalWrite(PIN_S3, ValueSaveSaida3);
-  digitalWrite(PIN_S4, ValueSaveSaida4);
-  digitalWrite(PIN_S5, ValueSaveSaida5);
-  digitalWrite(PIN_S6, ValueSaveSaida6);
-  digitalWrite(PIN_S7, ValueSaveSaida7);
-  digitalWrite(PIN_S8, ValueSaveSaida8);
-
-
-  analogWrite(PIN_RED, ValueSaveRed);
-  analogWrite(PIN_GREEN, ValueSaveGreen);
-  analogWrite(PIN_BLUE, ValueSaveBlue);
-
+	  digitalWrite(PIN_S1, ValueSaveSaida1);
+	  digitalWrite(PIN_S2, ValueSaveSaida2);
+	  digitalWrite(PIN_S3, ValueSaveSaida3);
+	  digitalWrite(PIN_S4, ValueSaveSaida4);
+	  digitalWrite(PIN_S5, ValueSaveSaida5);
+	  digitalWrite(PIN_S6, ValueSaveSaida6);
+	  digitalWrite(PIN_S7, ValueSaveSaida7);
+	  digitalWrite(PIN_S8, ValueSaveSaida8);
+	  
+	  analogWrite(PIN_RED, ValueSaveRed);
+	  analogWrite(PIN_GREEN, ValueSaveGreen);
+	  analogWrite(PIN_BLUE, ValueSaveBlue);
+  }
 
   lcd.init();
   lcd.begin(16, 2);
   lcd.clear();
 
-  // Change these values to what you want to set your clock to.
-  // You probably only want to set your clock once and then remove
-  // the setDateDs1307 call.
   second = 00;
   minute = 00;
   hour = 20;
@@ -228,9 +211,8 @@ void setup()
   year = 15;
 
   //DEBUG
-  //Comentar novamente apos ajuste da data
+  //Comentar novamente apos ajuste manual da data
   //setDateDs1307(second, minute, hour, dayOfWeek, dayOfMonth, month, year);
-
 
 }
 
@@ -273,7 +255,6 @@ void disparacomando()
 {
 
   Serial.println(comando);
-
   //Envio de comando para acionamento de saídas de relés
   if (comando[0] == 'D')
   {
@@ -282,52 +263,76 @@ void disparacomando()
 
     if (port == 1)
     {
-      ValueSaveSaida1 = value;
-      EEPROM.write(MemSaida1, ValueSaveSaida1);
-      digitalWrite(PIN_S1, ValueSaveSaida1);
+      ValueSaveSaida1 = value;      
+      digitalWrite(PIN_S1, ValueSaveSaida1);	  
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemSaida1, ValueSaveSaida1);
+	  }
     }
     else if (port == 2)
     {
-      ValueSaveSaida2 = value;
-      EEPROM.write(MemSaida2, ValueSaveSaida2);
+      ValueSaveSaida2 = value;      
       digitalWrite(PIN_S2, ValueSaveSaida2);
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemSaida2, ValueSaveSaida2);
+	  }
     }
-    else if (port == 3)
+	else if (port == 3)
     {
-      ValueSaveSaida3 = value;
-      EEPROM.write(MemSaida3, ValueSaveSaida3);
+      ValueSaveSaida3 = value;      
       digitalWrite(PIN_S3, ValueSaveSaida3);
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemSaida3, ValueSaveSaida3);
+	  }
     }
-    else if (port == 4)
+	else if (port == 4)
     {
-      ValueSaveSaida4 = value;
-      EEPROM.write(MemSaida4, ValueSaveSaida4);
+      ValueSaveSaida4 = value;      
       digitalWrite(PIN_S4, ValueSaveSaida4);
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemSaida4, ValueSaveSaida4);
+	  }
     }
-    else if (port == 5)
+	else if (port == 5)
     {
-      ValueSaveSaida5 = value;
-      EEPROM.write(MemSaida5, ValueSaveSaida5);
+      ValueSaveSaida5 = value;      
       digitalWrite(PIN_S5, ValueSaveSaida5);
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemSaida5, ValueSaveSaida5);
+	  }
     }
-    else if (port == 6)
+	else if (port == 6)
     {
-      ValueSaveSaida6 = value;
-      EEPROM.write(MemSaida6, ValueSaveSaida6);
+      ValueSaveSaida6 = value;      
       digitalWrite(PIN_S6, ValueSaveSaida6);
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemSaida6, ValueSaveSaida6);
+	  }
     }
-    else if (port == 7)
+	else if (port == 7)
     {
-      ValueSaveSaida7 = value;
-      EEPROM.write(MemSaida7, ValueSaveSaida7);
+      ValueSaveSaida7 = value;      
       digitalWrite(PIN_S7, ValueSaveSaida7);
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemSaida7, ValueSaveSaida7);
+	  }
     }
-    else if (port == 8)
+	else if (port == 8)
     {
-      ValueSaveSaida8 = value;
-      EEPROM.write(MemSaida8, ValueSaveSaida8);
+      ValueSaveSaida8 = value;      
       digitalWrite(PIN_S8, ValueSaveSaida8);
-    }
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemSaida8, ValueSaveSaida8);
+	  }
+    }    	
   }
   //Envio de comando para acionamento de saídas de potencia
   else if (comando[0] == 'A')
@@ -338,21 +343,30 @@ void disparacomando()
 
     if ( port == 6 )
     {
-      ValueSaveRed = value;
-      EEPROM.write(MemRed, ValueSaveRed);
+      ValueSaveRed = value;      
       analogWrite(port, value);
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemRed, ValueSaveRed);
+	  }
     }
     else if ( port == 5 )
     {
-      ValueSaveGreen = value;
-      EEPROM.write(MemGreen, ValueSaveGreen);
+      ValueSaveGreen = value;      
       analogWrite(port, value);
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemGreen, ValueSaveGreen);
+	  }
     }
     else if ( port == 3 )
     {
-      ValueSaveBlue = value;
-      EEPROM.write(MemBlue, ValueSaveBlue);
+      ValueSaveBlue = value;      
       analogWrite(port, value);
+	  if(EEPROMComandos)
+	  {
+		EEPROM.write(MemBlue, ValueSaveBlue);
+	  }
     }
   }
   //Envio de comando para agendamento de saídas
@@ -624,13 +638,11 @@ void ModoAuto() {
     if (ValueSaida1HrI <= hour && ValueSaida1HrF >= hour)
     {
       ValueSaveSaida1 = HIGH;
-      EEPROM.write(MemSaida1, HIGH);
       digitalWrite(PIN_S1, HIGH);
     }
     else
     {
       ValueSaveSaida1 = LOW;
-      EEPROM.write(MemSaida1, LOW);
       digitalWrite(PIN_S1, LOW);
     }
 
@@ -638,13 +650,11 @@ void ModoAuto() {
     if (ValueSaida2HrI <= hour && ValueSaida2HrF >= hour)
     {
       ValueSaveSaida2 = HIGH;
-      EEPROM.write(MemSaida2, HIGH);
       digitalWrite(PIN_S2, HIGH);
     }
     else
     {
       ValueSaveSaida2 = LOW;
-      EEPROM.write(MemSaida2, LOW);
       digitalWrite(PIN_S2, LOW);
     }
 
@@ -652,13 +662,11 @@ void ModoAuto() {
     if (ValueSaida3HrI <= hour && ValueSaida3HrF >= hour)
     {
       ValueSaveSaida3 = HIGH;
-      EEPROM.write(MemSaida3, HIGH);
       digitalWrite(PIN_S3, HIGH);
     }
     else
     {
       ValueSaveSaida3 = LOW;
-      EEPROM.write(MemSaida3, LOW);
       digitalWrite(PIN_S3, LOW);
     }
 
@@ -666,13 +674,11 @@ void ModoAuto() {
     if (ValueSaida4HrI <= hour && ValueSaida4HrF >= hour)
     {
       ValueSaveSaida4 = HIGH;
-      EEPROM.write(MemSaida4, HIGH);
       digitalWrite(PIN_S4, HIGH);
     }
     else
     {
       ValueSaveSaida4 = LOW;
-      EEPROM.write(MemSaida4, LOW);
       digitalWrite(PIN_S4, LOW);
     }
 
@@ -680,13 +686,11 @@ void ModoAuto() {
     if (ValueSaida5HrI <= hour && ValueSaida5HrF >= hour)
     {
       ValueSaveSaida5 = HIGH;
-      EEPROM.write(MemSaida5, HIGH);
       digitalWrite(PIN_S5, HIGH);
     }
     else
     {
       ValueSaveSaida5 = LOW;
-      EEPROM.write(MemSaida5, LOW);
       digitalWrite(PIN_S5, LOW);
     }
 
@@ -694,13 +698,11 @@ void ModoAuto() {
     if (ValueSaida6HrI <= hour && ValueSaida6HrF >= hour)
     {
       ValueSaveSaida6 = HIGH;
-      EEPROM.write(MemSaida6, HIGH);
       digitalWrite(PIN_S6, HIGH);
     }
     else
     {
       ValueSaveSaida6 = LOW;
-      EEPROM.write(MemSaida6, LOW);
       digitalWrite(PIN_S6, LOW);
     }
 
@@ -708,13 +710,11 @@ void ModoAuto() {
     if (ValueSaida7HrI <= hour && ValueSaida7HrF >= hour)
     {
       ValueSaveSaida7 = HIGH;
-      EEPROM.write(MemSaida7, HIGH);
       digitalWrite(PIN_S7, HIGH);
     }
     else
     {
       ValueSaveSaida7 = LOW;
-      EEPROM.write(MemSaida7, LOW);
       digitalWrite(PIN_S7, LOW);
     }
 
@@ -722,13 +722,11 @@ void ModoAuto() {
     if (ValueSaida8HrI <= hour && ValueSaida8HrF >= hour)
     {
       ValueSaveSaida8 = HIGH;
-      EEPROM.write(MemSaida8, HIGH);
       digitalWrite(PIN_S8, HIGH);
     }
     else
     {
       ValueSaveSaida8 = LOW;
-      EEPROM.write(MemSaida8, LOW);
       digitalWrite(PIN_S8, LOW);
     }
 
@@ -887,7 +885,6 @@ void setDateDs1307(byte second,        // 0-59
   Wire.write(decToBcd(year));
   Wire.endTransmission();
 }
-
 
 
 
