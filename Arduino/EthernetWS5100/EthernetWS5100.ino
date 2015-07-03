@@ -120,6 +120,9 @@ DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
 
+
+  //An EEPROM write takes 3.3 ms to complete. The EEPROM memory has a specified life of 100,000 write/erase cycles, so you may need to be careful about how often you write to it.
+  //https://www.arduino.cc/en/Reference/EEPROMWrite
   //Manter em EPPROM acionamentos manuais do usuário  		
   //EEPROMComandos = true;
   EEPROMComandos = false;

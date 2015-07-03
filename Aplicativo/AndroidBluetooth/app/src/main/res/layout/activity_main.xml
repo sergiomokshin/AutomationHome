@@ -38,9 +38,11 @@
             android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/imgS1"
-                android:layout_width="225px"
-                android:layout_height="112px"
-                android:src="@drawable/on" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/on"
+                android:background="#FF333333"
+                />
             <TextView
                 android:id="@+id/txtS1"
                 android:textColor="#FFFFFF"
@@ -58,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_alignBottom="@+id/imgS1"
                 android:layout_alignLeft="@+id/txtS1"
-                android:text="" />
+                android:text="23453452345243" />
         </RelativeLayout>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -66,8 +68,9 @@
             android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/imgS2"
-                android:layout_width="225px"
-                android:layout_height="112px"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#FF333333"
                 android:src="@drawable/on" />
             <TextView
                 android:id="@+id/txtS2"
@@ -94,8 +97,9 @@
             android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/imgS3"
-                android:layout_width="225px"
-                android:layout_height="112px"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#FF333333"
                 android:src="@drawable/on" />
             <TextView
                 android:id="@+id/txtS3"
@@ -122,8 +126,9 @@
             android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/imgS4"
-                android:layout_width="225px"
-                android:layout_height="112px"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#FF333333"
                 android:src="@drawable/on" />
             <TextView
                 android:id="@+id/txtS4"
@@ -150,8 +155,9 @@
             android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/imgS5"
-                android:layout_width="225px"
-                android:layout_height="112px"
+                android:layout_width="wrap_content"
+                android:background="#FF333333"
+                android:layout_height="match_parent"
                 android:src="@drawable/on" />
             <TextView
                 android:id="@+id/txtS5"
@@ -178,8 +184,9 @@
             android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/imgS6"
-                android:layout_width="225px"
-                android:layout_height="112px"
+                android:layout_width="wrap_content"
+                android:background="#FF333333"
+                android:layout_height="match_parent"
                 android:src="@drawable/on" />
             <TextView
                 android:id="@+id/txtS6"
@@ -206,8 +213,9 @@
             android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/imgS7"
-                android:layout_width="225px"
-                android:layout_height="112px"
+                android:layout_width="wrap_content"
+                android:background="#FF333333"
+                android:layout_height="match_parent"
                 android:src="@drawable/on" />
             <TextView
                 android:id="@+id/txtS7"
@@ -234,8 +242,9 @@
             android:layout_height="wrap_content">
             <ImageButton
                 android:id="@+id/imgS8"
-                android:layout_width="225px"
-                android:layout_height="112px"
+                android:background="#FF333333"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:src="@drawable/on" />
             <TextView
                 android:id="@+id/txtS8"
@@ -259,6 +268,7 @@
 
         <LinearLayout
             android:orientation="vertical"
+            android:background="#FF333333"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
