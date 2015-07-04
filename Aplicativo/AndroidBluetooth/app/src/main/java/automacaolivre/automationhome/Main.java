@@ -604,12 +604,10 @@ public class Main extends Activity {
 
     private void Connect(Boolean forceConect) {
 
-        //if(!alterouDispositivo && mmSocket != null && mmSocket.isConnected())
         if(!forceConect && mmSocket != null && mmSocket.isConnected())
         {
             return;
         }
-
 
         meuAdaptadorBluetooth.cancelDiscovery();
         mmDevice = meuAdaptadorBluetooth.getRemoteDevice(address);
