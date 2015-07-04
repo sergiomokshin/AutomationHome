@@ -483,7 +483,7 @@ public class Main extends Activity {
 
                     Boolean alterouDispositivo = (addressAtual.toString() != address.toString());
 
-                    Connect(false);
+                    Connect(alterouDispositivo);
                 break;
             case REQUEST_SETUP_DEVICE:
                 try {
