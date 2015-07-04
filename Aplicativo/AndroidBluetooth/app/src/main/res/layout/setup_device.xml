@@ -461,46 +461,48 @@
             android:layout_width="140dp"
             android:textColor="#FFFFFF">
         </EditText>
-        <EditText
-            android:id="@+id/edtSRGBHI"
-            android:layout_height="wrap_content"
-            android:layout_width="40dp"
-            android:textColor="#FFFFFF"
-            android:inputType="number">
-        </EditText>
-        <TextView
-            android:id="@+id/txtSRGBHIMin"
-            android:layout_height="wrap_content"
-            android:layout_width="22dp"
-            android:textColor="#FFFFFF"
-            android:text=":00" />
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="20dp"
-            android:textColor="#FFFFFF"
-            android:text="até" />
-        <EditText
-            android:id="@+id/edtSRGBHF"
-            android:layout_height="wrap_content"
-            android:layout_width="40dp"
-            android:textColor="#FFFFFF"
-            android:ems="10"
-            android:inputType="number" />
-        <TextView
-            android:id="@+id/txtSRGBHFMin"
-            android:layout_height="wrap_content"
-            android:layout_width="20dp"
-            android:textColor="#FFFFFF"
-            android:text=":59" />
-    </LinearLayout>
+        <!--
+       <EditText
+           android:id="@+id/edtSRGBHI"
+           android:layout_height="wrap_content"
+           android:layout_width="40dp"
+           android:textColor="#FFFFFF"
+           android:inputType="number">
+       </EditText>
+       <TextView
+           android:id="@+id/txtSRGBHIMin"
+           android:layout_height="wrap_content"
+           android:layout_width="22dp"
+           android:textColor="#FFFFFF"
+           android:text=":00" />
+       <TextView
+           android:layout_height="wrap_content"
+           android:layout_width="20dp"
+           android:textColor="#FFFFFF"
+           android:text="até" />
+       <EditText
+           android:id="@+id/edtSRGBHF"
+           android:layout_height="wrap_content"
+           android:layout_width="40dp"
+           android:textColor="#FFFFFF"
+           android:ems="10"
+           android:inputType="number" />
+       <TextView
+           android:id="@+id/txtSRGBHFMin"
+           android:layout_height="wrap_content"
+           android:layout_width="20dp"
+           android:textColor="#FFFFFF"
+           android:text=":59" />
+           -->
+   </LinearLayout>
 
 
-    <Button
-        android:id="@+id/btAlterar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        android:text="Alterar" />
+   <Button
+       android:id="@+id/btAlterar"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:textColor="#FFFFFF"
+       android:text="Alterar" />
 
 
 </LinearLayout>

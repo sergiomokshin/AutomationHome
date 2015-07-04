@@ -73,8 +73,8 @@ public class SetupDevice extends Activity  {
     private String SRGBHrI = "";
     private String SRGBHrF = "";
     private EditText edtSRGB;
-    private EditText edtSRGBHI;
-    private EditText edtSRGBHF;
+   // private EditText edtSRGBHI;
+    //private EditText edtSRGBHF;
 
     private Button btAlterar;
 
@@ -175,14 +175,14 @@ public class SetupDevice extends Activity  {
 		
 		
 		edtSRGB = (EditText) findViewById(R.id.edtSRGB);
-        edtSRGBHI = (EditText) findViewById(R.id.edtSRGBHI);
-        edtSRGBHF = (EditText) findViewById(R.id.edtSRGBHF);
+       // edtSRGBHI = (EditText) findViewById(R.id.edtSRGBHI);
+       // edtSRGBHF = (EditText) findViewById(R.id.edtSRGBHF);
         NameSRGB = sharedPreferences.getString("SRGB", "SRGB");
         SRGBHrI = sharedPreferences.getString("SRGBHrI", "0");
         SRGBHrF = sharedPreferences.getString("SRGBHrF", "23");
         edtSRGB.setText(NameSRGB);
-        edtSRGBHI.setText(SRGBHrI, TextView.BufferType.EDITABLE);
-        edtSRGBHF.setText(SRGBHrF, TextView.BufferType.EDITABLE);
+        //edtSRGBHI.setText(SRGBHrI, TextView.BufferType.EDITABLE);
+       // edtSRGBHF.setText(SRGBHrF, TextView.BufferType.EDITABLE);
 		
 		
         btAlterar.setOnClickListener(new OnClickListener() {
@@ -225,8 +225,8 @@ public class SetupDevice extends Activity  {
                 editor.putString("S8HrF", edtS8HF.getText().toString());
 				
 				editor.putString("SRGB", edtSRGB.getText().toString());
-                editor.putString("SRGBHrI", edtSRGBHI.getText().toString());
-                editor.putString("SRGBHrF", edtSRGBHF.getText().toString());
+               // editor.putString("SRGBHrI", edtSRGBHI.getText().toString());
+               // editor.putString("SRGBHrF", edtSRGBHF.getText().toString());
 				
 											
                 editor.commit();

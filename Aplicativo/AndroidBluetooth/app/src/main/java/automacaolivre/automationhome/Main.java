@@ -111,7 +111,7 @@ public class Main extends Activity {
     private String SRGBHrF = "0";
     private String NameSRGB = "";	
     private TextView txtSRGB;
-    private TextView txtSRGBH;
+   // private TextView txtSRGBH;
 		
     private SeekBar seekBarR;
     private SeekBar seekBarG;
@@ -187,7 +187,7 @@ public class Main extends Activity {
         txtS8H = (TextView) findViewById(R.id.txtS8H);
 		
         txtSRGB = (TextView) findViewById(R.id.txtSRGB);
-        txtSRGBH = (TextView) findViewById(R.id.txtSRGBH);
+        //txtSRGBH = (TextView) findViewById(R.id.txtSRGBH);
 
         seekBarR = (SeekBar) findViewById(R.id.seekR);
         seekBarG = (SeekBar) findViewById(R.id.seekG);
@@ -573,20 +573,24 @@ public class Main extends Activity {
                 S8HrF = sharedPreferences.getString("S8HrF", "");
                 writeData("|H8I" + String.format("%02d", Integer.parseInt(S8HrI)) + "|");
                 Thread.sleep(100);
-                writeData("|H8F" + String.format("%02d", Integer.parseInt(S8HrF)) + "|");
-                Thread.sleep(100);
-
-                SRGBHrI = sharedPreferences.getString("SRGBHrI", "");
-                SRGBHrF = sharedPreferences.getString("SRGBHrF", "");
-                writeData("|H9I" + String.format("%02d", Integer.parseInt(SRGBHrI)) + "|");
-                Thread.sleep(100);
-
-                if(writeData("|H9F" + String.format("%02d", Integer.parseInt(SRGBHrF)) + "|")) {
+                if(writeData("|H8F" + String.format("%02d", Integer.parseInt(S8HrF)) + "|")) {
                     Toast.makeText(getApplicationContext(), "Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Erro durante a atualização dos parametros na placa, tente novamente!", Toast.LENGTH_SHORT).show();
                 }
+
+                //SRGBHrI = sharedPreferences.getString("SRGBHrI", "");
+                //SRGBHrF = sharedPreferences.getString("SRGBHrF", "");
+               // writeData("|H9I" + String.format("%02d", Integer.parseInt(SRGBHrI)) + "|");
+                //Thread.sleep(100);
+
+                //if(writeData("|H9F" + String.format("%02d", Integer.parseInt(SRGBHrF)) + "|")) {
+                //    Toast.makeText(getApplicationContext(), "Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();
+               // }
+               // else {
+                //    Toast.makeText(getApplicationContext(), "Erro durante a atualização dos parametros na placa, tente novamente!", Toast.LENGTH_SHORT).show();
+               // }
             }
 
 
@@ -801,8 +805,8 @@ public class Main extends Activity {
             S7HrF = DataCommand[26];
             S8HrI = DataCommand[27];
             S8HrF = DataCommand[28];
-            SRGBHrI = DataCommand[29];
-            SRGBHrF = DataCommand[30];
+           // SRGBHrI = DataCommand[29];
+           // SRGBHrF = DataCommand[30];
 
             Data = DataCommand[31];
             Hora = DataCommand[32];
@@ -879,7 +883,7 @@ public class Main extends Activity {
             txtS8H.setText(S8HrI + ":59 até " + S8HrF + ":59");
 
             txtSRGB.setText(NameSRGB);
-            txtSRGBH.setText(SRGBHrI + ":59 até " + SRGBHrF + ":59");
+           // txtSRGBH.setText(SRGBHrI + ":59 até " + SRGBHrF + ":59");
 
 
             if (FirstTime) {

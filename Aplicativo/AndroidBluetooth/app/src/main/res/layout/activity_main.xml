@@ -297,15 +297,6 @@
                 android:id="@+id/seekB" />
 
             <TextView
-                android:id="@+id/txtSRGBH"
-                android:textColor="#FFFFFF"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignBottom="@+id/imgS8"
-                android:layout_alignLeft="@+id/txtS8"
-                android:text="" />
-
-            <TextView
                 android:text="Mensagens"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
