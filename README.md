@@ -21,16 +21,16 @@ O Automation Shield é compatível com o Arduino Nano V3, permitindo o desenvolv
   
 ![Automation Shield](http://4.bp.blogspot.com/-bpQSxqHV7HQ/VZXDbfkLriI/AAAAAAAAI7o/HSLuzIuipSA/s1600/AutomationHomePCB.png)
 
- Pinos utilizados pelo Shield:
-D2, D4, D7, D9, A0, A1, A2 e A3: utilizados para saídas com relés S1, S2, S3, S4, S5, S6, S7, S8. 
-D3, D5 e D6: utilizados para saídas PWM de potência. 
-A4 e A5: utilizados para o RTC DS1307 
-*Os pinos acima são utilizados pelo shield e não estão disponíveis para outras conexões. 
+<br>Pinos utilizados pelo Shield:
+<br>D2, D4, D7, D9, A0, A1, A2 e A3: utilizados para saídas com relés S1, S2, S3, S4, S5, S6, S7, S8. 
+<br>D3, D5 e D6: utilizados para saídas PWM de potência. 
+<br>A4 e A5: utilizados para o RTC DS1307 
+<br>*Os pinos acima são utilizados pelo shield e não estão disponíveis para outras conexões. 
 
-Pinos disponíveis para uso com outros sensores ou shields:
-Analógicos: A6, A7, 
-Digitais: D13, D12, D11, D10, D8, 
-Comunicação serial: TX, RX, I2C para LCD ou outro dispositivo.
+<br>Pinos disponíveis para uso com outros sensores ou shields:
+<br>Analógicos: A6, A7, 
+<br>Digitais: D13, D12, D11, D10, D8, 
+<br>Comunicação serial: TX, RX, I2C para LCD ou outro dispositivo.
 
 
 
