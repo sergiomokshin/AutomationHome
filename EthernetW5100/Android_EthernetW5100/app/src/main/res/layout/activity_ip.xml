@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FF333333"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:textSize="20dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:text="IP"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:paddingTop="5dp"
+        android:paddingBottom="25dp"></TextView>
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+
+        <EditText
+            android:id="@+id/edtS1HI"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#FFFFFF"
+            android:inputType="number">
+        </EditText>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btAlterar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="Alterar" />
+</LinearLayout>
