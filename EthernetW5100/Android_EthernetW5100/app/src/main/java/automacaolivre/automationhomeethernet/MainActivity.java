@@ -3,9 +3,13 @@ package automacaolivre.automationhomeethernet;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,14 +23,21 @@ import android.widget.Toast;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URLDecoder;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -378,46 +389,82 @@ public class MainActivity extends ActionBarActivity {
         ip = sharedPreferences.getString("IP", "");
 
         if (ip == "") {
-            ip="192.166.1.200";
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DeviceListActivity");
-            startActivityForResult(intent, 90);
+
+            if(isConnected()) {
+                GET("http://192.168.0.202");
+            }
+
+            ip = "http://192.168.0.202";
+
+           // ip="192.166.0.202";
+           // Intent intent = new Intent(Intent.ACTION_VIEW);
+           // intent.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.IPActivity");
+           // startActivityForResult(intent, 90);
 
         } else {
-            GetData("htp:\\" + ip);
         }
 
 
     }
 
-    public void GetData(String url) {
-
-        String response = null;
+    public String GET(String url){
+        InputStream inputStream = null;
+        String result = "";
         try {
 
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(url);
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            response = EntityUtils.toString(httpEntity);
+            if (android.os.Build.VERSION.SDK_INT > 9) {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+            }
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+            inputStream = httpResponse.getEntity().getContent();
 
-            AtualizaDadosPlaca(response);
+            if(inputStream != null) {
+                result = convertInputStreamToString(inputStream);
+                AtualizaDadosPlaca(result);
+            }
+            else {
+                //Message
+            }
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+
         }
 
+
+
+        return result;
+    }
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null)
+            result += line;
+
+        inputStream.close();
+        return result;
+
+    }
+
+    public boolean isConnected(){
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected())
+            return true;
+        else
+            return false;
     }
 
     private void AtualizaDadosPlaca(String data) {
 
         try {
 
-            JSONObject jsonObj = new JSONObject(data);
+            data = data.replace("dataCB(", "");
+            data = data.replace(")", "");
+
+            JSONObject jsonObj = new JSONObject( URLDecoder.decode(data, "UTF-8") );
 
 
             //JSONArray arrayDados = null;
@@ -438,6 +485,51 @@ public class MainActivity extends ActionBarActivity {
             S8 = Integer.parseInt(jsonObj.getString("S8"));
 
             /*
+
+            dataCB({
+"Auto":"0"
+,"Day":5
+,"Mounth":7
+,"Year":15
+,"Hour":21
+,"Minute":44
+,"Second":40
+,"temp":22.00
+,"humidity":71.00
+,"S1":1
+,"S2":1
+,"S3":1
+,"S4":0
+,"S5":0
+,"S6":0
+,"S7":0
+,"S8":0
+,"AgeS1HrI":1
+,"AgeS1HrF":23
+,"AgeS2HrI":255
+,"AgeS2HrF":255
+,"AgeS3HrI":255
+,"AgeS3HrF":255
+,"AgeS4HrI":255
+,"AgeS4HrF":255
+,"AgeS5HrI":255
+,"AgeS5HrF":255
+,"AgeS6HrI":255
+,"AgeS6HrF":255
+,"AgeS7HrI":255
+,"AgeS7HrF":255
+,"AgeS8HrI":255
+,"AgeS8HrF":255
+,"AgeRGBHrI":255
+,"AgeRGBHrF":255
+,"Red":0
+,"Green":341
+,"Blue":1023
+,"A6":976
+,"A7":902
+})
+
+
             SR = Integer.parseInt(jsonObj.getString(""));
             SG = Integer.parseInt(DataCommand[10]);
             SB = Integer.parseInt(DataCommand[11]);
@@ -581,7 +673,7 @@ public class MainActivity extends ActionBarActivity {
 
         }
         catch (Exception ex) {
-            // Toast.makeText(this, "Erro na reconexão de parametros!", Toast.LENGTH_LONG).show();
+             Toast.makeText(this, "Erro nos dados recebidos:" + ex.toString(), Toast.LENGTH_LONG).show();
         }
     }
 
