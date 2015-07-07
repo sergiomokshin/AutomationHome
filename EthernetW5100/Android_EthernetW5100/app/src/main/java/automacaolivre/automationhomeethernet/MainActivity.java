@@ -412,7 +412,7 @@ public class MainActivity extends ActionBarActivity {
                    });
             }};           
 			
-            timer.schedule(task, 10000, 10000); 
+            timer.schedule(task, 60000, 60000);
     }
 
     public Boolean ConectarPlaca(String url, Boolean ExibirMensagem){
@@ -876,31 +876,31 @@ public class MainActivity extends ActionBarActivity {
             comando = "?S1" + StatusS;					
         }
 		else if (S == "2") {
-            StatusS = (S2 == 2) ? "D" : "L";
+            StatusS = (S2 == 1) ? "D" : "L";
             comando = "?S2" + StatusS;					
         }
 		else if (S == "3") {
-            StatusS = (S3 == 3) ? "D" : "L";
+            StatusS = (S3 == 1) ? "D" : "L";
             comando = "?S3" + StatusS;					
         }
 		else if (S == "4") {
-            StatusS = (S4 == 4) ? "D" : "L";
+            StatusS = (S4 == 1) ? "D" : "L";
             comando = "?S4" + StatusS;					
         }
 		else if (S == "5") {
-            StatusS = (S5 == 5) ? "D" : "L";
+            StatusS = (S5 == 1) ? "D" : "L";
             comando = "?S5" + StatusS;					
         }
 		else if (S == "6") {
-            StatusS = (S6 == 6) ? "D" : "L";
+            StatusS = (S6 == 1) ? "D" : "L";
             comando = "?S6" + StatusS;					
         }
 		else if (S == "7") {
-            StatusS = (S7 == 7) ? "D" : "L";
+            StatusS = (S7 == 1) ? "D" : "L";
             comando = "?S7" + StatusS;					
         }
 		else if (S == "8") {
-            StatusS = (S8 == 8) ? "D" : "L";
+            StatusS = (S8 == 1) ? "D" : "L";
             comando = "?S8" + StatusS;					
         }
 		else
