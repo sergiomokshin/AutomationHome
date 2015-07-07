@@ -24,13 +24,13 @@ public class IPActivity extends Activity {
     public void onCreate(final Bundle savedInstanceState) {
 	
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.define_hora_data);
+        setContentView(R.layout.activity_ip);
 
         btAlterar = (Button) findViewById(R.id.btAlterar);
         edtIP = (EditText) findViewById(R.id.edtIP);
 		
 		sharedPreferences = getSharedPreferences("APP_PREFS", getBaseContext().MODE_PRIVATE);
-		IP = sharedPreferences.getString("IP", "");
+		IP = sharedPreferences.getString("IP", "192.168.0.202");
         edtIP.setText(IP);
 						
 		btAlterar.setOnClickListener(new OnClickListener() {

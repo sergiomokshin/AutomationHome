@@ -381,10 +381,8 @@ public class MainActivity extends ActionBarActivity {
 			return;
 		}
 
-        ip = "192.168.0.202";
-		        
+
         if (ip.equals("")) {
-			ip = "192.168.0.202";
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.IPActivity");
             startActivityForResult(intent, 90);
@@ -708,9 +706,9 @@ public class MainActivity extends ActionBarActivity {
                 intent.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.DefineHoraData");
                 startActivityForResult(intent, 90);
                 return true;
-            case R.id.DeviceListActivity:
+            case R.id.IPActivity:
                 Intent intentD = new Intent(Intent.ACTION_VIEW);
-                intentD.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.DeviceListActivity");
+                intentD.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.IPActivity");
                 startActivityForResult(intentD, 90);
                 return true;
             case R.id.SetupDevice:
@@ -755,7 +753,7 @@ public class MainActivity extends ActionBarActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case REQUEST_SETUP_IP:
-                String ipAtual = sharedPreferences.getString("IP", "");
+                ip = sharedPreferences.getString("IP", "");
 				String comando = "http://" + ip ;						
 				if(ConectarPlaca(comando, true))
 				{
@@ -783,7 +781,7 @@ public class MainActivity extends ActionBarActivity {
 		String comando = "http://" + ip + "/";		
         String data = sharedPreferences.getString("Data", "");
         String hora = sharedPreferences.getString("Hora", "");
-		String dataEnvio ="?DataHoray" + data + "yz" + hora + "z|";
+		String dataEnvio ="?DataHoray" + data + "yz" + hora + "z";
 		
 		 if (ConectarPlaca(comando + dataEnvio, true) ) {
                 Toast.makeText(getApplicationContext(), "Data alterada com sucesso!", Toast.LENGTH_SHORT).show();

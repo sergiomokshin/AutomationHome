@@ -21,6 +21,10 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name=".IPActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name=".DefineHoraData"
             android:label="@string/app_name" >
         </activity>

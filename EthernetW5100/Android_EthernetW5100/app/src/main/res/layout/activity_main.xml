@@ -279,13 +279,14 @@
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:text="Iluminacao" />
+                android:text="Iluminação" />
 				
 			<ImageButton
                 android:id="@+id/imgWhite"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/on"
+                android:src="@drawable/white"
+                android:layout_marginTop="10px"
                 android:background="#FF333333"
              />
 			 
@@ -293,7 +294,8 @@
                 android:id="@+id/imgBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/on"
+                 android:layout_marginTop="20px"
+                android:src="@drawable/blue"
                 android:background="#FF333333"
              />
 			 
@@ -301,7 +303,8 @@
                 android:id="@+id/imgRed"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/on"
+                android:src="@drawable/red"
+                 android:layout_marginTop="20px"
                 android:background="#FF333333"
              />
 			 
@@ -309,7 +312,8 @@
                 android:id="@+id/imgGreen"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/on"
+                 android:layout_marginTop="20px"
+                android:src="@drawable/green"
                 android:background="#FF333333"
              />
 			 
@@ -317,7 +321,8 @@
                 android:id="@+id/imgOff"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/on"
+                 android:layout_marginTop="20px"
+                android:src="@drawable/black"
                 android:background="#FF333333"
              />
 				           
@@ -335,7 +340,7 @@
             android:gravity="center_vertical"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="5dp"
             >
 
@@ -346,13 +351,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5px"
                 android:text="" />
+
 			<TextView
                 android:id="@+id/txtTemperatura"
                 android:textColor="@android:color/white"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5px"
-                android:text="" />	
+                android:text="" />
 				
 
         </LinearLayout>

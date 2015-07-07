@@ -672,10 +672,6 @@ void SendResponse(EthernetClient client) {
   ValueSaveSaida7 = digitalRead(PIN_S7);
   ValueSaveSaida8 = digitalRead(PIN_S8);
 
-  ValueRed = analogRead(PIN_RED);
-  ValueGreen = analogRead(PIN_GREEN);
-  ValueBlue = analogRead(PIN_BLUE);
-
   client.println(F("HTTP/1.1 200 OK")); //send new page
   client.println(F("Content-Type: application/json"));
   client.println();
