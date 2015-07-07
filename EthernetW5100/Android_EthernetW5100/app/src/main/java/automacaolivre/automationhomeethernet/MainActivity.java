@@ -1,5 +1,7 @@
 package automacaolivre.automationhomeethernet;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,16 +39,25 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
+import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends ActionBarActivity {
 
+
+	private Timer timer  = new Timer();
+    private TimerTask task;
+    private final Handler handler = new Handler();
+	
     private String ModoAgendado = "";
     private String Data = "";
     private String Hora = "";
     private Switch swModoAgendado;
-
+	private String Temperatura = "";
+	private String Umidade = "";
+	
     private TextView txtHorario;
+	private TextView txtTemperatura;
 
     private int S1;
     private String S1HrI = "0";
@@ -120,9 +130,13 @@ public class MainActivity extends ActionBarActivity {
     private TextView txtSRGB;
     // private TextView txtSRGBH;
 
-    private SeekBar seekBarR;
-    private SeekBar seekBarG;
-    private SeekBar seekBarB;
+	
+	private ImageButton imgWhite;
+	private ImageButton imgBlue;
+	private ImageButton imgRed;
+	private ImageButton imgGreen;
+	private ImageButton imgOff;
+	
     private int SR;
     private int SG;
     private int SB;
@@ -132,9 +146,11 @@ public class MainActivity extends ActionBarActivity {
 
     private TextView txtMsg;
 
-    private final int REQUEST_CONNECT_DEVICE = 1;
+    private final int REQUEST_SETUP_IP = 1;
     private final int REQUEST_SETUP_DEVICE = 2;
     private final int REQUEST_SETUP_DATETIME = 3;
+	
+	private Boolean EmExecucao;
 
 
     SharedPreferences.Editor editor;
@@ -142,14 +158,15 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         Toast.makeText(this, "Conectando com o dispositivo.", Toast.LENGTH_LONG).show();
 
         swModoAgendado = (Switch) findViewById(R.id.swModoAgendado);
         txtHorario = (TextView) findViewById(R.id.txtHorario);
+		txtTemperatura = (TextView) findViewById(R.id.txtTemperatura);
 
         imgS1 = (ImageButton) findViewById(R.id.imgS1);
         txtS1 = (TextView) findViewById(R.id.txtS1);
@@ -186,30 +203,27 @@ public class MainActivity extends ActionBarActivity {
         txtSRGB = (TextView) findViewById(R.id.txtSRGB);
         //txtSRGBH = (TextView) findViewById(R.id.txtSRGBH);
 
-        seekBarR = (SeekBar) findViewById(R.id.seekR);
-        seekBarG = (SeekBar) findViewById(R.id.seekG);
-        seekBarB = (SeekBar) findViewById(R.id.seekB);
-
+        imgWhite = (ImageButton) findViewById(R.id.imgWhite);
+		imgBlue = (ImageButton) findViewById(R.id.imgBlue);
+		imgRed = (ImageButton) findViewById(R.id.imgRed);
+		imgGreen = (ImageButton) findViewById(R.id.imgGreen);
+		imgOff = (ImageButton) findViewById(R.id.imgOff);
+        
         AtualizaLabels();
-
         txtMsg = (TextView) findViewById(R.id.txtMsg);
         FirstTime = true;
-
 
         swModoAgendado.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                try {
+                String ipAtual = sharedPreferences.getString("IP", "");
+                if (swModoAgendado.isChecked()) {
 
-                    if (swModoAgendado.isChecked()) {
-                        writeData("|M1|");
+                    ConectarPlaca("http://" + ip + "/?AUTOL", true);
 
-                    } else {
-                        writeData("|M0|");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } else {
+                    ConectarPlaca("http://" + ip + "/?AUTOD", true);
                 }
             }
         });
@@ -304,112 +318,108 @@ public class MainActivity extends ActionBarActivity {
         });
 
 
-        seekBarR.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
+       imgWhite.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-                // TODO Auto-generated method stub
+            public void onClick(View arg0) {
                 try {
-                    EnviarRGB("6", progress);
+                    EnviarComandoDigital("WHI");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         });
-
-        seekBarG.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
+		
+		 imgBlue.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-                // TODO Auto-generated method stub
+            public void onClick(View arg0) {
                 try {
-                    EnviarRGB("5", progress);
+                    EnviarComandoDigital("BLU");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         });
-
-        seekBarB.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
+		
+		 imgGreen.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,
-                                          boolean fromUser) {
-                // TODO Auto-generated method stub
+            public void onClick(View arg0) {
                 try {
-                    EnviarRGB("3", progress);
+                    EnviarComandoDigital("GREE");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         });
-
-
-        ip = sharedPreferences.getString("IP", "");
-
-        if (ip == "") {
-
-            if(isConnected()) {
-                GET("http://192.168.0.202");
+		
+		 imgRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                try {
+                    EnviarComandoDigital("RED");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        });
+		
+		imgOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                try {
+                    EnviarComandoDigital("RGBOFF");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });	  
+		
+		ip = sharedPreferences.getString("IP", "");
+		EmExecucao = false;
+		if(!isConnected())
+		{
+			Toast.makeText(this, "Dispositivo Android não conectado! Conecte com a rede antes de abrir o aplicativo de automação!", Toast.LENGTH_LONG).show();		
+			return;
+		}
 
-            ip = "http://192.168.0.202";
-
-           // ip="192.166.0.202";
-           // Intent intent = new Intent(Intent.ACTION_VIEW);
-           // intent.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.IPActivity");
-           // startActivityForResult(intent, 90);
-
+        ip = "192.168.0.202";
+		        
+        if (ip.equals("")) {
+			ip = "192.168.0.202";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.IPActivity");
+            startActivityForResult(intent, 90);
         } else {
-        }
 
-
+			if(ConectarPlaca("http://" + ip, true))
+			{
+				IniciaTimer();		
+			}
+        }				
     }
 
-    public String GET(String url){
+	 private void IniciaTimer(){
+        task = new TimerTask() {
+            public void run() {
+                    handler.post(new Runnable() {
+                            public void run() {
+								if(!ip.equals("")){
+									if(!EmExecucao)
+									{
+										ConectarPlaca("http://" + ip, false);									
+									}								
+								}												                                													
+                            }
+                   });
+            }};           
+			
+            timer.schedule(task, 10000, 10000); 
+    }
+
+    public Boolean ConectarPlaca(String url, Boolean ExibirMensagem){
         InputStream inputStream = null;
         String result = "";
+		
+		EmExecucao = true;
         try {
 
             if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -425,16 +435,21 @@ public class MainActivity extends ActionBarActivity {
                 AtualizaDadosPlaca(result);
             }
             else {
-                //Message
+				if(ExibirMensagem){
+					Toast.makeText(this, "Dados truncados, verifique se a placa está conectada corretamente e se a rede não apresenta problemas!", Toast.LENGTH_LONG).show();		
+				}
+				EmExecucao = false;
+				return false;
             }
-
         } catch (Exception e) {
-
+			EmExecucao = false;
+			if(ExibirMensagem){
+				Toast.makeText(this, "Erro durante a conexão com a placa, verifique se o IP está correto e se dispositivo Android tem acesso a mesma rede da placa.!", Toast.LENGTH_LONG).show();
+			}
+			return false;
         }
-
-
-
-        return result;
+		EmExecucao = false;
+        return true;
     }
     private static String convertInputStreamToString(InputStream inputStream) throws IOException{
         BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
@@ -460,32 +475,9 @@ public class MainActivity extends ActionBarActivity {
     private void AtualizaDadosPlaca(String data) {
 
         try {
-
-            data = data.replace("dataCB(", "");
-            data = data.replace(")", "");
-
-            JSONObject jsonObj = new JSONObject( URLDecoder.decode(data, "UTF-8") );
-
-
-            //JSONArray arrayDados = null;
-            //arraysDados = jsonObj.getJSONArray("dados");
-
-
-            //JSONObject dados = jsonObj.getJSONObject(i);
-
-            String sS1 = jsonObj.getString("S1");
-
-            S1 = Integer.parseInt(jsonObj.getString("S1"));
-            S2 = Integer.parseInt(jsonObj.getString("S2"));
-            S3 = Integer.parseInt(jsonObj.getString("S3"));
-            S4 = Integer.parseInt(jsonObj.getString("S4"));
-            S5 = Integer.parseInt(jsonObj.getString("S5"));
-            S6 = Integer.parseInt(jsonObj.getString("S6"));
-            S7 = Integer.parseInt(jsonObj.getString("S7"));
-            S8 = Integer.parseInt(jsonObj.getString("S8"));
-
-            /*
-
+		
+		/*
+			JSON
             dataCB({
 "Auto":"0"
 ,"Day":5
@@ -528,37 +520,63 @@ public class MainActivity extends ActionBarActivity {
 ,"A6":976
 ,"A7":902
 })
+       */
+	   	   
+            data = data.replace("dataCB(", "");
+            data = data.replace(")", "");
 
+            JSONObject jsonObj = new JSONObject( URLDecoder.decode(data, "UTF-8") );
+            String sS1 = jsonObj.getString("S1");
 
-            SR = Integer.parseInt(jsonObj.getString(""));
-            SG = Integer.parseInt(DataCommand[10]);
-            SB = Integer.parseInt(DataCommand[11]);
-            ModoAgendado = DataCommand[12].toString();
-
-            S1HrI = DataCommand[13];
-            S1HrF = DataCommand[14];
-            S2HrI = DataCommand[15];
-            S2HrF = DataCommand[16];
-            S3HrI = DataCommand[17];
-            S3HrF = DataCommand[18];
-            S4HrI = DataCommand[19];
-            S4HrF = DataCommand[20];
-            S5HrI = DataCommand[21];
-            S5HrF = DataCommand[22];
-            S6HrI = DataCommand[23];
-            S6HrF = DataCommand[24];
-            S7HrI = DataCommand[25];
-            S7HrF = DataCommand[26];
-            S8HrI = DataCommand[27];
-            S8HrF = DataCommand[28];
-            // SRGBHrI = DataCommand[29];
-            // SRGBHrF = DataCommand[30];
-
-            Data = DataCommand[31];
-            Hora = DataCommand[32];
-            */
-
-            txtHorario.setText("Horário placa: " + Data + "  " + Hora);
+            S1 = Integer.parseInt(jsonObj.getString("S1"));
+            S2 = Integer.parseInt(jsonObj.getString("S2"));
+            S3 = Integer.parseInt(jsonObj.getString("S3"));
+            S4 = Integer.parseInt(jsonObj.getString("S4"));
+            S5 = Integer.parseInt(jsonObj.getString("S5"));
+            S6 = Integer.parseInt(jsonObj.getString("S6"));
+            S7 = Integer.parseInt(jsonObj.getString("S7"));
+            S8 = Integer.parseInt(jsonObj.getString("S8"));
+            
+            SR = Integer.parseInt(jsonObj.getString("Red"));
+            SG = Integer.parseInt(jsonObj.getString("Green"));
+            SB = Integer.parseInt(jsonObj.getString("Blue"));
+            ModoAgendado = jsonObj.getString("Auto");
+			
+			Data = jsonObj.getString("Day") + "/" + jsonObj.getString("Mounth") + "/" + jsonObj.getString("Year");
+			Hora = jsonObj.getString("Hour") + ":" + jsonObj.getString("Minute") + ":" + jsonObj.getString("Second");            
+			
+			Temperatura = jsonObj.getString("temp");
+			Umidade = jsonObj.getString("humidity");
+			
+            S1HrI = jsonObj.getString("AgeS1HrI");
+            S1HrF = jsonObj.getString("AgeS1HrF");
+			S2HrI = jsonObj.getString("AgeS2HrI");
+            S2HrF = jsonObj.getString("AgeS2HrF");
+			S3HrI = jsonObj.getString("AgeS3HrI");
+            S3HrF = jsonObj.getString("AgeS3HrF");
+			S4HrI = jsonObj.getString("AgeS4HrI");
+            S4HrF = jsonObj.getString("AgeS4HrF");
+			S5HrI = jsonObj.getString("AgeS5HrI");
+            S5HrF = jsonObj.getString("AgeS5HrF");
+			S6HrI = jsonObj.getString("AgeS6HrI");
+            S6HrF = jsonObj.getString("AgeS6HrF");
+			S7HrI = jsonObj.getString("AgeS7HrI");
+            S7HrF = jsonObj.getString("AgeS7HrF");
+			S8HrI = jsonObj.getString("AgeS8HrI");
+            S8HrF = jsonObj.getString("AgeS8HrF");
+			SRGBHrI = jsonObj.getString("AgeRGBHrI");
+            SRGBHrF = jsonObj.getString("AgeRGBHrF");
+			          
+            txtHorario.setText("Último Horário placa: " + Data + "  " + Hora);
+			
+			if(Temperatura.equals("0") && Umidade.equals("0"))
+			{
+				txtTemperatura.setText("");
+			}
+			else
+			{			
+				txtTemperatura.setText("Temperatura: " + Temperatura + "° - Umidade: " + Umidade + "%");
+			}
 
             if (ModoAgendado.contains("1"))
                 swModoAgendado.setChecked(true);
@@ -635,14 +653,6 @@ public class MainActivity extends ActionBarActivity {
 
             if (FirstTime) {
 
-                seekBarR.setProgress(SR / 28);
-                seekBarR.refreshDrawableState();
-
-                seekBarG.setProgress(SG / 28);
-                seekBarG.refreshDrawableState();
-
-                seekBarB.setProgress(SB / 28);
-                seekBarB.refreshDrawableState();
                 FirstTime = false;
 
                 sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
@@ -695,17 +705,17 @@ public class MainActivity extends ActionBarActivity {
                 editor.commit();
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DefineHoraData");
+                intent.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.DefineHoraData");
                 startActivityForResult(intent, 90);
                 return true;
             case R.id.DeviceListActivity:
                 Intent intentD = new Intent(Intent.ACTION_VIEW);
-                intentD.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.DeviceListActivity");
+                intentD.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.DeviceListActivity");
                 startActivityForResult(intentD, 90);
                 return true;
             case R.id.SetupDevice:
                 Intent intentS = new Intent(Intent.ACTION_VIEW);
-                intentS.setClassName("automacaolivre.automationhome", "automacaolivre.automationhome.SetupDevice");
+                intentS.setClassName("automacaolivre.automationhomeethernet", "automacaolivre.automationhomeethernet.SetupDevice");
                 startActivityForResult(intentS, 90);
                 return true;
             default:
@@ -744,31 +754,23 @@ public class MainActivity extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
-            case REQUEST_CONNECT_DEVICE:
-
-
+            case REQUEST_SETUP_IP:
                 String ipAtual = sharedPreferences.getString("IP", "");
-
-/*
-                ip = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
-                sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
-                editor = sharedPreferences.edit();
-                editor.putString("ADDRESS", address);
-                editor.commit();
-
-                Boolean alterouDispositivo = (addressAtual.toString() != address.toString());
-
-                Connect(alterouDispositivo);
-                */
+				String comando = "http://" + ip ;						
+				if(ConectarPlaca(comando, true))
+				{
+					IniciaTimer();		
+				}					
                 break;
             case REQUEST_SETUP_DEVICE:
+
                 try {
                     AtualizaAgendamentosPlaca();
                 } catch (InterruptedException e) {
-                    Toast.makeText(getApplicationContext(), "Erro durante a atualização dos parametros na placa, tente novamente!", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
                 AtualizaLabels();
+				
                 break;
             case REQUEST_SETUP_DATETIME:
                 AtualizaHorarioPlaca();
@@ -777,180 +779,144 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void AtualizaHorarioPlaca() {
-
+	
+		String comando = "http://" + ip + "/";		
         String data = sharedPreferences.getString("Data", "");
         String hora = sharedPreferences.getString("Hora", "");
-        try {
-            if (writeData("|Ty" + data + "yz" + hora + "z|")) {
+		String dataEnvio ="?DataHoray" + data + "yz" + hora + "z|";
+		
+		 if (ConectarPlaca(comando + dataEnvio, true) ) {
                 Toast.makeText(getApplicationContext(), "Data alterada com sucesso!", Toast.LENGTH_SHORT).show();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+         }        
     }
 
     private void AtualizaAgendamentosPlaca() throws InterruptedException {
 
         try {
-
-            sharedPreferences = getSharedPreferences("APP_PREFS", getBaseContext().MODE_PRIVATE);
-
-            S1HrI = sharedPreferences.getString("S1HrI", "");
+	
+			Toast.makeText(getApplicationContext(), "Aguarde a sincronização de dados com a placa, Esse processo pode dermorar alguns segundos!", Toast.LENGTH_SHORT).show();
+			
+						
+            sharedPreferences = getSharedPreferences("APP_PREFS", getBaseContext().MODE_PRIVATE);			
+			String comando = "http://" + ip + "/";		
+						
+			S1HrI = sharedPreferences.getString("S1HrI", "");
             S1HrF = sharedPreferences.getString("S1HrF", "");
-
-            if (writeData("|H1I" + String.format("%02d", Integer.parseInt(S1HrI)) + "|")) {
-                Thread.sleep(100);
-                writeData("|H1F" + String.format("%02d", Integer.parseInt(S1HrF)) + "|");
-                Thread.sleep(100);
-
-                S2HrI = sharedPreferences.getString("S2HrI", "");
-                S2HrF = sharedPreferences.getString("S2HrF", "");
-                writeData("|H2I" + String.format("%02d", Integer.parseInt(S2HrI)) + "|");
-                Thread.sleep(100);
-                writeData("|H2F" + String.format("%02d", Integer.parseInt(S2HrF)) + "|");
-                Thread.sleep(100);
-
-                S3HrI = sharedPreferences.getString("S3HrI", "");
-                S3HrF = sharedPreferences.getString("S3HrF", "");
-                writeData("|H3I" + String.format("%02d", Integer.parseInt(S3HrI)) + "|");
-                Thread.sleep(100);
-                writeData("|H3F" + String.format("%02d", Integer.parseInt(S3HrF)) + "|");
-                Thread.sleep(100);
-
-                S4HrI = sharedPreferences.getString("S4HrI", "");
-                S4HrF = sharedPreferences.getString("S4HrF", "");
-                writeData("|H4I" + String.format("%02d", Integer.parseInt(S4HrI)) + "|");
-                Thread.sleep(100);
-                writeData("|H4F" + String.format("%02d", Integer.parseInt(S4HrF)) + "|");
-                Thread.sleep(100);
-
-                S5HrI = sharedPreferences.getString("S5HrI", "");
-                S5HrF = sharedPreferences.getString("S5HrF", "");
-                writeData("|H5I" + String.format("%02d", Integer.parseInt(S5HrI)) + "|");
-                Thread.sleep(100);
-                writeData("|H5F" + String.format("%02d", Integer.parseInt(S5HrF)) + "|");
-                Thread.sleep(100);
-
-                S6HrI = sharedPreferences.getString("S6HrI", "");
-                S6HrF = sharedPreferences.getString("S6HrF", "");
-                writeData("|H6I" + String.format("%02d", Integer.parseInt(S6HrI)) + "|");
-                Thread.sleep(100);
-                writeData("|H6F" + String.format("%02d", Integer.parseInt(S6HrF)) + "|");
-                Thread.sleep(100);
-
-                S7HrI = sharedPreferences.getString("S7HrI", "");
-                S7HrF = sharedPreferences.getString("S7HrF", "");
-                writeData("|H7I" + String.format("%02d", Integer.parseInt(S7HrI)) + "|");
-                Thread.sleep(100);
-                writeData("|H7F" + String.format("%02d", Integer.parseInt(S7HrF)) + "|");
-                Thread.sleep(100);
-
-                S8HrI = sharedPreferences.getString("S8HrI", "");
-                S8HrF = sharedPreferences.getString("S8HrF", "");
-                writeData("|H8I" + String.format("%02d", Integer.parseInt(S8HrI)) + "|");
-                Thread.sleep(100);
-                if (writeData("|H8F" + String.format("%02d", Integer.parseInt(S8HrF)) + "|")) {
-                    Toast.makeText(getApplicationContext(), "Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Erro durante a atualização dos parametros na placa, tente novamente!", Toast.LENGTH_SHORT).show();
-                }
-
-                //SRGBHrI = sharedPreferences.getString("SRGBHrI", "");
-                //SRGBHrF = sharedPreferences.getString("SRGBHrF", "");
-                // writeData("|H9I" + String.format("%02d", Integer.parseInt(SRGBHrI)) + "|");
-                //Thread.sleep(100);
-
-                //if(writeData("|H9F" + String.format("%02d", Integer.parseInt(SRGBHrF)) + "|")) {
-                //    Toast.makeText(getApplicationContext(), "Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();
-                // }
-                // else {
-                //    Toast.makeText(getApplicationContext(), "Erro durante a atualização dos parametros na placa, tente novamente!", Toast.LENGTH_SHORT).show();
-                // }
+			String agendamento = "?AgeS1HrIy" + String.format("%02d", Integer.parseInt(S1HrI)) + "yz" +  String.format("%02d", Integer.parseInt(S1HrF)) + "z";
+			           							
+            if (ConectarPlaca(comando + agendamento, true)) {
+			
+				S2HrI = sharedPreferences.getString("S2HrI", "");
+				S2HrF = sharedPreferences.getString("S2HrF", "");
+				agendamento = "?AgeS2HrIy" + String.format("%02d", Integer.parseInt(S2HrI)) + "yz" +  String.format("%02d", Integer.parseInt(S2HrF)) + "z";
+                if(ConectarPlaca(comando + agendamento, true)){				
+				
+					S3HrI = sharedPreferences.getString("S3HrI", "");
+					S3HrF = sharedPreferences.getString("S3HrF", "");
+					agendamento = "?AgeS3HrIy" + String.format("%02d", Integer.parseInt(S3HrI)) + "yz" +  String.format("%02d", Integer.parseInt(S3HrF)) + "z";
+					if(ConectarPlaca(comando + agendamento, true)){
+					
+						S4HrI = sharedPreferences.getString("S4HrI", "");
+						S4HrF = sharedPreferences.getString("S4HrF", "");
+						agendamento = "?AgeS4HrIy" + String.format("%02d", Integer.parseInt(S4HrI)) + "yz" +  String.format("%02d", Integer.parseInt(S4HrF)) + "z";
+						if(ConectarPlaca(comando + agendamento, true)){
+						
+							S5HrI = sharedPreferences.getString("S5HrI", "");
+							S5HrF = sharedPreferences.getString("S5HrF", "");
+							agendamento = "?AgeS5HrIy" + String.format("%02d", Integer.parseInt(S5HrI)) + "yz" +  String.format("%02d", Integer.parseInt(S5HrF)) + "z";
+							if(ConectarPlaca(comando + agendamento, true)){
+							
+								S6HrI = sharedPreferences.getString("S6HrI", "");
+								S6HrF = sharedPreferences.getString("S6HrF", "");
+								agendamento = "?AgeS6HrIy" + String.format("%02d", Integer.parseInt(S6HrI)) + "yz" +  String.format("%02d", Integer.parseInt(S6HrF)) + "z";
+								if(ConectarPlaca(comando + agendamento, true)){
+								
+									S7HrI = sharedPreferences.getString("S7HrI", "");
+									S7HrF = sharedPreferences.getString("S7HrF", "");
+									agendamento = "?AgeS7HrIy" + String.format("%02d", Integer.parseInt(S7HrI)) + "yz" +  String.format("%02d", Integer.parseInt(S7HrF)) + "z";
+									if(ConectarPlaca(comando + agendamento, true)){
+									
+										S8HrI = sharedPreferences.getString("S8HrI", "");
+										S8HrF = sharedPreferences.getString("S8HrF", "");
+										agendamento = "?AgeS8HrIy" + String.format("%02d", Integer.parseInt(S8HrI)) + "yz" +  String.format("%02d", Integer.parseInt(S8HrF)) + "z";
+																	
+										if (ConectarPlaca(comando + agendamento, true)) {
+											Toast.makeText(getApplicationContext(), "Dados sincronizados com sucesso!", Toast.LENGTH_SHORT).show();
+										} else {
+											Toast.makeText(getApplicationContext(), "Erro durante a sincronização de dados com a placa, tente novamente!", Toast.LENGTH_SHORT).show();
+										}
+									}
+								}
+							}
+						}
+					}	
+				}				
             }
 
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Erro durante a atualização dos parametros na placa, tente novamente!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
 
-    private void EnviarRGB(String Porta, int Progress) throws IOException {
-
-        String comando = "|A" + Porta + String.valueOf(Progress) + "|";
-        writeData(comando);
-
-    }
-
     private void EnviarComandoDigital(String S) throws IOException {
 
-
-        if (ModoAgendado.contains("1")) {
+        if (ModoAgendado.equals("1")) {
             Toast.makeText(getApplicationContext(), "Modo agendado não permite acionamento de comandos, altere para o modo Manual!", Toast.LENGTH_SHORT).show();
             return;
         }
-        //|D21|
-        String comando = "|D" + S;
-
+		
+        //?S1L  1 ON
+		//?S1D  1 OFF
+        String comando = "";;
         String StatusS = "";
 
         if (S == "1") {
-            StatusS = (S1 == 1) ? "0" : "1";
-            comando += StatusS + "|";
+            StatusS = (S1 == 1) ? "D" : "L";
+            comando = "?S1" + StatusS;					
         }
-        if (S == "2") {
-            StatusS = (S2 == 1) ? "0" : "1";
-            comando += StatusS + "|";
+		else if (S == "2") {
+            StatusS = (S2 == 2) ? "D" : "L";
+            comando = "?S2" + StatusS;					
         }
-        if (S == "3") {
-            StatusS = (S3 == 1) ? "0" : "1";
-            comando += StatusS + "|";
+		else if (S == "3") {
+            StatusS = (S3 == 3) ? "D" : "L";
+            comando = "?S3" + StatusS;					
         }
-        if (S == "4") {
-            StatusS = (S4 == 1) ? "0" : "1";
-            comando += StatusS + "|";
+		else if (S == "4") {
+            StatusS = (S4 == 4) ? "D" : "L";
+            comando = "?S4" + StatusS;					
         }
-        if (S == "5") {
-            StatusS = (S5 == 1) ? "0" : "1";
-            comando += StatusS + "|";
+		else if (S == "5") {
+            StatusS = (S5 == 5) ? "D" : "L";
+            comando = "?S5" + StatusS;					
         }
-        if (S == "6") {
-            StatusS = (S6 == 1) ? "0" : "1";
-            comando += StatusS + "|";
+		else if (S == "6") {
+            StatusS = (S6 == 6) ? "D" : "L";
+            comando = "?S6" + StatusS;					
         }
-        if (S == "7") {
-            StatusS = (S7 == 1) ? "0" : "1";
-            comando += StatusS + "|";
+		else if (S == "7") {
+            StatusS = (S7 == 7) ? "D" : "L";
+            comando = "?S7" + StatusS;					
         }
-        if (S == "8") {
-            StatusS = (S8 == 1) ? "0" : "1";
-            comando += StatusS + "|";
+		else if (S == "8") {
+            StatusS = (S8 == 8) ? "D" : "L";
+            comando = "?S8" + StatusS;					
         }
-
+		else
+		{
+			comando = "?" + S;					
+		}
+		        
         //int duracao = Toast.LENGTH_SHORT;
         //Toast toast = Toast.makeText(getApplicationContext(), comando, duracao);
         //toast.show();
-
-        writeData(comando);
-    }
-
-    private boolean writeData(String data) throws IOException {
-
-        try {
-            return write(data);
-        } catch (IOException ex) {
-            return write(data);
-        }
-    }
-
-    private boolean write(String data) throws IOException {
-
-        return true;
-    }
-
-
-
+		
+		comando = "http://" + ip + "/" + comando;		
+		ConectarPlaca(comando, true);
+		
+    }   
 }
+
 
 

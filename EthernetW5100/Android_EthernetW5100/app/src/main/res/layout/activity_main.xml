@@ -280,22 +280,47 @@
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:text="Iluminacao" />
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="9"
-                android:id="@+id/seekR" />
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="9"
-                android:id="@+id/seekG" />
-            <SeekBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="9"
-                android:id="@+id/seekB" />
-
+				
+			<ImageButton
+                android:id="@+id/imgWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/on"
+                android:background="#FF333333"
+             />
+			 
+			 <ImageButton
+                android:id="@+id/imgBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/on"
+                android:background="#FF333333"
+             />
+			 
+			 <ImageButton
+                android:id="@+id/imgRed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/on"
+                android:background="#FF333333"
+             />
+			 
+			 <ImageButton
+                android:id="@+id/imgGreen"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/on"
+                android:background="#FF333333"
+             />
+			 
+			 <ImageButton
+                android:id="@+id/imgOff"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/on"
+                android:background="#FF333333"
+             />
+				           
             <TextView
                 android:text="Mensagens"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -320,7 +345,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5px"
-                android:text="Horário Placa: 28/06/2015 18:59" />
+                android:text="" />
+			<TextView
+                android:id="@+id/txtTemperatura"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5px"
+                android:text="" />	
+				
 
         </LinearLayout>
 

@@ -21,11 +21,10 @@
         android:id="@+id/linearLayout1">
 
         <EditText
-            android:id="@+id/edtS1HI"
+            android:id="@+id/edtIP"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textColor="#FFFFFF"
-            android:inputType="number">
+            android:textColor="#FFFFFF">
         </EditText>
 
     </LinearLayout>
