@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="Scripts/automationhome.js"></script>
+    
 	
     <style>
 		html, body
@@ -28,7 +28,7 @@
 		body
 		{
 			font-family: 'Century Gothic', futura, 'URW Gothic L', Verdana, sans-serif;
-			background:url('../img/bg.png');
+			background-color:navy;
 		}
 		
 		h1{
@@ -439,12 +439,10 @@ function BindData(data) {
     }
 
     $("#DataHW").text(RetornaData() + " " + RetornaHora());
-	
+		
 	$("#spTemperatura").text(data.temp + "º");
 	$("#spUmidade").text(data.humidity + "%");
-        
-   
-
+	         
     if (data.S1 == 1) {
         $("#S1").html('On');
         $('#S1').addClass('btn btn-success');

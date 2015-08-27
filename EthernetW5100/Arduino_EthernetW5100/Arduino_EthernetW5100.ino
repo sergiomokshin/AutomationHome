@@ -207,11 +207,17 @@ void setup() {
 
 void loop() {
 
-  getDateDs1307(&second, &minute, &hour, &dayOfWeek, &dayOfMonth, &month, &year);
-  humidity = dht.readHumidity();
+  getDateDs1307(&second, &minute, &hour, &dayOfWeek, &dayOfMonth, &month, &year); 
+ 
+  humidity = dht.readHumidity();  
   temp = dht.readTemperature();
 
-
+  if(isnan(temp))
+    temp = 0;
+  
+  if(isnan(humidity))
+    humidity = 0;
+    
 
   WebServer();
   ModoAuto();
