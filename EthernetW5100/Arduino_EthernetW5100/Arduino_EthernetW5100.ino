@@ -275,7 +275,7 @@ void PrintLcd() {
     lcd.print(ValueSaveSaida5);
     lcd.print(ValueSaveSaida6);
     lcd.print(ValueSaveSaida7);
-    lcd.print(ValueSaveSaida6);
+    lcd.print(ValueSaveSaida8);
 
 
     if (ValueRed > 10 )
