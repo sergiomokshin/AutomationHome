@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAge8 = new System.Windows.Forms.Button();
+            this.btnAge7 = new System.Windows.Forms.Button();
+            this.btnAge6 = new System.Windows.Forms.Button();
+            this.btnAge5 = new System.Windows.Forms.Button();
+            this.btnAge4 = new System.Windows.Forms.Button();
+            this.btnAge3 = new System.Windows.Forms.Button();
+            this.btnAge2 = new System.Windows.Forms.Button();
+            this.btnAge1 = new System.Windows.Forms.Button();
             this.lblAgendamento8 = new System.Windows.Forms.Label();
             this.lblAgendamento7 = new System.Windows.Forms.Label();
             this.lblAgendamento6 = new System.Windows.Forms.Label();
@@ -55,7 +63,6 @@
             this.lblSaida1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblComStatus = new System.Windows.Forms.Label();
-            this.lblCOM = new System.Windows.Forms.Label();
             this.rbAgendado = new System.Windows.Forms.RadioButton();
             this.rbManual = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
@@ -64,14 +71,8 @@
             this.lblData = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lblMensagens = new System.Windows.Forms.Label();
-            this.btnAge1 = new System.Windows.Forms.Button();
-            this.btnAge2 = new System.Windows.Forms.Button();
-            this.btnAge3 = new System.Windows.Forms.Button();
-            this.btnAge4 = new System.Windows.Forms.Button();
-            this.btnAge5 = new System.Windows.Forms.Button();
-            this.btnAge6 = new System.Windows.Forms.Button();
-            this.btnAge7 = new System.Windows.Forms.Button();
-            this.btnAge8 = new System.Windows.Forms.Button();
+            this.cmbSerialPorts = new System.Windows.Forms.ComboBox();
+            this.lblCOM = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -117,6 +118,86 @@
             this.groupBox1.Size = new System.Drawing.Size(580, 281);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // btnAge8
+            // 
+            this.btnAge8.Location = new System.Drawing.Point(359, 232);
+            this.btnAge8.Name = "btnAge8";
+            this.btnAge8.Size = new System.Drawing.Size(50, 23);
+            this.btnAge8.TabIndex = 31;
+            this.btnAge8.Text = "button2";
+            this.btnAge8.UseVisualStyleBackColor = true;
+            this.btnAge8.Click += new System.EventHandler(this.btnAge8_Click);
+            // 
+            // btnAge7
+            // 
+            this.btnAge7.Location = new System.Drawing.Point(360, 203);
+            this.btnAge7.Name = "btnAge7";
+            this.btnAge7.Size = new System.Drawing.Size(50, 23);
+            this.btnAge7.TabIndex = 30;
+            this.btnAge7.Text = "button2";
+            this.btnAge7.UseVisualStyleBackColor = true;
+            this.btnAge7.Click += new System.EventHandler(this.btnAge7_Click);
+            // 
+            // btnAge6
+            // 
+            this.btnAge6.Location = new System.Drawing.Point(359, 174);
+            this.btnAge6.Name = "btnAge6";
+            this.btnAge6.Size = new System.Drawing.Size(50, 23);
+            this.btnAge6.TabIndex = 29;
+            this.btnAge6.Text = "button2";
+            this.btnAge6.UseVisualStyleBackColor = true;
+            this.btnAge6.Click += new System.EventHandler(this.btnAge6_Click);
+            // 
+            // btnAge5
+            // 
+            this.btnAge5.Location = new System.Drawing.Point(360, 145);
+            this.btnAge5.Name = "btnAge5";
+            this.btnAge5.Size = new System.Drawing.Size(50, 23);
+            this.btnAge5.TabIndex = 28;
+            this.btnAge5.Text = "button2";
+            this.btnAge5.UseVisualStyleBackColor = true;
+            this.btnAge5.Click += new System.EventHandler(this.btnAge5_Click);
+            // 
+            // btnAge4
+            // 
+            this.btnAge4.Location = new System.Drawing.Point(359, 116);
+            this.btnAge4.Name = "btnAge4";
+            this.btnAge4.Size = new System.Drawing.Size(50, 23);
+            this.btnAge4.TabIndex = 27;
+            this.btnAge4.Text = "button2";
+            this.btnAge4.UseVisualStyleBackColor = true;
+            this.btnAge4.Click += new System.EventHandler(this.btnAge4_Click);
+            // 
+            // btnAge3
+            // 
+            this.btnAge3.Location = new System.Drawing.Point(359, 87);
+            this.btnAge3.Name = "btnAge3";
+            this.btnAge3.Size = new System.Drawing.Size(50, 23);
+            this.btnAge3.TabIndex = 26;
+            this.btnAge3.Text = "button2";
+            this.btnAge3.UseVisualStyleBackColor = true;
+            this.btnAge3.Click += new System.EventHandler(this.btnAge3_Click);
+            // 
+            // btnAge2
+            // 
+            this.btnAge2.Location = new System.Drawing.Point(360, 58);
+            this.btnAge2.Name = "btnAge2";
+            this.btnAge2.Size = new System.Drawing.Size(50, 23);
+            this.btnAge2.TabIndex = 25;
+            this.btnAge2.Text = "button2";
+            this.btnAge2.UseVisualStyleBackColor = true;
+            this.btnAge2.Click += new System.EventHandler(this.btnAge2_Click);
+            // 
+            // btnAge1
+            // 
+            this.btnAge1.Location = new System.Drawing.Point(360, 29);
+            this.btnAge1.Name = "btnAge1";
+            this.btnAge1.Size = new System.Drawing.Size(50, 23);
+            this.btnAge1.TabIndex = 24;
+            this.btnAge1.Text = "button2";
+            this.btnAge1.UseVisualStyleBackColor = true;
+            this.btnAge1.Click += new System.EventHandler(this.btnAge1_Click);
             // 
             // lblAgendamento8
             // 
@@ -336,6 +417,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cmbSerialPorts);
             this.groupBox2.Controls.Add(this.lblComStatus);
             this.groupBox2.Controls.Add(this.lblCOM);
             this.groupBox2.Controls.Add(this.rbAgendado);
@@ -355,15 +437,6 @@
             this.lblComStatus.Size = new System.Drawing.Size(50, 13);
             this.lblComStatus.TabIndex = 4;
             this.lblComStatus.Text = "STATUS";
-            // 
-            // lblCOM
-            // 
-            this.lblCOM.AutoSize = true;
-            this.lblCOM.Location = new System.Drawing.Point(319, 24);
-            this.lblCOM.Name = "lblCOM";
-            this.lblCOM.Size = new System.Drawing.Size(34, 13);
-            this.lblCOM.TabIndex = 3;
-            this.lblCOM.Text = "COM ";
             // 
             // rbAgendado
             // 
@@ -448,85 +521,23 @@
             this.lblMensagens.TabIndex = 0;
             this.lblMensagens.Text = "Mensagens";
             // 
-            // btnAge1
+            // cmbSerialPorts
             // 
-            this.btnAge1.Location = new System.Drawing.Point(360, 29);
-            this.btnAge1.Name = "btnAge1";
-            this.btnAge1.Size = new System.Drawing.Size(50, 23);
-            this.btnAge1.TabIndex = 24;
-            this.btnAge1.Text = "button2";
-            this.btnAge1.UseVisualStyleBackColor = true;
-            this.btnAge1.Click += new System.EventHandler(this.btnAge1_Click);
+            this.cmbSerialPorts.FormattingEnabled = true;
+            this.cmbSerialPorts.Location = new System.Drawing.Point(305, 20);
+            this.cmbSerialPorts.Name = "cmbSerialPorts";
+            this.cmbSerialPorts.Size = new System.Drawing.Size(61, 21);
+            this.cmbSerialPorts.TabIndex = 6;
+            this.cmbSerialPorts.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // btnAge2
+            // lblCOM
             // 
-            this.btnAge2.Location = new System.Drawing.Point(360, 58);
-            this.btnAge2.Name = "btnAge2";
-            this.btnAge2.Size = new System.Drawing.Size(50, 23);
-            this.btnAge2.TabIndex = 25;
-            this.btnAge2.Text = "button2";
-            this.btnAge2.UseVisualStyleBackColor = true;
-            this.btnAge2.Click += new System.EventHandler(this.btnAge2_Click);
-            // 
-            // btnAge3
-            // 
-            this.btnAge3.Location = new System.Drawing.Point(359, 87);
-            this.btnAge3.Name = "btnAge3";
-            this.btnAge3.Size = new System.Drawing.Size(50, 23);
-            this.btnAge3.TabIndex = 26;
-            this.btnAge3.Text = "button2";
-            this.btnAge3.UseVisualStyleBackColor = true;
-            this.btnAge3.Click += new System.EventHandler(this.btnAge3_Click);
-            // 
-            // btnAge4
-            // 
-            this.btnAge4.Location = new System.Drawing.Point(359, 116);
-            this.btnAge4.Name = "btnAge4";
-            this.btnAge4.Size = new System.Drawing.Size(50, 23);
-            this.btnAge4.TabIndex = 27;
-            this.btnAge4.Text = "button2";
-            this.btnAge4.UseVisualStyleBackColor = true;
-            this.btnAge4.Click += new System.EventHandler(this.btnAge4_Click);
-            // 
-            // btnAge5
-            // 
-            this.btnAge5.Location = new System.Drawing.Point(360, 145);
-            this.btnAge5.Name = "btnAge5";
-            this.btnAge5.Size = new System.Drawing.Size(50, 23);
-            this.btnAge5.TabIndex = 28;
-            this.btnAge5.Text = "button2";
-            this.btnAge5.UseVisualStyleBackColor = true;
-            this.btnAge5.Click += new System.EventHandler(this.btnAge5_Click);
-            // 
-            // btnAge6
-            // 
-            this.btnAge6.Location = new System.Drawing.Point(359, 174);
-            this.btnAge6.Name = "btnAge6";
-            this.btnAge6.Size = new System.Drawing.Size(50, 23);
-            this.btnAge6.TabIndex = 29;
-            this.btnAge6.Text = "button2";
-            this.btnAge6.UseVisualStyleBackColor = true;
-            this.btnAge6.Click += new System.EventHandler(this.btnAge6_Click);
-            // 
-            // btnAge7
-            // 
-            this.btnAge7.Location = new System.Drawing.Point(360, 203);
-            this.btnAge7.Name = "btnAge7";
-            this.btnAge7.Size = new System.Drawing.Size(50, 23);
-            this.btnAge7.TabIndex = 30;
-            this.btnAge7.Text = "button2";
-            this.btnAge7.UseVisualStyleBackColor = true;
-            this.btnAge7.Click += new System.EventHandler(this.btnAge7_Click);
-            // 
-            // btnAge8
-            // 
-            this.btnAge8.Location = new System.Drawing.Point(359, 232);
-            this.btnAge8.Name = "btnAge8";
-            this.btnAge8.Size = new System.Drawing.Size(50, 23);
-            this.btnAge8.TabIndex = 31;
-            this.btnAge8.Text = "button2";
-            this.btnAge8.UseVisualStyleBackColor = true;
-            this.btnAge8.Click += new System.EventHandler(this.btnAge8_Click);
+            this.lblCOM.AutoSize = true;
+            this.lblCOM.Location = new System.Drawing.Point(274, 24);
+            this.lblCOM.Name = "lblCOM";
+            this.lblCOM.Size = new System.Drawing.Size(34, 13);
+            this.lblCOM.TabIndex = 3;
+            this.lblCOM.Text = "COM ";
             // 
             // Painel
             // 
@@ -584,7 +595,6 @@
         private System.Windows.Forms.RadioButton rbManual;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label lblData;
-        private System.Windows.Forms.Label lblCOM;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lblMensagens;
         private System.Windows.Forms.Label lblComStatus;
@@ -597,6 +607,8 @@
         private System.Windows.Forms.Button btnAge4;
         private System.Windows.Forms.Button btnAge3;
         private System.Windows.Forms.Button btnAge2;
+        private System.Windows.Forms.ComboBox cmbSerialPorts;
+        private System.Windows.Forms.Label lblCOM;
     }
 }
 

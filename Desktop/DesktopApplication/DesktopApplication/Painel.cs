@@ -23,32 +23,44 @@ namespace DesktopApplication
         public Painel()
         {
             InitializeComponent();
-            Conecta();
+            var ports = SerialPort.GetPortNames();
+            cmbSerialPorts.DataSource = ports;
+            cmbSerialPorts.SelectedIndex = cmbSerialPorts.FindStringExact("COM3");
+            Conecta("COM3");
 
         }
 
-        private void Conecta()
+        private void Conecta(string com)
         {
             port = new SerialPort();
-            port.PortName = "COM3";
+            port.PortName = com;
             port.BaudRate = 9600;
             port.Parity = Parity.None;
             port.StopBits = StopBits.One;
             port.Handshake = Handshake.None;
 
-            port.Open(); 
-            port.ReadTimeout = 200;
-            port.WriteTimeout = 500;//
-            if (port.IsOpen)
+            try
             {
-                lblCOM.Text = port.PortName;
-                lblComStatus.Text = "Conectado";
+                port.Open();
+                port.ReadTimeout = 200;
+                port.WriteTimeout = 500;//
+                if (port.IsOpen)
+                {
+                    lblComStatus.Text = "Conectado";
+                }
+                else
+                {
+                    lblComStatus.Text = "Desconectado";
+                }
+                port.DataReceived += new SerialDataReceivedEventHandler(serialPort_DataReceived);
             }
-            else
-            {
-                lblComStatus.Text = "Desconectado";
+            catch (Exception ex){
+
+                var erro = ex.Message;
+                lblComStatus.Text = "Error";
+                lblMensagens.Text = erro;
+
             }
-            port.DataReceived += new SerialDataReceivedEventHandler(serialPort_DataReceived);
 
 
         }
@@ -281,6 +293,11 @@ namespace DesktopApplication
         private void btnAge8_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Conecta(cmbSerialPorts.Text);
         }
     }
 }
