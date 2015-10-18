@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfiguraSaida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfiguraSaida.Designer.cs">
+      <DependentUpon>ConfiguraSaida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HorarioPlaca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HorarioPlaca.Designer.cs">
+      <DependentUpon>HorarioPlaca.cs</DependentUpon>
+    </Compile>
     <Compile Include="Painel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +66,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ConfiguraSaida.resx">
+      <DependentUpon>ConfiguraSaida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HorarioPlaca.resx">
+      <DependentUpon>HorarioPlaca.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Painel.resx">
       <DependentUpon>Painel.cs</DependentUpon>
     </EmbeddedResource>

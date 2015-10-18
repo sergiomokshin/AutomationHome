@@ -7,3 +7,5 @@ D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\De
 D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.csproj.GenerateResource.Cache
 D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.exe
 D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.pdb
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.HorarioPlaca.resources
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.ConfiguraSaida.resources
