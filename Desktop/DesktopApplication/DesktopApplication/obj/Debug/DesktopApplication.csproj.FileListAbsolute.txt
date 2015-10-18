@@ -1,0 +1,9 @@
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\bin\Debug\DesktopApplication.exe.config
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\bin\Debug\DesktopApplication.exe
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\bin\Debug\DesktopApplication.pdb
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.csprojResolveAssemblyReference.cache
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.Painel.resources
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.Properties.Resources.resources
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.csproj.GenerateResource.Cache
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.exe
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.pdb
