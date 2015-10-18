@@ -24,9 +24,13 @@ namespace DesktopApplication
         {
             InitializeComponent();
             var ports = SerialPort.GetPortNames();
+
+            this.cmbSerialPorts.SelectedIndexChanged -= new System.EventHandler(this.cmbSerialPorts_SelectedIndexChanged);
             cmbSerialPorts.DataSource = ports;
-            cmbSerialPorts.SelectedIndex = cmbSerialPorts.FindStringExact("COM3");
-            Conecta("COM3");
+            cmbSerialPorts.SelectedIndex = cmbSerialPorts.FindStringExact(Properties.Settings.Default["COM"].ToString());
+            this.cmbSerialPorts.SelectedIndexChanged += new System.EventHandler(this.cmbSerialPorts_SelectedIndexChanged);
+            
+            Conecta(Properties.Settings.Default["COM"].ToString());
 
         }
 
@@ -44,24 +48,17 @@ namespace DesktopApplication
                 port.Open();
                 port.ReadTimeout = 200;
                 port.WriteTimeout = 500;//
-                if (port.IsOpen)
+                if (!port.IsOpen)
                 {
-                    lblComStatus.Text = "Conectado";
-                }
-                else
-                {
-                    lblComStatus.Text = "Desconectado";
+                    lblMensagens.Text = "Erro na conexão com a porta serial";
                 }
                 port.DataReceived += new SerialDataReceivedEventHandler(serialPort_DataReceived);
             }
             catch (Exception ex){
 
                 var erro = ex.Message;
-                lblComStatus.Text = "Error";
                 lblMensagens.Text = erro;
-
             }
-
 
         }
 
@@ -295,11 +292,22 @@ namespace DesktopApplication
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void cmbSerialPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Conecta(cmbSerialPorts.Text);
+            if(port.IsOpen)
+            {
+                port.Close();
+            }
+
+            lblMensagens.Text = string.Empty;
+            Conecta(cmbSerialPorts.Text);
+            Properties.Settings.Default["COM"] = cmbSerialPorts.Text;
+            Properties.Settings.Default.Save();
         }
     }
+    
 }
 
 

@@ -62,7 +62,8 @@
             this.btnSaida1 = new System.Windows.Forms.Button();
             this.lblSaida1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblComStatus = new System.Windows.Forms.Label();
+            this.cmbSerialPorts = new System.Windows.Forms.ComboBox();
+            this.lblCOM = new System.Windows.Forms.Label();
             this.rbAgendado = new System.Windows.Forms.RadioButton();
             this.rbManual = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
@@ -71,8 +72,6 @@
             this.lblData = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lblMensagens = new System.Windows.Forms.Label();
-            this.cmbSerialPorts = new System.Windows.Forms.ComboBox();
-            this.lblCOM = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -418,7 +417,6 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.cmbSerialPorts);
-            this.groupBox2.Controls.Add(this.lblComStatus);
             this.groupBox2.Controls.Add(this.lblCOM);
             this.groupBox2.Controls.Add(this.rbAgendado);
             this.groupBox2.Controls.Add(this.rbManual);
@@ -429,14 +427,23 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
-            // lblComStatus
+            // cmbSerialPorts
             // 
-            this.lblComStatus.AutoSize = true;
-            this.lblComStatus.Location = new System.Drawing.Point(371, 24);
-            this.lblComStatus.Name = "lblComStatus";
-            this.lblComStatus.Size = new System.Drawing.Size(50, 13);
-            this.lblComStatus.TabIndex = 4;
-            this.lblComStatus.Text = "STATUS";
+            this.cmbSerialPorts.FormattingEnabled = true;
+            this.cmbSerialPorts.Location = new System.Drawing.Point(336, 20);
+            this.cmbSerialPorts.Name = "cmbSerialPorts";
+            this.cmbSerialPorts.Size = new System.Drawing.Size(75, 21);
+            this.cmbSerialPorts.TabIndex = 6;
+            this.cmbSerialPorts.SelectedIndexChanged += new System.EventHandler(this.cmbSerialPorts_SelectedIndexChanged);
+            // 
+            // lblCOM
+            // 
+            this.lblCOM.AutoSize = true;
+            this.lblCOM.Location = new System.Drawing.Point(274, 24);
+            this.lblCOM.Name = "lblCOM";
+            this.lblCOM.Size = new System.Drawing.Size(64, 13);
+            this.lblCOM.TabIndex = 3;
+            this.lblCOM.Text = "Porta Serial:";
             // 
             // rbAgendado
             // 
@@ -521,24 +528,6 @@
             this.lblMensagens.TabIndex = 0;
             this.lblMensagens.Text = "Mensagens";
             // 
-            // cmbSerialPorts
-            // 
-            this.cmbSerialPorts.FormattingEnabled = true;
-            this.cmbSerialPorts.Location = new System.Drawing.Point(305, 20);
-            this.cmbSerialPorts.Name = "cmbSerialPorts";
-            this.cmbSerialPorts.Size = new System.Drawing.Size(61, 21);
-            this.cmbSerialPorts.TabIndex = 6;
-            this.cmbSerialPorts.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // lblCOM
-            // 
-            this.lblCOM.AutoSize = true;
-            this.lblCOM.Location = new System.Drawing.Point(274, 24);
-            this.lblCOM.Name = "lblCOM";
-            this.lblCOM.Size = new System.Drawing.Size(34, 13);
-            this.lblCOM.TabIndex = 3;
-            this.lblCOM.Text = "COM ";
-            // 
             // Painel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -597,7 +586,6 @@
         private System.Windows.Forms.Label lblData;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lblMensagens;
-        private System.Windows.Forms.Label lblComStatus;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnAge1;
         private System.Windows.Forms.Button btnAge8;
