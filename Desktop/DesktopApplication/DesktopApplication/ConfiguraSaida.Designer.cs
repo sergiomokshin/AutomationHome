@@ -31,11 +31,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtNomeSaida = new System.Windows.Forms.TextBox();
             this.Agendamento = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtHrI = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtHrF = new System.Windows.Forms.TextBox();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -64,12 +64,12 @@
             this.Agendamento.TabIndex = 2;
             this.Agendamento.Text = "Agendamento";
             // 
-            // textBox1
+            // txtHrI
             // 
-            this.textBox1.Location = new System.Drawing.Point(92, 54);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(31, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtHrI.Location = new System.Drawing.Point(92, 54);
+            this.txtHrI.Name = "txtHrI";
+            this.txtHrI.Size = new System.Drawing.Size(31, 20);
+            this.txtHrI.TabIndex = 3;
             // 
             // label2
             // 
@@ -98,12 +98,12 @@
             this.label4.TabIndex = 7;
             this.label4.Text = ":59";
             // 
-            // textBox2
+            // txtHrF
             // 
-            this.textBox2.Location = new System.Drawing.Point(182, 54);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(31, 20);
-            this.textBox2.TabIndex = 6;
+            this.txtHrF.Location = new System.Drawing.Point(182, 54);
+            this.txtHrF.Name = "txtHrF";
+            this.txtHrF.Size = new System.Drawing.Size(31, 20);
+            this.txtHrF.TabIndex = 6;
             // 
             // btnAlterar
             // 
@@ -113,23 +113,27 @@
             this.btnAlterar.TabIndex = 8;
             this.btnAlterar.Text = "Alterar";
             this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // ConfiguraSaida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 178);
+            this.ClientSize = new System.Drawing.Size(273, 154);
             this.Controls.Add(this.btnAlterar);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtHrF);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtHrI);
             this.Controls.Add(this.Agendamento);
             this.Controls.Add(this.txtNomeSaida);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ConfiguraSaida";
             this.Text = "Configurar Saída";
+            this.Load += new System.EventHandler(this.ConfiguraSaida_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,11 +144,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNomeSaida;
         private System.Windows.Forms.Label Agendamento;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtHrI;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtHrF;
         private System.Windows.Forms.Button btnAlterar;
     }
 }

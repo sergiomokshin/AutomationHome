@@ -72,10 +72,19 @@
             this.lblData = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lblMensagens = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblIluminacao = new System.Windows.Forms.Label();
+            this.trB = new System.Windows.Forms.TrackBar();
+            this.trG = new System.Windows.Forms.TrackBar();
+            this.tbR = new System.Windows.Forms.TrackBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbR)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -384,7 +393,7 @@
             this.btnSaida2.Name = "btnSaida2";
             this.btnSaida2.Size = new System.Drawing.Size(148, 23);
             this.btnSaida2.TabIndex = 3;
-            this.btnSaida2.UseVisualStyleBackColor = true;
+            this.btnSaida2.UseVisualStyleBackColor = false;
             this.btnSaida2.Click += new System.EventHandler(this.btnSaida2_Click);
             // 
             // lblSaida2
@@ -402,7 +411,7 @@
             this.btnSaida1.Name = "btnSaida1";
             this.btnSaida1.Size = new System.Drawing.Size(148, 23);
             this.btnSaida1.TabIndex = 1;
-            this.btnSaida1.UseVisualStyleBackColor = true;
+            this.btnSaida1.UseVisualStyleBackColor = false;
             this.btnSaida1.Click += new System.EventHandler(this.btnSaida1_Click);
             // 
             // lblSaida1
@@ -423,14 +432,14 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(431, 55);
+            this.groupBox2.Size = new System.Drawing.Size(370, 55);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
             // cmbSerialPorts
             // 
             this.cmbSerialPorts.FormattingEnabled = true;
-            this.cmbSerialPorts.Location = new System.Drawing.Point(336, 20);
+            this.cmbSerialPorts.Location = new System.Drawing.Point(286, 20);
             this.cmbSerialPorts.Name = "cmbSerialPorts";
             this.cmbSerialPorts.Size = new System.Drawing.Size(75, 21);
             this.cmbSerialPorts.TabIndex = 6;
@@ -439,7 +448,7 @@
             // lblCOM
             // 
             this.lblCOM.AutoSize = true;
-            this.lblCOM.Location = new System.Drawing.Point(274, 24);
+            this.lblCOM.Location = new System.Drawing.Point(224, 24);
             this.lblCOM.Name = "lblCOM";
             this.lblCOM.Size = new System.Drawing.Size(64, 13);
             this.lblCOM.TabIndex = 3;
@@ -484,15 +493,15 @@
             // 
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.lblData);
-            this.groupBox3.Location = new System.Drawing.Point(451, 12);
+            this.groupBox3.Location = new System.Drawing.Point(388, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(141, 55);
+            this.groupBox3.Size = new System.Drawing.Size(204, 55);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(110, 19);
+            this.button1.Location = new System.Drawing.Point(170, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(23, 23);
             this.button1.TabIndex = 2;
@@ -513,7 +522,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.lblMensagens);
-            this.groupBox4.Location = new System.Drawing.Point(12, 360);
+            this.groupBox4.Location = new System.Drawing.Point(12, 481);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(580, 46);
             this.groupBox4.TabIndex = 3;
@@ -522,17 +531,66 @@
             // lblMensagens
             // 
             this.lblMensagens.AutoSize = true;
-            this.lblMensagens.Location = new System.Drawing.Point(7, 20);
+            this.lblMensagens.Location = new System.Drawing.Point(7, 19);
             this.lblMensagens.Name = "lblMensagens";
             this.lblMensagens.Size = new System.Drawing.Size(62, 13);
             this.lblMensagens.TabIndex = 0;
             this.lblMensagens.Text = "Mensagens";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.lblIluminacao);
+            this.groupBox5.Controls.Add(this.trB);
+            this.groupBox5.Controls.Add(this.trG);
+            this.groupBox5.Controls.Add(this.tbR);
+            this.groupBox5.Location = new System.Drawing.Point(12, 360);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(579, 115);
+            this.groupBox5.TabIndex = 4;
+            this.groupBox5.TabStop = false;
+            // 
+            // lblIluminacao
+            // 
+            this.lblIluminacao.AutoSize = true;
+            this.lblIluminacao.Location = new System.Drawing.Point(7, 14);
+            this.lblIluminacao.Name = "lblIluminacao";
+            this.lblIluminacao.Size = new System.Drawing.Size(58, 13);
+            this.lblIluminacao.TabIndex = 32;
+            this.lblIluminacao.Text = "Iluminação";
+            // 
+            // trB
+            // 
+            this.trB.Location = new System.Drawing.Point(86, 67);
+            this.trB.Maximum = 9;
+            this.trB.Name = "trB";
+            this.trB.Size = new System.Drawing.Size(379, 45);
+            this.trB.TabIndex = 2;
+            this.trB.Scroll += new System.EventHandler(this.trB_Scroll);
+            // 
+            // trG
+            // 
+            this.trG.Location = new System.Drawing.Point(86, 38);
+            this.trG.Maximum = 9;
+            this.trG.Name = "trG";
+            this.trG.Size = new System.Drawing.Size(379, 45);
+            this.trG.TabIndex = 1;
+            this.trG.Scroll += new System.EventHandler(this.trG_Scroll);
+            // 
+            // tbR
+            // 
+            this.tbR.Location = new System.Drawing.Point(86, 14);
+            this.tbR.Maximum = 9;
+            this.tbR.Name = "tbR";
+            this.tbR.Size = new System.Drawing.Size(379, 45);
+            this.tbR.TabIndex = 0;
+            this.tbR.Scroll += new System.EventHandler(this.tbR_Scroll);
+            // 
             // Painel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 426);
+            this.ClientSize = new System.Drawing.Size(613, 544);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -547,6 +605,11 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbR)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -597,6 +660,11 @@
         private System.Windows.Forms.Button btnAge2;
         private System.Windows.Forms.ComboBox cmbSerialPorts;
         private System.Windows.Forms.Label lblCOM;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TrackBar tbR;
+        private System.Windows.Forms.TrackBar trB;
+        private System.Windows.Forms.TrackBar trG;
+        private System.Windows.Forms.Label lblIluminacao;
     }
 }
 

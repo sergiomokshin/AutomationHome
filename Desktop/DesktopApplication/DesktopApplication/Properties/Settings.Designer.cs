@@ -34,5 +34,101 @@ namespace DesktopApplication.Properties {
                 this["COM"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Saída 1")]
+        public string Saida1 {
+            get {
+                return ((string)(this["Saida1"]));
+            }
+            set {
+                this["Saida1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Saída 2")]
+        public string Saida2 {
+            get {
+                return ((string)(this["Saida2"]));
+            }
+            set {
+                this["Saida2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Saída 3")]
+        public string Saida3 {
+            get {
+                return ((string)(this["Saida3"]));
+            }
+            set {
+                this["Saida3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Saída 4")]
+        public string Saida4 {
+            get {
+                return ((string)(this["Saida4"]));
+            }
+            set {
+                this["Saida4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Saída 5")]
+        public string Saida5 {
+            get {
+                return ((string)(this["Saida5"]));
+            }
+            set {
+                this["Saida5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Saída 6")]
+        public string Saida6 {
+            get {
+                return ((string)(this["Saida6"]));
+            }
+            set {
+                this["Saida6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Saída 7")]
+        public string Saida7 {
+            get {
+                return ((string)(this["Saida7"]));
+            }
+            set {
+                this["Saida7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Saída 8")]
+        public string Saida8 {
+            get {
+                return ((string)(this["Saida8"]));
+            }
+            set {
+                this["Saida8"] = value;
+            }
+        }
     }
 }
