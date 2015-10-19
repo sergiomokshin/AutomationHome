@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Painel));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAge8 = new System.Windows.Forms.Button();
             this.btnAge7 = new System.Windows.Forms.Button();
@@ -123,7 +124,7 @@
             this.groupBox1.Controls.Add(this.lblSaida1);
             this.groupBox1.Location = new System.Drawing.Point(12, 73);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(580, 281);
+            this.groupBox1.Size = new System.Drawing.Size(606, 281);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -131,9 +132,9 @@
             // 
             this.btnAge8.Location = new System.Drawing.Point(359, 232);
             this.btnAge8.Name = "btnAge8";
-            this.btnAge8.Size = new System.Drawing.Size(50, 23);
+            this.btnAge8.Size = new System.Drawing.Size(59, 23);
             this.btnAge8.TabIndex = 31;
-            this.btnAge8.Text = "button2";
+            this.btnAge8.Text = "Alterar";
             this.btnAge8.UseVisualStyleBackColor = true;
             this.btnAge8.Click += new System.EventHandler(this.btnAge8_Click);
             // 
@@ -141,9 +142,9 @@
             // 
             this.btnAge7.Location = new System.Drawing.Point(360, 203);
             this.btnAge7.Name = "btnAge7";
-            this.btnAge7.Size = new System.Drawing.Size(50, 23);
+            this.btnAge7.Size = new System.Drawing.Size(59, 23);
             this.btnAge7.TabIndex = 30;
-            this.btnAge7.Text = "button2";
+            this.btnAge7.Text = "Alterar";
             this.btnAge7.UseVisualStyleBackColor = true;
             this.btnAge7.Click += new System.EventHandler(this.btnAge7_Click);
             // 
@@ -151,9 +152,9 @@
             // 
             this.btnAge6.Location = new System.Drawing.Point(359, 174);
             this.btnAge6.Name = "btnAge6";
-            this.btnAge6.Size = new System.Drawing.Size(50, 23);
+            this.btnAge6.Size = new System.Drawing.Size(59, 23);
             this.btnAge6.TabIndex = 29;
-            this.btnAge6.Text = "button2";
+            this.btnAge6.Text = "Alterar";
             this.btnAge6.UseVisualStyleBackColor = true;
             this.btnAge6.Click += new System.EventHandler(this.btnAge6_Click);
             // 
@@ -161,9 +162,9 @@
             // 
             this.btnAge5.Location = new System.Drawing.Point(360, 145);
             this.btnAge5.Name = "btnAge5";
-            this.btnAge5.Size = new System.Drawing.Size(50, 23);
+            this.btnAge5.Size = new System.Drawing.Size(59, 23);
             this.btnAge5.TabIndex = 28;
-            this.btnAge5.Text = "button2";
+            this.btnAge5.Text = "Alterar";
             this.btnAge5.UseVisualStyleBackColor = true;
             this.btnAge5.Click += new System.EventHandler(this.btnAge5_Click);
             // 
@@ -171,9 +172,9 @@
             // 
             this.btnAge4.Location = new System.Drawing.Point(359, 116);
             this.btnAge4.Name = "btnAge4";
-            this.btnAge4.Size = new System.Drawing.Size(50, 23);
+            this.btnAge4.Size = new System.Drawing.Size(59, 23);
             this.btnAge4.TabIndex = 27;
-            this.btnAge4.Text = "button2";
+            this.btnAge4.Text = "Alterar";
             this.btnAge4.UseVisualStyleBackColor = true;
             this.btnAge4.Click += new System.EventHandler(this.btnAge4_Click);
             // 
@@ -181,9 +182,9 @@
             // 
             this.btnAge3.Location = new System.Drawing.Point(359, 87);
             this.btnAge3.Name = "btnAge3";
-            this.btnAge3.Size = new System.Drawing.Size(50, 23);
+            this.btnAge3.Size = new System.Drawing.Size(59, 23);
             this.btnAge3.TabIndex = 26;
-            this.btnAge3.Text = "button2";
+            this.btnAge3.Text = "Alterar";
             this.btnAge3.UseVisualStyleBackColor = true;
             this.btnAge3.Click += new System.EventHandler(this.btnAge3_Click);
             // 
@@ -191,19 +192,21 @@
             // 
             this.btnAge2.Location = new System.Drawing.Point(360, 58);
             this.btnAge2.Name = "btnAge2";
-            this.btnAge2.Size = new System.Drawing.Size(50, 23);
+            this.btnAge2.Size = new System.Drawing.Size(59, 23);
             this.btnAge2.TabIndex = 25;
-            this.btnAge2.Text = "button2";
+            this.btnAge2.Text = "Alterar";
             this.btnAge2.UseVisualStyleBackColor = true;
             this.btnAge2.Click += new System.EventHandler(this.btnAge2_Click);
             // 
             // btnAge1
             // 
+            this.btnAge1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAge1.Image = ((System.Drawing.Image)(resources.GetObject("btnAge1.Image")));
             this.btnAge1.Location = new System.Drawing.Point(360, 29);
             this.btnAge1.Name = "btnAge1";
-            this.btnAge1.Size = new System.Drawing.Size(50, 23);
+            this.btnAge1.Size = new System.Drawing.Size(59, 23);
             this.btnAge1.TabIndex = 24;
-            this.btnAge1.Text = "button2";
+            this.btnAge1.Text = "Alterar";
             this.btnAge1.UseVisualStyleBackColor = true;
             this.btnAge1.Click += new System.EventHandler(this.btnAge1_Click);
             // 
@@ -495,7 +498,7 @@
             this.groupBox3.Controls.Add(this.lblData);
             this.groupBox3.Location = new System.Drawing.Point(388, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(204, 55);
+            this.groupBox3.Size = new System.Drawing.Size(230, 55);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
@@ -503,9 +506,9 @@
             // 
             this.button1.Location = new System.Drawing.Point(170, 19);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 23);
+            this.button1.Size = new System.Drawing.Size(54, 23);
             this.button1.TabIndex = 2;
-            this.button1.Text = "A";
+            this.button1.Text = "Alterar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -524,7 +527,7 @@
             this.groupBox4.Controls.Add(this.lblMensagens);
             this.groupBox4.Location = new System.Drawing.Point(12, 481);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(580, 46);
+            this.groupBox4.Size = new System.Drawing.Size(606, 46);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             // 
@@ -545,7 +548,7 @@
             this.groupBox5.Controls.Add(this.tbR);
             this.groupBox5.Location = new System.Drawing.Point(12, 360);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(579, 115);
+            this.groupBox5.Size = new System.Drawing.Size(606, 115);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             // 
@@ -589,12 +592,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 544);
+            this.ClientSize = new System.Drawing.Size(628, 544);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Painel";
             this.Text = "Automation Home";
             this.groupBox1.ResumeLayout(false);
