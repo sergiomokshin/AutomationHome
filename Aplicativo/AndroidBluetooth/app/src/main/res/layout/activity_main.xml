@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_alignBottom="@+id/imgS1"
                 android:layout_alignLeft="@+id/txtS1"
-                android:text="" />
+                android:text="Agendado das 07:00 as 19:00" />
         </RelativeLayout>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_alignBottom="@+id/imgS2"
                 android:layout_alignLeft="@+id/txtS2"
-                android:text="" />
+                android:text="Agendado das 07:00 as 19:00" />
         </RelativeLayout>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
