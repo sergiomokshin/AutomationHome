@@ -352,7 +352,7 @@ namespace DesktopApplication
             using (var frm = new ConfiguraSaida())
             {
                 frm.Saida = 4;
-                frm.Nome = lblSaida1.Text;
+                frm.Nome = lblSaida4.Text;
                 frm.HrI = S1HrI;
                 frm.HrF = S1HrF;
                 frm.ShowDialog();
@@ -364,7 +364,7 @@ namespace DesktopApplication
             using (var frm = new ConfiguraSaida())
             {
                 frm.Saida = 5;
-                frm.Nome = lblSaida1.Text;
+                frm.Nome = lblSaida5.Text;
                 frm.HrI = S1HrI;
                 frm.HrF = S1HrF;
                 frm.ShowDialog();
