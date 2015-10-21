@@ -435,12 +435,12 @@ namespace DesktopApplication
 
         private void tbR_Scroll(object sender, EventArgs e)
         {
-            EnviaComandoRGB("6", trB.Value);
+            EnviaComandoRGB("6", tbR.Value);
         }
 
         private void trG_Scroll(object sender, EventArgs e)
         {
-            EnviaComandoRGB("5", trB.Value);
+            EnviaComandoRGB("5", trG.Value);
         }
 
         private void trB_Scroll(object sender, EventArgs e)
