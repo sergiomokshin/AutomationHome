@@ -353,8 +353,8 @@ namespace DesktopApplication
             {
                 frm.Saida = 4;
                 frm.Nome = lblSaida4.Text;
-                frm.HrI = S1HrI;
-                frm.HrF = S1HrF;
+                frm.HrI = S4HrI;
+                frm.HrF = S4HrF;
                 frm.ShowDialog();
             }
         }
@@ -365,8 +365,8 @@ namespace DesktopApplication
             {
                 frm.Saida = 5;
                 frm.Nome = lblSaida5.Text;
-                frm.HrI = S1HrI;
-                frm.HrF = S1HrF;
+                frm.HrI = S5HrI;
+                frm.HrF = S5HrF;
                 frm.ShowDialog();
             }
         }
