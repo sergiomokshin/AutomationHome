@@ -1,0 +1,14 @@
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\bin\Debug\DesktopApplication.exe.config
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\bin\Debug\DesktopApplication.exe
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\bin\Debug\DesktopApplication.pdb
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.csprojResolveAssemblyReference.cache
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.Painel.resources
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.Properties.Resources.resources
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.csproj.GenerateResource.Cache
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.exe
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.pdb
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.HorarioPlaca.resources
+D:\git\AutomationHome\Desktop\DesktopApplication\DesktopApplication\obj\Debug\DesktopApplication.ConfiguraSaida.resources
+D:\git\AutomationHome\Testes\Temp\DesktopApplication\DesktopApplication2.0\bin\Debug\DesktopApplication.exe.config
+D:\git\AutomationHome\Testes\Temp\DesktopApplication\DesktopApplication2.0\obj\Debug\DesktopApplication.exe
+D:\git\AutomationHome\Testes\Temp\DesktopApplication\DesktopApplication2.0\obj\Debug\DesktopApplication.pdb

@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DesktopApplication.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="COM" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM3</Value>
+    </Setting>
+    <Setting Name="Saida1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Saída 1</Value>
+    </Setting>
+    <Setting Name="Saida2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Saída 2</Value>
+    </Setting>
+    <Setting Name="Saida3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Saída 3</Value>
+    </Setting>
+    <Setting Name="Saida4" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Saída 4</Value>
+    </Setting>
+    <Setting Name="Saida5" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Saída 5</Value>
+    </Setting>
+    <Setting Name="Saida6" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Saída 6</Value>
+    </Setting>
+    <Setting Name="Saida7" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Saída 7</Value>
+    </Setting>
+    <Setting Name="Saida8" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Saída 8</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
