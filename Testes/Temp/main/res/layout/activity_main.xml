@@ -1,0 +1,466 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+	 <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="#FFFFFF"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        tools:context=".Main">
+		
+		
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+			
+        <TableRow android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="20dp"
+            android:padding="1dip" >
+            <Switch
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/swS1"
+                android:layout_gravity="center"
+                android:textSize="10px"
+                android:layout_column="1" />
+            <TextView
+                android:id="@+id/txtS1"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20px"
+                android:textSize="18dp"
+                android:layout_width="fill_parent"
+                android:text="Saída 1"
+                android:layout_column="3"/>
+            <TableLayout android:layout_gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_column="4">
+                <TableRow android:layout_gravity="center"
+                    android:layout_width="fill_parent"
+                    >
+                    <TextView
+                        android:id="@+id/txtTS1"
+                        android:textColor="#000000"
+
+                        android:textSize="10dp"
+                        android:text="Modo Agendado        "
+                        android:layout_column="3"/></TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtHS1"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="07:00 às 19:00"
+                        android:layout_column="3"/></TableRow>
+            </TableLayout>
+            <ImageButton
+                android:layout_width="fill_parent"
+                android:id="@+id/btnCfgS1"
+                android:layout_column="5"
+                android:src="@mipmap/setting" />
+        </TableRow>
+
+		
+		<TableRow android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dip" >
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/swS2"
+                android:layout_gravity="center"
+                android:textSize="10px"
+                android:layout_column="1" />
+            <TextView
+                android:id="@+id/txtS2"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20px"
+                android:textSize="18dp"
+                android:text="Saída 1"
+                android:layout_column="3"/>
+            <TableLayout android:layout_gravity="center"
+                android:layout_column="4">
+                <TableRow android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/txtTS2"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="Modo Agendado        "
+                        android:layout_column="3"/></TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtHS2"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="07:00 às 19:00"
+                        android:layout_column="3"/></TableRow>
+            </TableLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCfgS2"
+                android:layout_column="5"
+                android:src="@mipmap/setting" />
+        </TableRow>
+		
+		<TableRow android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:padding="1dip" >
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/swS3"
+                android:layout_gravity="center"
+                android:textSize="10px"
+                android:layout_column="1" />
+            <TextView
+                android:id="@+id/txtS3"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20px"
+                android:textSize="18dp"
+                android:text="Saída 1"
+                android:layout_column="3"/>
+            <TableLayout android:layout_gravity="center"
+                android:layout_column="4">
+                <TableRow android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/txtTS3"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="Modo Agendado        "
+                        android:layout_column="3"/></TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtHS3"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="07:00 às 19:00"
+                        android:layout_column="3"/></TableRow>
+            </TableLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCfgS3"
+                android:layout_column="5"
+                android:src="@mipmap/setting" />
+        </TableRow>
+		
+		<TableRow android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:padding="1dip" >
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/swS4"
+                android:layout_gravity="center"
+                android:textSize="10px"
+                android:layout_column="1" />
+            <TextView
+                android:id="@+id/txtS4"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20px"
+                android:textSize="18dp"
+                android:text="Saída 1"
+                android:layout_column="3"/>
+            <TableLayout android:layout_gravity="center"
+                android:layout_column="4">
+                <TableRow android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/txtTS4"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="Modo Agendado        "
+                        android:layout_column="3"/></TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtHS4"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="07:00 às 19:00"
+                        android:layout_column="3"/></TableRow>
+            </TableLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCfgS4"
+                android:layout_column="5"
+                android:src="@mipmap/setting" />
+        </TableRow>
+		
+		<TableRow android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dip" >
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/swS5"
+                android:layout_gravity="center"
+                android:textSize="10px"
+                android:layout_column="1" />
+            <TextView
+                android:id="@+id/txtS5"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20px"
+                android:textSize="18dp"
+                android:text="Saída 1"
+                android:layout_column="3"/>
+            <TableLayout android:layout_gravity="center"
+                android:layout_column="4">
+                <TableRow android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/txtTS5"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="Modo Agendado        "
+                        android:layout_column="3"/></TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtHS5"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="07:00 às 19:00"
+                        android:layout_column="3"/></TableRow>
+            </TableLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCfgS5"
+                android:layout_column="5"
+                android:src="@mipmap/setting" />
+        </TableRow>
+		
+		<TableRow android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dip" >
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/swS6"
+                android:layout_gravity="center"
+                android:textSize="10px"
+                android:layout_column="1" />
+            <TextView
+                android:id="@+id/txtS6"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20px"
+                android:textSize="18dp"
+                android:text="Saída 1"
+                android:layout_column="3"/>
+            <TableLayout android:layout_gravity="center"
+                android:layout_column="4">
+                <TableRow android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/txtTS6"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="Modo Agendado        "
+                        android:layout_column="3"/></TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtHS6"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="07:00 às 19:00"
+                        android:layout_column="3"/></TableRow>
+            </TableLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCfgS6"
+                android:layout_column="5"
+                android:src="@mipmap/setting" />
+        </TableRow>
+		
+		<TableRow android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dip" >
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/swS7"
+                android:layout_gravity="center"
+                android:textSize="10px"
+                android:layout_column="1" />
+            <TextView
+                android:id="@+id/txtS7"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20px"
+                android:textSize="18dp"
+                android:text="Saída 1"
+                android:layout_column="3"/>
+            <TableLayout android:layout_gravity="center"
+                android:layout_column="4">
+                <TableRow android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/txtTS7"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="Modo Agendado        "
+                        android:layout_column="3"/></TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtHS7"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="07:00 às 19:00"
+                        android:layout_column="3"/></TableRow>
+            </TableLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCfgS7"
+                android:layout_column="5"
+                android:src="@mipmap/setting" />
+        </TableRow>
+		
+		<TableRow android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dip" >
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/swS8"
+                android:layout_gravity="center"
+                android:textSize="10px"
+                android:layout_column="1" />
+            <TextView
+                android:id="@+id/txtS8"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20px"
+                android:textSize="18dp"
+                android:text="Saída 1"
+                android:layout_column="3"/>
+            <TableLayout android:layout_gravity="center"
+                android:layout_column="4">
+                <TableRow android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/txtTS8"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="Modo Agendado        "
+                        android:layout_column="3"/></TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/txtHS8"
+                        android:textColor="#000000"
+                        android:textSize="10dp"
+                        android:text="07:00 às 19:00"
+                        android:layout_column="3"/></TableRow>
+            </TableLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCfgS8"
+                android:layout_column="5"
+                android:src="@mipmap/setting" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        </TableRow>
+
+
+    </TableLayout>
+	
+	
+	<LinearLayout
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/txtSRGB"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="Iluminação" />
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="9"
+                android:id="@+id/seekR" />
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="9"
+                android:id="@+id/seekG" />
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="9"
+                android:id="@+id/seekB" />
+
+            <TextView
+                android:text="Mensagens"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtMsg" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="#FF333333"
+            android:gravity="center_vertical"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:id="@+id/txtHorario"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5px"
+                android:text="Horário Placa: ##/##/##### ##:##" />
+
+        </LinearLayout>
+	
+	</LinearLayout>
+</ScrollView>

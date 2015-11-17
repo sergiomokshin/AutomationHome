@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/scrollView1">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFFFF"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    tools:context=".SetupDevice">
+
+    <LinearLayout
+        android:textColor="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <TextView
+            android:id="@+id/txtS"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Nome Saída:" />
+        <EditText
+            android:id="@+id/edtS"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="20"
+            android:layout_width="140dp"
+            android:textColor="#FFFFFF">
+        </EditText>
+    </LinearLayout>		
+
+	<LinearLayout
+        android:textColor="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp">	
+		
+		<TextView
+            android:id="@+id/txtTipo"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Tipo Saída:" />
+		
+
+	   <Spinner
+			android:id="@+id/spTipo"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+	</LinearLayout>		
+
+	<LinearLayout
+		android:id="@+id/llAgendamento"
+        android:textColor="#000000"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp">	
+		
+		<TextView
+            android:id="@+id/txtHorario"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Agendamento:" />
+			
+        <EditText
+            android:id="@+id/edtSHI"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="#000000"
+            android:inputType="number">
+        </EditText>
+        <TextView
+            android:id="@+id/txtSeparador"
+            android:layout_height="wrap_content"
+            android:layout_width="22dp"
+            android:textColor="#000000"
+            android:text=":" />
+		<EditText
+            android:id="@+id/edtSMI"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="#000000"
+            android:inputType="number">
+        </EditText>			
+			
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:textColor="#000000"
+            android:text=" até " />
+        <EditText
+            android:id="@+id/edtSHF"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="#000000"
+            android:inputType="number">
+        </EditText>
+		
+        <TextView
+            android:id="@+id/txtSeparador2"
+            android:layout_height="wrap_content"
+            android:layout_width="22dp"
+            android:textColor="#000000"
+            android:text=":" />
+		<EditText
+            android:id="@+id/edtSMF"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:textColor="#000000"
+            android:inputType="number">
+        </EditText>			
+	   
+    </LinearLayout>
+	
+<LinearLayout
+		android:id="@+id/llPulso"
+        android:textColor="#FFFFFF"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp">	
+		
+		<TextView
+            android:id="@+id/txtTempo"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Pulso:" />
+			
+        <EditText
+            android:id="@+id/edtSP"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+			android:maxLength="5"
+            android:textColor="#000000"
+            android:inputType="number">
+        </EditText>       
+			
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="#000000"
+            android:text=" segundos (máximo 5 segundos) " />
+       
+	   
+    </LinearLayout>	
+	   
+
+   <Button
+       android:id="@+id/btAlterar"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:textColor="#000000"
+       android:text="Alterar" />
+</LinearLayout>
+</ScrollView>
