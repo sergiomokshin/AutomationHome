@@ -644,6 +644,11 @@ namespace DesktopApplication
             var comando = string.Format("|A{0}{1}|", Saida, Status);
             EnviarComando(comando);
         }
+
+        private void btnIniciarPlaca_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

@@ -75,6 +75,7 @@
             this.trB = new System.Windows.Forms.TrackBar();
             this.trG = new System.Windows.Forms.TrackBar();
             this.tbR = new System.Windows.Forms.TrackBar();
+            this.btnIniciarPlaca = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -425,6 +426,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnIniciarPlaca);
             this.groupBox2.Controls.Add(this.cmbSerialPorts);
             this.groupBox2.Controls.Add(this.lblCOM);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
@@ -547,6 +549,16 @@
             this.tbR.TabIndex = 0;
             this.tbR.Scroll += new System.EventHandler(this.tbR_Scroll);
             // 
+            // btnIniciarPlaca
+            // 
+            this.btnIniciarPlaca.Location = new System.Drawing.Point(276, 21);
+            this.btnIniciarPlaca.Name = "btnIniciarPlaca";
+            this.btnIniciarPlaca.Size = new System.Drawing.Size(88, 23);
+            this.btnIniciarPlaca.TabIndex = 3;
+            this.btnIniciarPlaca.Text = "InicializarPlaca";
+            this.btnIniciarPlaca.UseVisualStyleBackColor = true;
+            this.btnIniciarPlaca.Click += new System.EventHandler(this.btnIniciarPlaca_Click);
+            // 
             // Painel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -625,6 +637,7 @@
         private System.Windows.Forms.TrackBar trB;
         private System.Windows.Forms.TrackBar trG;
         private System.Windows.Forms.Label lblIluminacao;
+        private System.Windows.Forms.Button btnIniciarPlaca;
     }
 }
 
