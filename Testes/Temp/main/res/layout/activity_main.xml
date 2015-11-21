@@ -60,12 +60,7 @@
                         android:textSize="10dp"
                         android:text="07:00 às 19:00"
                         android:layout_column="3"/></TableRow>
-            </TableLayout>
-            <ImageButton
-                android:layout_width="fill_parent"
-                android:id="@+id/btnCfgS1"
-                android:layout_column="5"
-                android:src="@mipmap/setting" />
+            </TableLayout>         
         </TableRow>
 
 		
@@ -107,12 +102,7 @@
                         android:text="07:00 às 19:00"
                         android:layout_column="3"/></TableRow>
             </TableLayout>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnCfgS2"
-                android:layout_column="5"
-                android:src="@mipmap/setting" />
+        
         </TableRow>
 		
 		<TableRow android:layout_width="wrap_content"
@@ -153,12 +143,7 @@
                         android:text="07:00 às 19:00"
                         android:layout_column="3"/></TableRow>
             </TableLayout>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnCfgS3"
-                android:layout_column="5"
-                android:src="@mipmap/setting" />
+          
         </TableRow>
 		
 		<TableRow android:layout_width="wrap_content"
@@ -199,12 +184,7 @@
                         android:text="07:00 às 19:00"
                         android:layout_column="3"/></TableRow>
             </TableLayout>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnCfgS4"
-                android:layout_column="5"
-                android:src="@mipmap/setting" />
+            
         </TableRow>
 		
 		<TableRow android:layout_width="wrap_content"
@@ -245,12 +225,7 @@
                         android:text="07:00 às 19:00"
                         android:layout_column="3"/></TableRow>
             </TableLayout>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnCfgS5"
-                android:layout_column="5"
-                android:src="@mipmap/setting" />
+        
         </TableRow>
 		
 		<TableRow android:layout_width="wrap_content"
@@ -291,12 +266,7 @@
                         android:text="07:00 às 19:00"
                         android:layout_column="3"/></TableRow>
             </TableLayout>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnCfgS6"
-                android:layout_column="5"
-                android:src="@mipmap/setting" />
+          
         </TableRow>
 		
 		<TableRow android:layout_width="wrap_content"
@@ -337,12 +307,7 @@
                         android:text="07:00 às 19:00"
                         android:layout_column="3"/></TableRow>
             </TableLayout>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnCfgS7"
-                android:layout_column="5"
-                android:src="@mipmap/setting" />
+          
         </TableRow>
 		
 		<TableRow android:layout_width="wrap_content"
@@ -383,12 +348,7 @@
                         android:text="07:00 às 19:00"
                         android:layout_column="3"/></TableRow>
             </TableLayout>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnCfgS8"
-                android:layout_column="5"
-                android:src="@mipmap/setting" />
+      
         </TableRow>
 
         <TableRow

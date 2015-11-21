@@ -1,12 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+		<item android:id="@+id/DeviceListActivity"
+		  android:title="Selecionar Bluetooth"
+		  />
+		  
         <item android:id="@+id/DefineHoraData"
         android:title="Data/Hora"
          />
-
-
-	<item android:id="@+id/DeviceListActivity"
-		  android:title="Selecionar Bluetooth"
-		  />
-	  
+		
+        <item android:id="@+id/SelecionaSaída"
+        android:title="Configurar Saída"
+         />
+		 		  
 </menu>

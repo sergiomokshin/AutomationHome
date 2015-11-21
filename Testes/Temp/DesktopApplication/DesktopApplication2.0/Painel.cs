@@ -175,210 +175,208 @@ namespace DesktopApplication
 
         private void AtualizaInterface(string comando)
         {
-            if (comando.IndexOf("dataCB") >=0 )
+            if (comando.IndexOf("Dia") >= 0 )
             {
                 //Install-Package System.Json -Version 4.0.20126.16343
-                
-                comando = comando.Replace("dataCB(", "");
-                comando = comando.Replace(")", "");
                 //JsonObject result = value as JsonObject;
 
                 JsonValue value = JsonValue.Parse(comando);
-
-                S1 = Convert.ToInt32(value["S1"].ToString()); 		
-				S1HI = Convert.ToInt32(value["S1HI"].ToString()); 
-                S1MI = Convert.ToInt32(value["S1MI"].ToString()); 
-                S1HF = Convert.ToInt32(value["S1HF"].ToString()); 
-                S1MF = Convert.ToInt32(value["S1MF"].ToString()); 
-                TS1 = value["TS1"].ToString();
-                S1P = Convert.ToInt32(value["S1P"].ToString()); 
 				
-				S2 = Convert.ToInt32(value["S2"].ToString());  		
-				S2HI = Convert.ToInt32(value["S2HI"].ToString()); 
-                S2MI = Convert.ToInt32(value["S2MI"].ToString()); 
-                S2HF = Convert.ToInt32(value["S2HF"].ToString()); 
-                S2MF = Convert.ToInt32(value["S2MF"].ToString()); 
-                TS2 = value["TS2"].ToString();
-                S2P = Convert.ToInt32(value["S2P"].ToString()); 
-
-                				
-				S3 = Convert.ToInt32(value["S3"].ToString());  		
-				S3HI = Convert.ToInt32(value["S3HI"].ToString()); 
-                S3MI = Convert.ToInt32(value["S3MI"].ToString()); 
-                S3HF = Convert.ToInt32(value["S3HF"].ToString()); 
-                S3MF = Convert.ToInt32(value["S3MF"].ToString()); 
-                TS3 = value["TS3"].ToString();
-                S3P = Convert.ToInt32(value["S3P"].ToString()); 
-				
-				S4 = Convert.ToInt32(value["S4"].ToString());  		
-				S4HI = Convert.ToInt32(value["S4HI"].ToString()); 
-                S4MI = Convert.ToInt32(value["S4MI"].ToString()); 
-                S4HF = Convert.ToInt32(value["S4HF"].ToString()); 
-                S4MF = Convert.ToInt32(value["S4MF"].ToString()); 
-                TS4 = value["TS4"].ToString();
-                S4P = Convert.ToInt32(value["S4P"].ToString()); 
-				
-				S5 = Convert.ToInt32(value["S5"].ToString());  		
-				S5HI = Convert.ToInt32(value["S5HI"].ToString()); 
-                S5MI = Convert.ToInt32(value["S5MI"].ToString()); 
-                S5HF = Convert.ToInt32(value["S5HF"].ToString()); 
-                S5MF = Convert.ToInt32(value["S5MF"].ToString()); 
-                TS5 = value["TS5"].ToString();
-                S5P = Convert.ToInt32(value["S5P"].ToString());
-
-
-                /*
-
-				S6 = Convert.ToInt32(value["S6"].ToString());  		
-				S6HI = Convert.ToInt32(value["S6HI"].ToString()); 
-                S6MI = Convert.ToInt32(value["S6MI"].ToString()); 
-                S6HF = Convert.ToInt32(value["S6HF"].ToString()); 
-                S6MF = Convert.ToInt32(value["S6MF"].ToString()); 
-                TS6 = value["TS6"].ToString();
-                S6P = Convert.ToInt32(value["S6P"].ToString());
-
-                
-
-				S7 = Convert.ToInt32(value["S7"].ToString());  		
-				S7HI = Convert.ToInt32(value["S7HI"].ToString()); 
-                S7MI = Convert.ToInt32(value["S7MI"].ToString()); 
-                S7HF = Convert.ToInt32(value["S7HF"].ToString()); 
-                S7MF = Convert.ToInt32(value["S7MF"].ToString()); 
-                TS7 = value["TS7"].ToString();
-                S7P = Convert.ToInt32(value["S7P"].ToString()); 
-				
-				S8 = Convert.ToInt32(value["S8"].ToString());  		
-				S8HI = Convert.ToInt32(value["S8HI"].ToString()); 
-                S8MI = Convert.ToInt32(value["S8MI"].ToString()); 
-                S8HF = Convert.ToInt32(value["S8HF"].ToString()); 
-                S8MF = Convert.ToInt32(value["S8MF"].ToString()); 
-                TS8 = value["TS8"].ToString();
-                S8P = Convert.ToInt32(value["S8P"].ToString()); 
-            
-                SRed = value["Red"].ToString(); 		
-                SGreen = value["Green"].ToString(); 		
-                SBlue = value["Blue"].ToString(); 		
-
-    */
-                Data = String.Format("{0}/{1}/{2}", value["Dia"].ToString(), value["Mes"].ToString(), value["Ano"].ToString());
+   			    Data = String.Format("{0}/{1}/{2}", value["Dia"].ToString(), value["Mes"].ToString(), value["Ano"].ToString());
                 Hora = String.Format("{0}:{1}:{2}", value["Hora"].ToString(), value["Minuto"].ToString(), value["Segundo"].ToString());
                 lblData.Text = Data + "  " + Hora;
 
+								
+				if (comando.IndexOf("S1") >= 0 )
+				{					
+					S1 = Convert.ToInt32(value["S1"].ToString()); 		
+					S1HI = Convert.ToInt32(value["S1HI"].ToString()); 
+					S1MI = Convert.ToInt32(value["S1MI"].ToString()); 
+					S1HF = Convert.ToInt32(value["S1HF"].ToString()); 
+					S1MF = Convert.ToInt32(value["S1MF"].ToString()); 
+					TS1 = value["TS1"].ToString();
+					S1P = Convert.ToInt32(value["S1P"].ToString()); 
+					
+					S2 = Convert.ToInt32(value["S2"].ToString());  		
+					S2HI = Convert.ToInt32(value["S2HI"].ToString()); 
+					S2MI = Convert.ToInt32(value["S2MI"].ToString()); 
+					S2HF = Convert.ToInt32(value["S2HF"].ToString()); 
+					S2MF = Convert.ToInt32(value["S2MF"].ToString()); 
+					TS2 = value["TS2"].ToString();
+					S2P = Convert.ToInt32(value["S2P"].ToString()); 
+									
+					S3 = Convert.ToInt32(value["S3"].ToString());  		
+					S3HI = Convert.ToInt32(value["S3HI"].ToString()); 
+					S3MI = Convert.ToInt32(value["S3MI"].ToString()); 
+					S3HF = Convert.ToInt32(value["S3HF"].ToString()); 
+					S3MF = Convert.ToInt32(value["S3MF"].ToString()); 
+					TS3 = value["TS3"].ToString();
+					S3P = Convert.ToInt32(value["S3P"].ToString()); 
+					
+					S4 = Convert.ToInt32(value["S4"].ToString());  		
+					S4HI = Convert.ToInt32(value["S4HI"].ToString()); 
+					S4MI = Convert.ToInt32(value["S4MI"].ToString()); 
+					S4HF = Convert.ToInt32(value["S4HF"].ToString()); 
+					S4MF = Convert.ToInt32(value["S4MF"].ToString()); 
+					TS4 = value["TS4"].ToString();
+					S4P = Convert.ToInt32(value["S4P"].ToString()); 
+					
+					btnSaida1.Text = S1 == 0 ? "DESLIGADO" : "LIGADO";
+					btnSaida1.BackColor = S1 == 0 ? Color.Crimson : Color.LimeGreen;
+					if (TS1 == "A")
+					{
+						lblTipo1.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S1HI, S1MI, S1HF, S1MF);
+					} else if (TS1 == "P")
+					{
+						lblTipo1.Text = String.Format("Pulso: {0} segundos", S1P);
+					}
+					else
+					{
+						lblTipo1.Text = String.Format("Manual");
+					}
+					
+					btnSaida2.Text = S2 == 0 ? "DESLIGADO" : "LIGADO";
+					btnSaida2.BackColor = S2 == 0 ? Color.Crimson : Color.LimeGreen;
+					if (TS2 == "A")
+					{
+						lblTipo2.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S2HI, S2MI, S2HF, S2MF);
+					} else if (TS2 == "P")
+					{
+						lblTipo2.Text = String.Format("Pulso: {0} segundos", S2P);
+					}
+					else
+					{
+						lblTipo2.Text = String.Format("Manual");
+					}
+					
+					btnSaida3.Text = S3 == 0 ? "DESLIGADO" : "LIGADO";
+					btnSaida3.BackColor = S3 == 0 ? Color.Crimson : Color.LimeGreen;
+					if (TS3 == "A")
+					{
+						lblTipo3.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S3HI, S3MI, S3HF, S3MF);
+					} else if (TS3 == "P")
+					{
+						lblTipo3.Text = String.Format("Pulso: {0} segundos", S3P);
+					}
+					else
+					{
+						lblTipo3.Text = String.Format("Manual");
+					}
+					
+					btnSaida4.Text = S4 == 0 ? "DESLIGADO" : "LIGADO";
+					btnSaida4.BackColor = S4 == 0 ? Color.Crimson : Color.LimeGreen;
+					if (TS4 == "A")
+					{
+						lblTipo4.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S4HI, S4MI, S4HF, S4MF);
+					} else if (TS4 == "P")
+					{
+						lblTipo4.Text = String.Format("Pulso: {0} segundos", S4P);
+					}
+					else
+					{
+						lblTipo4.Text = String.Format("Manual");
+					}
+					
+				}
+				
+				if (comando.IndexOf("S5") >= 0 )
+				{
+				
+					S5 = Convert.ToInt32(value["S5"].ToString());  		
+					S5HI = Convert.ToInt32(value["S5HI"].ToString()); 
+					S5MI = Convert.ToInt32(value["S5MI"].ToString()); 
+					S5HF = Convert.ToInt32(value["S5HF"].ToString()); 
+					S5MF = Convert.ToInt32(value["S5MF"].ToString()); 
+					TS5 = value["TS5"].ToString();
+					S5P = Convert.ToInt32(value["S5P"].ToString());
 
-                btnSaida1.Text = S1 == 0 ? "DESLIGADO" : "LIGADO";
-                btnSaida1.BackColor = S1 == 0 ? Color.Crimson : Color.LimeGreen;
-                if (TS1 == "A")
-                {
-                    lblTipo1.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S1HI, S1MI, S1HF, S1MF);
-                } else if (TS1 == "P")
-                {
-                    lblTipo1.Text = String.Format("Pulso: {0} segundos", S1P);
-                }
-                else
-                {
-                    lblTipo1.Text = String.Format("Manual");
-                }
-				
-				btnSaida2.Text = S2 == 0 ? "DESLIGADO" : "LIGADO";
-                btnSaida2.BackColor = S2 == 0 ? Color.Crimson : Color.LimeGreen;
-                if (TS2 == "A")
-                {
-                    lblTipo2.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S2HI, S2MI, S2HF, S2MF);
-                } else if (TS2 == "P")
-                {
-                    lblTipo2.Text = String.Format("Pulso: {0} segundos", S2P);
-                }
-                else
-                {
-                    lblTipo2.Text = String.Format("Manual");
-                }
-				
-				btnSaida3.Text = S3 == 0 ? "DESLIGADO" : "LIGADO";
-                btnSaida3.BackColor = S3 == 0 ? Color.Crimson : Color.LimeGreen;
-                if (TS3 == "A")
-                {
-                    lblTipo3.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S3HI, S3MI, S3HF, S3MF);
-                } else if (TS3 == "P")
-                {
-                    lblTipo3.Text = String.Format("Pulso: {0} segundos", S3P);
-                }
-                else
-                {
-                    lblTipo3.Text = String.Format("Manual");
-                }
-				
-				btnSaida4.Text = S4 == 0 ? "DESLIGADO" : "LIGADO";
-                btnSaida4.BackColor = S4 == 0 ? Color.Crimson : Color.LimeGreen;
-                if (TS4 == "A")
-                {
-                    lblTipo4.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S4HI, S4MI, S4HF, S4MF);
-                } else if (TS4 == "P")
-                {
-                    lblTipo4.Text = String.Format("Pulso: {0} segundos", S4P);
-                }
-                else
-                {
-                    lblTipo4.Text = String.Format("Manual");
-                }
-				
-				btnSaida5.Text = S5 == 0 ? "DESLIGADO" : "LIGADO";
-                btnSaida5.BackColor = S5 == 0 ? Color.Crimson : Color.LimeGreen;
-                if (TS5 == "A")
-                {
-                    lblTipo5.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S5HI, S5MI, S5HF, S5MF);
-                } else if (TS5 == "P")
-                {
-                    lblTipo5.Text = String.Format("Pulso: {0} segundos", S5P);
-                }
-                else
-                {
-                    lblTipo5.Text = String.Format("Manual");
-                }
-				
-				btnSaida6.Text = S6 == 0 ? "DESLIGADO" : "LIGADO";
-                btnSaida6.BackColor = S6 == 0 ? Color.Crimson : Color.LimeGreen;
-                if (TS6 == "A")
-                {
-                    lblTipo6.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S6HI, S6MI, S6HF, S6MF);
-                } else if (TS6 == "P")
-                {
-                    lblTipo6.Text = String.Format("Pulso: {0} segundos", S6P);
-                }
-                else
-                {
-                    lblTipo6.Text = String.Format("Manual");
-                }
-				
-				btnSaida7.Text = S7 == 0 ? "DESLIGADO" : "LIGADO";
-                btnSaida7.BackColor = S7 == 0 ? Color.Crimson : Color.LimeGreen;
-                if (TS7 == "A")
-                {
-                    lblTipo7.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S7HI, S7MI, S7HF, S7MF);
-                } else if (TS7 == "P")
-                {
-                    lblTipo7.Text = String.Format("Pulso: {0} segundos", S7P);
-                }
-                else
-                {
-                    lblTipo7.Text = String.Format("Manual");
-                }
-				
-				btnSaida8.Text = S8 == 0 ? "DESLIGADO" : "LIGADO";
-                btnSaida8.BackColor = S8 == 0 ? Color.Crimson : Color.LimeGreen;
-                if (TS8 == "A")
-                {
-                    lblTipo8.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S8HI, S8MI, S8HF, S8MF);
-                } else if (TS8 == "P")
-                {
-                    lblTipo8.Text = String.Format("Pulso: {0} segundos", S8P);
-                }
-                else
-                {
-                    lblTipo8.Text = String.Format("Manual");
-                }
 
+					S6 = Convert.ToInt32(value["S6"].ToString());  		
+					S6HI = Convert.ToInt32(value["S6HI"].ToString()); 
+					S6MI = Convert.ToInt32(value["S6MI"].ToString()); 
+					S6HF = Convert.ToInt32(value["S6HF"].ToString()); 
+					S6MF = Convert.ToInt32(value["S6MF"].ToString()); 
+					TS6 = value["TS6"].ToString();
+					S6P = Convert.ToInt32(value["S6P"].ToString());
+				
+
+					S7 = Convert.ToInt32(value["S7"].ToString());  		
+					S7HI = Convert.ToInt32(value["S7HI"].ToString()); 
+					S7MI = Convert.ToInt32(value["S7MI"].ToString()); 
+					S7HF = Convert.ToInt32(value["S7HF"].ToString()); 
+					S7MF = Convert.ToInt32(value["S7MF"].ToString()); 
+					TS7 = value["TS7"].ToString();
+					S7P = Convert.ToInt32(value["S7P"].ToString()); 
+					
+					S8 = Convert.ToInt32(value["S8"].ToString());  		
+					S8HI = Convert.ToInt32(value["S8HI"].ToString()); 
+					S8MI = Convert.ToInt32(value["S8MI"].ToString()); 
+					S8HF = Convert.ToInt32(value["S8HF"].ToString()); 
+					S8MF = Convert.ToInt32(value["S8MF"].ToString()); 
+					TS8 = value["TS8"].ToString();
+					S8P = Convert.ToInt32(value["S8P"].ToString()); 
+				
+					SRed = value["Red"].ToString(); 		
+					SGreen = value["Green"].ToString(); 		
+					SBlue = value["Blue"].ToString(); 		
+											
+					btnSaida5.Text = S5 == 0 ? "DESLIGADO" : "LIGADO";
+					btnSaida5.BackColor = S5 == 0 ? Color.Crimson : Color.LimeGreen;
+					if (TS5 == "A")
+					{
+						lblTipo5.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S5HI, S5MI, S5HF, S5MF);
+					} else if (TS5 == "P")
+					{
+						lblTipo5.Text = String.Format("Pulso: {0} segundos", S5P);
+					}
+					else
+					{
+						lblTipo5.Text = String.Format("Manual");
+					}
+					
+					btnSaida6.Text = S6 == 0 ? "DESLIGADO" : "LIGADO";
+					btnSaida6.BackColor = S6 == 0 ? Color.Crimson : Color.LimeGreen;
+					if (TS6 == "A")
+					{
+						lblTipo6.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S6HI, S6MI, S6HF, S6MF);
+					} else if (TS6 == "P")
+					{
+						lblTipo6.Text = String.Format("Pulso: {0} segundos", S6P);
+					}
+					else
+					{
+						lblTipo6.Text = String.Format("Manual");
+					}
+					
+					btnSaida7.Text = S7 == 0 ? "DESLIGADO" : "LIGADO";
+					btnSaida7.BackColor = S7 == 0 ? Color.Crimson : Color.LimeGreen;
+					if (TS7 == "A")
+					{
+						lblTipo7.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S7HI, S7MI, S7HF, S7MF);
+					} else if (TS7 == "P")
+					{
+						lblTipo7.Text = String.Format("Pulso: {0} segundos", S7P);
+					}
+					else
+					{
+						lblTipo7.Text = String.Format("Manual");
+					}
+					
+					btnSaida8.Text = S8 == 0 ? "DESLIGADO" : "LIGADO";
+					btnSaida8.BackColor = S8 == 0 ? Color.Crimson : Color.LimeGreen;
+					if (TS8 == "A")
+					{
+						lblTipo8.Text = String.Format("Agendado: {0}:{1} até {2}:{3}", S8HI, S8MI, S8HF, S8MF);
+					} else if (TS8 == "P")
+					{
+						lblTipo8.Text = String.Format("Pulso: {0} segundos", S8P);
+					}
+					else
+					{
+						lblTipo8.Text = String.Format("Manual");
+					}
+				}	
             }
-
         }
 
         private void btnSaida1_Click(object sender, EventArgs e)

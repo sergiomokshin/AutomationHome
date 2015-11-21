@@ -59,7 +59,6 @@ public class MainActivity extends Activity {
 	private TextView txtS1;
     private TextView txtTS1;
 	private TextView txtHS1;
-	private ImageButton imgS1;
 	private String NameS1 = "";
 	
 	
@@ -74,7 +73,6 @@ public class MainActivity extends Activity {
 	private TextView txtS2;
     private TextView txtTS2;
 	private TextView txtHS2;
-	private ImageButton imgS2;
 	private String NameS2 = "";
 	
 	private int S3 = 0; 
@@ -88,7 +86,6 @@ public class MainActivity extends Activity {
 	private TextView txtS3;
     private TextView txtTS3;
 	private TextView txtHS3;
-	private ImageButton imgS3;
 	private String NameS3 = "";
 	
 	private int S4 = 0; 
@@ -102,7 +99,6 @@ public class MainActivity extends Activity {
 	private TextView txtS4;
     private TextView txtTS4;
 	private TextView txtHS4;
-	private ImageButton imgS4;
 	private String NameS4 = "";
 	
 	private int S5 = 0; 
@@ -116,7 +112,6 @@ public class MainActivity extends Activity {
 	private TextView txtS5;
     private TextView txtTS5;
 	private TextView txtHS5;
-	private ImageButton imgS5;
 	private String NameS5 = "";
 	
 	private int S6 = 0; 
@@ -130,7 +125,6 @@ public class MainActivity extends Activity {
 	private TextView txtS6;
     private TextView txtTS6;
 	private TextView txtHS6;
-	private ImageButton imgS6;
 	private String NameS6 = "";
 		
 	private int S7 = 0; 
@@ -144,7 +138,6 @@ public class MainActivity extends Activity {
 	private TextView txtS7;
     private TextView txtTS7;
 	private TextView txtHS7;
-	private ImageButton imgS7;
 	private String NameS7 = "";
 	
 	private int S8 = 0; 
@@ -158,7 +151,6 @@ public class MainActivity extends Activity {
 	private TextView txtS8;
     private TextView txtTS8;
 	private TextView txtHS8;
-	private ImageButton imgS8;
 	private String NameS8 = "";
 	
 	private int SRGB;	
@@ -174,7 +166,6 @@ public class MainActivity extends Activity {
 
     String address;
     Handler handler = new Handler();
-    private Boolean FirstTime;
     private boolean stopWorker = false;
     private int readBufferPosition = 0;
     private byte[] readBuffer = new byte[1024];
@@ -194,7 +185,11 @@ public class MainActivity extends Activity {
     SharedPreferences.Editor editor;
     SharedPreferences sharedPreferences;
     private UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-			
+	
+	private Boolean FirstConnection;
+	private boolean receivedBlockA = false;
+	private boolean receivedBlockB = false;
+	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,50 +203,42 @@ public class MainActivity extends Activity {
 		txtS1 = (TextView)findViewById(R.id.txtS1);
 		txtTS1 = (TextView) findViewById(R.id.txtTS1);
         txtHS1 = (TextView) findViewById(R.id.txtHS1);			
-        imgS1 = (ImageButton) findViewById(R.id.btnCfgS1);
 		
 		swS2 = (Switch)findViewById(R.id.swS2);
 		txtS2 = (TextView)findViewById(R.id.txtS2);
 		txtTS2 = (TextView) findViewById(R.id.txtTS2);
         txtHS2 = (TextView) findViewById(R.id.txtHS2);			
-        imgS2 = (ImageButton) findViewById(R.id.btnCfgS2);
         
 		swS3 = (Switch)findViewById(R.id.swS3);
 		txtS3 = (TextView)findViewById(R.id.txtS3);
 		txtTS3 = (TextView) findViewById(R.id.txtTS3);
         txtHS3 = (TextView) findViewById(R.id.txtHS3);			
-        imgS3 = (ImageButton) findViewById(R.id.btnCfgS3);
 		
 		swS4 = (Switch)findViewById(R.id.swS4);
 		txtS4 = (TextView)findViewById(R.id.txtS4);
 		txtTS4 = (TextView) findViewById(R.id.txtTS4);
         txtHS4 = (TextView) findViewById(R.id.txtHS4);			
-        imgS4 = (ImageButton) findViewById(R.id.btnCfgS4);
 		
 		swS5 = (Switch)findViewById(R.id.swS5);
 		txtS5 = (TextView)findViewById(R.id.txtS5);
 		txtTS5 = (TextView) findViewById(R.id.txtTS5);
         txtHS5 = (TextView) findViewById(R.id.txtHS5);			
-        imgS5 = (ImageButton) findViewById(R.id.btnCfgS5);
-		
+    		
 		swS6 = (Switch)findViewById(R.id.swS6);
 		txtS6 = (TextView)findViewById(R.id.txtS6);
 		txtTS6 = (TextView) findViewById(R.id.txtTS6);
         txtHS6 = (TextView) findViewById(R.id.txtHS6);			
-        imgS6 = (ImageButton) findViewById(R.id.btnCfgS6);
-				
+    				
 		swS7 = (Switch)findViewById(R.id.swS7);
 		txtS7 = (TextView)findViewById(R.id.txtS7);
 		txtTS7 = (TextView) findViewById(R.id.txtTS7);
         txtHS7 = (TextView) findViewById(R.id.txtHS7);			
-        imgS7 = (ImageButton) findViewById(R.id.btnCfgS7);
-		
+    		
 		swS8 = (Switch)findViewById(R.id.swS8);
 		txtS8 = (TextView)findViewById(R.id.txtS8);
 		txtTS8 = (TextView) findViewById(R.id.txtTS8);
         txtHS8 = (TextView) findViewById(R.id.txtHS8);			
-        imgS8 = (ImageButton) findViewById(R.id.btnCfgS8);
-		
+    		
 		txtSRGB = (TextView) findViewById(R.id.txtSRGB);
 		
         seekBarR = (SeekBar) findViewById(R.id.seekR);
@@ -261,7 +248,9 @@ public class MainActivity extends Activity {
         AtualizaLabels();
 
         txtMsg = (TextView) findViewById(R.id.txtMsg);
-        FirstTime = true;
+        FirstConnection = true;
+		receivedBlockA = false;
+		receivedBlockB = false;
 		
 		 swS1.setOnClickListener(new OnClickListener() {
             @Override
@@ -351,134 +340,7 @@ public class MainActivity extends Activity {
             }
         });
 			
-		imgS1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-               
-			    sharedPreferences = getSharedPreferences("APP_PREFS", MODE_PRIVATE);
-				editor = sharedPreferences.edit();
-				editor.putString("SaidaSetup", "1");				
-				editor.commit();
-							
-				Intent intentS = new Intent(Intent.ACTION_VIEW);
-                intentS.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.SetupDevice");
-                startActivityForResult(intentS,90);
-			   			   			  
-            }
-        });
-
-		imgS2.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-               
-			    sharedPreferences = getSharedPreferences("APP_PREFS", MODE_PRIVATE);
-				editor = sharedPreferences.edit();
-				editor.putString("SaidaSetup", "2");				
-				editor.commit();
-							
-				Intent intentS = new Intent(Intent.ACTION_VIEW);
-                intentS.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.SetupDevice");
-                startActivityForResult(intentS,90);
-			   			   			  
-            }
-        });
-
-		imgS3.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-               
-			    sharedPreferences = getSharedPreferences("APP_PREFS", MODE_PRIVATE);
-				editor = sharedPreferences.edit();
-				editor.putString("SaidaSetup", "3");				
-				editor.commit();
-							
-				Intent intentS = new Intent(Intent.ACTION_VIEW);
-                intentS.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.SetupDevice");
-                startActivityForResult(intentS,90);
-			   			   			  
-            }
-        });		
-
-		imgS4.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-               
-			    sharedPreferences = getSharedPreferences("APP_PREFS", MODE_PRIVATE);
-				editor = sharedPreferences.edit();
-				editor.putString("SaidaSetup", "4");				
-				editor.commit();
-							
-				Intent intentS = new Intent(Intent.ACTION_VIEW);
-                intentS.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.SetupDevice");
-                startActivityForResult(intentS,90);
-			   			   			  
-            }
-        });      
-
-		
-		imgS5.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-               
-			    sharedPreferences = getSharedPreferences("APP_PREFS", MODE_PRIVATE);
-				editor = sharedPreferences.edit();
-				editor.putString("SaidaSetup", "5");				
-				editor.commit();
-							
-				Intent intentS = new Intent(Intent.ACTION_VIEW);
-                intentS.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.SetupDevice");
-                startActivityForResult(intentS,90);
-			   			   			  
-            }
-        });    
-
-		imgS6.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-               
-			    sharedPreferences = getSharedPreferences("APP_PREFS", MODE_PRIVATE);
-				editor = sharedPreferences.edit();
-				editor.putString("SaidaSetup", "6");				
-				editor.commit();
-							
-				Intent intentS = new Intent(Intent.ACTION_VIEW);
-                intentS.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.SetupDevice");
-                startActivityForResult(intentS,90);
-			   			   			  
-            }
-        });  
-
-		imgS7.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-               
-			    sharedPreferences = getSharedPreferences("APP_PREFS", MODE_PRIVATE);
-				editor = sharedPreferences.edit();
-				editor.putString("SaidaSetup", "7");				
-				editor.commit();
-							
-				Intent intentS = new Intent(Intent.ACTION_VIEW);
-                intentS.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.SetupDevice");
-                startActivityForResult(intentS,90);
-			   			   			  
-            }
-        });      
-		
-		imgS8.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-               
-			    sharedPreferences = getSharedPreferences("APP_PREFS", MODE_PRIVATE);
-				editor = sharedPreferences.edit();
-				editor.putString("SaidaSetup", "8");				
-				editor.commit();
-							
-				Intent intentS = new Intent(Intent.ACTION_VIEW);
-                intentS.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.SetupDevice");
-                startActivityForResult(intentS,90);
-			   			   			  
-            }
-        });      
+	
 						
         seekBarR.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {         
             @Override
@@ -593,6 +455,11 @@ public class MainActivity extends Activity {
                 intentD.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.DeviceListActivity");
                 startActivityForResult(intentD,90);
                 return true;            
+			case R.id.SelecionaSaída:
+                Intent intentD = new Intent(Intent.ACTION_VIEW);
+                intentD.setClassName("automacaolivre.automationhomeplus", "automacaolivre.automationhomeplus.SelecionaSaída");
+                startActivityForResult(intentD,90);
+                return true;            					
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -874,223 +741,232 @@ public class MainActivity extends Activity {
             data = data.replace(")", "");
 
             JSONObject jsonObj = new JSONObject( URLDecoder.decode(data, "UTF-8") );
-		
-			S1 = Integer.parseInt(jsonObj.getString("S1"));
-			S1P = Integer.parseInt(jsonObj.getString("S1P"));
-			S1HI = Integer.parseInt(jsonObj.getString("S1HI"));
-			S1MI = Integer.parseInt(jsonObj.getString("S1MI"));
-			S1HF = Integer.parseInt(jsonObj.getString("S1HF"));
-			S1MF = Integer.parseInt(jsonObj.getString("S1MF"));
-			TS1 = jsonObj.getString("TS1");		
-			swS1.setChecked((S1 == 1));
-			txtS1.setText(NameS1);
-			if(TS1 == "A" )
-			{
-				txtTS1.setText("Agendado");		
-				txtHS1.setText(S1HI + ":" + S1MI + " até " + S1HF + ":" + S1MF);
-				
-			} else if(TS1 == "M" )
-			{
-				txtTS1.setText("Manual");					
-				txtHS1.setText("");
-			}
-			else if(TS1 == "P" )
-			{
-				txtTS1.setText("Pulso");					
-				txtHS1.setText(S1P + " segundo(s)");
-			}
-			
-			
-			S2 = Integer.parseInt(jsonObj.getString("S2"));
-			S2P = Integer.parseInt(jsonObj.getString("S2P"));
-			S2HI = Integer.parseInt(jsonObj.getString("S2HI"));
-			S2MI = Integer.parseInt(jsonObj.getString("S2MI"));
-			S2HF = Integer.parseInt(jsonObj.getString("S2HF"));
-			S2MF = Integer.parseInt(jsonObj.getString("S2MF"));
-			TS2 = jsonObj.getString("TS2");		
-			swS2.setChecked((S2 == 1));
-			txtS2.setText(NameS2);
-			if(TS2 == "A" )
-			{
-				txtTS2.setText("Agendado");		
-				txtHS2.setText(S2HI + ":" + S2MI + " até " + S2HF + ":" + S2MF);
-				
-			} else if(TS2 == "M" )
-			{
-				txtTS2.setText("Manual");					
-				txtHS2.setText("");
-			}
-			else if(TS2 == "P" )
-			{
-				txtTS2.setText("Pulso");					
-				txtHS2.setText(S2P + " segundo(s)");
-			}
-			
-			S3 = Integer.parseInt(jsonObj.getString("S3"));
-			S3P = Integer.parseInt(jsonObj.getString("S3P"));
-			S3HI = Integer.parseInt(jsonObj.getString("S3HI"));
-			S3MI = Integer.parseInt(jsonObj.getString("S3MI"));
-			S3HF = Integer.parseInt(jsonObj.getString("S3HF"));
-			S3MF = Integer.parseInt(jsonObj.getString("S3MF"));
-			TS3 = jsonObj.getString("TS3");		
-			swS3.setChecked((S3 == 1));
-			txtS3.setText(NameS3);
-			if(TS3 == "A" )
-			{
-				txtTS3.setText("Agendado");		
-				txtHS3.setText(S3HI + ":" + S3MI + " até " + S3HF + ":" + S3MF);
-				
-			} else if(TS3 == "M" )
-			{
-				txtTS3.setText("Manual");					
-				txtHS3.setText("");
-			}
-			else if(TS3 == "P" )
-			{
-				txtTS3.setText("Pulso");					
-				txtHS3.setText(S3P + " segundo(s)");
-			}
-			
-            S4 = Integer.parseInt(jsonObj.getString("S4"));
-			S4P = Integer.parseInt(jsonObj.getString("S4P"));
-			S4HI = Integer.parseInt(jsonObj.getString("S4HI"));
-			S4MI = Integer.parseInt(jsonObj.getString("S4MI"));
-			S4HF = Integer.parseInt(jsonObj.getString("S4HF"));
-			S4MF = Integer.parseInt(jsonObj.getString("S4MF"));
-			TS4 = jsonObj.getString("TS4");		
-			swS4.setChecked((S4 == 1));
-			txtS4.setText(NameS4);
-			if(TS4 == "A" )
-			{
-				txtTS4.setText("Agendado");		
-				txtHS4.setText(S4HI + ":" + S4MI + " até " + S4HF + ":" + S4MF);
-				
-			} else if(TS4 == "M" )
-			{
-				txtTS4.setText("Manual");					
-				txtHS4.setText("");
-			}
-			else if(TS4 == "P" )
-			{
-				txtTS4.setText("Pulso");					
-				txtHS4.setText(S4P + " segundo(s)");
-			}
-			
-			
-			S5 = Integer.parseInt(jsonObj.getString("S5"));
-			S5P = Integer.parseInt(jsonObj.getString("S5P"));
-			S5HI = Integer.parseInt(jsonObj.getString("S5HI"));
-			S5MI = Integer.parseInt(jsonObj.getString("S5MI"));
-			S5HF = Integer.parseInt(jsonObj.getString("S5HF"));
-			S5MF = Integer.parseInt(jsonObj.getString("S5MF"));
-			TS5 = jsonObj.getString("TS5");		
-			swS5.setChecked((S5 == 1));
-			txtS5.setText(NameS5);
-			if(TS5 == "A" )
-			{
-				txtTS5.setText("Agendado");		
-				txtHS5.setText(S5HI + ":" + S5MI + " até " + S5HF + ":" + S5MF);
-				
-			} else if(TS5 == "M" )
-			{
-				txtTS5.setText("Manual");					
-				txtHS5.setText("");
-			}
-			else if(TS5 == "P" )
-			{
-				txtTS5.setText("Pulso");					
-				txtHS5.setText(S5P + " segundo(s)");
-			}
-			
-			
-			S6 = Integer.parseInt(jsonObj.getString("S6"));
-			S6P = Integer.parseInt(jsonObj.getString("S6P"));
-			S6HI = Integer.parseInt(jsonObj.getString("S6HI"));
-			S6MI = Integer.parseInt(jsonObj.getString("S6MI"));
-			S6HF = Integer.parseInt(jsonObj.getString("S6HF"));
-			S6MF = Integer.parseInt(jsonObj.getString("S6MF"));
-			TS6 = jsonObj.getString("TS6");		
-			swS6.setChecked((S6 == 1));
-			txtS6.setText(NameS6);
-			if(TS6 == "A" )
-			{
-				txtTS6.setText("Agendado");		
-				txtHS6.setText(S6HI + ":" + S6MI + " até " + S6HF + ":" + S6MF);
-				
-			} else if(TS6 == "M" )
-			{
-				txtTS6.setText("Manual");					
-				txtHS6.setText("");
-			}
-			else if(TS6 == "P" )
-			{
-				txtTS6.setText("Pulso");					
-				txtHS6.setText(S6P + " segundo(s)");
-			}
-			
-			S7 = Integer.parseInt(jsonObj.getString("S7"));
-			S7P = Integer.parseInt(jsonObj.getString("S7P"));
-			S7HI = Integer.parseInt(jsonObj.getString("S7HI"));
-			S7MI = Integer.parseInt(jsonObj.getString("S7MI"));
-			S7HF = Integer.parseInt(jsonObj.getString("S7HF"));
-			S7MF = Integer.parseInt(jsonObj.getString("S7MF"));
-			TS7 = jsonObj.getString("TS7");		
-			swS7.setChecked((S7 == 1));
-			txtS7.setText(NameS7);
-			if(TS7 == "A" )
-			{
-				txtTS7.setText("Agendado");		
-				txtHS7.setText(S7HI + ":" + S7MI + " até " + S7HF + ":" + S7MF);
-				
-			} else if(TS7 == "M" )
-			{
-				txtTS7.setText("Manual");					
-				txtHS7.setText("");
-			}
-			else if(TS7 == "P" )
-			{
-				txtTS7.setText("Pulso");					
-				txtHS7.setText(S7P + " segundo(s)");
-			}
-			
-			
-			S8 = Integer.parseInt(jsonObj.getString("S8"));
-			S8P = Integer.parseInt(jsonObj.getString("S8P"));
-			S8HI = Integer.parseInt(jsonObj.getString("S8HI"));
-			S8MI = Integer.parseInt(jsonObj.getString("S8MI"));
-			S8HF = Integer.parseInt(jsonObj.getString("S8HF"));
-			S8MF = Integer.parseInt(jsonObj.getString("S8MF"));
-			TS8 = jsonObj.getString("TS8");		
-			swS8.setChecked((S8 == 1));
-			txtS8.setText(NameS8);
-			if(TS8 == "A" )
-			{
-				txtTS8.setText("Agendado");		
-				txtHS8.setText(S8HI + ":" + S8MI + " até " + S8HF + ":" + S8MF);
-				
-			} else if(TS8 == "M" )
-			{
-				txtTS8.setText("Manual");					
-				txtHS8.setText("");
-			}
-			else if(TS8 == "P" )
-			{
-				txtTS8.setText("Pulso");					
-				txtHS8.setText(S8P + " segundo(s)");
-			}
-			
-            SRed = Integer.parseInt(jsonObj.getString("Red"));
-            SGreen = Integer.parseInt(jsonObj.getString("Green"));
-            SBlue = Integer.parseInt(jsonObj.getString("Blue"));
-			
 			Data = jsonObj.getString("Day") + "/" + jsonObj.getString("Mounth") + "/" + jsonObj.getString("Year");
 			Hora = jsonObj.getString("Hour") + ":" + jsonObj.getString("Minute") + ":" + jsonObj.getString("Second");            
 			txtHorario.setText("Horário placa: " + Data + "  " + Hora);
 						
 			String Temperatura = jsonObj.getString("temperatura");
             String Umidade = jsonObj.getString("umidade");
-							
-            if (FirstTime) {
+		
+		
+			if (data.contains("S1")) 
+			{	
+				receivedBlockA = true;
+			
+				S1 = Integer.parseInt(jsonObj.getString("S1"));
+				S1P = Integer.parseInt(jsonObj.getString("S1P"));
+				S1HI = Integer.parseInt(jsonObj.getString("S1HI"));
+				S1MI = Integer.parseInt(jsonObj.getString("S1MI"));
+				S1HF = Integer.parseInt(jsonObj.getString("S1HF"));
+				S1MF = Integer.parseInt(jsonObj.getString("S1MF"));
+				TS1 = jsonObj.getString("TS1");		
+				swS1.setChecked((S1 == 1));
+				txtS1.setText(NameS1);
+				if(TS1 == "A" )
+				{
+					txtTS1.setText("Agendado");		
+					txtHS1.setText(S1HI + ":" + S1MI + " até " + S1HF + ":" + S1MF);
+					
+				} else if(TS1 == "M" )
+				{
+					txtTS1.setText("Manual");					
+					txtHS1.setText("");
+				}
+				else if(TS1 == "P" )
+				{
+					txtTS1.setText("Pulso");					
+					txtHS1.setText(S1P + " segundo(s)");
+				}
+				
+				
+				S2 = Integer.parseInt(jsonObj.getString("S2"));
+				S2P = Integer.parseInt(jsonObj.getString("S2P"));
+				S2HI = Integer.parseInt(jsonObj.getString("S2HI"));
+				S2MI = Integer.parseInt(jsonObj.getString("S2MI"));
+				S2HF = Integer.parseInt(jsonObj.getString("S2HF"));
+				S2MF = Integer.parseInt(jsonObj.getString("S2MF"));
+				TS2 = jsonObj.getString("TS2");		
+				swS2.setChecked((S2 == 1));
+				txtS2.setText(NameS2);
+				if(TS2 == "A" )
+				{
+					txtTS2.setText("Agendado");		
+					txtHS2.setText(S2HI + ":" + S2MI + " até " + S2HF + ":" + S2MF);
+					
+				} else if(TS2 == "M" )
+				{
+					txtTS2.setText("Manual");					
+					txtHS2.setText("");
+				}
+				else if(TS2 == "P" )
+				{
+					txtTS2.setText("Pulso");					
+					txtHS2.setText(S2P + " segundo(s)");
+				}
+				
+				S3 = Integer.parseInt(jsonObj.getString("S3"));
+				S3P = Integer.parseInt(jsonObj.getString("S3P"));
+				S3HI = Integer.parseInt(jsonObj.getString("S3HI"));
+				S3MI = Integer.parseInt(jsonObj.getString("S3MI"));
+				S3HF = Integer.parseInt(jsonObj.getString("S3HF"));
+				S3MF = Integer.parseInt(jsonObj.getString("S3MF"));
+				TS3 = jsonObj.getString("TS3");		
+				swS3.setChecked((S3 == 1));
+				txtS3.setText(NameS3);
+				if(TS3 == "A" )
+				{
+					txtTS3.setText("Agendado");		
+					txtHS3.setText(S3HI + ":" + S3MI + " até " + S3HF + ":" + S3MF);
+					
+				} else if(TS3 == "M" )
+				{
+					txtTS3.setText("Manual");					
+					txtHS3.setText("");
+				}
+				else if(TS3 == "P" )
+				{
+					txtTS3.setText("Pulso");					
+					txtHS3.setText(S3P + " segundo(s)");
+				}
+				
+				S4 = Integer.parseInt(jsonObj.getString("S4"));
+				S4P = Integer.parseInt(jsonObj.getString("S4P"));
+				S4HI = Integer.parseInt(jsonObj.getString("S4HI"));
+				S4MI = Integer.parseInt(jsonObj.getString("S4MI"));
+				S4HF = Integer.parseInt(jsonObj.getString("S4HF"));
+				S4MF = Integer.parseInt(jsonObj.getString("S4MF"));
+				TS4 = jsonObj.getString("TS4");		
+				swS4.setChecked((S4 == 1));
+				txtS4.setText(NameS4);
+				if(TS4 == "A" )
+				{
+					txtTS4.setText("Agendado");		
+					txtHS4.setText(S4HI + ":" + S4MI + " até " + S4HF + ":" + S4MF);
+					
+				} else if(TS4 == "M" )
+				{
+					txtTS4.setText("Manual");					
+					txtHS4.setText("");
+				}
+				else if(TS4 == "P" )
+				{
+					txtTS4.setText("Pulso");					
+					txtHS4.setText(S4P + " segundo(s)");
+				}
+			}
+			
+			if (data.contains("S5")) 
+			{				
+				receivedBlockB = true;
+			
+				S5 = Integer.parseInt(jsonObj.getString("S5"));
+				S5P = Integer.parseInt(jsonObj.getString("S5P"));
+				S5HI = Integer.parseInt(jsonObj.getString("S5HI"));
+				S5MI = Integer.parseInt(jsonObj.getString("S5MI"));
+				S5HF = Integer.parseInt(jsonObj.getString("S5HF"));
+				S5MF = Integer.parseInt(jsonObj.getString("S5MF"));
+				TS5 = jsonObj.getString("TS5");		
+				swS5.setChecked((S5 == 1));
+				txtS5.setText(NameS5);
+				if(TS5 == "A" )
+				{
+					txtTS5.setText("Agendado");		
+					txtHS5.setText(S5HI + ":" + S5MI + " até " + S5HF + ":" + S5MF);
+					
+				} else if(TS5 == "M" )
+				{
+					txtTS5.setText("Manual");					
+					txtHS5.setText("");
+				}
+				else if(TS5 == "P" )
+				{
+					txtTS5.setText("Pulso");					
+					txtHS5.setText(S5P + " segundo(s)");
+				}
+				
+				
+				S6 = Integer.parseInt(jsonObj.getString("S6"));
+				S6P = Integer.parseInt(jsonObj.getString("S6P"));
+				S6HI = Integer.parseInt(jsonObj.getString("S6HI"));
+				S6MI = Integer.parseInt(jsonObj.getString("S6MI"));
+				S6HF = Integer.parseInt(jsonObj.getString("S6HF"));
+				S6MF = Integer.parseInt(jsonObj.getString("S6MF"));
+				TS6 = jsonObj.getString("TS6");		
+				swS6.setChecked((S6 == 1));
+				txtS6.setText(NameS6);
+				if(TS6 == "A" )
+				{
+					txtTS6.setText("Agendado");		
+					txtHS6.setText(S6HI + ":" + S6MI + " até " + S6HF + ":" + S6MF);
+					
+				} else if(TS6 == "M" )
+				{
+					txtTS6.setText("Manual");					
+					txtHS6.setText("");
+				}
+				else if(TS6 == "P" )
+				{
+					txtTS6.setText("Pulso");					
+					txtHS6.setText(S6P + " segundo(s)");
+				}
+				
+				S7 = Integer.parseInt(jsonObj.getString("S7"));
+				S7P = Integer.parseInt(jsonObj.getString("S7P"));
+				S7HI = Integer.parseInt(jsonObj.getString("S7HI"));
+				S7MI = Integer.parseInt(jsonObj.getString("S7MI"));
+				S7HF = Integer.parseInt(jsonObj.getString("S7HF"));
+				S7MF = Integer.parseInt(jsonObj.getString("S7MF"));
+				TS7 = jsonObj.getString("TS7");		
+				swS7.setChecked((S7 == 1));
+				txtS7.setText(NameS7);
+				if(TS7 == "A" )
+				{
+					txtTS7.setText("Agendado");		
+					txtHS7.setText(S7HI + ":" + S7MI + " até " + S7HF + ":" + S7MF);
+					
+				} else if(TS7 == "M" )
+				{
+					txtTS7.setText("Manual");					
+					txtHS7.setText("");
+				}
+				else if(TS7 == "P" )
+				{
+					txtTS7.setText("Pulso");					
+					txtHS7.setText(S7P + " segundo(s)");
+				}
+				
+				
+				S8 = Integer.parseInt(jsonObj.getString("S8"));
+				S8P = Integer.parseInt(jsonObj.getString("S8P"));
+				S8HI = Integer.parseInt(jsonObj.getString("S8HI"));
+				S8MI = Integer.parseInt(jsonObj.getString("S8MI"));
+				S8HF = Integer.parseInt(jsonObj.getString("S8HF"));
+				S8MF = Integer.parseInt(jsonObj.getString("S8MF"));
+				TS8 = jsonObj.getString("TS8");		
+				swS8.setChecked((S8 == 1));
+				txtS8.setText(NameS8);
+				if(TS8 == "A" )
+				{
+					txtTS8.setText("Agendado");		
+					txtHS8.setText(S8HI + ":" + S8MI + " até " + S8HF + ":" + S8MF);
+					
+				} else if(TS8 == "M" )
+				{
+					txtTS8.setText("Manual");					
+					txtHS8.setText("");
+				}
+				else if(TS8 == "P" )
+				{
+					txtTS8.setText("Pulso");					
+					txtHS8.setText(S8P + " segundo(s)");
+				}
+				
+				SRed = Integer.parseInt(jsonObj.getString("Red"));
+				SGreen = Integer.parseInt(jsonObj.getString("Green"));
+				SBlue = Integer.parseInt(jsonObj.getString("Blue"));
+			}
+													
+            if (FirstConnection && receivedBlockA && receivedBlockB) {
 
                 seekBarR.setProgress(SRed / 28);
                 seekBarR.refreshDrawableState();
@@ -1100,7 +976,7 @@ public class MainActivity extends Activity {
 
                 seekBarB.setProgress(SBlue / 28);
                 seekBarB.refreshDrawableState();
-                FirstTime = false;
+                FirstConnection = false;
 
                 sharedPreferences = getSharedPreferences("APP_PREFS", Context.MODE_PRIVATE);
                 editor = sharedPreferences.edit();

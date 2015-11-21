@@ -15,6 +15,35 @@ import android.widget.TextView;
 
 public class SetupDevice extends Activity  {
 
+
+	private LinearLayout llSelecionaSaida;
+	private LinearLayout llSetupDevice;
+	
+	private Button btS1;
+	private String NameS1 = "";
+	
+	private Button btS2;
+	private String NameS2 = "";
+	
+	private Button btS3;
+	private String NameS3 = "";
+	
+	private Button btS4;
+	private String NameS4 = "";
+	
+	private Button btS5;
+	private String NameS5 = "";
+	
+	private Button btS6;
+	private String NameS6 = "";
+	
+	private Button btS7;
+	private String NameS7 = "";
+	
+	private Button btS8;
+	private String NameS8 = "";
+	
+	
 	private	TextView txtS;
 	private EditText edtS;
 	private Spinner spTipo;
@@ -37,6 +66,7 @@ public class SetupDevice extends Activity  {
 	private LinearLayout llPulso;
 		
     private Button btAlterar;
+	private Button btCancelar;
 	
 
     SharedPreferences.Editor editor;
@@ -45,15 +75,134 @@ public class SetupDevice extends Activity  {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
 
+		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setup_device);
-		btAlterar = (Button) findViewById(R.id.btAlterar);
+		
+		llSelecionaSaida.setVisibility(LinearLayout.VISIBLE);
+		llSetupDevice.setVisibility(LinearLayout.GONE); //INVISIBLE		
+		
+		btS1 = (Button) findViewById(R.id.btS1);
+		NameS1 = sharedPreferences.getString("S1", "Saída 1");
+		btS1.setText(NameS1);
+
+		btS1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+               
+			  OpenSetup("1");
+        });
+		
+		btS2 = (Button) findViewById(R.id.btS2);
+		NameS2 = sharedPreferences.getString("S2", "Saída 2");
+		btS2.setText(NameS2);
+
+		btS2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+               
+			   OpenSetup("2");
+            }
+        });
+		
+		
+		btS3 = (Button) findViewById(R.id.btS3);
+		NameS3 = sharedPreferences.getString("S3", "Saída 3");
+		btS3.setText(NameS3);
+
+		btS3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+               
+			  OpenSetup("3");
+            }
+        });
+		
+		
+		btS4 = (Button) findViewById(R.id.btS4);
+		NameS4 = sharedPreferences.getString("S4", "Saída 4");
+		btS4.setText(NameS4);
+
+		btS4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+               
+			    OpenSetup("4");
+            }
+        });
+		
+		btS5 = (Button) findViewById(R.id.btS5);
+		NameS5 = sharedPreferences.getString("S5", "Saída 5");
+		btS5.setText(NameS5);
+
+		btS5.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+               
+			   OpenSetup("5");
+            }
+        });
+		
+		
+		btS6 = (Button) findViewById(R.id.btS6);
+		NameS6 = sharedPreferences.getString("S6", "Saída 6");
+		btS6.setText(NameS6);
+
+		btS6.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+               
+			    OpenSetup("6");
+            }
+        });
+		
+		
+		btS7 = (Button) findViewById(R.id.btS7);
+		NameS7 = sharedPreferences.getString("S7", "Saída 7");
+		btS7.setText(NameS7);
+
+		btS7.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+               
+			    OpenSetup("7");
+            }
+        });
+		
+		
+		btS8 = (Button) findViewById(R.id.btS8);
+		NameS8 = sharedPreferences.getString("S8", "Saída 8");
+		btS8.setText(NameS8);
+
+		btS8.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {               
+			    OpenSetup("8");
+            }
+        });
+				
+		btAlterar = (Button) findViewById(R.id.btAlterar);				
+		btCancelar = (Button) findViewById(R.id.btCancelar);	
+
+		btCancelar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {               
+				llSelecionaSaida.setVisibility(LinearLayout.VISIBLE); //INVISIBLE		
+				llSetupDevice.setVisibility(LinearLayout.GONE); 
+            }
+        });		
+        
+    }
+	
+	private void OpenSetup(String saidaAlterada)
+	{
+		
+		
 		llAgendamento = (LinearLayout)findViewById(R.id.llAgendamento);					
 		llPulso = (LinearLayout)findViewById(R.id.llPulso);
-			
-        sharedPreferences = getSharedPreferences("APP_PREFS", getBaseContext().MODE_PRIVATE);
 		
-		saidaAlterada = sharedPreferences.getString("SaidaSetup", "");
+	    sharedPreferences = getSharedPreferences("APP_PREFS", getBaseContext().MODE_PRIVATE);
+		
 		String nomeSaida = sharedPreferences.getString("S" + saidaAlterada, "Saída" + saidaAlterada);
 		String horaInicio = sharedPreferences.getString("S" + saidaAlterada + "HI" , "0");
 		String horaFim = sharedPreferences.getString("S" + saidaAlterada + "HF" , "23");
@@ -156,8 +305,11 @@ public class SetupDevice extends Activity  {
 
             }
         });
-    }
 	
+		llSelecionaSaida.setVisibility(LinearLayout.GONE);//INVISIBLE		
+		llSetupDevice.setVisibility(LinearLayout.VISIBLE); 
+				
+	}
 	private void MostraTipo(String tipo)
 	{
 		llAgendamento.setVisibility(View.GONE);

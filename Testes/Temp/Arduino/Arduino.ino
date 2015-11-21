@@ -169,6 +169,7 @@ int SBlue = 0; //conteÃºdo com ultimo comando enviado Blue
 float umidade;
 float temperatura;
 int countLcd = 0;
+int blocoEnvio = 0;
 
 String readString;
 int inicioucomando;
@@ -253,6 +254,8 @@ void setup() {
   lcd.clear();
 
   dht.begin();
+  blocoEnvio = 0;
+  
 }
 
 void loop() {
@@ -893,7 +896,6 @@ void disparacomando()
 }
 
 void RetornaDados() {
-
  
   S1 = digitalRead(PIN_S1);
   S2 = digitalRead(PIN_S2);
@@ -905,177 +907,170 @@ void RetornaDados() {
   S8 = digitalRead(PIN_S8);
 
   String retorno = "";
+  retorno.concat("{");
  
-  //retorno += F("HTTP/1.1 200 OK"); //send new page
- // retorno += F("Content-Type: application/json");
-  retorno += "dataCB";
-  //retorno += F("({");
+  retorno.concat("\"Dia\":");
+  retorno.concat(dayOfMonth);
+  retorno.concat(",\"Mes\":");
+  retorno.concat(month);
+  retorno.concat(",\"Ano\":");
+  retorno.concat(year);
+  retorno.concat(",\"Hora\":");
+  retorno.concat(hour);
+  retorno.concat(",\"Minuto\":");
+  retorno.concat(minute);
+  retorno.concat(",\"Segundo\":");
+  retorno.concat(second);
 
-  retorno += "({";
+  retorno.concat(",\"temperatura\":");
+  retorno.concat(temperatura);
+  retorno.concat(",\"umidade\":");
+  retorno.concat(umidade);
  
-  retorno += "\"Dia\":";
-  retorno += dayOfMonth, DEC;
-  retorno += ",\"Mes\":";
-  retorno += month, DEC;
-  retorno += ",\"Ano\":";
-  retorno += year, DEC;
-  retorno += ",\"Hora\":";
-  retorno += hour, DEC;
-  retorno += ",\"Minuto\":";
-  retorno += minute, DEC;
-  retorno += ",\"Segundo\":";
-  retorno += second, DEC;
-
-  retorno += ",\"temperatura\":";
-  retorno += temperatura;
-  retorno += ",\"umidade\":";
-  retorno += umidade;
-
+  if(blocoEnvio == 0) 
+  {  
+    blocoEnvio = 1;
   
-  retorno += ",\"S1\":";
-  retorno += S1;  
-  retorno += ",\"S1HI\":";
-  retorno += S1HI;
-  retorno += ",\"S1MI\":";
-  retorno += S1MI;
-  retorno += ",\"S1HF\":";
-  retorno += S1HF;
-  retorno += ",\"S1MF\":";
-  retorno += S1MF;
-  retorno += ",\"TS1\":\"";
-  retorno += TS1 + "\"";
-  retorno += ",\"S1P\":";
-  retorno += S1P;
-
- 
-  retorno += ",\"S2\":";
-  retorno += S2;
-  retorno += ",\"S2HI\":";
-  retorno += S2HI;
-  retorno += ",\"S2MI\":";
-  retorno += S2MI;
-  retorno += ",\"S2HF\":";
-  retorno += S2HF;
-  retorno += ",\"S2MF\":";
-  retorno += S2MF;
-  retorno += ",\"TS2\":\"";
-  retorno += TS2 + "\"";
-  retorno += ",\"S2P\":";
-  retorno += S2P;
-
-  
-  retorno += ",\"S3\":";
-  retorno += S3;
-  retorno += ",\"S3HI\":";
-  retorno += S3HI;
-  retorno += ",\"S3MI\":";
-  retorno += S3MI;
-  retorno += ",\"S3HF\":";
-  retorno += S3HF;
-  retorno += ",\"S3MF\":";
-  retorno += S3MF;
-  retorno += ",\"TS3\":\"";
-  retorno += TS3 + "\"";
-  retorno += ",\"S3P\":";
-  retorno += S3P;
-  
-  retorno += ",\"S4\":";
-  retorno += S4;
-  retorno += ",\"S4HI\":";
-  retorno += S4HI;
-  retorno += ",\"S4MI\":";
-  retorno += S4MI;
-  retorno += ",\"S4HF\":";
-  retorno += S4HF;
-  retorno += ",\"S4MF\":";
-  retorno += S4MF;
-  retorno += ",\"TS4\":\"";
-  retorno += TS4 + "\"";
-  retorno += ",\"S4P\":";
-  retorno += S4P;
-  
-  retorno += ",\"S5\":";
-  retorno += S5;
-  retorno += ",\"S5HI\":";
-  retorno += S5HI;
-  retorno += ",\"S5MI\":";
-  retorno += S5MI;
-  retorno += ",\"S5HF\":";
-  retorno += S5HF;
-  retorno += ",\"S5MF\":";
-  retorno += S5MF;
-  retorno += ",\"TS5\":\"";
-  retorno += TS5 + "\"";
-  retorno += ",\"S5P\":";
-  retorno += S5P;
-
-  /*
-  retorno += ",\"S6\":";
-  retorno += S6;
-  retorno += ",\"S6HI\":";
-  retorno += S6HI;
-  retorno += ",\"S6MI\":";
-  retorno += S6MI;
-  retorno += ",\"S6HF\":";
-  retorno += S6HF;
-  retorno += ",\"S6MF\":";
-  retorno += S6MF;
-  retorno += ",\"TS6\":\"";
-  retorno += TS6 + "\"";  
-  retorno += ",\"S6P\":";
-  retorno += S6P;
-  
-  retorno += ",\"S7\":";   
-  retorno += S7;
-  retorno += ",\"S7HI\":";
-  retorno += S7HI;
-  retorno += ",\"S7MI\":";
-  retorno += S7MI;
-  retorno += ",\"S7HF\":";
-  retorno += S7HF;
-  retorno += ",\"S7MF\":";
-  retorno += S7MF;
-  retorno += ",\"TS7\":\"";  
-  retorno += TS7 + "\"";
-  retorno += ",\"S7P\":";
-  retorno += S7P;
+    retorno.concat(",\"S1\":");
+    retorno.concat(S1);  
+    retorno.concat(",\"S1HI\":");
+    retorno.concat(S1HI);
+    retorno.concat(",\"S1MI\":");
+    retorno.concat(S1MI);
+    retorno.concat(",\"S1HF\":");
+    retorno.concat(S1HF);
+    retorno.concat(",\"S1MF\":");
+    retorno.concat(S1MF);
+    retorno.concat(",\"TS1\":\"");
+    retorno.concat(TS1 + "\"");
+    retorno.concat(",\"S1P\":");
+    retorno.concat(S1P);
+   
+    retorno.concat(",\"S2\":");
+    retorno.concat(S2);
+    retorno.concat(",\"S2HI\":");
+    retorno.concat(S2HI);
+    retorno.concat(",\"S2MI\":");
+    retorno.concat(S2MI);
+    retorno.concat(",\"S2HF\":");
+    retorno.concat(S2HF);
+    retorno.concat(",\"S2MF\":");
+    retorno.concat(S2MF);
+    retorno.concat(",\"TS2\":\"");
+    retorno.concat(TS2 + "\"");
+    retorno.concat(",\"S2P\":");
+    retorno.concat(S2P);
     
-  
-  retorno += ",\"S8\":";  
-  retorno += S8;
-  retorno += ",\"S8HI\":";
-  retorno += S8HI;
-  retorno += ",\"S8MI\":";
-  retorno += S8MI;
-  retorno += ",\"S8HF\":";
-  retorno += S8HF;
-  retorno += ",\"S8MF\":";
-  retorno += S8MF;
-  retorno += ",\"TS8\":\"";
-  retorno += TS8 + "\"";
-  retorno += ",\"S8P\":";
-  retorno += S8P;
+    retorno.concat(",\"S3\":");
+    retorno.concat(S3);
+    retorno.concat(",\"S3HI\":");
+    retorno.concat(S3HI);
+    retorno.concat(",\"S3MI\":");
+    retorno.concat(S3MI);
+    retorno.concat(",\"S3HF\":");
+    retorno.concat(S3HF);
+    retorno.concat(",\"S3MF\":");
+    retorno.concat(S3MF);
+    retorno.concat(",\"TS3\":\"");
+    retorno.concat(TS3 + "\"");
+    retorno.concat(",\"S3P\":");
+    retorno.concat(S3P);
+    
+    retorno.concat(",\"S4\":");
+    retorno.concat(S4);
+    retorno.concat(",\"S4HI\":");
+    retorno.concat(S4HI);
+    retorno.concat(",\"S4MI\":");
+    retorno.concat(S4MI);
+    retorno.concat(",\"S4HF\":");
+    retorno.concat(S4HF);
+    retorno.concat(",\"S4MF\":");
+    retorno.concat(S4MF);
+    retorno.concat(",\"TS4\":\"");
+    retorno.concat(TS4 + "\"");
+    retorno.concat(",\"S4P\":");
+    retorno.concat(S4P);
+  }
+  else
+  {
+    blocoEnvio = 0;
+    
+    retorno.concat(",\"S5\":");
+    retorno.concat(S5);
+    retorno.concat(",\"S5HI\":");
+    retorno.concat(S5HI);
+    retorno.concat(",\"S5MI\":");
+    retorno.concat(S5MI);
+    retorno.concat(",\"S5HF\":");
+    retorno.concat(S5HF);
+    retorno.concat(",\"S5MF\":");
+    retorno.concat(S5MF);
+    retorno.concat(",\"TS5\":\"");
+    retorno.concat(TS5 + "\"");
+    retorno.concat(",\"S5P\":");
+    retorno.concat(S5P);
 
-       
-  retorno += ",\"Red\":";
-  retorno += SRed;
-  retorno += ",\"Green\":";
-  retorno += SGreen;
-  retorno += ",\"Blue\":";
-  retorno += SBlue;
+    retorno.concat(",\"S6\":");
+    retorno.concat(S6);
+    retorno.concat(",\"S6HI\":");
+    retorno.concat(S6HI);
+    retorno.concat(",\"S6MI\":");
+    retorno.concat(S6MI);
+    retorno.concat(",\"S6HF\":");
+    retorno.concat(S6HF);
+    retorno.concat(",\"S6MF\":");
+    retorno.concat(S6MF);
+    retorno.concat(",\"TS6\":\"");
+    retorno.concat(TS6 + "\"");  
+    retorno.concat(",\"S6P\":");
+    retorno.concat(S6P);
+    
+    retorno.concat(",\"S7\":");   
+    retorno.concat(S7);
+    retorno.concat(",\"S7HI\":");
+    retorno.concat(S7HI);
+    retorno.concat(",\"S7MI\":");
+    retorno.concat(S7MI);
+    retorno.concat(",\"S7HF\":");
+    retorno.concat(S7HF);
+    retorno.concat(",\"S7MF\":");
+    retorno.concat(S7MF);
+    retorno.concat(",\"TS7\":\"");  
+    retorno.concat(TS7 + "\"");
+    retorno.concat(",\"S7P\":");
+    retorno.concat(S7P);
+    
+    retorno.concat(",\"S8\":");  
+    retorno.concat(S8);
+    retorno.concat(",\"S8HI\":");
+    retorno.concat(S8HI);
+    retorno.concat(",\"S8MI\":");
+    retorno.concat(S8MI);
+    retorno.concat(",\"S8HF\":");
+    retorno.concat(S8HF);
+    retorno.concat(",\"S8MF\":");
+    retorno.concat(S8MF);
+    retorno.concat(",\"TS8\":\"");
+    retorno.concat(TS8 + "\"");
+    retorno.concat(",\"S8P\":");
+    retorno.concat(S8P);
 
-  retorno += ",\"A6\":";
-  retorno += analogRead(A6);
-  retorno += ",\"A7\":";
-  retorno += analogRead(A7);
-*/
+    retorno.concat(",\"Red\":");
+    retorno.concat(SRed);
+    retorno.concat(",\"Green\":");
+    retorno.concat(SGreen);
+    retorno.concat(",\"Blue\":");
+    retorno.concat(SBlue);
 
-  retorno += "})";
+    retorno.concat(",\"A6\":");
+    retorno.concat(analogRead(A6));
+    retorno.concat(",\"A7\":");
+    retorno.concat(analogRead(A7));
+  }
 
-  //retorno += F("})");
+ retorno.concat("}");
 
-    Serial.print(retorno);
-
+  Serial.println(retorno);
 }
 
 void ModoAuto() {
