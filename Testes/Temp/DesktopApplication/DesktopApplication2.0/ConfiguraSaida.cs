@@ -43,7 +43,19 @@ namespace DesktopApplication
             if (TS == String.Empty)
                 TS = "M";
 
-            cboTipo.SelectedValue = TS;
+            if(TS == "M")
+            {
+                cboTipo.SelectedIndex = 0;
+            }else if (TS == "A")
+            {
+                cboTipo.SelectedIndex = 1;
+            }
+            else if (TS == "P")
+            {
+                cboTipo.SelectedIndex = 2;
+            }
+
+
 
             gbAgendamento.Enabled = (TS == "A");
             gbPulso.Enabled = (TS == "P");
